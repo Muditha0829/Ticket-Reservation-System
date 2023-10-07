@@ -1,0 +1,516 @@
+{
+	"info": {
+		"_postman_id": "62eb2ef6-a446-426f-9ca3-d17f7a897da3",
+		"name": "EAD_Group_Assignment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20937248"
+	},
+	"item": [
+		{
+			"name": "User Management",
+			"item": [
+				{
+					"name": "SignUp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"FirstName\": \"John\",\r\n    \"LastName\": \"Doe\",\r\n    \"UserName\": \"johndoe123\",\r\n    \"Email\": \"johndoe@example.com\",\r\n    \"Password\": \"Abcd@1234\",\r\n    \"RePassword\": \"Abcd@1234\",\r\n    \"ContactNumber\": \"1234567890\",\r\n    \"NIC\": \"123456788117\",\r\n    \"Gender\": \"Male\",\r\n    \"UserType\": \"Regular\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:57549/api/users/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "57549",
+							"path": [
+								"api",
+								"users",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SignIn",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"NIC\": \"123456788117\",\r\n    \"Password\": \"Abcd@1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:57549/api/users/signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "57549",
+							"path": [
+								"api",
+								"users",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"FirstName\": \"John\",\r\n    \"LastName\": \"Doe\",\r\n    \"UserName\": \"john2\",\r\n    \"Email\": \"johndoe@example.com\",\r\n    \"Password\": \"password123\",\r\n    \"RePassword\": \"password123\",\r\n    \"ContactNumber\": \"1234567890\",\r\n    \"NIC\": \"123456788113\",\r\n    \"Gender\": \"Male\",\r\n    \"UserType\": \"Regular\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:57549/api/users/updateuser/65218a9a751809a0a5a75a76",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "57549",
+							"path": [
+								"api",
+								"users",
+								"updateuser",
+								"65218a9a751809a0a5a75a76"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:57549/api/users/getuser/65218a9a751809a0a5a75a76",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "57549",
+							"path": [
+								"api",
+								"users",
+								"getuser",
+								"65218a9a751809a0a5a75a76"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:57549/api/users/getallusers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "57549",
+							"path": [
+								"api",
+								"users",
+								"getallusers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Travel User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"FirstName\": \"John\",\r\n    \"LastName\": \"Doe\",\r\n    \"UserName\": \"johndoe123\",\r\n    \"Email\": \"johndoe@example.com\",\r\n    \"Password\": \"password123\",\r\n    \"RePassword\": \"password123\",\r\n    \"ContactNumber\": \"1234567890\",\r\n    \"NIC\": \"123456788114\",\r\n    \"Gender\": \"Male\",\r\n    \"UserType\": \"Regular\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:57549/api/users/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "57549",
+							"path": [
+								"api",
+								"users",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Status",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"UserStatus\": \"Active\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:57549/api/users/updateuserstatus/65218a9a751809a0a5a75a76",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "57549",
+							"path": [
+								"api",
+								"users",
+								"updateuserstatus",
+								"65218a9a751809a0a5a75a76"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:57549/api/users/deleteuser/65218a9a751809a0a5a75a76",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "57549",
+							"path": [
+								"api",
+								"users",
+								"deleteuser",
+								"65218a9a751809a0a5a75a76"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Train Management",
+			"item": [
+				{
+					"name": "Add Train Shedule",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"UserID\": \"65218b6ebb29235939be3bbc\",\r\n    \"TrainName\": \"Express 123\",\r\n    \"TrainDriver\": \"John Doe\",\r\n    \"DepartureStation\": \"Station A\",\r\n    \"ArrivalStation\": \"Station B\",\r\n    \"DepartureTime\": \"2023-10-07T08:00:00Z\",\r\n    \"ArrivalTime\": \"2023-10-07T12:00:00Z\",\r\n    \"TrainType\": \"Express\",\r\n    \"FirstClassTicketPrice\": \"50\",\r\n    \"SecondClassTicketPrice\": \"30\",\r\n    \"ThirdClassTicketPrice\": \"20\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:57549/api/trains/createtrain",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "57549",
+							"path": [
+								"api",
+								"trains",
+								"createtrain"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Train Shedule",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"TrainName\": \"Express 128\",\r\n    \"TrainDriver\": \"John Doe\",\r\n    \"DepartureStation\": \"Station A\",\r\n    \"ArrivalStation\": \"Station B\",\r\n    \"DepartureTime\": \"2023-10-07T08:00:00Z\",\r\n    \"ArrivalTime\": \"2023-10-07T12:00:00Z\",\r\n    \"TrainType\": \"Express\",\r\n    \"FirstClassTicketPrice\": \"50\",\r\n    \"SecondClassTicketPrice\": \"30\",\r\n    \"ThirdClassTicketPrice\": \"20\",\r\n    \"TrainStatus\": \"Active\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:57549/api/trains/updatetrain/652195183268c71e2e74f333",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "57549",
+							"path": [
+								"api",
+								"trains",
+								"updatetrain",
+								"652195183268c71e2e74f333"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Train Shedule",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:57549/api/trains/gettrain/652195183268c71e2e74f333",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "57549",
+							"path": [
+								"api",
+								"trains",
+								"gettrain",
+								"652195183268c71e2e74f333"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Train Shedule",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:57549/api/trains/getalltrains",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "57549",
+							"path": [
+								"api",
+								"trains",
+								"getalltrains"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Train shedule",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:57549/api/trains/deletetrain/652195183268c71e2e74f333",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "57549",
+							"path": [
+								"api",
+								"trains",
+								"deletetrain",
+								"652195183268c71e2e74f333"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Active Trains",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:57549/api/trains/getallactivetrains",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "57549",
+							"path": [
+								"api",
+								"trains",
+								"getallactivetrains"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ticket Booking Management",
+			"item": [
+				{
+					"name": "Add Booking",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"TrainID\": \"652195183268c71e2e74f333\", \r\n  \"UserID\": \"65218b6ebb29235939be3bbc\",\r\n  \"ReservationDate\": \"2023-10-18T12:00:00Z\",\r\n  \"TotalPassengers\": 1,\r\n  \"MainPassengerName\": \"John Doe\",\r\n  \"ContactNumber\": \"1234567890\",\r\n  \"Email\": \"johndoe@example.com\",\r\n  \"TicketClass\": \"First Class\",\r\n  \"TotalPrice\": 150.00\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:57549/api/trainbooking/createticketbooking",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "57549",
+							"path": [
+								"api",
+								"trainbooking",
+								"createticketbooking"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Booking",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"TrainID\": \"652195183268c71e2e74f333\", \r\n  \"UserID\": \"65218b6ebb29235939be3bbc\",\r\n  \"ReservationDate\": \"2023-10-18T12:00:00Z\",\r\n  \"TotalPassengers\": 1,\r\n  \"MainPassengerName\": \"John Doe\",\r\n  \"ContactNumber\": \"1234567890\",\r\n  \"Email\": \"johndoe@example.com\",\r\n  \"TicketClass\": \"First Class\",\r\n  \"TotalPrice\": 150.00\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:57549/api/trainbooking/updateticketbooking/6521ad3ffe3c4f9b73a171ff",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "57549",
+							"path": [
+								"api",
+								"trainbooking",
+								"updateticketbooking",
+								"6521ad3ffe3c4f9b73a171ff"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Booking",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:57549/api/trainbooking/getticketbooking/65218b6ebb29235939be3bbc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "57549",
+							"path": [
+								"api",
+								"trainbooking",
+								"getticketbooking",
+								"65218b6ebb29235939be3bbc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Booking",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:57549/api/trainbooking/getallticketbookings/65218b6ebb29235939be3bbc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "57549",
+							"path": [
+								"api",
+								"trainbooking",
+								"getallticketbookings",
+								"65218b6ebb29235939be3bbc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel Booking",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:49260/api/trainbooking/cancelticketbooking/6521a6a9023c7e140e563903",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "49260",
+							"path": [
+								"api",
+								"trainbooking",
+								"cancelticketbooking",
+								"6521a6a9023c7e140e563903"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
