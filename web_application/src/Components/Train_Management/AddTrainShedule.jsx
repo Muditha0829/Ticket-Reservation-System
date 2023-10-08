@@ -1,6 +1,8 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../AuthContext';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Form, Button, Container, Row, Col, Card } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
@@ -38,22 +40,23 @@ const AddTrainShedule = () => {
     const TrainIDPattern = /^[A-Z]\d{4}$/;
 
     if (!TrainIDPattern.test(trainData.TrainNumber)) {
-      alert('Invalid Train Number. Please enter a valid Train Number format (TXXXX).');
+      toast.error('Invalid Train Number. Please enter a valid Train Number format (TXXXX).');
       return;
     }
     axios.post('http://localhost:57549/api/trains/createtrain', trainData)
       .then(response => {
         console.log('Train added:', response.data);
-        alert("Train Added");
+        toast.success("Train Added");
         history.push('/backofficeuserdashboard');
       })
       .catch(error => {
-        console.error('Error:', error);
+        toast.error('Error:', error);
       });
   };
 
   return (
     <Container className="text-center mt-5" style={{width: "1200px", paddingLeft: "250px", marginBottom: "25px"}}>
+      <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
       <Row className="justify-content-center">
         <Col>
           <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>

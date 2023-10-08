@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Form, Button, Row, Col, Card } from 'react-bootstrap';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 
@@ -51,12 +53,12 @@ const UpdateTrainShedule = () => {
     axios.put(`http://localhost:57549/api/trains/updatetrain/${TrainID}`, updatedTrainData)
       .then(response => {
         console.log('Train updated:', response.data);
-        alert('Train updated successfully!');
+        toast.success('Train updated successfully!');
         history.push('/backofficeuserdashboard');
       })
       .catch(error => {
         console.error('Error:', error);
-        alert('Error updating train. Please try again later.');
+        toast.error('Error updating train. Please try again later.');
       });
   };
 
@@ -75,6 +77,7 @@ const UpdateTrainShedule = () => {
 
   return (
     <Container className="text-center mt-5" style={{width: "1200px", paddingLeft: "250px"}}>
+      <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
       <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>
         <Card.Body>
           <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Update Train Shedule</Card.Title>

@@ -30,6 +30,8 @@ namespace Web_Service.Models.Train_Ticket_Booking_Management
 
         public string Email { get; set; }
 
+        public string NIC { get; set; }
+
         public string TicketClass { get; set; }
 
         public String TotalPrice { get; set; }

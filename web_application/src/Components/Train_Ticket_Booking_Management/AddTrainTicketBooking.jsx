@@ -1,6 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../AuthContext';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Form, Button, Card, Container } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
@@ -18,6 +20,7 @@ const AddTrainTicketBooking = () => {
     TotalPassengers: "",
     TicketClass: '',
     Email: '',
+    NIC: '',
     ContactNumber: '',
     TotalPrice: ''
   });
@@ -124,7 +127,8 @@ const AddTrainTicketBooking = () => {
   };
 
   return (
-    <Container className="text-center mt-5" style={{width: "1200px", paddingLeft: "250px"}}>
+    <Container className="text-center mt-5" style={{width: "1200px", paddingLeft: "250px", marginBottom: "25px"}}>
+      <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
       <div className="container">
       <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>
             <Card.Body>
@@ -249,7 +253,18 @@ const AddTrainTicketBooking = () => {
                 required
               /><br />
 
-<Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Total Price</Form.Label>
+<Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>NIC</Form.Label>
+              <Form.Control
+                type="text"
+                name="NIC"
+                value={formData.NIC}
+                onChange={handleChange}
+                placeholder='NIC'
+                required
+              /><br />
+            </div>
+          </div>
+          <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat", textAlign: "left"}}>Total Price</Form.Label>
               <Form.Control
                 type="text"
                 name="TotalPrice"
@@ -258,8 +273,6 @@ const AddTrainTicketBooking = () => {
                 placeholder='Total Price'
                 required
               /><br />
-            </div>
-          </div>
 
           <div className="text-center" style={{margin: "34px"}}>
             <Button variant="secondary" onClick={() => window.history.back()} style={{ width: '150px' }}>Back</Button>{' '}

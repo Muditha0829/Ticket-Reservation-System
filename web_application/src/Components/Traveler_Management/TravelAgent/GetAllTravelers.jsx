@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Table, Button, Container, Card } from 'react-bootstrap';
 
 const GetAllTravelers = () => {
@@ -33,6 +35,7 @@ const GetAllTravelers = () => {
 
   return (
     <Container className="my-5 text-center" style={{height: "700px", paddingLeft: "250px"}}>
+      <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
   <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>
             <Card.Body>
               <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Travelers</Card.Title>

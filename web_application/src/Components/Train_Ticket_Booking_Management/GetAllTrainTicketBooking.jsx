@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../AuthContext';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { Table, Button, Card, Container } from 'react-bootstrap';
@@ -74,6 +76,7 @@ const GetAllTrainTicketBooking = () => {
 
   return (
     <Container className="text-center mt-5" style={{height: "700px", paddingLeft: "250px"}}>
+      <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
       <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>
             <Card.Body>
               <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Your All Train Bookings</Card.Title>

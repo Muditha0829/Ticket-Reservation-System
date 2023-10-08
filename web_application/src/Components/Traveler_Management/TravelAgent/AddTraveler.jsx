@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Form, Button, Container, Row, Col, Card } from 'react-bootstrap';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useHistory } from 'react-router-dom';
 
 const AddTraveller = () => {
@@ -65,17 +67,18 @@ const AddTraveller = () => {
     })
     .then(response => {
       console.log('Success:', response.data);
-      alert('User Created successfully!');
+      toast.success('User Created successfully!');
       history.push('/travelagentdashboard');
     })
     .catch(error => {
-      console.error('Error:', error);
+      toast.error('Error:', error);
       alert('error');
     });
   };
 
   return (
     <Container className="my-5 text-center" style={{width: "1200px", paddingLeft: "250px"}}>
+      <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
   <Row className="justify-content-center">
     <Col>
     <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>

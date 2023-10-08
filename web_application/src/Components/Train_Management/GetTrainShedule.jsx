@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Table, Row, Col, Button, Card, Container } from 'react-bootstrap';
 
 const GetTrainShedule = () => {
@@ -19,6 +21,7 @@ const GetTrainShedule = () => {
 
   return (
     <Container className="my-5 text-center" style={{width: "1200px", paddingLeft: "250px"}}>
+      <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
       <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>
         <Card.Body>
           <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>View Train Shedule</Card.Title>

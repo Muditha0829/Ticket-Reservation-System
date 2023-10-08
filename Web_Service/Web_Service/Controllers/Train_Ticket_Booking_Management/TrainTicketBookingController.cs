@@ -144,6 +144,7 @@ namespace WebSevice.Controllers
                     .Set(t => t.DepartureStation, updatedBooking.DepartureStation)
                     .Set(t => t.DestinationStation, updatedBooking.DestinationStation)
                     .Set(t => t.Email, updatedBooking.Email)
+                    .Set(t => t.NIC, updatedBooking.NIC)
                     .Set(t => t.TicketClass, updatedBooking.TicketClass)
                     .Set(t => t.TotalPrice, updatedBooking.TotalPrice);
 

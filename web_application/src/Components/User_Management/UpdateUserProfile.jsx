@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useHistory } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 
 const UpdateUserProfile = () => {
@@ -50,6 +52,7 @@ const UpdateUserProfile = () => {
 
   return (
     <Container>
+      <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
   <Row className="justify-content-center" style={{marginTop: "25px"}}>
     <Col md={6}>
       <h2 className="text-center mb-4">Update Profile</h2>

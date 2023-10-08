@@ -1,6 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../../AuthContext';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Container, Table, Button, Card } from 'react-bootstrap';
 
 const TravellerUser = () => {
@@ -49,6 +51,7 @@ const TravellerUser = () => {
 
   return (
     <Container className="my-5 text-center" style={{height: "700px", paddingLeft: "250px"}}>
+      <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
   <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>
         <Card.Body>
           <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Traveler Status</Card.Title>

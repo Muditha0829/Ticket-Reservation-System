@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from '../AuthContext';
 import Cookies from 'js-cookie';
 import { Container, Row, Col, Button, Table, Card } from 'react-bootstrap';
@@ -45,14 +47,14 @@ const UserProfile = () => {
     axios.delete(`/api/users/delete/${userID}`)
       .then(response => {
         console.log('User deleted:', response.data);
-        alert('Profile deleted successfully!');
+        toast.success('Profile deleted successfully!');
         Cookies.remove('userID');
         Cookies.remove('UserType');
         setUser(null);
         history.push('/home');
       })
       .catch(error => {
-        console.error('Error deleting user:', error);
+        toast.error('Error deleting user:', error);
       });
   };
 
@@ -73,6 +75,7 @@ const UserProfile = () => {
 
   return (
     <Container className="my-5 text-center" style={{paddingLeft: "250px"}}>
+      <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
       <Row>
         <Col md={0}>
         <Card.Title style={{ margin: "25px", fontFamily: "MyCustomFont, sans-serif", fontSize: "34px" }}>Profile</Card.Title>

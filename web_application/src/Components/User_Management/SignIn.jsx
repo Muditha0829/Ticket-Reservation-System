@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useHistory, Link } from 'react-router-dom';
 import { AuthContext } from '../AuthContext';
 import { Form, Button, Container, Row, Col, Card } from 'react-bootstrap';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignIn = () => {
   const { setUser, UserType } = useContext(AuthContext);
@@ -42,12 +44,12 @@ const SignIn = () => {
       })
       .catch(error => {
         if (error.response && error.response.status === 401) {
-          alert('Password or NIC mismatch. Please try again.');
+          toast.error('Password or NIC mismatch. Please try again.');
         } else if (error.response && error.response.status === 400) {
-          alert('Invalid User credentials. Please check your inputs.');
+          toast.error('Invalid User credentials. Please check your inputs.');
         } else {
           console.error('Error authenticating user:', error);
-          alert('Invalid User credentials. Please check your inputs.');
+          toast.error('Invalid User credentials. Please check your inputs.');
         }
       });
   };
@@ -60,6 +62,7 @@ const SignIn = () => {
         <img src='https://lp-cms-production.imgix.net/2022-02/shutterstockRF_376030297.jpg?auto=format&q=75&w=1920' style={{width: "87%"}}/>
         </Col>
           <Col>
+        <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
         <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Sign In</Card.Title>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="NIC" style={{ marginBottom: "25px", fontFamily: "Montserrat" }}>
