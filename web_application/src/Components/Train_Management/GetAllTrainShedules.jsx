@@ -3,11 +3,11 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Table, Button, Card, Container } from 'react-bootstrap';
 
-const GetAllTrain = () => {
+const GetAllTrainShedules = () => {
   const [trains, setTrains] = useState([]);
 
   useEffect(() => {
-    axios.get('/api/trains/getall')
+    axios.get('http://localhost:57549/api/trains/getalltrains')
       .then(response => {
         setTrains(response.data);
       })
@@ -16,8 +16,8 @@ const GetAllTrain = () => {
       });
   }, []);
 
-  const handleDelete = (trainID) => {
-    axios.delete(`/api/trains/delete/${trainID}`)
+  const handleDelete = (TrainID) => {
+    axios.delete(`http://localhost:57549/api/trains/deletetrain/${TrainID}`)
       .then(response => {
         alert('Train successfully deleted!');
         window.location.reload();
@@ -44,16 +44,16 @@ const GetAllTrain = () => {
             <tbody>
               {trains.map(train => (
                 <tr key={train.ID}>
-                  <td>{train.TrainID}</td>
+                  <td>{train.TrainNumber}</td>
                   <td>{train.TrainStatus}</td>
                   <td>
-                    <Link to={`/view/${train.ID}`}>
+                    <Link to={`/view/${train.TrainID}`}>
                       <Button variant="warning" style={{ marginRight: '17px', color: 'white' }}>View Train Shedule</Button>
                     </Link>
-                    <Link to={`/update/${train.ID}`}>
+                    <Link to={`/update/${train.TrainID}`}>
                       <Button variant="success" style={{ marginRight: '17px' }}>Update Train Shedule</Button>
                     </Link>
-                    <Button variant="danger" onClick={() => handleDelete(train.ID)} style={{ marginRight: '17px' }}>
+                    <Button variant="danger" onClick={() => handleDelete(train.TrainID)} style={{ marginRight: '17px' }}>
                       Delete Train Shedule
                     </Button>
                   </td>
@@ -67,4 +67,4 @@ const GetAllTrain = () => {
   );
 };
 
-export default GetAllTrain;
+export default GetAllTrainShedules;

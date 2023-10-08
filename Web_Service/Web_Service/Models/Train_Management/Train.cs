@@ -13,6 +13,7 @@ namespace Web_Service.Models.Train_Management
         [BsonRepresentation(BsonType.ObjectId)]
         public string TrainID { get; set; }
         public string UserID { get; set; }
+        public string TrainNumber { get; set; }
         public string TrainName { get; set; }
         public string TrainDriver { get; set; }
         public string DepartureStation { get; set; }

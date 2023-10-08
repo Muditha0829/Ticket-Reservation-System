@@ -4,15 +4,23 @@ import { Container, Form, Button, Row, Col, Card } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 
-const UpdateTrain = () => {
-  const { trainID } = useParams();
-  const [trainId, setTrainId] = useState('');
+const UpdateTrainShedule = () => {
+  const { TrainID } = useParams();
+  const [TrainId, setTrainId] = useState('');
   const [updatedTrainData, setUpdatedTrainData] = useState({
-    TrainID: '',
+    // TrainID: '',
+    // UserID: '',
+    TrainNumber: '',
     TrainName: '',
     TrainDriver: '',
-    DeDateTime: '',
-    ArDateTime: '',
+    DepartureStation: '',
+    ArrivalStation: '',
+    DepartureTime: '',
+    ArrivalTime: '',
+    TrainType: '',
+    FirstClassTicketPrice: '',
+    SecondClassTicketPrice: '',
+    ThirdClassTicketPrice: '',
     TrainStatus: ''
   });
 
@@ -33,14 +41,14 @@ const UpdateTrain = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const trainIdPattern = /^[A-Z]\d{4}$/;
+  //   const trainIdPattern = /^[A-Z]\d{4}$/;
 
-  if (!trainIdPattern.test(updatedTrainData.TrainID)) {
-    alert('Invalid Train ID. Please enter a valid Train ID (e.g., T1234).');
-    return;
-  }
+  // if (!trainIdPattern.test(updatedTrainData.TrainNumber)) {
+  //   alert('Invalid Train Number. Please enter a valid Train Number format. (TXXXX).');
+  //   return;
+  // }
 
-    axios.put(`/api/trains/update/${trainID}`, updatedTrainData)
+    axios.put(`http://localhost:57549/api/trains/updatetrain/${TrainID}`, updatedTrainData)
       .then(response => {
         console.log('Train updated:', response.data);
         alert('Train updated successfully!');
@@ -53,9 +61,9 @@ const UpdateTrain = () => {
   };
 
   useEffect(() => {
-    // Fetch data based on trainID
-    if (trainID) {
-      axios.get(`/api/trains/get/${trainID}`)
+    // Fetch data based on TrainID
+    if (TrainID) {
+      axios.get(`http://localhost:57549/api/trains/gettrain/${TrainID}`)
         .then(response => {
           setUpdatedTrainData(response.data);
         })
@@ -63,7 +71,7 @@ const UpdateTrain = () => {
           console.error('Error fetching train data:', error);
         });
     }
-  }, [trainID]);  
+  }, [TrainID]);  
 
   return (
     <Container className="text-center mt-5" style={{width: "700px"}}>
@@ -73,22 +81,22 @@ const UpdateTrain = () => {
       <Form onSubmit={handleSubmit}>
         <Row className="mb-3">
           <Col md={6} className="mx-auto">
-            <Form.Label>Train ID</Form.Label>
+            <Form.Label>Train Number</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Train ID"
-              value={updatedTrainData.TrainID}
+              placeholder="Train Number"
+              value={updatedTrainData.TrainNumber}
               onChange={handleTrainIdChange}
             />
           </Col>
         </Row>
         <Row className="mb-3">
           <Col md={6} className="mx-auto">
-            <Form.Label>New Train Name</Form.Label>
+            <Form.Label>Train Name</Form.Label>
             <Form.Control
               type="text"
               name="TrainName"
-              placeholder="New Train Name"
+              placeholder="Train Name"
               value={updatedTrainData.TrainName}
               onChange={handleChange}
             />
@@ -100,7 +108,31 @@ const UpdateTrain = () => {
             <Form.Control
               type="text"
               name="TrainDriver"
-              placeholder="New TrainDriver"
+              placeholder="Train Driver"
+              value={updatedTrainData.TrainDriver}
+              onChange={handleChange}
+            />
+          </Col>
+        </Row>
+        <Row className="mb-3">
+          <Col md={6} className="mx-auto">
+            <Form.Label>Departure Station</Form.Label>
+            <Form.Control
+              type="text"
+              name="DepartureStation"
+              placeholder="Departure Station"
+              value={updatedTrainData.DepartureStation}
+              onChange={handleChange}
+            />
+          </Col>
+        </Row>
+        <Row className="mb-3">
+          <Col md={6} className="mx-auto">
+            <Form.Label>Arrival Station</Form.Label>
+            <Form.Control
+              type="text"
+              name="ArrivalStation"
+              placeholder="Arrival Station"
               value={updatedTrainData.TrainDriver}
               onChange={handleChange}
             />
@@ -112,7 +144,7 @@ const UpdateTrain = () => {
             <Form.Control
               type="datetime-local"
               name="DeDateTime"
-              placeholder="New Departure Time"
+              placeholder="Departure Time"
               value={updatedTrainData.DeDateTime}
               onChange={handleChange}
             />
@@ -124,11 +156,60 @@ const UpdateTrain = () => {
             <Form.Control
               type="datetime-local"
               name="ArDateTime"
-              placeholder="New Arrival Time"
+              placeholder="Arrival Time"
               value={updatedTrainData.ArDateTime}
               onChange={handleChange}
             />
+            </Col>
+        <Row className="mb-3">
+          <Col md={6} className="mx-auto">
+            <Form.Label>Train Type</Form.Label>
+            <Form.Control
+              type="text"
+              name="TrainType"
+              placeholder="Train Type"
+              value={updatedTrainData.TrainType}
+              onChange={handleChange}
+            />
           </Col>
+        </Row>
+        <Row className="mb-3">
+          <Col md={6} className="mx-auto">
+            <Form.Label>First Class Ticket Price</Form.Label>
+            <Form.Control
+              type="text"
+              name="FirstClassTicketPrice"
+              placeholder="First Class Ticket Price"
+              value={updatedTrainData.FirstClassTicketPrice}
+              onChange={handleChange}
+            />
+          </Col>
+        </Row>
+        <Row className="mb-3">
+          <Col md={6} className="mx-auto">
+            <Form.Label>Second Class Ticket Price</Form.Label>
+            <Form.Control
+              type="text"
+              name="SecondClassTicketPrice"
+              placeholder="Second Class Ticket Price"
+              value={updatedTrainData.SecondClassTicketPrice}
+              onChange={handleChange}
+            />
+          </Col>
+        </Row>
+        <Row className="mb-3">
+          <Col md={6} className="mx-auto">
+            <Form.Label>Third Class Ticket Price</Form.Label>
+            <Form.Control
+              type="text"
+              name="ThirdClassTicketPrice"
+              placeholder="Third Class Ticket Price"
+              value={updatedTrainData.ThirdClassTicketPrice}
+              onChange={handleChange}
+            />
+          </Col>
+        </Row>
+
         </Row>
         <Row className="mb-3">
   <Col md={6} className="mx-auto">
@@ -156,4 +237,4 @@ const UpdateTrain = () => {
   );
 };
 
-export default UpdateTrain;
+export default UpdateTrainShedule;

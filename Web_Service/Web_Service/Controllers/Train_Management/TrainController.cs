@@ -126,6 +126,7 @@ namespace Web_Service.Controllers
 
             var filter = Builders<Train>.Filter.Eq(t => t.TrainID, id);
             var update = Builders<Train>.Update
+                .Set(t => t.TrainNumber, updatedTrain.TrainNumber)
                 .Set(t => t.TrainName, updatedTrain.TrainName)
                 .Set(t => t.TrainDriver, updatedTrain.TrainDriver)
                 .Set(t => t.DepartureStation, updatedTrain.DepartureStation)

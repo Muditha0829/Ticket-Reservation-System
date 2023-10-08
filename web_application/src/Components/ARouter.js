@@ -10,10 +10,10 @@ import Signup from './User_Management/SignUp';
 import UserProfile from '../Components/User_Management/UserProfile';
 import UpdateUserProfile from './User_Management/UpdateUserProfile';
 
-import AddTrain from './Train_Management/AddTrain';
-import UpdateTrain from './Train_Management/UpdateTrain';
-import GetTrain from './Train_Management/GetTrain';
-import GetAllTrain from './Train_Management/GetAllTrain';
+import AddTrainShedule from './Train_Management/AddTrainShedule';
+import UpdateTrainShedule from './Train_Management/UpdateTrainShedule';
+import GetTrainShedule from './Train_Management/GetTrainShedule';
+import GetAllTrainShedules from './Train_Management/GetAllTrainShedules';
 
 import AddTrainTicketBooking from './Train_Ticket_Booking_Management/AddTrainTicketBooking';
 import UpdateTrainTicketBooking from './Train_Ticket_Booking_Management/UpdateTrainTicketBooking';
@@ -44,10 +44,10 @@ const ARouter = () => {
       <UserProvider>
         {!shouldHideNavbar && <NavBar />}
         <Switch>
-          <Route path="/listtrain" exact component={GetAllTrain} />
-          <Route path="/view/:trainID" component={GetTrain} />
-          <Route path="/update/:trainID" component={UpdateTrain} />
-          <Route path="/addtrain" component={AddTrain}/>
+          <Route path="/listtrain" exact component={GetAllTrainShedules} />
+          <Route path="/view/:TrainID" component={GetTrainShedule} />
+          <Route path="/update/:TrainID" component={UpdateTrainShedule} />
+          <Route path="/addtrain" component={AddTrainShedule}/>
           <Route path="/listreservation" component={GetAllTrainTicketBooking}/>
           <Route path="/makereservation" component={AddTrainTicketBooking}/>
           <Route path="/reservationview/:reservationID" component={GetTrainTicketBooking} />
