@@ -69,7 +69,7 @@ const UpdateTraveller = () => {
   <div className="row">
   <div className="col-md-6" style={{textAlign: "left"}}>
   <Form.Group>
-      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>NIC:</Form.Label>
+      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>NIC</Form.Label>
       <Form.Control
         type="text"
         id="NIC"
@@ -83,7 +83,7 @@ const UpdateTraveller = () => {
     </Form.Group>
     <br/>
     <Form.Group>
-      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>User Name:</Form.Label>
+      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>User Name</Form.Label>
       <Form.Control
         type="text"
         id="UserName"
@@ -96,7 +96,7 @@ const UpdateTraveller = () => {
     </Form.Group>
     <br/>
     <Form.Group>
-      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>First Name:</Form.Label>
+      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>First Name</Form.Label>
       <Form.Control
         type="text"
         id="FirstName"
@@ -109,7 +109,7 @@ const UpdateTraveller = () => {
     </Form.Group>
     <br/>
     <Form.Group>
-      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Last Name:</Form.Label>
+      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Last Name</Form.Label>
       <Form.Control
         type="text"
         id="LastName"
@@ -124,7 +124,7 @@ const UpdateTraveller = () => {
     </div>
     <div className="col-md-6" style={{textAlign: "left"}}>
     <Form.Group>
-      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Email:</Form.Label>
+      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Email</Form.Label>
       <Form.Control
         type="Email"
         id="Email"
@@ -137,7 +137,7 @@ const UpdateTraveller = () => {
     </Form.Group>
     <br/>
     <Form.Group>
-      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Gender:</Form.Label>
+      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Gender</Form.Label>
       <Form.Control
         type="text"
         id="Gender"
@@ -150,7 +150,7 @@ const UpdateTraveller = () => {
     </Form.Group>
     <br/>
     <Form.Group>
-      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Phone Number:</Form.Label>
+      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Phone Number</Form.Label>
       <Form.Control
         type="text"
         id="ContactNumber"
@@ -159,6 +159,20 @@ const UpdateTraveller = () => {
         style={{fontFamily: "Onest"}}
         onChange={handleChange}
         required
+      />
+    </Form.Group>
+    <br/>
+    <Form.Group>
+      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>User Status</Form.Label>
+      <Form.Control
+        type="text"
+        id="UserStatus"
+        name="UserStatus"
+        value={userData.UserStatus}
+        style={{fontFamily: "Onest"}}
+        onChange={handleChange}
+        required
+        disabled
       />
     </Form.Group>
     <br/>
