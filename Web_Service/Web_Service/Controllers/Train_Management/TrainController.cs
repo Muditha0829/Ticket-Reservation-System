@@ -162,5 +162,13 @@ namespace Web_Service.Controllers
 
             return Ok("Train shedule deleted");
         }
+
+        [HttpGet]
+        [Route("gettraincount")]
+        public IHttpActionResult GetTrainCount()
+        {
+            long trainCount = _trainsCollection.CountDocuments(new BsonDocument());
+            return Ok(trainCount);
+        }
     }
 }

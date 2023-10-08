@@ -87,7 +87,7 @@ const Signup = () => {
   return (
     <div style={sectionStyle}>
     <Container style={{width:"50%", marginTop: "5%"}}>
-      <Card>
+      <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>
         <Card.Body>
         <Card.Title style={{ margin: "25px", fontFamily: "MyCustomFont, sans-serif", textAlign: "center", fontSize: "34px" }}>Signup</Card.Title>
           <Form onSubmit={handleSubmit}>

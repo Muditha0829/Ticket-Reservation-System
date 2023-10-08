@@ -189,5 +189,13 @@ namespace WebSevice.Controllers
 
             return BadRequest("Reservation can only be canceled at least 5 days before the reservation date.");
         }
+
+        [HttpGet]
+        [Route("getbookingcount/{id}")]
+        public IHttpActionResult GetBookingCount(string agentId)
+        {
+            var bookingCount = _bookingsCollection.CountDocuments(b => b.UserID == agentId);
+            return Ok(bookingCount);
+        }
     }
 }

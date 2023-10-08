@@ -33,7 +33,7 @@ const GetAllTravelers = () => {
 
   return (
     <Container className="my-5 text-center" style={{height: "700px", paddingLeft: "250px"}}>
-  <Card>
+  <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>
             <Card.Body>
               <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Travel Users</Card.Title>
   <Table striped bordered hover responsive>
@@ -53,12 +53,12 @@ const GetAllTravelers = () => {
           <td>{user.Email}</td>
           <td>
             <Link to={`/viewtraveller/${user.UserID}`} className="mr-2">
-              <Button variant="warning" style={{marginRight: "25px"}}><i className="fas fa-eye"></i></Button>
+              <Button variant="warning" style={{marginRight: "5px"}}><i className="fas fa-eye"></i></Button>
             </Link>
             <Link to={`/updatetraveller/${user.UserID}`} className="mr-2">
-              <Button variant="success" style={{marginRight: "25px"}}><i className="fas fa-edit"></i></Button>
+              <Button variant="success" style={{marginRight: "5px"}}><i className="fas fa-edit"></i></Button>
             </Link>
-            <Button variant="danger" onClick={() => handleDeleteUser(user.UserID)} style={{marginRight: "25px"}}><i className="fas fa-trash-alt"></i></Button>
+            <Button variant="danger" onClick={() => handleDeleteUser(user.UserID)} style={{marginRight: "5px"}}><i className="fas fa-trash-alt"></i></Button>
           </td>
         </tr>
       ))}

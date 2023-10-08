@@ -19,7 +19,7 @@ const GetTrainShedule = () => {
 
   return (
     <Container className="my-5 text-center" style={{width: "1200px", paddingLeft: "250px"}}>
-      <Card>
+      <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>
         <Card.Body>
           <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>View Train Shedule</Card.Title>
           <div className="mx-auto" style={{ maxWidth: '600px' }}>

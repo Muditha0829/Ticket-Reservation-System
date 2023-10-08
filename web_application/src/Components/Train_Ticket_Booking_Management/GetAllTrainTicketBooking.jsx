@@ -7,9 +7,17 @@ import { Table, Button, Card, Container } from 'react-bootstrap';
 
 const GetAllTrainTicketBooking = () => {
   const { userId, setUser } = useContext(AuthContext);
-
   const [reservations, setReservations] = useState([]);
   const [cancellationLoading, setCancellationLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = reservations.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handlePagination = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   const handleCancel = (id, ReservationDate, BookingDate) => {
     const ReservationDateObj = new Date(ReservationDate);
@@ -66,7 +74,7 @@ const GetAllTrainTicketBooking = () => {
 
   return (
     <Container className="text-center mt-5" style={{height: "700px", paddingLeft: "250px"}}>
-      <Card>
+      <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>
             <Card.Body>
               <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>You Reservations</Card.Title>
   <Table striped bordered hover style={{ marginTop: '20px', width:"75%" }} className="mx-auto">
@@ -116,6 +124,34 @@ const GetAllTrainTicketBooking = () => {
 ))}
     </tbody>
   </Table>
+  <div className="pagination" style={{ textAlign: 'Right', margin: "20px", marginLeft: "40%"}}>
+  <span
+    onClick={() => currentPage > 1 && handlePagination(currentPage - 1)}
+    className={currentPage === 1 ? 'disabled' : ''}
+    style={{margin: "0 5px", cursor: "pointer"}}
+  >
+    &#8249;  {/* Left arrow */}
+  </span>
+
+  {Array.from({ length: Math.ceil(reservations.length / itemsPerPage) }).map((_, index) => (
+    <span
+      key={index}
+      onClick={() => handlePagination(index + 1)}
+      className={currentPage === index + 1 ? 'active' : ''}
+      style={{margin: "0 5px", cursor: "pointer"}}
+    >
+      {index + 1}
+    </span>
+  ))}
+
+  <span
+    onClick={() => currentPage < Math.ceil(reservations.length / itemsPerPage) && handlePagination(currentPage + 1)}
+    className={currentPage === Math.ceil(reservations.length / itemsPerPage) ? 'disabled' : ''}
+    style={{margin: "0 5px", cursor: "pointer"}}
+  >
+    &#8250;  {/* Right arrow */}
+  </span>
+</div>
   </Card.Body>
   </Card>
   </Container>

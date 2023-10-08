@@ -6,6 +6,15 @@ import { Container, Table, Button, Card } from 'react-bootstrap';
 const TravellerUser = () => {
   const { UserID } = useContext(AuthContext);
   const [traveler, setTravellers] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = traveler.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handlePagination = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   useEffect(() => {
     axios.get('http://localhost:57549/api/users/getallusers')
@@ -40,7 +49,7 @@ const TravellerUser = () => {
 
   return (
     <Container className="my-5 text-center" style={{height: "1200px", paddingLeft: "250px"}}>
-  <Card>
+  <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>
         <Card.Body>
           <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Travel User List</Card.Title>
   <Table striped bordered hover responsive>
@@ -80,6 +89,34 @@ const TravellerUser = () => {
       ))}
     </tbody>
   </Table>
+  <div className="pagination" style={{ textAlign: 'Right', margin: "20px", marginLeft: "40%"}}>
+  <span
+    onClick={() => currentPage > 1 && handlePagination(currentPage - 1)}
+    className={currentPage === 1 ? 'disabled' : ''}
+    style={{margin: "0 5px", cursor: "pointer"}}
+  >
+    &#8249;  {/* Left arrow */}
+  </span>
+
+  {Array.from({ length: Math.ceil(traveler.length / itemsPerPage) }).map((_, index) => (
+    <span
+      key={index}
+      onClick={() => handlePagination(index + 1)}
+      className={currentPage === index + 1 ? 'active' : ''}
+      style={{margin: "0 5px", cursor: "pointer"}}
+    >
+      {index + 1}
+    </span>
+  ))}
+
+  <span
+    onClick={() => currentPage < Math.ceil(traveler.length / itemsPerPage) && handlePagination(currentPage + 1)}
+    className={currentPage === Math.ceil(traveler.length / itemsPerPage) ? 'disabled' : ''}
+    style={{margin: "0 5px", cursor: "pointer"}}
+  >
+    &#8250;  {/* Right arrow */}
+  </span>
+</div>
   </Card.Body>
   </Card>
 </Container>

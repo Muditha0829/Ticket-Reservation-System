@@ -126,7 +126,7 @@ const AddTrainTicketBooking = () => {
   return (
     <Container className="text-center mt-5" style={{width: "1200px", paddingLeft: "250px"}}>
       <div className="container">
-      <Card>
+      <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>
             <Card.Body>
               <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Create Your Train Booking</Card.Title>
         <Form onSubmit={handleSubmit}>

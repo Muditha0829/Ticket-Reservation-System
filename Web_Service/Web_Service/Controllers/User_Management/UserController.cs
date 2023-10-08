@@ -323,5 +323,47 @@ namespace WebSevice.Controllers
             }
             return Ok("user deleted");
         }
+
+        [HttpGet]
+        [Route("getusercount")]
+        public IHttpActionResult GetUserCount()
+        {
+            long userCount = _usersCollection.CountDocuments(new BsonDocument());
+
+            return Ok(userCount);
+        }
+
+        [HttpGet]
+        [Route("getbackofficeusercount")]
+        public IHttpActionResult GetTravelAgentCount()
+        {
+            var filter = Builders<User>.Filter.Eq(u => u.UserType, "backofficeuser");
+            long backofficeUserCount = _usersCollection.CountDocuments(filter);
+
+            return Ok(backofficeUserCount);
+        }
+
+
+        [HttpGet]
+        [Route("gettravelagentcount")]
+        public IHttpActionResult GetBackofficeUserCount()
+        {
+            var filter = Builders<User>.Filter.Eq(u => u.UserType, "travelagent");
+            long backofficeUserCount = _usersCollection.CountDocuments(filter);
+
+            return Ok(backofficeUserCount);
+        }
+
+
+        [HttpGet]
+        [Route("gettravelusercount")]
+        public IHttpActionResult GetTravelUserCount()
+        {
+            var filter = Builders<User>.Filter.Eq(u => u.UserType, "Traveler");
+            long backofficeUserCount = _usersCollection.CountDocuments(filter);
+
+            return Ok(backofficeUserCount);
+        }
+
     }
 }
