@@ -24,6 +24,10 @@ namespace Web_Service.Models.Train_Ticket_Booking_Management
 
         public string ContactNumber { get; set; }
 
+        public string DepartureStation { get; set; }
+
+        public string DestinationStation { get; set; }
+
         public string Email { get; set; }
 
         public string TicketClass { get; set; }

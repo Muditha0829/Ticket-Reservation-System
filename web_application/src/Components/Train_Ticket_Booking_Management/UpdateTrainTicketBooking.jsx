@@ -15,6 +15,8 @@ const UpdateTrainTicketBooking = () => {
     UserID: userId,
     ReservationDate: '',
     BookingDate: '',
+    DepartureStation: '',
+    DestinationStation: '',
     TrainName: '',
     TotalPassengers: "",
     TicketClass: '',
@@ -207,6 +209,30 @@ const UpdateTrainTicketBooking = () => {
         value={updatedReservationData.ContactNumber}
         onChange={handleChange}
         placeholder="Phone"
+        required
+      />
+    </Form.Group>
+
+    <Form.Group>
+      <Form.Label>Departure Stationr:</Form.Label>
+      <Form.Control
+        type="text"
+        name="DepartureStation"
+        value={updatedReservationData.DepartureStation}
+        onChange={handleChange}
+        placeholder="DepartureStation"
+        required
+      />
+    </Form.Group>
+
+    <Form.Group>
+      <Form.Label>Destination Station:</Form.Label>
+      <Form.Control
+        type="text"
+        name="DestinationStation"
+        value={updatedReservationData.DestinationStation}
+        onChange={handleChange}
+        placeholder="DestinationStation"
         required
       />
     </Form.Group>

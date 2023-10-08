@@ -48,6 +48,14 @@ const GetTrainTicketBooking = () => {
             <td>{reservation.ReservationDate}</td>
           </tr>
           <tr>
+            <td className="text"><strong>Departure Station</strong></td>
+            <td>{reservation.DepartureStation}</td>
+          </tr>
+          <tr>
+            <td className="text"><strong>Destination Station</strong></td>
+            <td>{reservation.DestinationStation}</td>
+          </tr>
+          <tr>
             <td className="text"><strong>Total Passengers</strong></td>
             <td>{reservation.TotalPassengers}</td>
           </tr>

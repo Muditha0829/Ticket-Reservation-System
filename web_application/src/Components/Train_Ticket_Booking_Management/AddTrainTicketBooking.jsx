@@ -12,6 +12,8 @@ const AddTrainTicketBooking = () => {
     UserID: userId,
     ReservationDate: '',
     BookingDate: '',
+    DepartureStation: '',
+    DestinationStation: '',
     TrainName: '',
     TotalPassengers: "",
     TicketClass: '',
@@ -171,6 +173,14 @@ const AddTrainTicketBooking = () => {
                 placeholder='Total Price'
                 required
               /><br />
+              <Form.Control
+                type="text"
+                name="DepartureStation"
+                value={formData.DepartureStation}
+                onChange={handleChange}
+                placeholder='Departure Station'
+                required
+              /><br />
               
             </div>
 
@@ -224,6 +234,14 @@ const AddTrainTicketBooking = () => {
                 value={formData.ContactNumber}
                 onChange={handleChange}
                 placeholder="Contact Number"
+                required
+              /><br />
+              <Form.Control
+                type="text"
+                name="DestinationStation"
+                value={formData.DestinationStation}
+                onChange={handleChange}
+                placeholder='DestinationStation'
                 required
               /><br />
             </div>
