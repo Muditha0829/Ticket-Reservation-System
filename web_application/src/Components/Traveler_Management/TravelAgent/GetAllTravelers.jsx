@@ -23,7 +23,6 @@ const GetAllTravelers = () => {
     try {
       await axios.delete(`/api/users/delete/${userId}`);
 
-      // If successful, update state accordingly
       const updatedUsers = users.filter(user => user.ID !== userId);
       setUsers(updatedUsers);
       alert('Travel user deleted successfully!');
@@ -40,6 +39,7 @@ const GetAllTravelers = () => {
   <Table striped bordered hover responsive>
     <thead>
       <tr>
+      <th>NIC</th>
         <th>Username</th>
         <th>Email</th>
         <th>Actions</th>
@@ -48,7 +48,8 @@ const GetAllTravelers = () => {
     <tbody>
       {users.map(user => (
         <tr key={user.ID}>
-          <td>{user.UName}</td>
+          <td>{user.NIC}</td>
+          <td>{user.UserName}</td>
           <td>{user.Email}</td>
           <td>
             <Link to={`/viewtraveller/${user.ID}`} className="mr-2">

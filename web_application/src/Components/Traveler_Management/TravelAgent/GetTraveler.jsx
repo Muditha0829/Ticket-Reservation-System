@@ -46,23 +46,27 @@ const GetTraveler = () => {
       </tr>
       <tr>
         <td><strong>Username</strong></td>
-        <td>{user.UName}</td>
+        <td>{user.UserName}</td>
       </tr>
       <tr>
         <td><strong>First Name</strong></td>
-        <td>{user.FName}</td>
+        <td>{user.FirstName}</td>
       </tr>
       <tr>
         <td><strong>Last Name</strong></td>
-        <td>{user.LName}</td>
+        <td>{user.LastName}</td>
       </tr>
       <tr>
         <td><strong>Email</strong></td>
         <td>{user.Email}</td>
       </tr>
       <tr>
+        <td><strong>Gender</strong></td>
+        <td>{user.Gender}</td>
+      </tr>
+      <tr>
         <td><strong>Phone Number</strong></td>
-        <td>{user.CNumber}</td>
+        <td>{user.ContactNumber}</td>
       </tr>
       <tr>
         <td><strong>User Type</strong></td>

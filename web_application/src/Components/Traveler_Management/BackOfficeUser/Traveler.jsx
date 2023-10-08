@@ -60,12 +60,12 @@ const TravellerUser = () => {
     <tbody>
       {travellers.map(traveller => (
         <tr key={traveller.ID}>
-          <td>{traveller.FName}</td>
-          <td>{traveller.LName}</td>
-          <td>{traveller.UName}</td>
+          <td>{traveller.FirstName}</td>
+          <td>{traveller.LastName}</td>
+          <td>{traveller.UserName}</td>
           <td>{traveller.NIC}</td>
           <td>{traveller.Email}</td>
-          <td>{traveller.CNumber}</td>
+          <td>{traveller.ContactNumber}</td>
           <td>{traveller.UserType}</td>
           <td>{traveller.UserStatus}</td>
           <td>

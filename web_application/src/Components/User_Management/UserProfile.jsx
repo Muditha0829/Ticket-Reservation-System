@@ -83,15 +83,15 @@ const UserProfile = () => {
             <tbody>
               <tr>
                 <td><strong>First Name</strong></td>
-                <td>{user.FName}</td>
+                <td>{user.FirstName}</td>
               </tr>
               <tr>
                 <td><strong>Last Name</strong></td>
-                <td>{user.LName}</td>
+                <td>{user.LastName}</td>
               </tr>
               <tr>
                 <td><strong>User Name</strong></td>
-                <td>{user.UName}</td>
+                <td>{user.UserName}</td>
               </tr>
               <tr>
                 <td><strong>NIC</strong></td>
@@ -103,7 +103,7 @@ const UserProfile = () => {
               </tr>
               <tr>
                 <td><strong>Contact Number</strong></td>
-                <td>{user.CNumber}</td>
+                <td>{user.ContactNumber}</td>
               </tr>
               <tr>
                 <td><strong>User Type</strong></td>

@@ -8,11 +8,11 @@ const UpdateUserProfile = () => {
   const history = useHistory();
 
   const [userData, setUserData] = useState({
-    UName: '',
-    FName: '',
-    LName: '',
+    UserName: '',
+    FirstName: '',
+    LastName: '',
     Email: '',
-    CNumber: '',
+    ContactNumber: '',
     UserType: '',
   });
 
@@ -57,32 +57,32 @@ const UpdateUserProfile = () => {
             <img src="https://cdn4.vectorstock.com/i/1000x1000/06/18/male-avatar-profile-picture-vector-10210618.jpg" alt="Profile" style={{ width: '150px', height: '150px', borderRadius: '50%' }} />
           </div>
       <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="UName">
+        <Form.Group controlId="UserName">
           <Form.Label>Username:</Form.Label>
           <Form.Control
             type="text"
-            name="UName"
-            value={userData.UName}
+            name="UserName"
+            value={userData.UserName}
             onChange={handleChange}
             required
           />
         </Form.Group>
-        <Form.Group controlId="FName">
+        <Form.Group controlId="FirstName">
           <Form.Label>First Name:</Form.Label>
           <Form.Control
             type="text"
-            name="FName"
-            value={userData.FName}
+            name="FirstName"
+            value={userData.FirstName}
             onChange={handleChange}
             required
           />
         </Form.Group>
-        <Form.Group controlId="LName">
+        <Form.Group controlId="LastName">
           <Form.Label>Last Name:</Form.Label>
           <Form.Control
             type="text"
-            name="LName"
-            value={userData.LName}
+            name="LastName"
+            value={userData.LastName}
             onChange={handleChange}
             required
           />
@@ -97,12 +97,12 @@ const UpdateUserProfile = () => {
             required
           />
         </Form.Group>
-        <Form.Group controlId="CNumber">
+        <Form.Group controlId="ContactNumber">
           <Form.Label>Phone Number:</Form.Label>
           <Form.Control
             type="text"
-            name="CNumber"
-            value={userData.CNumber}
+            name="ContactNumber"
+            value={userData.ContactNumber}
             onChange={handleChange}
             required
           />

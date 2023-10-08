@@ -8,11 +8,12 @@ const UpdateTraveller = () => {
   const history = useHistory();
 
   const [userData, setUserData] = useState({
-    UName: '',
-    FName: '',
-    LName: '',
+    UserName: '',
+    FirstName: '',
+    LastName: '',
     Email: '',
-    CNumber: '',
+    Gender: '',
+    ContactNumber: '',
     UserType: '',
   });
 
@@ -39,7 +40,7 @@ const UpdateTraveller = () => {
 
     const phoneRegex = /^[0-9]{10}$/;
 
-  if (!phoneRegex.test(userData.CNumber)) {
+  if (!phoneRegex.test(userData.ContactNumber)) {
     alert('Invalid phone number. Please enter a 10-digit phone number.');
     return;
   }
@@ -69,9 +70,9 @@ const UpdateTraveller = () => {
       <Form.Label>Username:</Form.Label>
       <Form.Control
         type="text"
-        id="UName"
-        name="UName"
-        value={userData.UName}
+        id="UserName"
+        name="UserName"
+        value={userData.UserName}
         onChange={handleChange}
         required
       />
@@ -80,9 +81,9 @@ const UpdateTraveller = () => {
       <Form.Label>First Name:</Form.Label>
       <Form.Control
         type="text"
-        id="FName"
-        name="FName"
-        value={userData.FName}
+        id="FirstName"
+        name="FirstName"
+        value={userData.FirstName}
         onChange={handleChange}
         required
       />
@@ -91,9 +92,9 @@ const UpdateTraveller = () => {
       <Form.Label>Last Name:</Form.Label>
       <Form.Control
         type="text"
-        id="LName"
-        name="LName"
-        value={userData.LName}
+        id="LastName"
+        name="LastName"
+        value={userData.LastName}
         onChange={handleChange}
         required
       />
@@ -110,12 +111,23 @@ const UpdateTraveller = () => {
       />
     </Form.Group>
     <Form.Group>
+      <Form.Label>Gender:</Form.Label>
+      <Form.Control
+        type="text"
+        id="Gender"
+        name="Gender"
+        value={userData.Gender}
+        onChange={handleChange}
+        required
+      />
+    </Form.Group>
+    <Form.Group>
       <Form.Label>Phone Number:</Form.Label>
       <Form.Control
         type="text"
-        id="CNumber"
-        name="CNumber"
-        value={userData.CNumber}
+        id="ContactNumber"
+        name="ContactNumber"
+        value={userData.ContactNumber}
         onChange={handleChange}
         required
       />

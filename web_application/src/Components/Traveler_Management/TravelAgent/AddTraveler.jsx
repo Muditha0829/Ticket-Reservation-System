@@ -6,13 +6,14 @@ import { useHistory } from 'react-router-dom';
 const AddTraveller = () => {
   const [formData, setFormData] = useState({
     NIC: '',
-    UName: '',
-    FName: '',
-    LName: '',
+    UserName: '',
+    FirstName: '',
+    LastName: '',
     Email: '',
+    Gender: '',
     Password: '',
     RePassword: '',
-    CNumber: '',
+    ContactNumber: '',
     UserType: "Traveller"
   });
 
@@ -42,7 +43,7 @@ const AddTraveller = () => {
     return;
   }
 
-  if (!phoneRegex.test(formData.CNumber)) {
+  if (!phoneRegex.test(formData.ContactNumber)) {
     alert('Invalid phone number. Please enter a 10-digit phone number.');
     return;
   }
@@ -91,31 +92,31 @@ const AddTraveller = () => {
             required
           />
         </Form.Group>
-        <Form.Group controlId="UName" style={{margin: "25px"}}>
+        <Form.Group controlId="UserName" style={{margin: "25px"}}>
           <Form.Control
             type="text"
-            name="UName"
-            value={formData.UName}
+            name="UserName"
+            value={formData.UserName}
             onChange={handleChange}
             placeholder="Username"
             required
           />
         </Form.Group>
-        <Form.Group controlId="FName" style={{margin: "25px"}}>
+        <Form.Group controlId="FirstName" style={{margin: "25px"}}>
           <Form.Control
             type="text"
-            name="FName"
-            value={formData.FName}
+            name="FirstName"
+            value={formData.FirstName}
             onChange={handleChange}
             placeholder="First Name"
             required
           />
         </Form.Group>
-        <Form.Group controlId="LName" style={{margin: "25px"}}>
+        <Form.Group controlId="LastName" style={{margin: "25px"}}>
           <Form.Control
             type="text"
-            name="LName"
-            value={formData.LName}
+            name="LastName"
+            value={formData.LastName}
             onChange={handleChange}
             placeholder="Last Name"
             required
@@ -131,11 +132,21 @@ const AddTraveller = () => {
             required
           />
         </Form.Group>
-        <Form.Group controlId="CNumber" style={{margin: "25px"}}>
+        <Form.Group controlId="Gender" style={{margin: "25px"}}>
           <Form.Control
             type="text"
-            name="CNumber"
-            value={formData.CNumber}
+            name="Gender"
+            value={formData.Gender}
+            onChange={handleChange}
+            placeholder="Gender"
+            required
+          />
+        </Form.Group>
+        <Form.Group controlId="ContactNumber" style={{margin: "25px"}}>
+          <Form.Control
+            type="text"
+            name="ContactNumber"
+            value={formData.ContactNumber}
             onChange={handleChange}
             placeholder="Phone Number"
             required

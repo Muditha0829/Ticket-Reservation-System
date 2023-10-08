@@ -16,13 +16,14 @@ const Signup = () => {
 
   const [formData, setFormData] = useState({
     NIC: '',
-    UName: '',
-    FName: '',
-    LName: '',
+    UserName: '',
+    FirstName: '',
+    LastName: '',
+    Gender: '',
     Email: '',
     Password: '',
     RePassword: '',
-    CNumber: '',
+    ContactNumber: '',
     UserType: ''
   });
 
@@ -39,35 +40,35 @@ const Signup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const nicRegex = /^[0-9]{10,12}$/;
-    const phoneRegex = /^[0-9]{10}$/;
+  //   const nicRegex = /^[0-9]{10,12}$/;
+  //   const phoneRegex = /^[0-9]{10}$/;
 
-    const isValidPassword = (password) => {
-      const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
-      return passwordPattern.test(password);
-    };
+  //   const isValidPassword = (password) => {
+  //     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
+  //     return passwordPattern.test(password);
+  //   };
 
-  if (!nicRegex.test(formData.NIC.toUpperCase())) {
-    alert('Invalid NIC number. Please enter a valid NIC number.');
-    return;
-  }
+  // if (!nicRegex.test(formData.NIC.toUpperCase())) {
+  //   alert('Invalid NIC number. Please enter a valid NIC number.');
+  //   return;
+  // }
 
-  if (!phoneRegex.test(formData.CNumber)) {
-    alert('Invalid phone number. Please enter a 10-digit phone number.');
-    return;
-  }
+  // if (!phoneRegex.test(formData.ContactNumber)) {
+  //   alert('Invalid phone number. Please enter a 10-digit phone number.');
+  //   return;
+  // }
 
-    if (formData.Password !== formData.RePassword) {
-      alert("Passwords do not match. Please try again.");
-      return;
-    }
+  //   if (formData.Password !== formData.RePassword) {
+  //     alert("Passwords do not match. Please try again.");
+  //     return;
+  //   }
 
-    if (!isValidPassword(formData.Password)) {
-      alert('Password must contain at least one uppercase letter, one lowercase letter, one digit, and be at least 8 characters long.');
-      return;
-    }
+  //   if (!isValidPassword(formData.Password)) {
+  //     alert('Password must contain at least one uppercase letter, one lowercase letter, one digit, and be at least 8 characters long.');
+  //     return;
+  //   }
   
-    axios.post('/api/users/signup', formData, {
+    axios.post('http://localhost:57549/api/users/signup', formData, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -100,31 +101,31 @@ const Signup = () => {
                 required
               />
             </Form.Group>
-            <Form.Group controlId="UName" style={{marginBottom:"25px"}}>
+            <Form.Group controlId="UserName" style={{marginBottom:"25px"}}>
               <Form.Control
                 type="text"
-                name="UName"
-                value={formData.UName}
+                name="UserName"
+                value={formData.UserName}
                 onChange={handleChange}
                 placeholder="Username"
                 required
               />
             </Form.Group>
-            <Form.Group controlId="FName" style={{marginBottom:"25px"}}>
+            <Form.Group controlId="FirstName" style={{marginBottom:"25px"}}>
               <Form.Control
                 type="text"
-                name="FName"
-                value={formData.FName}
+                name="FirstName"
+                value={formData.FirstName}
                 onChange={handleChange}
                 placeholder="First Name"
                 required
               />
             </Form.Group>
-            <Form.Group controlId="LName" style={{marginBottom:"25px"}}>
+            <Form.Group controlId="LastName" style={{marginBottom:"25px"}}>
               <Form.Control
                 type="text"
-                name="LName"
-                value={formData.LName}
+                name="LastName"
+                value={formData.LastName}
                 onChange={handleChange}
                 placeholder="Last Name"
                 required
@@ -139,12 +140,22 @@ const Signup = () => {
                 placeholder="Email"
                 required
               />
-            </Form.Group>
-            <Form.Group controlId="CNumber" style={{marginBottom:"25px"}}>
+              </Form.Group>
+              <Form.Group controlId="Gender" style={{marginBottom:"25px"}}>
               <Form.Control
                 type="text"
-                name="CNumber"
-                value={formData.CNumber}
+                name="Gender"
+                value={formData.Gender}
+                onChange={handleChange}
+                placeholder="Gender"
+                required
+              />
+            </Form.Group>
+            <Form.Group controlId="ContactNumber" style={{marginBottom:"25px"}}>
+              <Form.Control
+                type="text"
+                name="ContactNumber"
+                value={formData.ContactNumber}
                 onChange={handleChange}
                 placeholder="Phone Number"
                 required

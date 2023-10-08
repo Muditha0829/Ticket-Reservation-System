@@ -34,11 +34,11 @@ const SignIn = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.post('/api/users/signin', formData)
+    axios.post('http://localhost:57549/api/users/signin', formData)
       .then(response => {
         console.log('User authenticated:', response.data);
-        setUser(response.data.ID, response.data.UserType);
-        sessionStorage.setItem('userId', response.data.ID);
+        setUser(response.data.UserID, response.data.UserType);
+        sessionStorage.setItem('userId', response.data.userID);
         console.log('User Type:', response.data.UserType);
         console.log('UserType:', UserType);
 
