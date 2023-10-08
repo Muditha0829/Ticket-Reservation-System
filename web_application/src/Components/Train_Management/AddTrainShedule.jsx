@@ -53,105 +53,141 @@ const AddTrainShedule = () => {
   };
 
   return (
-    <Container className="text-center mt-5" style={{paddingLeft: "250px"}}>
+    <Container className="text-center mt-5" style={{width: "1200px", paddingLeft: "250px"}}>
       <Row className="justify-content-center">
-        <Col xs={6}>
+        <Col>
           <Card>
             <Card.Body>
-              <Card.Title style={{ margin: "25px", fontFamily: "MyCustomFont, sans-serif", fontSize: "34px" }}>Create New Train Schedule</Card.Title>
+              <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Create New Train Schedule</Card.Title>
               <Form onSubmit={handleSubmit}>
-                <Form.Group controlId="TrainID">
-                  <Form.Label>Train Number</Form.Label>
+              <div className="row">
+  <div className="col-md-6" style={{textAlign: "left"}}>
+                <Form.Group controlId="TrainID" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
+                  <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Train Number</Form.Label>
                   <Form.Control
                     type="text"
                     name="TrainNumber"
+                    style={{fontFamily: "Onest"}}
                     value={trainData.TrainNumber}
                     onChange={handleChange}
                     required
                   />
                 </Form.Group>
-                <Form.Group controlId="trainName">
-                  <Form.Label>Train Name</Form.Label>
+                <br/>
+                <Form.Group controlId="trainName" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
+                  <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Train Name</Form.Label>
                   <Form.Control
                     type="text"
                     name="TrainName"
+                    style={{fontFamily: "Onest"}}
                     value={trainData.TrainName}
                     onChange={handleChange}
                     required
                   />
                 </Form.Group>
-                <Form.Group controlId="trainDriver">
-                  <Form.Label>Train Driver</Form.Label>
+                <br/>
+                <Form.Group controlId="trainDriver" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
+                  <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Train Driver</Form.Label>
                   <Form.Control
                     type="text"
                     name="TrainDriver"
+                    style={{fontFamily: "Onest"}}
                     value={trainData.TrainDriver}
                     onChange={handleChange}
                     required
                   />
                 </Form.Group>
-                <Form.Group controlId="departureStation">
-                  <Form.Label>Departure Station</Form.Label>
+                <br/>
+                <Form.Group controlId="departureStation" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
+                  <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Departure Station</Form.Label>
                   <Form.Control
                     type="text"
                     name="DepartureStation"
+                    style={{fontFamily: "Onest"}}
                     value={trainData.DepartureStation}
                     onChange={handleChange}
                     required
                   />
                 </Form.Group>
-                <Form.Group controlId="arrivalStation">
-                  <Form.Label>Arrival Station</Form.Label>
+                <br/>
+                <Form.Group controlId="arrivalStation" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
+                  <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Arrival Station</Form.Label>
                   <Form.Control
                     type="text"
                     name="ArrivalStation"
+                    style={{fontFamily: "Onest"}}
                     value={trainData.ArrivalStation}
                     onChange={handleChange}
                     required
                   />
                 </Form.Group>
-                <Form.Group controlId="departureTime">
-                  <Form.Label>Departure Time</Form.Label>
+                <br/>
+                <Form.Group controlId="trainStatus" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
+                  <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Train Status</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="trainStatus"
+                    style={{fontFamily: "Onest"}}
+                    value="Active"
+                    onChange={handleChange}
+                    required
+                    disabled
+                  />
+                </Form.Group>
+                <br/>
+                </div>
+                <div className="col-md-6" style={{textAlign: "left"}}>
+                <Form.Group controlId="departureTime" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
+                  <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Departure Time</Form.Label>
                   <Form.Control
                     type="datetime-local"
                     name="DepartureTime"
+                    style={{fontFamily: "Onest"}}
                     value={trainData.DepartureTime}
                     onChange={handleChange}
                     required
                   />
                 </Form.Group>
-                <Form.Group controlId="arrivalTime">
-                  <Form.Label>Arrival Time</Form.Label>
+                <br/>
+                <Form.Group controlId="arrivalTime" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
+                  <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Arrival Time</Form.Label>
                   <Form.Control
                     type="datetime-local"
                     name="ArrivalTime"
+                    style={{fontFamily: "Onest"}}
                     value={trainData.ArrivalTime}
                     onChange={handleChange}
                     required
                   />
                 </Form.Group>
-                <Form.Group controlId="trainType">
-                  <Form.Label>Train Type</Form.Label>
+                <br/>
+
+                <Form.Group controlId="trainType" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
+                  <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Train Type</Form.Label>
                   <Form.Control
                     type="text"
                     name="TrainType"
+                    style={{fontFamily: "Onest"}}
                     value={trainData.TrainType}
                     onChange={handleChange}
                     required
                   />
                 </Form.Group>
-                <Form.Group controlId="firstClassTicketPrice">
-                  <Form.Label>First Class Ticket Price</Form.Label>
+                <br/>
+                <Form.Group controlId="firstClassTicketPrice" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
+                  <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>First Class Ticket Price</Form.Label>
                   <Form.Control
                     type="text"
                     name="FirstClassTicketPrice"
+                    style={{fontFamily: "Onest"}}
                     value={trainData.FirstClassTicketPrice}
                     onChange={handleChange}
                     required
                   />
                 </Form.Group>
-                <Form.Group controlId="secondClassTicketPrice">
-                  <Form.Label>Second Class Ticket Price</Form.Label>
+                <br/>
+                <Form.Group controlId="secondClassTicketPrice" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
+                  <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Second Class Ticket Price</Form.Label>
                   <Form.Control
                     type="text"
                     name="SecondClassTicketPrice"
@@ -160,8 +196,9 @@ const AddTrainShedule = () => {
                     required
                   />
                 </Form.Group>
-                <Form.Group controlId="thirdClassTicketPrice">
-                  <Form.Label>Third Class Ticket Price</Form.Label>
+                <br/>
+                <Form.Group controlId="thirdClassTicketPrice" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
+                  <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Third Class Ticket Price</Form.Label>
                   <Form.Control
                     type="text"
                     name="ThirdClassTicketPrice"
@@ -170,6 +207,9 @@ const AddTrainShedule = () => {
                     required
                   />
                 </Form.Group>
+                <br/>
+                </div>
+                </div>
                 <Row className="justify-content-center">
                   <Col xs="auto" style={{ margin: "34px" }}>
                     <Button variant="secondary" onClick={() => window.history.back()} style={{ width: '150px' }}>Back</Button>{' '}

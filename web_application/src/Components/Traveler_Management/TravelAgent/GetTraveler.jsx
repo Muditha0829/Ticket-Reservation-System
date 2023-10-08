@@ -34,47 +34,47 @@ const GetTraveler = () => {
     <Container className="my-5 text-center" style={{paddingLeft: "250px"}}>
       <Card>
             <Card.Body>
-  <Card.Title style={{ margin: "25px", fontFamily: "MyCustomFont, sans-serif", fontSize: "34px" }}>View Travel User</Card.Title>
+  <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>View Travel User</Card.Title>
   <div className="text-center mb-4">
             <img src="https://th.bing.com/th/id/OIP.x7X2oAehk5M9IvGwO_K0PgHaHa?pid=ImgDet&rs=1" alt="Profile" style={{ width: '150px', height: '150px', borderRadius: '50%' }} />
           </div>
   <Table striped bordered responsive>
     <tbody>
       <tr>
-        <td><strong>User NIC</strong></td>
-        <td>{user.NIC}</td>
+        <td style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>User NIC</strong></td>
+        <td style={{fontFamily: "Onest"}}>{user.NIC}</td>
       </tr>
       <tr>
-        <td><strong>Username</strong></td>
-        <td>{user.UserName}</td>
+        <td style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Username</strong></td>
+        <td style={{fontFamily: "Onest"}}>{user.UserName}</td>
       </tr>
       <tr>
-        <td><strong>First Name</strong></td>
-        <td>{user.FirstName}</td>
+        <td style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>First Name</strong></td>
+        <td style={{fontFamily: "Onest"}}>{user.FirstName}</td>
       </tr>
       <tr>
-        <td><strong>Last Name</strong></td>
-        <td>{user.LastName}</td>
+        <td style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Last Name</strong></td>
+        <td style={{fontFamily: "Onest"}}>{user.LastName}</td>
       </tr>
       <tr>
-        <td><strong>Email</strong></td>
-        <td>{user.Email}</td>
+        <td style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Email</strong></td>
+        <td style={{fontFamily: "Onest"}}>{user.Email}</td>
       </tr>
       <tr>
-        <td><strong>Gender</strong></td>
-        <td>{user.Gender}</td>
+        <td style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Gender</strong></td>
+        <td style={{fontFamily: "Onest"}}>{user.Gender}</td>
       </tr>
       <tr>
-        <td><strong>Phone Number</strong></td>
-        <td>{user.ContactNumber}</td>
+        <td style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Phone Number</strong></td>
+        <td style={{fontFamily: "Onest"}}>{user.ContactNumber}</td>
       </tr>
       <tr>
-        <td><strong>User Type</strong></td>
-        <td>{user.UserType}</td>
+        <td style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>User Type</strong></td>
+        <td style={{fontFamily: "Onest"}}>{user.UserType}</td>
       </tr>
       <tr>
-        <td><strong>Status</strong></td>
-        <td>{user.UserStatus}</td>
+        <td style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Status</strong></td>
+        <td style={{fontFamily: "Onest"}}>{user.UserStatus}</td>
       </tr>
     </tbody>
   </Table>

@@ -32,15 +32,15 @@ const NavBar = () => {
       <Nav className="ml-auto">
         {UserType === 'travelagent' && (
           <>
-            <Nav.Link as={Link} to="/travelagentdashboard" style={{padding: "34px"}}>Home</Nav.Link>
-            <NavDropdown title="Reservation Management" style={{padding: "25px"}}>
-                <NavDropdown.Item as={Link} to="/makereservation" style={{padding: "25px"}}>Add Reservation</NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/listreservation" style={{padding: "25px"}}>Reservation List</NavDropdown.Item>
-              </NavDropdown>
-              <NavDropdown title="Travel User Management" style={{padding: "25px"}}>
-              <NavDropdown.Item as={Link} to="/addtraveluser" style={{padding: "25px"}}>Add Traveller</NavDropdown.Item>
-            <NavDropdown.Item as={Link} to="/listtraveluser" style={{padding: "25px"}}>Travel user List</NavDropdown.Item>
-              </NavDropdown>
+            {/* <Nav.Link as={Link} to="/travelagentdashboard" style={{padding: "34px"}}>Home</Nav.Link> */}
+       
+                <Nav.Link as={Link} to="/makereservation" style={{padding: "34px"}}>Add Reservation</Nav.Link>
+                {/* <NavDropdown.Item as={Link} to="/listreservation" style={{padding: "25px"}}>Reservation List</NavDropdown.Item> */}
+     
+       
+              <Nav.Link as={Link} to="/addtraveluser" style={{padding: "34px"}}>Add Traveller</Nav.Link>
+            {/* <NavDropdown.Item as={Link} to="/listtraveluser" style={{padding: "25px"}}>Travel user List</NavDropdown.Item> */}
+
             {/* <Nav.Link as={Link} to={`/profile/${userId}`} style={{padding: "34px"}}>Profile</Nav.Link> */}
           </>
         )}
@@ -48,18 +48,19 @@ const NavBar = () => {
       <Nav className="mr-auto">
         {UserType === 'backofficeuser' && (
           <>
-            <Nav.Link as={Link} to="/backofficeuserdashboard" style={{padding: "34px"}}>Home</Nav.Link>
-            <NavDropdown title="Train Management" style={{padding: "25px"}}>
-              <NavDropdown.Item as={Link} to="/addtrain" style={{padding: "25px"}}>Add Train</NavDropdown.Item>
-            <NavDropdown.Item as={Link} to="/listtrain" style={{padding: "25px"}}>Train List</NavDropdown.Item>
-              </NavDropdown>
-            <Nav.Link as={Link} to="/traveluserstatus" style={{padding: "34px"}}>Travel Users</Nav.Link>
+            {/* <Nav.Link as={Link} to="/backofficeuserdashboard" style={{padding: "34px"}}>Home</Nav.Link> */}
+    
+              <Nav.Link as={Link} to="/addtrain" style={{padding: "34px"}}>Add Train</Nav.Link>
+            {/* <NavDropdown.Item as={Link} to="/listtrain" style={{padding: "25px"}}>Train List</NavDropdown.Item> */}
+
+            {/* <Nav.Link as={Link} to="/traveluserstatus" style={{padding: "34px"}}>Travel Users</Nav.Link> */}
             {/* <Nav.Link as={Link} to={`/profile/${userId}`} style={{padding: "34px"}}>Profile</Nav.Link> */}
           </>
         )}
       </Nav>
       <Nav>
-        <Nav.Link onClick={handleLogout} style={{ color: "white", marginRight: "25px", padding: "25px"}}>Signout</Nav.Link>
+      <Nav.Link as={Link} to={`/profile/${userId}`} style={{padding: "34px"}}>Profile</Nav.Link>
+        {/* <Nav.Link onClick={handleLogout} style={{ color: "white", marginRight: "25px", padding: "25px"}}>Signout</Nav.Link> */}
       </Nav>
     </Navbar>
   );

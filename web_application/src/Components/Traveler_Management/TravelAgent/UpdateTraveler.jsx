@@ -58,81 +58,113 @@ const UpdateTraveller = () => {
   };
 
   return (
-    <Container className="my-5 text-center" style={{width: "47%", paddingLeft: "250px"}}>
+    <Container className="my-5 text-center" style={{width: "1200px", paddingLeft: "250px"}}>
       <Card>
             <Card.Body>
-  <Card.Title style={{ margin: "25px", fontFamily: "MyCustomFont, sans-serif", fontSize: "34px" }}>Update Traveller</Card.Title>
+  <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Update Traveller</Card.Title>
   <div className="text-center mb-4">
             <img src="https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Photos.png" alt="Profile" style={{ width: '150px', height: '150px', borderRadius: '50%' }} />
           </div>
   <Form onSubmit={handleSubmit}>
+  <div className="row">
+  <div className="col-md-6" style={{textAlign: "left"}}>
+  <Form.Group>
+      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>NIC:</Form.Label>
+      <Form.Control
+        type="text"
+        id="NIC"
+        name="NIC"
+        value={userData.NIC}
+        style={{fontFamily: "Onest"}}
+        onChange={handleChange}
+        required
+        disabled
+      />
+    </Form.Group>
+    <br/>
     <Form.Group>
-      <Form.Label>Username:</Form.Label>
+      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>User Name:</Form.Label>
       <Form.Control
         type="text"
         id="UserName"
         name="UserName"
         value={userData.UserName}
+        style={{fontFamily: "Onest"}}
         onChange={handleChange}
         required
       />
     </Form.Group>
+    <br/>
     <Form.Group>
-      <Form.Label>First Name:</Form.Label>
+      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>First Name:</Form.Label>
       <Form.Control
         type="text"
         id="FirstName"
         name="FirstName"
         value={userData.FirstName}
+        style={{fontFamily: "Onest"}}
         onChange={handleChange}
         required
       />
     </Form.Group>
+    <br/>
     <Form.Group>
-      <Form.Label>Last Name:</Form.Label>
+      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Last Name:</Form.Label>
       <Form.Control
         type="text"
         id="LastName"
         name="LastName"
         value={userData.LastName}
+        style={{fontFamily: "Onest"}}
         onChange={handleChange}
         required
       />
     </Form.Group>
+    <br/>
+    </div>
+    <div className="col-md-6" style={{textAlign: "left"}}>
     <Form.Group>
-      <Form.Label>Email:</Form.Label>
+      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Email:</Form.Label>
       <Form.Control
         type="Email"
         id="Email"
         name="Email"
         value={userData.Email}
+        style={{fontFamily: "Onest"}}
         onChange={handleChange}
         required
       />
     </Form.Group>
+    <br/>
     <Form.Group>
-      <Form.Label>Gender:</Form.Label>
+      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Gender:</Form.Label>
       <Form.Control
         type="text"
         id="Gender"
         name="Gender"
+        style={{fontFamily: "Onest"}}
         value={userData.Gender}
         onChange={handleChange}
         required
       />
     </Form.Group>
+    <br/>
     <Form.Group>
-      <Form.Label>Phone Number:</Form.Label>
+      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Phone Number:</Form.Label>
       <Form.Control
         type="text"
         id="ContactNumber"
         name="ContactNumber"
         value={userData.ContactNumber}
+        style={{fontFamily: "Onest"}}
         onChange={handleChange}
         required
       />
     </Form.Group>
-    <Row className="justify-content-center" style={{margin: "25px"}}>
+    <br/>
+    </div>
+            </div>
+            <Row className="justify-content-center" style={{margin: "25px"}}>
               <Col xs="auto">
               <Button variant="secondary" onClick={() => window.history.back()} style={{ width: '150px' }}>Back</Button>{' '}
             <Button type="submit" variant="primary" style={{ width: '150px' }}>Update</Button>

@@ -35,10 +35,10 @@ const GetAllTravelers = () => {
     <Container className="my-5 text-center" style={{height: "700px", paddingLeft: "250px"}}>
   <Card>
             <Card.Body>
-              <Card.Title style={{ margin: "25px", fontFamily: "MyCustomFont, sans-serif", fontSize: "34px" }}>Travel Users</Card.Title>
+              <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Travel Users</Card.Title>
   <Table striped bordered hover responsive>
     <thead>
-      <tr>
+      <tr style={{fontSize: "17px", fontFamily: "Montserrat"}}>
       <th>NIC</th>
         <th>Username</th>
         <th>Email</th>
@@ -47,18 +47,18 @@ const GetAllTravelers = () => {
     </thead>
     <tbody>
       {users.map(user => (
-        <tr key={user.ID}>
+        <tr key={user.ID} style={{fontFamily: "Onest"}}>
           <td>{user.NIC}</td>
           <td>{user.UserName}</td>
           <td>{user.Email}</td>
           <td>
             <Link to={`/viewtraveller/${user.UserID}`} className="mr-2">
-              <Button variant="warning" style={{marginRight: "25px"}}><i className="fas fa-eye"></i>View Travel User</Button>
+              <Button variant="warning" style={{marginRight: "25px"}}><i className="fas fa-eye"></i></Button>
             </Link>
             <Link to={`/updatetraveller/${user.UserID}`} className="mr-2">
-              <Button variant="success" style={{marginRight: "25px"}}><i className="fas fa-edit"></i>Update Travel User</Button>
+              <Button variant="success" style={{marginRight: "25px"}}><i className="fas fa-edit"></i></Button>
             </Link>
-            <Button variant="danger" onClick={() => handleDeleteUser(user.UserID)} style={{marginRight: "25px"}}><i className="fas fa-trash-alt"></i>Delete Travel User</Button>
+            <Button variant="danger" onClick={() => handleDeleteUser(user.UserID)} style={{marginRight: "25px"}}><i className="fas fa-trash-alt"></i></Button>
           </td>
         </tr>
       ))}

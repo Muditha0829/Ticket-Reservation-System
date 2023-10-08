@@ -114,27 +114,57 @@ const UpdateTrainTicketBooking = () => {
   }, []);
 
   return (
-    <Container className="my-5 text-center" style={{width: "43%", paddingLeft: "250px"}}>
+    <Container className="my-5 text-center" style={{width: "75%", paddingLeft: "250px"}}>
   <Card>
             <Card.Body>
-              <Card.Title style={{ margin: "25px", fontFamily: "MyCustomFont, sans-serif", fontSize: "34px" }}>Create New Reservation</Card.Title>
+              <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Update Your Trian Booking</Card.Title>
+              
+                
   <Form onSubmit={handleSubmit}>
-    <Form.Group>
-      <Form.Label>Traveler Name:</Form.Label>
+  <div className="row">
+  <div className="col-md-6" style={{textAlign: "left"}}>
+    <Form.Group style={{textAlign:"left", margin: "25px"}}>
+      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Main Passenger Name</Form.Label>
       <Form.Control
         type="text"
         name="TravelerName"
         value={updatedReservationData.MainPassengerName}
         onChange={handleChange}
         placeholder="Traveler Name"
+        style={{fontFamily: "Onest"}}
+        required
+      />
+    </Form.Group>
+    <Form.Group style={{textAlign:"left", margin: "25px"}}>
+      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Email:</Form.Label>
+      <Form.Control
+        type="Email"
+        name="Email"
+        value={updatedReservationData.Email}
+        style={{fontFamily: "Onest"}}
+        onChange={handleChange}
+        placeholder="Email"
+        required
+      />
+    </Form.Group>
+    <Form.Group style={{textAlign:"left", margin: "25px"}}> 
+      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Contact Number</Form.Label>
+      <Form.Control
+        type="tel"
+        name="Phone"
+        value={updatedReservationData.ContactNumber}
+        style={{fontFamily: "Onest"}}
+        onChange={handleChange}
+        placeholder="Phone"
         required
       />
     </Form.Group>
     
-    <Form.Group controlId="TrainID">
-      <Form.Label>Train Name</Form.Label>
+    <Form.Group controlId="TrainID" style={{textAlign:"left", margin: "25px"}}>
+      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Train Name</Form.Label>
       <Form.Select
         name="TrainID"
+        style={{fontFamily: "Onest"}}
         value={updatedReservationData.TrainID}
         onChange={handleChange}
         required
@@ -147,22 +177,25 @@ const UpdateTrainTicketBooking = () => {
 ))}
       </Form.Select>
     </Form.Group>
-    <Form.Group>
-      <Form.Label>Reservation Date:</Form.Label>
+    <Form.Group style={{textAlign:"left", margin: "25px"}}>
+      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Reservation Date</Form.Label>
       <Form.Control
   type="date"
   name="ReservationDate"
+  style={{fontFamily: "Onest"}}
   value={updatedReservationData.ReservationDate}
   onChange={handleChange}
   required
 />
     </Form.Group>
     
-    
-    <Form.Group controlId="TotalPassengers">
-      <Form.Label>Total Passengers</Form.Label>
+    </div>
+    <div className="col-md-6" style={{textAlign: "left"}}>
+    <Form.Group controlId="TotalPassengers" style={{textAlign:"left", margin: "25px"}}>
+      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Total Passengers</Form.Label>
       <Form.Select
         name="NumPassengers"
+        style={{fontFamily: "Onest"}}
         value={updatedReservationData.TotalPassengers}
         onChange={handleChange}
         required
@@ -175,10 +208,11 @@ const UpdateTrainTicketBooking = () => {
       </Form.Select>
     </Form.Group>
     
-    <Form.Group controlId="TicketClass">
-      <Form.Label>Ticket Class:</Form.Label>
+    <Form.Group controlId="TicketClass" style={{textAlign:"left", margin: "25px"}}>
+      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Ticket Class:</Form.Label>
       <Form.Select
         name="TicketClass"
+        style={{fontFamily: "Onest"}}
         value={updatedReservationData.TicketClass}
         onChange={handleChange}
         required
@@ -189,35 +223,13 @@ const UpdateTrainTicketBooking = () => {
         <option value="Third Class">Third Class</option>
       </Form.Select>
     </Form.Group>
-    
-    <Form.Group>
-      <Form.Label>Email:</Form.Label>
-      <Form.Control
-        type="Email"
-        name="Email"
-        value={updatedReservationData.Email}
-        onChange={handleChange}
-        placeholder="Email"
-        required
-      />
-    </Form.Group>
-    <Form.Group>
-      <Form.Label>Contact Number:</Form.Label>
-      <Form.Control
-        type="tel"
-        name="Phone"
-        value={updatedReservationData.ContactNumber}
-        onChange={handleChange}
-        placeholder="Phone"
-        required
-      />
-    </Form.Group>
 
-    <Form.Group>
-      <Form.Label>Departure Stationr:</Form.Label>
+    <Form.Group style={{textAlign:"left", margin: "25px"}}>
+      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Departure Station</Form.Label>
       <Form.Control
         type="text"
         name="DepartureStation"
+        style={{fontFamily: "Onest"}}
         value={updatedReservationData.DepartureStation}
         onChange={handleChange}
         placeholder="DepartureStation"
@@ -225,10 +237,11 @@ const UpdateTrainTicketBooking = () => {
       />
     </Form.Group>
 
-    <Form.Group>
-      <Form.Label>Destination Station:</Form.Label>
+    <Form.Group style={{textAlign:"left", margin: "25px"}}>
+      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Destination Station</Form.Label>
       <Form.Control
         type="text"
+        style={{fontFamily: "Onest"}}
         name="DestinationStation"
         value={updatedReservationData.DestinationStation}
         onChange={handleChange}
@@ -236,10 +249,11 @@ const UpdateTrainTicketBooking = () => {
         required
       />
     </Form.Group>
-    <Form.Group>
-      <Form.Label>Total Price:</Form.Label>
+    <Form.Group style={{textAlign:"left", margin: "25px"}}>
+      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Total Price</Form.Label>
       <Form.Control
         type="tel"
+        style={{fontFamily: "Onest"}}
         name="Phone"
         value={updatedReservationData.TotalPrice}
         onChange={handleChange}
@@ -247,15 +261,21 @@ const UpdateTrainTicketBooking = () => {
         required
       />
     </Form.Group>
-    <Row className="mb-3" style={{margin: "25px"}}>
+    
+        </div>
+        </div>
+        <Row className="mb-3" style={{margin: "25px"}}>
           <Col md={0} className="mx-auto">
             <Button variant="secondary" onClick={() => window.history.back()} style={{ width: '150px' }}>Back</Button>{' '}
             <Button variant="primary" type="submit" style={{ width: '150px' }}>Update</Button>
           </Col>
         </Row>
   </Form>
+  
+  
   </Card.Body>
   </Card>
+  
 </Container>
   );
 };

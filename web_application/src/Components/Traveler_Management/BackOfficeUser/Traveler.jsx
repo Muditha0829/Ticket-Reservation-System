@@ -4,27 +4,27 @@ import { AuthContext } from '../../AuthContext';
 import { Container, Table, Button, Card } from 'react-bootstrap';
 
 const TravellerUser = () => {
-  const { userID } = useContext(AuthContext);
-  const [travellers, setTravellers] = useState([]);
+  const { UserID } = useContext(AuthContext);
+  const [traveler, setTravellers] = useState([]);
 
   useEffect(() => {
-    axios.get('/api/users/getall')
+    axios.get('http://localhost:57549/api/users/getallusers')
       .then(response => {
         setTravellers(response.data);
       })
       .catch(error => {
-        console.error('Error fetching travellers:', error);
+        console.error('Error fetching traveler:', error);
       });
   }, []);
 
-  const handleStatusChange = (userID, currentStatus) => {
+  const handleStatusChange = (UserID, currentStatus) => {
     const newStatus = currentStatus === 'Active' ? 'Inactive' : 'Active';
 
-    axios.put(`/api/users/updatestatusbyid/${userID}`, { UserStatus: newStatus })
+    axios.put(`http://localhost:57549/api/users/updateuserstatus/${UserID}`, { UserStatus: newStatus })
       .then(response => {
         if (response.status === 200) {
-          setTravellers(travellers.map(traveller =>
-            traveller.ID === userID ? { ...traveller, UserStatus: newStatus } : traveller
+          setTravellers(traveler.map(traveler =>
+            traveler.UserID === UserID ? { ...traveler, UserStatus: newStatus } : traveler
           ));
           alert('Status updated successfully');
         } else {
@@ -39,13 +39,13 @@ const TravellerUser = () => {
   };
 
   return (
-    <Container className="my-5 text-center" style={{height: "700px", paddingLeft: "250px"}}>
+    <Container className="my-5 text-center" style={{height: "1200px", paddingLeft: "250px"}}>
   <Card>
         <Card.Body>
-          <Card.Title style={{ margin: "25px", fontFamily: "MyCustomFont, sans-serif", fontSize: "34px" }}>Travel User List</Card.Title>
+          <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Travel User List</Card.Title>
   <Table striped bordered hover responsive>
     <thead>
-      <tr>
+      <tr style={{fontSize: "17px", fontFamily: "Montserrat"}}>
         <th>First Name</th>
         <th>Last Name</th>
         <th>Username</th>
@@ -58,22 +58,22 @@ const TravellerUser = () => {
       </tr>
     </thead>
     <tbody>
-      {travellers.map(traveller => (
-        <tr key={traveller.ID}>
-          <td>{traveller.FirstName}</td>
-          <td>{traveller.LastName}</td>
-          <td>{traveller.UserName}</td>
-          <td>{traveller.NIC}</td>
-          <td>{traveller.Email}</td>
-          <td>{traveller.ContactNumber}</td>
-          <td>{traveller.UserType}</td>
-          <td>{traveller.UserStatus}</td>
+      {traveler.map(traveler => (
+        <tr key={traveler.UserID} style={{fontFamily: "Onest"}}>
+          <td>{traveler.FirstName}</td>
+          <td>{traveler.LastName}</td>
+          <td>{traveler.UserName}</td>
+          <td>{traveler.NIC}</td>
+          <td>{traveler.Email}</td>
+          <td>{traveler.ContactNumber}</td>
+          <td>{traveler.UserType}</td>
+          <td>{traveler.UserStatus}</td>
           <td>
             <Button
               variant="primary"
-              onClick={() => handleStatusChange(traveller.ID, traveller.UserStatus)}
+              onClick={() => handleStatusChange(traveler.UserID, traveler.UserStatus)}
             >
-              {traveller.UserStatus === 'Active' ? 'Inactivate' : 'Activate'}
+              {traveler.UserStatus === 'Active' ? 'Inactivate' : 'Activate'}
             </Button>
           </td>
         </tr>

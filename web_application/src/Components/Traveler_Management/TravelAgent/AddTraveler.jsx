@@ -75,103 +75,140 @@ const AddTraveller = () => {
   };
 
   return (
-    <Container className="text-center mt-5" style={{width: "1200px", paddingLeft: "250px"}}>
+    <Container className="my-5 text-center" style={{width: "1200px", paddingLeft: "250px"}}>
   <Row className="justify-content-center">
-    <Col md={6}>
+    <Col>
     <Card>
             <Card.Body>
-              <Card.Title style={{ margin: "25px", fontFamily: "MyCustomFont, sans-serif", fontSize: "34px" }}>Create New Traveller</Card.Title>
+              <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Create New Traveller</Card.Title>
       <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="NIC" style={{margin: "25px"}}>
+      <div className="row">
+      <div className="col-md-6" style={{textAlign: "left"}}>
+        <Form.Group controlId="NIC" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
           <Form.Control
             type="text"
             name="NIC"
             value={formData.NIC}
+            style={{fontFamily: "Onest"}}
             onChange={handleChange}
             placeholder="NIC"
             required
           />
+          <br/>
         </Form.Group>
-        <Form.Group controlId="UserName" style={{margin: "25px"}}>
+        <Form.Group controlId="UserName" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
           <Form.Control
             type="text"
             name="UserName"
             value={formData.UserName}
+            style={{fontFamily: "Onest"}}
             onChange={handleChange}
             placeholder="Username"
             required
           />
         </Form.Group>
-        <Form.Group controlId="FirstName" style={{margin: "25px"}}>
+        <br/>
+        <Form.Group controlId="FirstName" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
           <Form.Control
             type="text"
             name="FirstName"
             value={formData.FirstName}
+            style={{fontFamily: "Onest"}}
             onChange={handleChange}
             placeholder="First Name"
             required
           />
         </Form.Group>
-        <Form.Group controlId="LastName" style={{margin: "25px"}}>
+        <br/>
+        <Form.Group controlId="LastName" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
           <Form.Control
             type="text"
             name="LastName"
             value={formData.LastName}
+            style={{fontFamily: "Onest"}}
             onChange={handleChange}
             placeholder="Last Name"
             required
           />
         </Form.Group>
-        <Form.Group controlId="Email" style={{margin: "25px"}}>
+        <br/>
+        <Form.Group controlId="userType" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
+          <Form.Control
+            type="text"
+            name="userType"
+            value={formData.LastName}
+            style={{fontFamily: "Onest"}}
+            onChange={handleChange}
+            placeholder="Traveler"
+            required
+            disabled
+          />
+        </Form.Group>
+        <br/>
+        </div>
+        <div className="col-md-6" style={{textAlign: "left"}}>
+        <Form.Group controlId="Email" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
           <Form.Control
             type="Email"
             name="Email"
             value={formData.Email}
+            style={{fontFamily: "Onest"}}
             onChange={handleChange}
             placeholder="Email"
             required
           />
         </Form.Group>
-        <Form.Group controlId="Gender" style={{margin: "25px"}}>
+        <br/>
+        <Form.Group controlId="Gender" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
           <Form.Control
             type="text"
             name="Gender"
             value={formData.Gender}
+            style={{fontFamily: "Onest"}}
             onChange={handleChange}
             placeholder="Gender"
             required
           />
         </Form.Group>
-        <Form.Group controlId="ContactNumber" style={{margin: "25px"}}>
+        <br/>
+        <Form.Group controlId="ContactNumber" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
           <Form.Control
             type="text"
             name="ContactNumber"
             value={formData.ContactNumber}
+            style={{fontFamily: "Onest"}}
             onChange={handleChange}
             placeholder="Phone Number"
             required
           />
         </Form.Group>
-        <Form.Group controlId="Password" style={{margin: "25px"}}>
+        <br/>
+        <Form.Group controlId="Password" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
           <Form.Control
             type="password"
             name="Password"
             value={formData.Password}
+            style={{fontFamily: "Onest"}}
             onChange={handleChange}
             placeholder="Password"
             required
           />
         </Form.Group>
-        <Form.Group controlId="RePassword" style={{margin: "25px"}}>
+        <br/>
+        <Form.Group controlId="RePassword" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
           <Form.Control
             type="password"
             name="RePassword"
             value={formData.RePassword}
+            style={{fontFamily: "Onest"}}
             onChange={handleChange}
-            placeholder="Re-enter Password"
+            placeholder="Re Password"
             required
           />
         </Form.Group>
+        <br/>
+        </div>
+        </div>
         <Row className="justify-content-center" style={{margin: "25px"}}>
               <Col xs="auto">
               <Button variant="secondary" onClick={() => window.history.back()} style={{ width: '150px' }}>Back</Button>{' '}

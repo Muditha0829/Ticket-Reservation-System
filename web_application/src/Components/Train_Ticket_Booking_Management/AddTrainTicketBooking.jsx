@@ -124,24 +124,45 @@ const AddTrainTicketBooking = () => {
   };
 
   return (
-    <Container className="text-center mt-5" style={{width: "800px", paddingLeft: "250px"}}>
+    <Container className="text-center mt-5" style={{width: "1200px", paddingLeft: "250px"}}>
       <div className="container">
       <Card>
             <Card.Body>
-              <Card.Title style={{ margin: "25px", fontFamily: "MyCustomFont, sans-serif", fontSize: "34px" }}>Create New Reservation</Card.Title>
+              <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Create Your Train Booking</Card.Title>
         <Form onSubmit={handleSubmit}>
           <div className="row">
             {/* Left Column */}
-            <div className="col-md-6">
+            <div className="col-md-6" style={{textAlign: "left"}}>
+            <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Main Passenger Name</Form.Label>
               <Form.Control
                 type="text"
                 name="MainPassengerName"
                 value={formData.MainPassengerName}
                 onChange={handleChange}
-                placeholder="Traveler Name"
+                required
+              /><br />
+
+<Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Email</Form.Label>
+              <Form.Control
+                type="Email"
+                name="Email"
+                value={formData.Email}
+                onChange={handleChange}
+                placeholder="Email"
+                required
+              /><br />
+
+              <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Contact Number</Form.Label>
+              <Form.Control
+                type="text"
+                name="ContactNumber"
+                value={formData.ContactNumber}
+                onChange={handleChange}
+                placeholder="Contact Number"
                 required
               /><br />
               
+              <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Reservation Date</Form.Label>
               <Form.Control
                 type="date"
                 name="ReservationDate"
@@ -149,6 +170,7 @@ const AddTrainTicketBooking = () => {
                 onChange={handleChange}
                 required
               /><br />
+              <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Train Name</Form.Label>
               <Form.Group controlId="TrainName">
           <Form.Select
             name="TrainName"
@@ -163,29 +185,16 @@ const AddTrainTicketBooking = () => {
               </option>
             ))}
           </Form.Select>
+
         </Form.Group>
               <br />
-              <Form.Control
-                type="text"
-                name="TotalPrice"
-                value={formData.TotalPrice}
-                onChange={handleChange}
-                placeholder='Total Price'
-                required
-              /><br />
-              <Form.Control
-                type="text"
-                name="DepartureStation"
-                value={formData.DepartureStation}
-                onChange={handleChange}
-                placeholder='Departure Station'
-                required
-              /><br />
+              
               
             </div>
 
             {/* Right Column */}
-            <div className="col-md-6">
+            <div className="col-md-6" style={{textAlign: "left"}}>
+            <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Total Passengers</Form.Label>
             <Form.Group controlId="TotalPassengers">
   <Form.Control
     as="select"
@@ -194,7 +203,7 @@ const AddTrainTicketBooking = () => {
     onChange={handleChange}
     required
   >
-    <option value="" disabled>Number of Passengers</option>
+    <option value="" disabled>Select Passengers Count</option>
     <option value="1">1</option>
     <option value="2">2</option>
     <option value="3">3</option>
@@ -203,7 +212,7 @@ const AddTrainTicketBooking = () => {
 </Form.Group>
 
               <br />
-              
+              <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Ticket Class</Form.Label>
               <Form.Group controlId="TicketClass">
   <Form.Control
     as="select"
@@ -212,36 +221,41 @@ const AddTrainTicketBooking = () => {
     onChange={handleChange}
     required
   >
-    <option value="" disabled>Ticket Class</option>
+    <option value="" disabled>Select Ticket Class</option>
     <option value="First Class">First Class</option>
     <option value="Second Class">Second Class</option>
     <option value="Third Class">Third Class</option>
   </Form.Control>
   </Form.Group>
               <br />
-              
-              <Form.Control
-                type="Email"
-                name="Email"
-                value={formData.Email}
-                onChange={handleChange}
-                placeholder="Email"
-                required
-              /><br />
-              <Form.Control
-                type="text"
-                name="ContactNumber"
-                value={formData.ContactNumber}
-                onChange={handleChange}
-                placeholder="Contact Number"
-                required
-              /><br />
+
+<Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Destination Station</Form.Label>
               <Form.Control
                 type="text"
                 name="DestinationStation"
                 value={formData.DestinationStation}
                 onChange={handleChange}
                 placeholder='DestinationStation'
+                required
+              /><br />
+
+<Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Deaprture Station</Form.Label>
+              <Form.Control
+                type="text"
+                name="DepartureStation"
+                value={formData.DepartureStation}
+                onChange={handleChange}
+                placeholder='Departure Station'
+                required
+              /><br />
+
+<Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Total Price</Form.Label>
+              <Form.Control
+                type="text"
+                name="TotalPrice"
+                value={formData.TotalPrice}
+                onChange={handleChange}
+                placeholder='Total Price'
                 required
               /><br />
             </div>

@@ -27,53 +27,53 @@ const GetTrainTicketBooking = () => {
   return (
     <div className="text-center p-4">
   <Card className="mx-auto" style={{ maxWidth: '800px', borderRadius: '10px', paddingLeft: "250px" }}>
-  <Card.Title style={{ margin: "25px", fontFamily: "MyCustomFont, sans-serif", fontSize: "34px" }}>View Reservation</Card.Title>
+  <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>View Reservation</Card.Title>
     <Card.Body>
       <Table striped bordered hover>
         <tbody>
           <tr>
-            <td className="text"><strong>Main Passenger Name</strong></td>
-            <td>{reservation.MainPassengerName}</td>
+            <td className="text" style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Main Passenger Name</strong></td>
+            <td style={{fontFamily: "Onest"}}>{reservation.MainPassengerName}</td>
           </tr>
           <tr>
-            <td className="text"><strong>Booking Date</strong></td>
-            <td>{reservation.BookingDate}</td>
+            <td className="text" style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Booking Date</strong></td>
+            <td style={{fontFamily: "Onest"}}>{reservation.BookingDate}</td>
           </tr>
           <tr>
-            <td className="text"><strong>Train Name</strong></td>
-            <td>{reservation.TrainName}</td>
+            <td className="text" style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Train Name</strong></td>
+            <td style={{fontFamily: "Onest"}}>{reservation.TrainName}</td>
           </tr>
           <tr>
-            <td className="text"><strong>Reservation Date</strong></td>
-            <td>{reservation.ReservationDate}</td>
+            <td className="text" style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Reservation Date</strong></td>
+            <td style={{fontFamily: "Onest"}}>{reservation.ReservationDate}</td>
           </tr>
           <tr>
-            <td className="text"><strong>Departure Station</strong></td>
-            <td>{reservation.DepartureStation}</td>
+            <td className="text" style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Departure Station</strong></td>
+            <td style={{fontFamily: "Onest"}}>{reservation.DepartureStation}</td>
           </tr>
           <tr>
-            <td className="text"><strong>Destination Station</strong></td>
-            <td>{reservation.DestinationStation}</td>
+            <td className="text" style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Destination Station</strong></td>
+            <td style={{fontFamily: "Onest"}}>{reservation.DestinationStation}</td>
           </tr>
           <tr>
-            <td className="text"><strong>Total Passengers</strong></td>
-            <td>{reservation.TotalPassengers}</td>
+            <td className="text" style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Total Passengers</strong></td>
+            <td style={{fontFamily: "Onest"}}>{reservation.TotalPassengers}</td>
           </tr>
           <tr>
-            <td className="text"><strong>Ticket Class</strong></td>
-            <td>{reservation.TicketClass}</td>
+            <td className="text" style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Ticket Class</strong></td>
+            <td style={{fontFamily: "Onest"}}>{reservation.TicketClass}</td>
           </tr>
           <tr>
-            <td className="text"><strong>Email</strong></td>
-            <td>{reservation.Email}</td>
+            <td className="text" style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Email</strong></td>
+            <td style={{fontFamily: "Onest"}}>{reservation.Email}</td>
           </tr>
           <tr>
-            <td className="text"><strong>Contact Number</strong></td>
-            <td>{reservation.ContactNumber}</td>
+            <td className="text" style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Contact Number</strong></td>
+            <td style={{fontFamily: "Onest"}}>{reservation.ContactNumber}</td>
           </tr>
           <tr>
-            <td className="text"><strong>Total Price</strong></td>
-            <td>{reservation.TotalPrice}</td>
+            <td className="text" style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Total Price</strong></td>
+            <td style={{fontFamily: "Onest"}}>{reservation.TotalPrice}</td>
           </tr>
         </tbody>
       </Table>

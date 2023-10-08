@@ -32,10 +32,10 @@ const GetAllTrainShedules = () => {
     <Container className="my-5 text-center" style={{height: "700px", paddingLeft: "250px"}}>
       <Card>
         <Card.Body>
-          <Card.Title style={{ margin: "25px", fontFamily: "MyCustomFont, sans-serif", fontSize: "34px" }}>Train Shedules</Card.Title>
+          <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Train Shedules</Card.Title>
           <Table striped bordered hover style={{ marginTop: '20px', width: '75%' }} className="mx-auto">
             <thead>
-              <tr>
+              <tr style={{fontSize: "17px", fontFamily: "Montserrat"}}>
                 <th>Train ID</th>
                 <th>Status</th>
                 <th>Actions</th>
@@ -43,7 +43,7 @@ const GetAllTrainShedules = () => {
             </thead>
             <tbody>
               {trains.map(train => (
-                <tr key={train.ID}>
+                <tr key={train.ID} style={{fontFamily: "Onest"}}>
                   <td>{train.TrainNumber}</td>
                   <td>{train.TrainStatus}</td>
                   <td>

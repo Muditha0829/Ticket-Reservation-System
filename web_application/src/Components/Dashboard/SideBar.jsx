@@ -34,21 +34,21 @@ const SideBar = () => {
         {UserType === 'travelagent' && (
           <>
             <Nav.Link as={Link} to="/travelagentdashboard" style={{ color: "white", padding: "15px", textAlign: "center" }}>Home</Nav.Link>
-            <Nav.Link as={Link} to="/makereservation" style={{ color: "white", padding: "15px", textAlign: "center" }}>Add Reservation</Nav.Link>
+            {/* <Nav.Link as={Link} to="/makereservation" style={{ color: "white", padding: "15px", textAlign: "center" }}>Add Reservation</Nav.Link> */}
             <Nav.Link as={Link} to="/listreservation" style={{ color: "white", padding: "15px", textAlign: "center" }}>Reservation List</Nav.Link>
-            <Nav.Link as={Link} to="/addtraveluser" style={{ color: "white", padding: "15px", textAlign: "center" }}>Add Traveller</Nav.Link>
+            {/* <Nav.Link as={Link} to="/addtraveluser" style={{ color: "white", padding: "15px", textAlign: "center" }}>Add Traveller</Nav.Link> */}
             <Nav.Link as={Link} to="/listtraveluser" style={{ color: "white", padding: "15px", textAlign: "center" }}>Travel user List</Nav.Link>
           </>
         )}
         {UserType === 'backofficeuser' && (
           <>
             <Nav.Link as={Link} to="/backofficeuserdashboard" style={{ color: "white", padding: "15px", textAlign: "center" }}>Home</Nav.Link>
-            <Nav.Link as={Link} to="/addtrain" style={{ color: "white", padding: "15px", textAlign: "center" }}>Add Train</Nav.Link>
+            {/* <Nav.Link as={Link} to="/addtrain" style={{ color: "white", padding: "15px", textAlign: "center" }}>Add Train</Nav.Link> */}
             <Nav.Link as={Link} to="/listtrain" style={{ color: "white", padding: "15px", textAlign: "center" }}>Train List</Nav.Link>
             <Nav.Link as={Link} to="/traveluserstatus" style={{ color: "white", padding: "15px", textAlign: "center" }}>Travel Users</Nav.Link>
           </>
         )}
-        <Nav.Link onClick={handleLogout} style={{ color: "white", padding: "15px", textAlign: "center" }}>Signout</Nav.Link>
+        <Nav.Link onClick={handleLogout} style={{ color: "white", padding: "15px", textAlign: "center", marginTop: "140px" }}>Signout</Nav.Link>
       </Nav>
     </div>
   );

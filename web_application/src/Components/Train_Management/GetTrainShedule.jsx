@@ -18,60 +18,60 @@ const GetTrainShedule = () => {
   }, [TrainID]);
 
   return (
-    <Container className="my-5 text-center" style={{width: "470px", paddingLeft: "250px"}}>
+    <Container className="my-5 text-center" style={{width: "1200px", paddingLeft: "250px"}}>
       <Card>
         <Card.Body>
-          <Card.Title style={{ margin: "25px", fontFamily: "MyCustomFont, sans-serif", fontSize: "34px" }}>View Train Shedule</Card.Title>
+          <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>View Train Shedule</Card.Title>
           <div className="mx-auto" style={{ maxWidth: '600px' }}>
             <Table striped bordered hover>
             <tbody>
   <tr>
-    <td><strong>Train Number</strong></td>
-    <td>{train.TrainNumber}</td>
+    <td style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Train Number</strong></td>
+    <td style={{fontFamily: "Onest"}}>{train.TrainNumber}</td>
   </tr>
   <tr>
-    <td><strong>Train Name</strong></td>
-    <td>{train.TrainName}</td>
+    <td style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Train Name</strong></td>
+    <td style={{fontFamily: "Onest"}}>{train.TrainName}</td>
   </tr>
   <tr>
-    <td><strong>Train Driver</strong></td>
-    <td>{train.TrainDriver}</td>
+    <td style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Train Driver</strong></td>
+    <td style={{fontFamily: "Onest"}}>{train.TrainDriver}</td>
   </tr>
   <tr>
-    <td><strong>Departure Station</strong></td>
-    <td>{train.DepartureStation}</td>
+    <td style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Departure Station</strong></td>
+    <td style={{fontFamily: "Onest"}}>{train.DepartureStation}</td>
   </tr>
   <tr>
-    <td><strong>Arrival Station</strong></td>
-    <td>{train.ArrivalStation}</td>
+    <td style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Arrival Station</strong></td>
+    <td style={{fontFamily: "Onest"}}>{train.ArrivalStation}</td>
   </tr>
   <tr>
-    <td><strong>Departure Time</strong></td>
-    <td>{train.DepartureTime}</td>
+    <td style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Departure Time</strong></td>
+    <td style={{fontFamily: "Onest"}}>{train.DepartureTime}</td>
   </tr>
   <tr>
-    <td><strong>Arrival Time</strong></td>
-    <td>{train.ArrivalTime}</td>
+    <td style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Arrival Time</strong></td>
+    <td style={{fontFamily: "Onest"}}>{train.ArrivalTime}</td>
   </tr>
   <tr>
-    <td><strong>Train Type</strong></td>
-    <td>{train.TrainType}</td>
+    <td style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Train Type</strong></td>
+    <td style={{fontFamily: "Onest"}}>{train.TrainType}</td>
   </tr>
   <tr>
-    <td><strong>First Class Ticket Price</strong></td>
-    <td>{train.FirstClassTicketPrice}</td>
+    <td style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>First Class Ticket Price</strong></td>
+    <td style={{fontFamily: "Onest"}}>{train.FirstClassTicketPrice}</td>
   </tr>
   <tr>
-    <td><strong>Second Class Ticket Price</strong></td>
-    <td>{train.SecondClassTicketPrice}</td>
+    <td style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Second Class Ticket Price</strong></td>
+    <td style={{fontFamily: "Onest"}}>{train.SecondClassTicketPrice}</td>
   </tr>
   <tr>
-    <td><strong>Third Class Ticket Price</strong></td>
-    <td>{train.ThirdClassTicketPrice}</td>
+    <td style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Third Class Ticket Price</strong></td>
+    <td style={{fontFamily: "Onest"}}>{train.ThirdClassTicketPrice}</td>
   </tr>
   <tr>
-    <td><strong>Status</strong></td>
-    <td>{train.TrainStatus}</td>
+    <td style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Status</strong></td>
+    <td style={{fontFamily: "Onest"}}>{train.TrainStatus}</td>
   </tr>
 </tbody>
             </Table>

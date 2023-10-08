@@ -74,28 +74,32 @@ const UpdateTrainShedule = () => {
   }, [TrainID]);  
 
   return (
-    <Container className="text-center mt-5" style={{width: "700px", paddingLeft: "250px"}}>
+    <Container className="text-center mt-5" style={{width: "1200px", paddingLeft: "250px"}}>
       <Card>
         <Card.Body>
-          <Card.Title style={{ margin: "25px", fontFamily: "MyCustomFont, sans-serif", fontSize: "34px" }}>Update Train Shedule</Card.Title>
+          <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Update Train Shedule</Card.Title>
       <Form onSubmit={handleSubmit}>
+      <div className="row">
+  <div className="col-md-6" style={{textAlign: "left"}}>
         <Row className="mb-3">
-          <Col md={6} className="mx-auto">
-            <Form.Label>Train Number</Form.Label>
+          <Col className="mx-auto">
+            <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Train Number</Form.Label>
             <Form.Control
               type="text"
               placeholder="Train Number"
+              style={{fontFamily: "Onest"}}
               value={updatedTrainData.TrainNumber}
               onChange={handleTrainIDChange}
             />
           </Col>
         </Row>
         <Row className="mb-3">
-          <Col md={6} className="mx-auto">
-            <Form.Label>Train Name</Form.Label>
+          <Col className="mx-auto">
+            <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Train Name</Form.Label>
             <Form.Control
               type="text"
               name="TrainName"
+              style={{fontFamily: "Onest"}}
               placeholder="Train Name"
               value={updatedTrainData.TrainName}
               onChange={handleChange}
@@ -103,11 +107,12 @@ const UpdateTrainShedule = () => {
           </Col>
         </Row>
         <Row className="mb-3">
-          <Col md={6} className="mx-auto">
-            <Form.Label>Train Driver</Form.Label>
+          <Col className="mx-auto">
+            <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Train Driver</Form.Label>
             <Form.Control
               type="text"
               name="TrainDriver"
+              style={{fontFamily: "Onest"}}
               placeholder="Train Driver"
               value={updatedTrainData.TrainDriver}
               onChange={handleChange}
@@ -115,11 +120,12 @@ const UpdateTrainShedule = () => {
           </Col>
         </Row>
         <Row className="mb-3">
-          <Col md={6} className="mx-auto">
-            <Form.Label>Departure Station</Form.Label>
+          <Col className="mx-auto">
+            <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Departure Station</Form.Label>
             <Form.Control
               type="text"
               name="DepartureStation"
+              style={{fontFamily: "Onest"}}
               placeholder="Departure Station"
               value={updatedTrainData.DepartureStation}
               onChange={handleChange}
@@ -127,11 +133,12 @@ const UpdateTrainShedule = () => {
           </Col>
         </Row>
         <Row className="mb-3">
-          <Col md={6} className="mx-auto">
-            <Form.Label>Arrival Station</Form.Label>
+          <Col className="mx-auto">
+            <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Arrival Station</Form.Label>
             <Form.Control
               type="text"
               name="ArrivalStation"
+              style={{fontFamily: "Onest"}}
               placeholder="Arrival Station"
               value={updatedTrainData.TrainDriver}
               onChange={handleChange}
@@ -139,10 +146,27 @@ const UpdateTrainShedule = () => {
           </Col>
         </Row>
         <Row className="mb-3">
-          <Col md={6} className="mx-auto">
-            <Form.Label>Departure Time</Form.Label>
+          <Col className="mx-auto">
+            <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Train Type</Form.Label>
+            <Form.Control
+              type="text"
+              name="TrainType"
+              placeholder="Train Type"
+              style={{fontFamily: "Onest"}}
+              value={updatedTrainData.TrainType}
+              onChange={handleChange}
+            />
+          </Col>
+        </Row>
+        
+        </div>
+  <div className="col-md-6" style={{textAlign: "left"}}>
+  <Row className="mb-3">
+          <Col className="mx-auto">
+            <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Departure Time</Form.Label>
             <Form.Control
               type="datetime-local"
+              style={{fontFamily: "Onest"}}
               name="DeDateTime"
               placeholder="Departure Time"
               value={updatedTrainData.DeDateTime}
@@ -151,34 +175,26 @@ const UpdateTrainShedule = () => {
           </Col>
         </Row>
         <Row className="mb-3">
-          <Col md={6} className="mx-auto">
-            <Form.Label>Arrival Time</Form.Label>
+          <Col className="mx-auto">
+            <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Arrival Time</Form.Label>
             <Form.Control
               type="datetime-local"
               name="ArDateTime"
               placeholder="Arrival Time"
+              style={{fontFamily: "Onest"}}
               value={updatedTrainData.ArDateTime}
               onChange={handleChange}
             />
             </Col>
+        
+
         <Row className="mb-3">
-          <Col md={6} className="mx-auto">
-            <Form.Label>Train Type</Form.Label>
-            <Form.Control
-              type="text"
-              name="TrainType"
-              placeholder="Train Type"
-              value={updatedTrainData.TrainType}
-              onChange={handleChange}
-            />
-          </Col>
-        </Row>
-        <Row className="mb-3">
-          <Col md={6} className="mx-auto">
-            <Form.Label>First Class Ticket Price</Form.Label>
+          <Col className="mx-auto">
+            <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>First Class Ticket Price</Form.Label>
             <Form.Control
               type="text"
               name="FirstClassTicketPrice"
+              style={{fontFamily: "Onest"}}
               placeholder="First Class Ticket Price"
               value={updatedTrainData.FirstClassTicketPrice}
               onChange={handleChange}
@@ -186,11 +202,12 @@ const UpdateTrainShedule = () => {
           </Col>
         </Row>
         <Row className="mb-3">
-          <Col md={6} className="mx-auto">
-            <Form.Label>Second Class Ticket Price</Form.Label>
+          <Col className="mx-auto">
+            <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Second Class Ticket Price</Form.Label>
             <Form.Control
               type="text"
               name="SecondClassTicketPrice"
+              style={{fontFamily: "Onest"}}
               placeholder="Second Class Ticket Price"
               value={updatedTrainData.SecondClassTicketPrice}
               onChange={handleChange}
@@ -198,11 +215,12 @@ const UpdateTrainShedule = () => {
           </Col>
         </Row>
         <Row className="mb-3">
-          <Col md={6} className="mx-auto">
-            <Form.Label>Third Class Ticket Price</Form.Label>
+          <Col className="mx-auto">
+            <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Third Class Ticket Price</Form.Label>
             <Form.Control
               type="text"
               name="ThirdClassTicketPrice"
+              style={{fontFamily: "Onest"}}
               placeholder="Third Class Ticket Price"
               value={updatedTrainData.ThirdClassTicketPrice}
               onChange={handleChange}
@@ -212,10 +230,11 @@ const UpdateTrainShedule = () => {
 
         </Row>
         <Row className="mb-3">
-  <Col md={6} className="mx-auto">
-    <Form.Label>Train Status</Form.Label>
+  <Col className="mx-auto">
+    <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Train Status</Form.Label>
     <Form.Select
       name="TrainStatus"
+      style={{fontFamily: "Onest"}}
       value={updatedTrainData.TrainStatus}
       onChange={handleChange}
     >
@@ -224,8 +243,11 @@ const UpdateTrainShedule = () => {
     </Form.Select>
   </Col>
 </Row>
+</div>
+        
+        </div>
         <Row className="mb-3">
-          <Col md={6} className="mx-auto" style={{margin: "34px"}}>
+          <Col className="mx-auto" style={{margin: "34px"}}>
             <Button variant="secondary" onClick={() => window.history.back()} style={{ width: '150px' }}>Back</Button>{' '}
             <Button variant="primary" type="submit" style={{ width: '150px' }}>Update Train</Button>
           </Col>

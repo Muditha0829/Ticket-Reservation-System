@@ -68,22 +68,22 @@ const GetAllTrainTicketBooking = () => {
     <Container className="text-center mt-5" style={{height: "700px", paddingLeft: "250px"}}>
       <Card>
             <Card.Body>
-              <Card.Title style={{ margin: "25px", fontFamily: "MyCustomFont, sans-serif", fontSize: "34px" }}>You Reservations</Card.Title>
+              <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>You Reservations</Card.Title>
   <Table striped bordered hover style={{ marginTop: '20px', width:"75%" }} className="mx-auto">
     <thead>
-      <tr>
+      <tr style={{fontSize: "17px", fontFamily: "Montserrat"}}>
         <th>Train Name</th>
-        <th>Traveler Name</th>
+        <th>Main Passenger Name</th>
         <th>Traveler NIC</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
     {reservations.map(reservation => (
-  <tr key={reservation.ID}>
+  <tr key={reservation.ID} style={{fontFamily: "Onest"}}>
     <td>{reservation.TrainName}</td>
+    <td>{reservation.MainPassengerName}</td>
     <td>{reservation.NIC}</td>
-    <td>{reservation.TravelerName}</td>
     <td>
     <Button
   variant="warning"

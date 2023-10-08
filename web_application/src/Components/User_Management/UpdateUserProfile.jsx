@@ -58,7 +58,7 @@ const UpdateUserProfile = () => {
           </div>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="UserName">
-          <Form.Label>Username:</Form.Label>
+          <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Username:</Form.Label>
           <Form.Control
             type="text"
             name="UserName"
@@ -68,7 +68,7 @@ const UpdateUserProfile = () => {
           />
         </Form.Group>
         <Form.Group controlId="FirstName">
-          <Form.Label>First Name:</Form.Label>
+          <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>First Name:</Form.Label>
           <Form.Control
             type="text"
             name="FirstName"
@@ -78,7 +78,7 @@ const UpdateUserProfile = () => {
           />
         </Form.Group>
         <Form.Group controlId="LastName">
-          <Form.Label>Last Name:</Form.Label>
+          <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Last Name:</Form.Label>
           <Form.Control
             type="text"
             name="LastName"
@@ -88,7 +88,7 @@ const UpdateUserProfile = () => {
           />
         </Form.Group>
         <Form.Group controlId="Email">
-          <Form.Label>Email:</Form.Label>
+          <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Email:</Form.Label>
           <Form.Control
             type="Email"
             name="Email"
@@ -98,7 +98,7 @@ const UpdateUserProfile = () => {
           />
         </Form.Group>
         <Form.Group controlId="ContactNumber">
-          <Form.Label>Phone Number:</Form.Label>
+          <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Phone Number:</Form.Label>
           <Form.Control
             type="text"
             name="ContactNumber"
@@ -108,7 +108,7 @@ const UpdateUserProfile = () => {
           />
         </Form.Group>
         <Form.Group controlId="UserType">
-          <Form.Label>User Type:</Form.Label>
+          <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>User Type:</Form.Label>
           <Form.Control
             type="text"
             name="UserType"

@@ -282,7 +282,7 @@ namespace WebSevice.Controllers
         [Route("getallusers")]
         public IHttpActionResult GetAllUsers()
         {
-            var filter = Builders<User>.Filter.Eq(u => u.UserType, "Traveller");
+            var filter = Builders<User>.Filter.Eq(u => u.UserType, "Traveler");
             var travelusers = _usersCollection.Find(filter).ToList();
             return Ok(travelusers);
         }
