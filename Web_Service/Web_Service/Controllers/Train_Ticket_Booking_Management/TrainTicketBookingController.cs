@@ -86,7 +86,7 @@ namespace WebSevice.Controllers
         [Route("getticketbooking/{id}")]
         public IHttpActionResult GetBookingById(string id)
         {
-            var reservation = _bookingsCollection.Find(b => b.UserID == id).FirstOrDefault();
+            var reservation = _bookingsCollection.Find(b => b.BookingID == id).FirstOrDefault();
 
             if (reservation == null)
             {

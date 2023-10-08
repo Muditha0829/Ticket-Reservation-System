@@ -31,7 +31,7 @@ const AddTraveller = () => {
     e.preventDefault();
 
     const nicRegex = /^[0-9]{10,12}$/;
-    const phoneRegex = /^[0-9]{10}$/;
+    const EmailRegex = /^[0-9]{10}$/;
 
     const isValidPassword = (password) => {
       const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
@@ -43,8 +43,8 @@ const AddTraveller = () => {
     return;
   }
 
-  if (!phoneRegex.test(formData.ContactNumber)) {
-    alert('Invalid phone number. Please enter a 10-digit phone number.');
+  if (!EmailRegex.test(formData.ContactNumber)) {
+    alert('Invalid Email number. Please enter a 10-digit Email number.');
     return;
   }
 
@@ -124,7 +124,7 @@ const AddTraveller = () => {
         </Form.Group>
         <Form.Group controlId="Email" style={{margin: "25px"}}>
           <Form.Control
-            type="email"
+            type="Email"
             name="Email"
             value={formData.Email}
             onChange={handleChange}

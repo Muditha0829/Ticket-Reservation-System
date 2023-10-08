@@ -6,10 +6,10 @@ import { useHistory } from 'react-router-dom';
 
 const UpdateTrainShedule = () => {
   const { TrainID } = useParams();
-  const [TrainId, setTrainId] = useState('');
+  const [TraingId, setTrainID] = useState('');
   const [updatedTrainData, setUpdatedTrainData] = useState({
     // TrainID: '',
-    // UserID: '',
+    // userID: '',
     TrainNumber: '',
     TrainName: '',
     TrainDriver: '',
@@ -34,16 +34,16 @@ const UpdateTrainShedule = () => {
     });
   };
 
-  const handleTrainIdChange = (e) => {
-    setTrainId(e.target.value);
+  const handleTrainIDChange = (e) => {
+    setTrainID(e.target.value);
 };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-  //   const trainIdPattern = /^[A-Z]\d{4}$/;
+  //   const TrainIDPattern = /^[A-Z]\d{4}$/;
 
-  // if (!trainIdPattern.test(updatedTrainData.TrainNumber)) {
+  // if (!TrainIDPattern.test(updatedTrainData.TrainNumber)) {
   //   alert('Invalid Train Number. Please enter a valid Train Number format. (TXXXX).');
   //   return;
   // }
@@ -86,7 +86,7 @@ const UpdateTrainShedule = () => {
               type="text"
               placeholder="Train Number"
               value={updatedTrainData.TrainNumber}
-              onChange={handleTrainIdChange}
+              onChange={handleTrainIDChange}
             />
           </Col>
         </Row>

@@ -4,7 +4,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { Container, Form, Button, Row, Col, Card } from 'react-bootstrap';
 
 const UpdateTraveller = () => {
-  const { userId } = useParams();
+  const { userID } = useParams();
   const history = useHistory();
 
   const [userData, setUserData] = useState({
@@ -18,14 +18,14 @@ const UpdateTraveller = () => {
   });
 
   useEffect(() => {
-    axios.get(`/api/users/get/${userId}`)
+    axios.get(`/api/users/get/${userID}`)
       .then(response => {
         setUserData(response.data);
       })
       .catch(error => {
         console.error('Error fetching user data:', error);
       });
-  }, [userId]);
+  }, [userID]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -38,18 +38,18 @@ const UpdateTraveller = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const phoneRegex = /^[0-9]{10}$/;
+    const EmailRegex = /^[0-9]{10}$/;
 
-  if (!phoneRegex.test(userData.ContactNumber)) {
-    alert('Invalid phone number. Please enter a 10-digit phone number.');
+  if (!EmailRegex.test(userData.ContactNumber)) {
+    alert('Invalid Email number. Please enter a 10-digit Email number.');
     return;
   }
 
-    axios.put(`/api/users/updatebyid/${userId}`, userData)
+    axios.put(`/api/users/updatebyid/${userID}`, userData)
       .then(response => {
         console.log('User updated:', response.data);
         alert('Travel user updated successfully!');
-        history.push(`/viewtraveller/${userId}`);
+        history.push(`/viewtraveller/${userID}`);
         window.location.href = `/listtraveluser`;
       })
       .catch(error => {
@@ -102,7 +102,7 @@ const UpdateTraveller = () => {
     <Form.Group>
       <Form.Label>Email:</Form.Label>
       <Form.Control
-        type="email"
+        type="Email"
         id="Email"
         name="Email"
         value={userData.Email}

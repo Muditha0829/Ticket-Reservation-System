@@ -38,7 +38,7 @@ const SignIn = () => {
       .then(response => {
         console.log('User authenticated:', response.data);
         setUser(response.data.UserID, response.data.UserType);
-        sessionStorage.setItem('userId', response.data.userID);
+        sessionStorage.setItem('userID', response.data.userID);
         console.log('User Type:', response.data.UserType);
         console.log('UserType:', UserType);
 

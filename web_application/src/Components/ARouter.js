@@ -50,8 +50,8 @@ const ARouter = () => {
           <Route path="/addtrain" component={AddTrainShedule}/>
           <Route path="/listreservation" component={GetAllTrainTicketBooking}/>
           <Route path="/makereservation" component={AddTrainTicketBooking}/>
-          <Route path="/reservationview/:reservationID" component={GetTrainTicketBooking} />
-          <Route path="/reservationupdate/:reservationID" component={UpdateTrainTicketBooking} />
+          <Route path="/reservationview/:BookingID" component={GetTrainTicketBooking} />
+          <Route path="/reservationupdate/:BookingID" component={UpdateTrainTicketBooking} />
           <Route path="/profile/:userId" component={UserProfile} />
           <Route path="/signup" exact component={Signup} />
           <Route path="/" exact component={SignIn} />

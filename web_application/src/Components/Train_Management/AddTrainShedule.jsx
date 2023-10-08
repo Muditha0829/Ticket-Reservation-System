@@ -5,10 +5,10 @@ import { Form, Button, Container, Row, Col, Card } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
 const AddTrainShedule = () => {
-  const { userId } = useContext(AuthContext);
+  const { userID } = useContext(AuthContext);
   const [trainData, setTrainData] = useState({
     TrainNumber: '',
-    UserID: userId,
+    userID: userID,
     TrainName: '',
     TrainDriver: '',
     DepartureStation: '', // Added
@@ -35,9 +35,9 @@ const AddTrainShedule = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const trainIdPattern = /^[A-Z]\d{4}$/;
+    const TrainIDPattern = /^[A-Z]\d{4}$/;
 
-    if (!trainIdPattern.test(trainData.TrainNumber)) {
+    if (!TrainIDPattern.test(trainData.TrainNumber)) {
       alert('Invalid Train Number. Please enter a valid Train Number format (TXXXX).');
       return;
     }
@@ -60,7 +60,7 @@ const AddTrainShedule = () => {
             <Card.Body>
               <Card.Title style={{ margin: "25px", fontFamily: "MyCustomFont, sans-serif", fontSize: "34px" }}>Create New Train Schedule</Card.Title>
               <Form onSubmit={handleSubmit}>
-                <Form.Group controlId="trainID">
+                <Form.Group controlId="TrainID">
                   <Form.Label>Train Number</Form.Label>
                   <Form.Control
                     type="text"

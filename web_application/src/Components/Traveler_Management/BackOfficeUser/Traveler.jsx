@@ -4,7 +4,7 @@ import { AuthContext } from '../../AuthContext';
 import { Container, Table, Button, Card } from 'react-bootstrap';
 
 const TravellerUser = () => {
-  const { userId } = useContext(AuthContext);
+  const { userID } = useContext(AuthContext);
   const [travellers, setTravellers] = useState([]);
 
   useEffect(() => {
@@ -17,14 +17,14 @@ const TravellerUser = () => {
       });
   }, []);
 
-  const handleStatusChange = (userId, currentStatus) => {
+  const handleStatusChange = (userID, currentStatus) => {
     const newStatus = currentStatus === 'Active' ? 'Inactive' : 'Active';
 
-    axios.put(`/api/users/updatestatusbyid/${userId}`, { UserStatus: newStatus })
+    axios.put(`/api/users/updatestatusbyid/${userID}`, { UserStatus: newStatus })
       .then(response => {
         if (response.status === 200) {
           setTravellers(travellers.map(traveller =>
-            traveller.ID === userId ? { ...traveller, UserStatus: newStatus } : traveller
+            traveller.ID === userID ? { ...traveller, UserStatus: newStatus } : traveller
           ));
           alert('Status updated successfully');
         } else {

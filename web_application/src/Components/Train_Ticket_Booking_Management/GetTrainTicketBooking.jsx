@@ -5,11 +5,11 @@ import { Card, Table, Row, Col, Button } from 'react-bootstrap';
 
 const GetTrainTicketBooking = () => {
   const [reservation, setReservation] = useState(null);
-  const { reservationID } = useParams();
+  const { BookingID } = useParams();
 
   useEffect(() => {
-    if (reservationID) {
-      axios.get(`/api/reservations/get/${reservationID}`)
+    if (BookingID) {
+      axios.get(`http://localhost:57549/api/trainbooking/getticketbooking/${BookingID}`)
         .then(response => {
           setReservation(response.data);
           console.log(response.data);
@@ -18,7 +18,7 @@ const GetTrainTicketBooking = () => {
           console.error('Error fetching reservation:', error);
         });
     }
-  }, [reservationID]);
+  }, [BookingID]);
 
   if (!reservation) {
     return <div>Loading...</div>;
@@ -32,12 +32,12 @@ const GetTrainTicketBooking = () => {
       <Table striped bordered hover>
         <tbody>
           <tr>
-            <td className="text"><strong>Traveler Name</strong></td>
-            <td>{reservation.TravelerName}</td>
+            <td className="text"><strong>Main Passenger Name</strong></td>
+            <td>{reservation.MainPassengerName}</td>
           </tr>
           <tr>
-            <td className="text"><strong>NIC</strong></td>
-            <td>{reservation.NIC}</td>
+            <td className="text"><strong>Booking Date</strong></td>
+            <td>{reservation.BookingDate}</td>
           </tr>
           <tr>
             <td className="text"><strong>Train ID</strong></td>
@@ -48,36 +48,24 @@ const GetTrainTicketBooking = () => {
             <td>{reservation.ReservationDate}</td>
           </tr>
           <tr>
-            <td className="text"><strong>Departure Location</strong></td>
-            <td>{reservation.DepartureLocation}</td>
-          </tr>
-          <tr>
-            <td className="text"><strong>Destination Location</strong></td>
-            <td>{reservation.DestinationLocation}</td>
-          </tr>
-          <tr>
-            <td className="text"><strong>Number of Passengers</strong></td>
-            <td>{reservation.NumPassengers}</td>
-          </tr>
-          <tr>
-            <td className="text"><strong>Age</strong></td>
-            <td>{reservation.Age}</td>
+            <td className="text"><strong>Total Passengers</strong></td>
+            <td>{reservation.TotalPassengers}</td>
           </tr>
           <tr>
             <td className="text"><strong>Ticket Class</strong></td>
             <td>{reservation.TicketClass}</td>
           </tr>
           <tr>
-            <td className="text"><strong>Seat Selection</strong></td>
-            <td>{reservation.SeatSelection}</td>
-          </tr>
-          <tr>
             <td className="text"><strong>Email</strong></td>
             <td>{reservation.Email}</td>
           </tr>
           <tr>
-            <td className="text"><strong>Phone</strong></td>
-            <td>{reservation.Phone}</td>
+            <td className="text"><strong>Contact Number</strong></td>
+            <td>{reservation.ContactNumber}</td>
+          </tr>
+          <tr>
+            <td className="text"><strong>Total Price</strong></td>
+            <td>{reservation.TotalPrice}</td>
           </tr>
         </tbody>
       </Table>

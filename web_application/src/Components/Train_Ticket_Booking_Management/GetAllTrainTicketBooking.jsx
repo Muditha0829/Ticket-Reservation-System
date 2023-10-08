@@ -11,11 +11,11 @@ const GetAllTrainTicketBooking = () => {
   const [reservations, setReservations] = useState([]);
   const [cancellationLoading, setCancellationLoading] = useState(false);
 
-  const handleCancel = (id, reservationDate, bookingDate) => {
-    const reservationDateObj = new Date(reservationDate);
-    const bookingDateObj = new Date(bookingDate);
+  const handleCancel = (id, ReservationDate, BookingDate) => {
+    const ReservationDateObj = new Date(ReservationDate);
+    const BookingDateObj = new Date(BookingDate);
   
-    const differenceInMilliseconds = reservationDateObj - bookingDateObj;
+    const differenceInMilliseconds = ReservationDateObj - BookingDateObj;
   
     const differenceInDays = differenceInMilliseconds / (1000 * 60 * 60 * 24);
   
@@ -25,11 +25,12 @@ const GetAllTrainTicketBooking = () => {
     }
   
     setCancellationLoading(true);
-    axios.put(`/api/reservations/cancel/${id}`)
+    axios.put(`http://localhost:57549/api/trainbooking/cancelticketbooking/${id}`)
       .then(response => {
         console.log(`Booking with ID ${id} has been cancelled.`);
         setReservations(prevReservations => prevReservations.filter(res => res.ID !== id));
         alert("Reservation has been cancelled.");
+        window.location.href="#"
       })
       .catch(error => {
         alert("Cancellation is allowed only if reservation date is within 5 days of booking date.");
@@ -40,13 +41,13 @@ const GetAllTrainTicketBooking = () => {
   };  
 
   useEffect(() => {
-    const savedUserId = Cookies.get('userId');
+    const saveduserID = Cookies.get('userID');
 
-    if (!userId && savedUserId) {
-      setUser(savedUserId);
+    if (!userId && saveduserID) {
+      setUser(saveduserID);
     }
     if (userId) {
-      axios.get(`/api/reservations/getall/${userId}`)
+      axios.get(`http://localhost:57549/api/trainbooking/getallticketbookings/${userId}`)
         .then(response => {
           setReservations(response.data);
           localStorage.setItem('reservations', JSON.stringify(response.data)); // Store data in localStorage
@@ -85,7 +86,7 @@ const GetAllTrainTicketBooking = () => {
       <Button
         variant="warning"
         as={Link}
-        to={`/reservationview/${reservation.ID}`}
+        to={`/reservationview/${reservation.BookingID}`}
         style={{ color: 'white', marginRight: '5px', textDecoration: 'none' }}
       >
         View Reservation
@@ -93,14 +94,14 @@ const GetAllTrainTicketBooking = () => {
       <Button
         variant="link"
         as={Link}
-        to={`/reservationupdate/${reservation.ID}`}
+        to={`/reservationupdate/${reservation.BookingID}`}
         style={{ background: 'green', color: 'white', textDecoration: 'none' }}
       >
         Update Reservation
       </Button>
       <Button
         variant="danger"
-        onClick={() => handleCancel(reservation.ID, reservation.ReservationDate, reservation.BookingDate)}
+        onClick={() => handleCancel(reservation.BookingID, reservation.ReservationDate, reservation.BookingDate)}
         disabled={cancellationLoading}
         style={{ marginLeft: '5px' }}
       >

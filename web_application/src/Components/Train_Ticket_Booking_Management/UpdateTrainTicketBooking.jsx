@@ -6,24 +6,21 @@ import { useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
 const UpdateTrainTicketBooking = () => {
-  const { reservationID } = useParams();
+  const { BookingID } = useParams();
   const { userId } = useContext(AuthContext);
   const [trainData, setTrainData] = useState([]);
-  const [trainId, setTrainId] = useState('');
+  const [TrainID, setTrainID] = useState('');
   const [updatedReservationData, setUpdatedReservationData] = useState({
-    TravelerName: '',
-    NIC: '',
-    userId: userId,
+    MainPassengerName: '',
+    UserID: userId,
     ReservationDate: '',
-    TrainID: '',
-    DepartureLocation: '',
-    DestinationLocation: '',
-    NumPassengers: "",
-    Age: "",
+    BookingDate: '',
+    TrainName: '',
+    TotalPassengers: "",
     TicketClass: '',
-    SeatSelection: '',
     Email: '',
-    Phone: ''
+    ContactNumber: '',
+    TotalPrice: ''
   });
 
   const history = useHistory();
@@ -36,54 +33,50 @@ const UpdateTrainTicketBooking = () => {
     });
   };
 
-const isValidEmail = (email) => {
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailPattern.test(email);
-};
+// const isValidEmail = (Email) => {
+//   const EmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//   return EmailPattern.test(Email);
+// };
 
-const isValidContactNumber = (phoneNumber) => {
-  const phoneNumberPattern = /^\d{10}$/;
-  return phoneNumberPattern.test(phoneNumber);
-};
+// const isValidContactNumber = (EmailNumber) => {
+//   const EmailNumberPattern = /^\d{10}$/;
+//   return EmailNumberPattern.test(EmailNumber);
+// };
 
-const isValidNIC = (nic) => {
-  const nicPattern = /^[0-9]{10,12}$/;
-  return nicPattern.test(nic);
-};
+// const isValidNIC = (nic) => {
+//   const nicPattern = /^[0-9]{10,12}$/;
+//   return nicPattern.test(nic);
+// };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const reservationDateObj = new Date(updatedReservationData.ReservationDate);
-    const bookingDateObj = new Date(updatedReservationData.bookingDate);
-
-    // Calculate the difference in milliseconds
-    const differenceInMilliseconds = reservationDateObj - bookingDateObj;
-
-    // Calculate the difference in days
+    const ReservationDateObj = new Date(updatedReservationData.ReservationDate);
+    const BookingDateObj = new Date(updatedReservationData.BookingDate);
+    const differenceInMilliseconds = ReservationDateObj - BookingDateObj;
     const differenceInDays = differenceInMilliseconds / (1000 * 60 * 60 * 24);
 
-    if (differenceInDays <= 5) {
-      alert("Reservation can only be updated if reservation date is more than 5 days after booking date.");
-      return;
-    }
+    // if (differenceInDays <= 5) {
+    //   alert("Reservation can only be updated if reservation date is more than 5 days after booking date.");
+    //   return;
+    // }
 
-    if (!isValidEmail(updatedReservationData.Email)) {
-      alert('Invalid email. Please enter a valid email address.');
-      return;
-    }
+    // if (!isValidEmail(updatedReservationData.Email)) {
+    //   alert('Invalid Email. Please enter a valid Email address.');
+    //   return;
+    // }
     
-    if (!isValidContactNumber(updatedReservationData.Phone)) {
-      alert('Invalid contact number. Please enter a 10-digit phone number.');
-      return;
-    }    
+    // if (!isValidContactNumber(updatedReservationData.Phone)) {
+    //   alert('Invalid contact number. Please enter a 10-digit Email number.');
+    //   return;
+    // }    
 
-    if (!isValidNIC(updatedReservationData.NIC)) {
-      alert('Invalid NIC. Please enter a valid NIC number (e.g., 123456789V).');
-      return;
-    }
+    // if (!isValidNIC(updatedReservationData.NIC)) {
+    //   alert('Invalid NIC. Please enter a valid NIC number (e.g., 123456789V).');
+    //   return;
+    // }
 
-    axios.put(`/api/reservations/update/${reservationID}`, updatedReservationData)
+    axios.put(`http://localhost:57549/api/trainbooking/updateticketbooking/${BookingID}`, updatedReservationData)
       .then(response => {
         console.log('Reservation updated:', response.data);
         alert('Reservation updated successfully!');
@@ -97,8 +90,8 @@ const isValidNIC = (nic) => {
 
   useEffect(() => {
     // Fetch data based on reservationID
-    if (reservationID) {
-      axios.get(`/api/reservations/get/${reservationID}`)
+    if (BookingID) {
+      axios.get(`http://localhost:57549/api/trainbooking/getticketbooking/${BookingID}`)
         .then(response => {
           setUpdatedReservationData(response.data);
         })
@@ -106,10 +99,10 @@ const isValidNIC = (nic) => {
           console.error('Error fetching reservation data:', error);
         });
     }
-  }, [reservationID]);  
+  }, [BookingID]);  
 
   useEffect(() => {
-    axios.get('/api/trains/getallactive')
+    axios.get('http://localhost:57549/api/trains/getallactivetrains')
       .then(response => {
         setTrainData(response.data);
       })
@@ -129,32 +122,22 @@ const isValidNIC = (nic) => {
       <Form.Control
         type="text"
         name="TravelerName"
-        value={updatedReservationData.TravelerName}
+        value={updatedReservationData.MainPassengerName}
         onChange={handleChange}
         placeholder="Traveler Name"
         required
       />
     </Form.Group>
-    <Form.Group>
-      <Form.Label>NIC:</Form.Label>
-      <Form.Control
-        type="text"
-        name="NIC"
-        value={updatedReservationData.NIC}
-        onChange={handleChange}
-        placeholder="NIC"
-        required
-      />
-    </Form.Group>
+    
     <Form.Group controlId="TrainID">
-      <Form.Label>Train ID</Form.Label>
+      <Form.Label>Train Name</Form.Label>
       <Form.Select
         name="TrainID"
         value={updatedReservationData.TrainID}
         onChange={handleChange}
         required
       >
-        <option value="">Select Train ID</option>
+        <option value="">Select Train Name</option>
         {trainData.map(train => (
   <option key={train._id} value={train._id}>
     {train.TrainName}
@@ -172,54 +155,24 @@ const isValidNIC = (nic) => {
   required
 />
     </Form.Group>
-    <Form.Group>
-      <Form.Label>Departure Location:</Form.Label>
-      <Form.Control
-        type="text"
-        name="DepartureLocation"
-        value={updatedReservationData.DepartureLocation}
-        onChange={handleChange}
-        placeholder="Departure Location"
-        required
-      />
-    </Form.Group>
-    <Form.Group>
-      <Form.Label>Destination Location:</Form.Label>
-      <Form.Control
-        type="text"
-        name="DestinationLocation"
-        value={updatedReservationData.DestinationLocation}
-        onChange={handleChange}
-        placeholder="Destination Location"
-        required
-      />
-    </Form.Group>
-    <Form.Group controlId="numPassengers">
-      <Form.Label>Number of Passengers</Form.Label>
+    
+    
+    <Form.Group controlId="TotalPassengers">
+      <Form.Label>Total Passengers</Form.Label>
       <Form.Select
         name="NumPassengers"
-        value={updatedReservationData.NumPassengers}
+        value={updatedReservationData.TotalPassengers}
         onChange={handleChange}
         required
       >
-        <option value="">Select number of passengers</option>
+        <option value="">Select total passengers</option>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
         <option value="4">4</option>
       </Form.Select>
     </Form.Group>
-    <Form.Group>
-      <Form.Label>Age:</Form.Label>
-      <Form.Control
-        type="number"
-        name="Age"
-        value={updatedReservationData.Age}
-        onChange={handleChange}
-        placeholder="Age"
-        required
-      />
-    </Form.Group>
+    
     <Form.Group controlId="TicketClass">
       <Form.Label>Ticket Class:</Form.Label>
       <Form.Select
@@ -229,26 +182,16 @@ const isValidNIC = (nic) => {
         required
       >
         <option value="">Select Ticket Class</option>
-        <option value="a">a</option>
-        <option value="b">b</option>
-        <option value="c">c</option>
+        <option value="First Class">First Class</option>
+        <option value="Second Class">Second Class</option>
+        <option value="Third Class">Third Class</option>
       </Form.Select>
     </Form.Group>
-    <Form.Group>
-      <Form.Label>Seat Selection:</Form.Label>
-      <Form.Control
-        type="text"
-        name="SeatSelection"
-        value={updatedReservationData.SeatSelection}
-        onChange={handleChange}
-        placeholder="Seat Selection"
-        required
-      />
-    </Form.Group>
+    
     <Form.Group>
       <Form.Label>Email:</Form.Label>
       <Form.Control
-        type="email"
+        type="Email"
         name="Email"
         value={updatedReservationData.Email}
         onChange={handleChange}
@@ -257,11 +200,22 @@ const isValidNIC = (nic) => {
       />
     </Form.Group>
     <Form.Group>
-      <Form.Label>Phone:</Form.Label>
+      <Form.Label>Contact Number:</Form.Label>
       <Form.Control
         type="tel"
         name="Phone"
-        value={updatedReservationData.Phone}
+        value={updatedReservationData.ContactNumber}
+        onChange={handleChange}
+        placeholder="Phone"
+        required
+      />
+    </Form.Group>
+    <Form.Group>
+      <Form.Label>Total Price:</Form.Label>
+      <Form.Control
+        type="tel"
+        name="Phone"
+        value={updatedReservationData.TotalPrice}
         onChange={handleChange}
         placeholder="Phone"
         required

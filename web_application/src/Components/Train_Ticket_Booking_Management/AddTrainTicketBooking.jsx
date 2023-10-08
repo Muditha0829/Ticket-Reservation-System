@@ -8,21 +8,16 @@ const AddTrainTicketBooking = () => {
   const { userId } = useContext(AuthContext);
   const [trainData, setTrainData] = useState([]);
   const [formData, setFormData] = useState({
-    travelerName: '',
-    nic: '',
-    userId: userId,
-    reservationDate: '',
-    bookingDate: '',
-    trainId: '',
-    departureLocation: '',
-    destinationLocation: '',
-    numPassengers: "",
-    age: "",
-    ticketClass: '',
-    seatSelection: '',
-    email: '',
-    phone: '',
-    TrainID: ''
+    MainPassengerName: '',
+    UserID: userId,
+    ReservationDate: '',
+    BookingDate: '',
+    TrainID: '',
+    TotalPassengers: "",
+    TicketClass: '',
+    Email: '',
+    ContactNumber: '',
+    TotalPrice: ''
   });
 
   const history = useHistory();
@@ -45,7 +40,7 @@ const AddTrainTicketBooking = () => {
   };
 
   useEffect(() => {
-    axios.get('/api/trains/getallactive')
+    axios.get('http://localhost:57549/api/trains/getalltrains')
       .then(response => {
         setTrainData(response.data);
       })
@@ -61,57 +56,61 @@ const AddTrainTicketBooking = () => {
     });
   };
 
-  const isValidEmail = (email) => {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailPattern.test(email);
-  };
+  console.log('Form Data:', formData); // Add this line
+  console.log('UserID:', formData.UserID); // Add this line
+  console.log('TrainID:', formData.TrainID); // Add this line
 
-  const isValidContactNumber = (phoneNumber) => {
-    const phoneNumberPattern = /^\d{10}$/;
-    return phoneNumberPattern.test(phoneNumber);
-  };
+  // const isValidEmail = (Email) => {
+  //   const EmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  //   return EmailPattern.test(Email);
+  // };
 
-  const isValidNIC = (nic) => {
-    const nicPattern = /^[0-9]{10,12}$/;
-    return nicPattern.test(nic);
-  };
+  // const isValidContactNumber = (EmailNumber) => {
+  //   const EmailNumberPattern = /^\d{10}$/;
+  //   return EmailNumberPattern.test(EmailNumber);
+  // };
+
+  // const isValidNIC = (nic) => {
+  //   const nicPattern = /^[0-9]{10,12}$/;
+  //   return nicPattern.test(nic);
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!isValidEmail(formData.email)) {
-      alert('Invalid email. Please enter a valid email address.');
-      return;
-    }
+    // if (!isValidEmail(formData.Email)) {
+    //   alert('Invalid Email. Please enter a valid Email address.');
+    //   return;
+    // }
 
-    if (!isValidContactNumber(formData.phone)) {
-      alert('Invalid contact number. Please enter a 10-digit phone number.');
-      return;
-    }
+    // if (!isValidContactNumber(formData.Email)) {
+    //   alert('Invalid contact number. Please enter a 10-digit Email number.');
+    //   return;
+    // }
 
-    if (!isValidNIC(formData.nic)) {
-      alert('Invalid NIC. Please enter a valid NIC number.');
-      return;
-    }
+    // if (!isValidNIC(formData.nic)) {
+    //   alert('Invalid NIC. Please enter a valid NIC number.');
+    //   return;
+    // }
 
-  const reservationDate = new Date(formData.reservationDate);
-  const bookingDate = new Date(getCurrentDate());
+  // const ReservationDate = new Date(formData.ReservationDate);
+  // const BookingDate = new Date(getCurrentDate());
 
-  const differenceInMilliseconds = reservationDate - bookingDate;
+  // const differenceInMilliseconds = ReservationDate - BookingDate;
 
-  const differenceInDays = differenceInMilliseconds / (1000 * 60 * 60 * 24);
+  // const differenceInDays = differenceInMilliseconds / (1000 * 60 * 60 * 24);
 
-  if (differenceInDays >= 30) {
-    alert("Reservation date must be within 30 days of booking date.");
-    return;
-  }
+  // if (differenceInDays >= 30) {
+  //   alert("Reservation date must be within 30 days of booking date.");
+  //   return;
+  // }
 
     setFormData({
       ...formData,
-      bookingDate: getCurrentDate()
+      BookingDate: getCurrentDate()
     });
   
-    axios.post('/api/reservations/create', formData)
+    axios.post('http://localhost:57549/api/trainbooking/createticketbooking', formData)
       .then(response => {
         console.log('Reservation created:', response.data);
         alert("Reservation Added");
@@ -134,24 +133,17 @@ const AddTrainTicketBooking = () => {
             <div className="col-md-6">
               <Form.Control
                 type="text"
-                name="travelerName"
-                value={formData.travelerName}
+                name="MainPassengerName"
+                value={formData.MainPassengerName}
                 onChange={handleChange}
                 placeholder="Traveler Name"
                 required
               /><br />
-              <Form.Control
-                type="text"
-                name="nic"
-                value={formData.nic}
-                onChange={handleChange}
-                placeholder="NIC"
-                required
-              /><br />
+              
               <Form.Control
                 type="date"
-                name="reservationDate"
-                value={formData.reservationDate}
+                name="ReservationDate"
+                value={formData.ReservationDate}
                 onChange={handleChange}
                 required
               /><br />
@@ -162,7 +154,7 @@ const AddTrainTicketBooking = () => {
             onChange={handleChange}
             required
           >
-            <option value="">Select Train ID</option>
+            <option value="">Select Train Name</option>
             {trainData.map(train => (
               <option key={train._id} value={train._id}>
                 {train.TrainName}
@@ -173,29 +165,22 @@ const AddTrainTicketBooking = () => {
               <br />
               <Form.Control
                 type="text"
-                name="departureLocation"
-                value={formData.departureLocation}
+                name="TotalPrice"
+                value={formData.TotalPrice}
                 onChange={handleChange}
-                placeholder="Departure Location"
+                placeholder='Total Price'
                 required
               /><br />
-              <Form.Control
-                type="text"
-                name="destinationLocation"
-                value={formData.destinationLocation}
-                onChange={handleChange}
-                placeholder="Destination Location"
-                required
-              /><br />
+              
             </div>
 
             {/* Right Column */}
             <div className="col-md-6">
-            <Form.Group controlId="numPassengers">
+            <Form.Group controlId="TotalPassengers">
   <Form.Control
     as="select"
-    name="numPassengers"
-    value={formData.numPassengers}
+    name="TotalPassengers"
+    value={formData.TotalPassengers}
     onChange={handleChange}
     required
   >
@@ -208,51 +193,37 @@ const AddTrainTicketBooking = () => {
 </Form.Group>
 
               <br />
-              <Form.Control
-                type="number"
-                name="age"
-                value={formData.age}
-                onChange={handleChange}
-                placeholder="Age"
-                required
-              /><br />
-              <Form.Group controlId="ticketClass">
+              
+              <Form.Group controlId="TicketClass">
   <Form.Control
     as="select"
-    name="ticketClass"
-    value={formData.ticketClass}
+    name="TicketClass"
+    value={formData.TicketClass}
     onChange={handleChange}
     required
   >
     <option value="" disabled>Ticket Class</option>
-    <option value="A">A</option>
-    <option value="B">B</option>
-    <option value="C">C</option>
+    <option value="First Class">First Class</option>
+    <option value="Second Class">Second Class</option>
+    <option value="Third Class">Third Class</option>
   </Form.Control>
   </Form.Group>
               <br />
+              
               <Form.Control
-                type="text"
-                name="seatSelection"
-                value={formData.seatSelection}
-                onChange={handleChange}
-                placeholder="Seat Selection"
-                required
-              /><br />
-              <Form.Control
-                type="email"
-                name="email"
-                value={formData.email}
+                type="Email"
+                name="Email"
+                value={formData.Email}
                 onChange={handleChange}
                 placeholder="Email"
                 required
               /><br />
               <Form.Control
-                type="tel"
-                name="phone"
-                value={formData.phone}
+                type="text"
+                name="ContactNumber"
+                value={formData.ContactNumber}
                 onChange={handleChange}
-                placeholder="Phone"
+                placeholder="Contact Number"
                 required
               /><br />
             </div>

@@ -4,7 +4,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 
 const UpdateUserProfile = () => {
-  const { userId } = useParams();
+  const { userID } = useParams();
   const history = useHistory();
 
   const [userData, setUserData] = useState({
@@ -17,7 +17,7 @@ const UpdateUserProfile = () => {
   });
 
   useEffect(() => {
-    axios.get(`/api/users/get/${userId}`)
+    axios.get(`/api/users/get/${userID}`)
       .then(response => {
         console.log('API Response:', response.data);
         setUserData(response.data);
@@ -25,7 +25,7 @@ const UpdateUserProfile = () => {
       .catch(error => {
         console.error('Error fetching user data:', error);
       });
-  }, [userId]);  
+  }, [userID]);  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -37,11 +37,11 @@ const UpdateUserProfile = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.put(`/api/users/updatebyid/${userId}`, userData)
+    axios.put(`/api/users/updatebyid/${userID}`, userData)
       .then(response => {
         console.log('User updated:', response.data);
         alert('Profile updated successfully!');
-        history.push(`/profile/${userId}`);
+        history.push(`/profile/${userID}`);
       })
       .catch(error => {
         console.error('Error updating user:', error);
@@ -90,7 +90,7 @@ const UpdateUserProfile = () => {
         <Form.Group controlId="Email">
           <Form.Label>Email:</Form.Label>
           <Form.Control
-            type="email"
+            type="Email"
             name="Email"
             value={userData.Email}
             onChange={handleChange}

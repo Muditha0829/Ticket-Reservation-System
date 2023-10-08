@@ -28,6 +28,6 @@ namespace Web_Service.Models.Train_Ticket_Booking_Management
 
         public string TicketClass { get; set; }
 
-        public decimal TotalPrice { get; set; }
+        public String TotalPrice { get; set; }
     }
 }

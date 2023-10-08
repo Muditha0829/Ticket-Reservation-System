@@ -19,11 +19,11 @@ const GetAllTravelers = () => {
     fetchUsers();
   }, []);
 
-  const handleDeleteUser = async (userId) => {
+  const handleDeleteUser = async (userID) => {
     try {
-      await axios.delete(`/api/users/delete/${userId}`);
+      await axios.delete(`/api/users/delete/${userID}`);
 
-      const updatedUsers = users.filter(user => user.ID !== userId);
+      const updatedUsers = users.filter(user => user.ID !== userID);
       setUsers(updatedUsers);
       alert('Travel user deleted successfully!');
     } catch (error) {

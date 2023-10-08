@@ -7,46 +7,46 @@ import { Container, Row, Col, Button, Table, Card } from 'react-bootstrap';
 
 const UserProfile = () => {
   const history = useHistory();
-  const { userId, setUser, UserType } = useContext(AuthContext);
+  const { userID, setUser, UserType } = useContext(AuthContext);
   const [user, setUserState] = useState(null);
 
   useEffect(() => {
-    const savedUserId = Cookies.get('userId');
-    if (!userId && savedUserId) {
-        setUser(savedUserId);
+    const saveduserID = Cookies.get('userID');
+    if (!userID && saveduserID) {
+        setUser(saveduserID);
       }
     const fetchData = async () => {
       try {
-        const response = await axios.get(`/api/users/get/${userId}`);
+        const response = await axios.get(`/api/users/get/${userID}`);
         setUserState(response.data);
       } catch (error) {
         console.error('Error fetching user:', error);
       }
     };
 
-    if (userId) {
+    if (userID) {
       fetchData();
     }
-  }, [userId]);
+  }, [userID]);
 
   useEffect(() => {
-    const savedUserId = Cookies.get('userId');
+    const saveduserID = Cookies.get('userID');
 
-    if (savedUserId) {
-      setUser(savedUserId);
+    if (saveduserID) {
+      setUser(saveduserID);
     }
   }, [setUser]);
 
   const handleUpdate = () => {
-    history.push(`/updateprofile/${userId}`);
+    history.push(`/updateprofile/${userID}`);
   };
 
   const handleDelete = () => {
-    axios.delete(`/api/users/delete/${userId}`)
+    axios.delete(`/api/users/delete/${userID}`)
       .then(response => {
         console.log('User deleted:', response.data);
         alert('Profile deleted successfully!');
-        Cookies.remove('userId');
+        Cookies.remove('userID');
         Cookies.remove('UserType');
         setUser(null);
         history.push('/home');
@@ -56,7 +56,7 @@ const UserProfile = () => {
       });
   };
 
-  if (!userId) {
+  if (!userID) {
     return <div>No user ID found</div>;
   }
 
@@ -65,7 +65,7 @@ const UserProfile = () => {
   }
 
   const setCookies = () => {
-    Cookies.set('userId', userId, { expires: 7 });
+    Cookies.set('userID', userID, { expires: 7 });
     Cookies.set('UserType', UserType, { expires: 7 });
   };
 
