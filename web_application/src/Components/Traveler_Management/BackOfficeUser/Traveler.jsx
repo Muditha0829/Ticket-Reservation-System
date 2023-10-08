@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../../AuthContext';
+import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Container, Table, Button, Card } from 'react-bootstrap';
@@ -58,29 +59,24 @@ const TravellerUser = () => {
   <Table striped bordered hover responsive>
     <thead>
       <tr style={{fontSize: "17px", fontFamily: "Montserrat"}}>
-        <th>First Name</th>
-        <th>Last Name</th>
         <th>Username</th>
         <th>NIC</th>
-        <th>Email</th>
-        <th>Phone Number</th>
         <th>User Type</th>
-        <th>Status</th>
+        <th>User Status</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
       {traveler.map(traveler => (
         <tr key={traveler.UserID} style={{fontFamily: "Onest"}}>
-          <td>{traveler.FirstName}</td>
-          <td>{traveler.LastName}</td>
           <td>{traveler.UserName}</td>
           <td>{traveler.NIC}</td>
-          <td>{traveler.Email}</td>
-          <td>{traveler.ContactNumber}</td>
           <td>{traveler.UserType}</td>
           <td>{traveler.UserStatus}</td>
           <td>
+          <Link to={`/viewtraveller/${traveler.UserID}`} className="mr-2">
+              <Button variant="warning" style={{marginRight: "5px"}}><i className="fas fa-eye"></i></Button>
+            </Link>
             <Button
               variant="primary"
               onClick={() => handleStatusChange(traveler.UserID, traveler.UserStatus)}
@@ -92,7 +88,7 @@ const TravellerUser = () => {
       ))}
     </tbody>
   </Table>
-  <div className="pagination" style={{ textAlign: 'Right', margin: "20px", marginLeft: "40%"}}>
+  <div className="pagination" style={{ textAlign: 'Right', margin: "20px", marginLeft: "47%"}}>
   <span
     onClick={() => currentPage > 1 && handlePagination(currentPage - 1)}
     className={currentPage === 1 ? 'disabled' : ''}
