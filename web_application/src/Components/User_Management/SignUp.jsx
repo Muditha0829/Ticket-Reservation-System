@@ -5,15 +5,6 @@ import { useHistory, Link } from 'react-router-dom';
 
 const Signup = () => {
 
-  const sectionStyle = {
-    backgroundImage: `url(https://img.freepik.com/premium-photo/train-forest-with-yellow-smoke-background-trees_900706-5336.jpg)`,
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center center',
-    minHeight: '100vh',
-    paddingTop: '100px', 
-  };
-
   const [formData, setFormData] = useState({
     NIC: '',
     UserName: '',
@@ -85,16 +76,24 @@ const Signup = () => {
   };
 
   return (
-    <div style={sectionStyle}>
-    <Container style={{width:"50%", marginTop: "5%"}}>
+    <div>
+    <Container style={{width:"75%", marginTop: "87px"}}>
       <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>
+        <Row>
+          <Col>
+          <img src='https://www.telegraph.co.uk/content/dam/travel/2023/03/10/TELEMMGLPICT000328038771_trans_NvBQzQNjv4BqqVzuuqpFlyLIwiB6NTmJwSX5rhseiWKOo9p9OQ-ymek.jpeg' style={{width: "100%", margin: "25px", height: "84%"}}/>
+          </Col>
+          <Col>
         <Card.Body>
-        <Card.Title style={{ margin: "25px", fontFamily: "MyCustomFont, sans-serif", textAlign: "center", fontSize: "34px" }}>Signup</Card.Title>
+        <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px", textAlign: "center" }}>Sign Up</Card.Title>
           <Form onSubmit={handleSubmit}>
+            <Row>
+              <Col>
             <Form.Group controlId="NIC" style={{marginBottom:"25px"}}>
               <Form.Control
                 type="text"
                 name="NIC"
+                style={{fontFamily: "Montserrat"}}
                 value={formData.NIC}
                 onChange={handleChange}
                 placeholder="NIC"
@@ -105,6 +104,7 @@ const Signup = () => {
               <Form.Control
                 type="text"
                 name="UserName"
+                style={{fontFamily: "Montserrat"}}
                 value={formData.UserName}
                 onChange={handleChange}
                 placeholder="Username"
@@ -115,6 +115,7 @@ const Signup = () => {
               <Form.Control
                 type="text"
                 name="FirstName"
+                style={{fontFamily: "Montserrat"}}
                 value={formData.FirstName}
                 onChange={handleChange}
                 placeholder="First Name"
@@ -125,26 +126,33 @@ const Signup = () => {
               <Form.Control
                 type="text"
                 name="LastName"
+                style={{fontFamily: "Montserrat"}}
                 value={formData.LastName}
                 onChange={handleChange}
                 placeholder="Last Name"
                 required
               />
             </Form.Group>
+            
             <Form.Group controlId="Email" style={{marginBottom:"25px"}}>
               <Form.Control
                 type="Email"
                 name="Email"
+                style={{fontFamily: "Montserrat"}}
                 value={formData.Email}
                 onChange={handleChange}
                 placeholder="Email"
                 required
               />
+              
               </Form.Group>
+              </Col>
+            <Col>
               <Form.Group controlId="Gender" style={{marginBottom:"25px"}}>
               <Form.Control
                 type="text"
                 name="Gender"
+                style={{fontFamily: "Montserrat"}}
                 value={formData.Gender}
                 onChange={handleChange}
                 placeholder="Gender"
@@ -155,6 +163,7 @@ const Signup = () => {
               <Form.Control
                 type="text"
                 name="ContactNumber"
+                style={{fontFamily: "Montserrat"}}
                 value={formData.ContactNumber}
                 onChange={handleChange}
                 placeholder="Phone Number"
@@ -165,6 +174,7 @@ const Signup = () => {
               <Form.Control
                 type="password"
                 name="Password"
+                style={{fontFamily: "Montserrat"}}
                 value={formData.Password}
                 onChange={handleChange}
                 placeholder="Password"
@@ -175,6 +185,7 @@ const Signup = () => {
               <Form.Control
                 type="password"
                 name="RePassword"
+                style={{fontFamily: "Montserrat"}}
                 value={formData.RePassword}
                 onChange={handleChange}
                 placeholder="Re-enter Password"
@@ -185,6 +196,7 @@ const Signup = () => {
               <Form.Control
                 as="select"
                 name="UserType"
+                style={{fontFamily: "Montserrat"}}
                 value={formData.UserType}
                 onChange={handleChange}
                 required
@@ -194,18 +206,22 @@ const Signup = () => {
                 <option value="travelagent">Travel Agent</option>
               </Form.Control>
             </Form.Group>
-            <Row className="justify-content-center">
+            </Col>
+          </Row>
+          <Row className="justify-content-center">
               <Col xs="auto">
-            <Button type="submit" variant="primary" style={{ width: '150px', backgroundColor: '#003300' }}>Sign Up</Button>
+            <Button type="submit" variant="primary" style={{ width: '150px', backgroundColor: '#003300', fontFamily: "Montserrat" }}>Sign Up</Button>
               </Col>
             </Row>
-            <div className="text-center mt-2">
-            <p style={{ marginTop: "15px", fontSize: "1.2em", color: "#555" }}>
-  Don't have an account? <Link to="/" style={{ color: "#003300", textDecoration: "none", fontWeight: "bold" }}>Sign In</Link>
+          <div className="text-center mt-2">
+            <p style={{ marginTop: "15px", fontSize: "1.2em", color: "#555", fontFamily: "Montserrat" }}>
+  Don't have an account? <Link to="/" style={{ color: "#003300", textDecoration: "none", fontWeight: "bold", fontFamily: "Montserrat" }}>Sign In</Link>
 </p>
           </div>
           </Form>
         </Card.Body>
+        </Col>
+        </Row>
       </Card>
     </Container>
     </div>

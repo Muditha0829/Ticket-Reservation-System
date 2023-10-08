@@ -76,7 +76,7 @@ const GetAllTrainTicketBooking = () => {
     <Container className="text-center mt-5" style={{height: "700px", paddingLeft: "250px"}}>
       <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>
             <Card.Body>
-              <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>You Reservations</Card.Title>
+              <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Your All Train Bookings</Card.Title>
   <Table striped bordered hover style={{ marginTop: '20px', width:"75%" }} className="mx-auto">
     <thead>
       <tr style={{fontSize: "17px", fontFamily: "Montserrat"}}>

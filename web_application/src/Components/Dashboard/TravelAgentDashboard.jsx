@@ -47,9 +47,9 @@ const TravelAgentDashboard = () => {
                 Travel Agent Dashboard
               </Card.Title>
               {/* Dashboard image */}
-              <Card.Img src='https://th.bing.com/th/id/OIP.qZl2uQ0RJQTxq2DMJsjsAQHaC5?pid=ImgDet&w=1280&h=500&rs=1' style={{ height: "200px", marginBottom: "17px" }} />
+              <Card.Img src='https://t4.ftcdn.net/jpg/02/90/79/53/360_F_290795351_i0kJX32HPEdjTgK1iSjaDjTb9MN3qk4O.jpg' style={{ height: "200px", marginBottom: "17px" }} />
               <CardBody>
-                <Card.Text style={{fontFamily: "Onest"}}>With a focus on train booking management and traveler management, travel agents are essential to the travel sector. They professionally plan clients' lodging and travel arrangements, assuring hassle-free and delightful trips. They also offer thorough assistance to tourists, from preliminary questions to aid following a trip, ensuring a smooth journey. Travel agents are essential in delivering memorable and stress-free travel experiences thanks to their attention to detail and individualized service.</Card.Text>
+                <Card.Text style={{fontFamily: "Onest", textAlign: "justify"}}>With a focus on train booking management and traveler management, travel agents are essential to the travel sector. They professionally plan clients' lodging and travel arrangements, assuring hassle-free and delightful trips. They also offer thorough assistance to tourists, from preliminary questions to aid following a trip, ensuring a smooth journey. Travel agents are essential in delivering memorable and stress-free travel experiences thanks to their attention to detail and individualized service.</Card.Text>
               </CardBody>
             </Col>
             <Col>

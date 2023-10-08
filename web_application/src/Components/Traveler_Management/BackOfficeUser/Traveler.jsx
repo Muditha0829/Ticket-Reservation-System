@@ -48,10 +48,10 @@ const TravellerUser = () => {
   };
 
   return (
-    <Container className="my-5 text-center" style={{height: "1200px", paddingLeft: "250px"}}>
+    <Container className="my-5 text-center" style={{height: "700px", paddingLeft: "250px"}}>
   <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>
         <Card.Body>
-          <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Travel User List</Card.Title>
+          <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Traveler Status</Card.Title>
   <Table striped bordered hover responsive>
     <thead>
       <tr style={{fontSize: "17px", fontFamily: "Montserrat"}}>
@@ -82,7 +82,7 @@ const TravellerUser = () => {
               variant="primary"
               onClick={() => handleStatusChange(traveler.UserID, traveler.UserStatus)}
             >
-              {traveler.UserStatus === 'Active' ? 'Inactivate' : 'Activate'}
+              {traveler.UserStatus === 'Active' ? 'Deactivate' : 'Activate'}
             </Button>
           </td>
         </tr>

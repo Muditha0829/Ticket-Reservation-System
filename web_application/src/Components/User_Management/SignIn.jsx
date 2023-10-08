@@ -5,16 +5,6 @@ import { AuthContext } from '../AuthContext';
 import { Form, Button, Container, Row, Col, Card } from 'react-bootstrap';
 
 const SignIn = () => {
-
-  const sectionStyle = {
-    backgroundImage: `url(https://img.freepik.com/premium-photo/train-forest-with-yellow-smoke-background-trees_900706-5336.jpg)`,
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center center',
-    minHeight: '100vh', // Adjust this value as needed for full page height
-    paddingTop: '100px', // Add padding to keep content visible
-  };
-
   const { setUser, UserType } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     NIC: '',
@@ -39,8 +29,6 @@ const SignIn = () => {
         console.log('User authenticated:', response.data);
         setUser(response.data.UserID, response.data.UserType);
         sessionStorage.setItem('userID', response.data.userID);
-        console.log('User Type:', response.data.UserType);
-        console.log('UserType:', UserType);
 
         if (response.data.UserType === 'backofficeuser') {
           history.push('/backofficeuserdashboard');
@@ -65,45 +53,46 @@ const SignIn = () => {
   };
 
   return (
-    <div style={sectionStyle}>
-    <Container className="my-5 text-center">
-      <Row className="justify-content-center" style={{marginTop:"78px"}}>
-        <Col md={6}>
-          <Card style={{ padding: '25px', margin: '25px' }}>
-          <Card.Title style={{ margin: "25px", fontFamily: "MyCustomFont, sans-serif", fontSize: "34px" }}>Sign In</Card.Title>
-            <Form onSubmit={handleSubmit}>
-              <Form.Group controlId="NIC" style={{marginBottom: "25px"}}>
-                <Form.Control 
-                  type="text" 
-                  name="NIC" 
-                  value={formData.NIC} 
-                  onChange={handleChange} 
-                  placeholder='NIC'
-                  required 
-                />
-              </Form.Group>
-              <Form.Group controlId="Password" style={{marginBottom:"25px"}}>
-                <Form.Control 
-                  type="password" 
-                  name="Password" 
-                  value={formData.Password} 
-                  onChange={handleChange} 
-                  placeholder='Password'
-                  required 
-                />
-              </Form.Group>
-              <Button variant="primary" type="submit" style={{ padding: '10px 20px', backgroundColor: '#003300' }}>
-  Sign In
-</Button>
-            </Form>
-            <p style={{ marginTop: "15px", fontSize: "1.2em", color: "#555" }}>
-  Don't have an account? <Link to="/signup" style={{ color: "#003300", textDecoration: "none", fontWeight: "bold", color: '#003300' }}>Sign Up</Link>
-</p>
-          </Card>
+    <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
+      <Card style={{ padding: '25px', width: "1200px", textAlign: "center", background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>
+        <Row>
+        <Col>
+        <img src='https://lp-cms-production.imgix.net/2022-02/shutterstockRF_376030297.jpg?auto=format&q=75&w=1920' style={{width: "87%"}}/>
         </Col>
-      </Row>
+          <Col>
+        <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Sign In</Card.Title>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group controlId="NIC" style={{ marginBottom: "25px", fontFamily: "Montserrat" }}>
+            <Form.Control
+              type="text"
+              name="NIC"
+              value={formData.NIC}
+              onChange={handleChange}
+              placeholder='NIC'
+              required
+            />
+          </Form.Group>
+          <Form.Group controlId="Password" style={{ marginBottom: "25px", fontFamily: "Montserrat" }}>
+            <Form.Control
+              type="password"
+              name="Password"
+              value={formData.Password}
+              onChange={handleChange}
+              placeholder='Password'
+              required
+            />
+          </Form.Group>
+          <Button variant="primary" type="submit" style={{ padding: '10px 20px', backgroundColor: '#003300', fontFamily: "Montserrat" }}>
+            Sign In
+          </Button>
+        </Form>
+        <p style={{ marginTop: "15px", fontSize: "1.2em", color: "#555", fontFamily: "Montserrat" }}>
+          Don't have an account? <Link to="/signup" style={{ color: "#003300", textDecoration: "none", fontWeight: "bold", fontFamily: "Montserrat" }}>Sign Up</Link>
+        </p>
+        </Col>
+        </Row>
+      </Card>
     </Container>
-    </div>
   );
 };
 

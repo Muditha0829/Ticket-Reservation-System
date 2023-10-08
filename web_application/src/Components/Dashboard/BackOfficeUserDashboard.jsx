@@ -35,7 +35,7 @@ const BackOfficeUserDashboard = () => {
         console.error('Error:', error);
       });
 
-  axios.get('http://localhost:57549/api/ticketbookings/gettraincount')
+  axios.get('http://localhost:57549/api/trains/gettraincount')
       .then(response => {
         setTrainSheduleCount(response.data);
       })
@@ -58,36 +58,36 @@ const BackOfficeUserDashboard = () => {
               {/* Dashboard image */}
               <Card.Img src='https://th.bing.com/th/id/OIP.qZl2uQ0RJQTxq2DMJsjsAQHaC5?pid=ImgDet&w=1280&h=500&rs=1' style={{ height: "200px", marginBottom: "17px" }} />
               <CardBody>
-                <Card.Text style={{fontFamily: "Onest"}}>The management of administrative activities and assistance for the online train ticket booking system is the responsibility of back office users. 
+                <Card.Text style={{fontFamily: "Onest", textAlign: "justify"}}>The management of administrative activities and assistance for the online train ticket booking system is the responsibility of back office users. 
                   To guarantee the system runs well, they take care of tasks including train shedule management, user account administration.</Card.Text>
               </CardBody>
             </Col>
             <Col>
               {/* Card displaying Back Office Users count */}
-              <Card style={{width: "75%", margin: "33px", marginBottom: "17%"}}>
+              <Card style={{width: "75%", margin: "33px", marginBottom: "7%"}}>
                 <Card.Body style={{fontFamily: "Montserrat"}}>
-                  <Card.Title>Number of Back Officers</Card.Title>
+                  <Card.Title>Number of Backofficers</Card.Title>
                   <Card.Text>{backofficeUserCount}</Card.Text>
                 </Card.Body>
               </Card>
               {/* Card displaying Travel Agents count */}
-              <Card style={{width: "75%", margin: "33px", marginBottom: "17%"}}>
+              <Card style={{width: "75%", margin: "33px", marginBottom: "8%"}}>
                 <Card.Body style={{fontFamily: "Montserrat"}}>
                   <Card.Title>Number of Travel Agents</Card.Title>
                   <Card.Text>{travelAgentCount}</Card.Text>
                 </Card.Body>
               </Card>
               {/* Card displaying Travellers count */}
-              <Card style={{width: "75%", margin: "34px", marginBottom: "17%"}}>
+              <Card style={{width: "75%", margin: "34px", marginBottom: "8%"}}>
                 <Card.Body style={{fontFamily: "Montserrat"}}>
-                  <Card.Title>Number of Travellers</Card.Title>
+                  <Card.Title>Number of Travelers</Card.Title>
                   <Card.Text>{travelUserCount}</Card.Text>
                 </Card.Body>
               </Card>
               {/* Card displaying Train Shedule count */}
-              <Card style={{width: "75%", margin: "34px", marginBottom: "17%"}}>
+              <Card style={{width: "75%", margin: "34px", marginBottom: "7%"}}>
                 <Card.Body style={{fontFamily: "Montserrat"}}>
-                  <Card.Title>Number of Travellers</Card.Title>
+                  <Card.Title>Number of Train Shedules</Card.Title>
                   <Card.Text>{trainshedulerCount}</Card.Text>
                 </Card.Body>
               </Card>

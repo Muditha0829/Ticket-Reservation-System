@@ -53,7 +53,7 @@ const AddTrainShedule = () => {
   };
 
   return (
-    <Container className="text-center mt-5" style={{width: "1200px", paddingLeft: "250px"}}>
+    <Container className="text-center mt-5" style={{width: "1200px", paddingLeft: "250px", marginBottom: "25px"}}>
       <Row className="justify-content-center">
         <Col>
           <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>

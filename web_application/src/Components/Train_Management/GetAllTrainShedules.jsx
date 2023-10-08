@@ -38,7 +38,7 @@ const GetAllTrainShedules = () => {
   };  
 
   return (
-    <Container className="my-5 text-center" style={{height: "700px", paddingLeft: "250px"}}>
+    <Container className="my-5 text-center" style={{paddingLeft: "250px"}}>
       <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>
         <Card.Body>
           <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Train Shedules</Card.Title>

@@ -139,9 +139,9 @@ namespace WebSevice.Controllers
                 return NotFound();
             }
 
-            if (existingUser.UserStatus == "Inactive")
+            if (existingUser.UserStatus == "Deactive")
             {
-                return BadRequest("User is inactive and cannot sign in.");
+                return BadRequest("User is deactive and cannot sign in.");
             }
 
             // Check if the provided password matches the stored hashed password

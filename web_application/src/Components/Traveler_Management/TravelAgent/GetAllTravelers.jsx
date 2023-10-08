@@ -35,7 +35,7 @@ const GetAllTravelers = () => {
     <Container className="my-5 text-center" style={{height: "700px", paddingLeft: "250px"}}>
   <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>
             <Card.Body>
-              <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Travel Users</Card.Title>
+              <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Travelers</Card.Title>
   <Table striped bordered hover responsive>
     <thead>
       <tr style={{fontSize: "17px", fontFamily: "Montserrat"}}>
