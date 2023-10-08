@@ -135,7 +135,7 @@ namespace WebSevice.Controllers
                     return BadRequest("Invalid ticket class.");
                 }
                 var update = Builders<TrainTicketBooking>.Update
-                    .Set(t => t.TrainID, updatedBooking.TrainID)
+                    .Set(t => t.TrainName, updatedBooking.TrainName)
                     .Set(t => t.UserID, updatedBooking.UserID)
                     .Set(t => t.ReservationDate, updatedBooking.ReservationDate)
                     .Set(t => t.TotalPassengers, updatedBooking.TotalPassengers)

@@ -12,7 +12,7 @@ const AddTrainTicketBooking = () => {
     UserID: userId,
     ReservationDate: '',
     BookingDate: '',
-    TrainID: '',
+    TrainName: '',
     TotalPassengers: "",
     TicketClass: '',
     Email: '',
@@ -58,7 +58,7 @@ const AddTrainTicketBooking = () => {
 
   console.log('Form Data:', formData); // Add this line
   console.log('UserID:', formData.UserID); // Add this line
-  console.log('TrainID:', formData.TrainID); // Add this line
+  console.log('TrainName:', formData.TrainName); // Add this line
 
   // const isValidEmail = (Email) => {
   //   const EmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -147,10 +147,10 @@ const AddTrainTicketBooking = () => {
                 onChange={handleChange}
                 required
               /><br />
-              <Form.Group controlId="TrainID">
+              <Form.Group controlId="TrainName">
           <Form.Select
-            name="TrainID"
-            value={formData.TrainID}
+            name="TrainName"
+            value={formData.TrainName}
             onChange={handleChange}
             required
           >

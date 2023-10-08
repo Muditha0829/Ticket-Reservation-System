@@ -4,7 +4,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { Container, Form, Button, Row, Col, Card } from 'react-bootstrap';
 
 const UpdateTraveller = () => {
-  const { userID } = useParams();
+  const { UserID } = useParams();
   const history = useHistory();
 
   const [userData, setUserData] = useState({
@@ -18,14 +18,14 @@ const UpdateTraveller = () => {
   });
 
   useEffect(() => {
-    axios.get(`/api/users/get/${userID}`)
+    axios.get(`http://localhost:57549/api/users/getuser/${UserID}`)
       .then(response => {
         setUserData(response.data);
       })
       .catch(error => {
         console.error('Error fetching user data:', error);
       });
-  }, [userID]);
+  }, [UserID]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,11 +45,11 @@ const UpdateTraveller = () => {
     return;
   }
 
-    axios.put(`/api/users/updatebyid/${userID}`, userData)
+    axios.put(`http://localhost:57549/api/users/updateuser/${UserID}`, userData)
       .then(response => {
         console.log('User updated:', response.data);
         alert('Travel user updated successfully!');
-        history.push(`/viewtraveller/${userID}`);
+        history.push(`/viewtraveller/${UserID}`);
         window.location.href = `/listtraveluser`;
       })
       .catch(error => {

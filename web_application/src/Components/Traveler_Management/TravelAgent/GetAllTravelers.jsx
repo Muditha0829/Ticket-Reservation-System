@@ -9,7 +9,7 @@ const GetAllTravelers = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('/api/users/getall');
+        const response = await axios.get('http://localhost:57549/api/users/getallusers');
         setUsers(response.data);
       } catch (error) {
         console.error('Error fetching users:', error);
@@ -21,9 +21,9 @@ const GetAllTravelers = () => {
 
   const handleDeleteUser = async (userID) => {
     try {
-      await axios.delete(`/api/users/delete/${userID}`);
+      await axios.delete(`http://localhost:57549/api/users/deleteuser/${userID}`);
 
-      const updatedUsers = users.filter(user => user.ID !== userID);
+      const updatedUsers = users.filter(user => user.UserID !== userID);
       setUsers(updatedUsers);
       alert('Travel user deleted successfully!');
     } catch (error) {
@@ -52,13 +52,13 @@ const GetAllTravelers = () => {
           <td>{user.UserName}</td>
           <td>{user.Email}</td>
           <td>
-            <Link to={`/viewtraveller/${user.ID}`} className="mr-2">
+            <Link to={`/viewtraveller/${user.UserID}`} className="mr-2">
               <Button variant="warning" style={{marginRight: "25px"}}>View Travel User</Button>
             </Link>
-            <Link to={`/updatetraveller/${user.ID}`} className="mr-2">
+            <Link to={`/updatetraveller/${user.UserID}`} className="mr-2">
               <Button variant="success" style={{marginRight: "25px"}}>Update Travel User</Button>
             </Link>
-            <Button variant="danger" onClick={() => handleDeleteUser(user.ID)} style={{marginRight: "25px"}}>Delete Travel User</Button>
+            <Button variant="danger" onClick={() => handleDeleteUser(user.UserID)} style={{marginRight: "25px"}}>Delete Travel User</Button>
           </td>
         </tr>
       ))}

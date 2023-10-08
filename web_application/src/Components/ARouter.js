@@ -58,8 +58,8 @@ const ARouter = () => {
           <Route path="/updateprofile/:userId" component={UpdateUserProfile} />
           <Route path="/traveluserstatus" component={Traveler} />
           <Route path="/listtraveluser" component={GetAllTravelers} />
-          <Route path="/updatetraveller/:userId" component={UpdateTraveler} />
-          <Route path="/viewtraveller/:userId" component={GetTraveler} />
+          <Route path="/updatetraveller/:UserID" component={UpdateTraveler} />
+          <Route path="/viewtraveller/:UserID" component={GetTraveler} />
           <Route path="/addtraveluser" component={AddTraveler} />
           <Route path="/backofficeuserdashboard" component={BackOfficeUserDashboard} />
           <Route path="/travelagentdashboard" component={TravelAgentDashboard} />

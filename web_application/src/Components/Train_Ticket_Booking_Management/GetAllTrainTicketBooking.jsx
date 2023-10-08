@@ -72,15 +72,17 @@ const GetAllTrainTicketBooking = () => {
   <Table striped bordered hover style={{ marginTop: '20px', width:"75%" }} className="mx-auto">
     <thead>
       <tr>
-        <th>ID</th>
+        <th>Train Name</th>
         <th>Traveler Name</th>
+        <th>Traveler NIC</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
     {reservations.map(reservation => (
   <tr key={reservation.ID}>
-    <td>{reservation.TrainID}</td>
+    <td>{reservation.TrainName}</td>
+    <td>{reservation.NIC}</td>
     <td>{reservation.TravelerName}</td>
     <td>
       <Button

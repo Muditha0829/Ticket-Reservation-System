@@ -30,35 +30,35 @@ const AddTraveller = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const nicRegex = /^[0-9]{10,12}$/;
-    const EmailRegex = /^[0-9]{10}$/;
+  //   const nicRegex = /^[0-9]{10,12}$/;
+  //   const EmailRegex = /^[0-9]{10}$/;
 
-    const isValidPassword = (password) => {
-      const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
-      return passwordPattern.test(password);
-    };
+  //   const isValidPassword = (password) => {
+  //     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
+  //     return passwordPattern.test(password);
+  //   };
 
-  if (!nicRegex.test(formData.NIC.toUpperCase())) {
-    alert('Invalid NIC number. Please enter a valid NIC number.');
-    return;
-  }
+  // if (!nicRegex.test(formData.NIC.toUpperCase())) {
+  //   alert('Invalid NIC number. Please enter a valid NIC number.');
+  //   return;
+  // }
 
-  if (!EmailRegex.test(formData.ContactNumber)) {
-    alert('Invalid Email number. Please enter a 10-digit Email number.');
-    return;
-  }
+  // if (!EmailRegex.test(formData.ContactNumber)) {
+  //   alert('Invalid Email number. Please enter a 10-digit Email number.');
+  //   return;
+  // }
 
-    if (formData.Password !== formData.RePassword) {
-      alert("Passwords do not match. Please try again.");
-      return;
-    }
+  //   if (formData.Password !== formData.RePassword) {
+  //     alert("Passwords do not match. Please try again.");
+  //     return;
+  //   }
 
-    if (!isValidPassword(formData.Password)) {
-      alert('Password must contain at least one uppercase letter, one lowercase letter, one digit, and be at least 8 characters long.');
-      return;
-    }
+  //   if (!isValidPassword(formData.Password)) {
+  //     alert('Password must contain at least one uppercase letter, one lowercase letter, one digit, and be at least 8 characters long.');
+  //     return;
+  //   }
   
-    axios.post('/api/users/signup', formData, {
+    axios.post('http://localhost:57549/api/users/signup', formData, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -70,7 +70,7 @@ const AddTraveller = () => {
     })
     .catch(error => {
       console.error('Error:', error);
-      alert('NIC is already in use. Please enter a different NIC.');
+      alert('error');
     });
   };
 

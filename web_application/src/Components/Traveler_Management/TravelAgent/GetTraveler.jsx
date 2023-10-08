@@ -4,25 +4,25 @@ import { useParams } from 'react-router-dom';
 import { Container, Table, Row, Col, Button, Card } from 'react-bootstrap';
 
 const GetTraveler = () => {
-  const { userID } = useParams();
+  const { UserID } = useParams();
   const [user, setUser] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`/api/users/get/${userID}`);
+        const response = await axios.get(`http://localhost:57549/api/users/getuser/${UserID}`);
         setUser(response.data);
       } catch (error) {
         console.error('Error fetching user:', error);
       }
     };
 
-    if (userID) {
+    if (UserID) {
       fetchData();
     }
-  }, [userID]);
+  }, [UserID]);
 
-  if (!userID) {
+  if (!UserID) {
     return <div>No user ID found</div>;
   }
 
