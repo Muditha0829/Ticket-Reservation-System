@@ -92,12 +92,12 @@ const SignIn = () => {
                   required 
                 />
               </Form.Group>
-              <Button variant="primary" type="submit" style={{ padding: '10px 20px', backgroundColor: '#848014' }}>
+              <Button variant="primary" type="submit" style={{ padding: '10px 20px', backgroundColor: '#003300' }}>
   Sign In
 </Button>
             </Form>
             <p style={{ marginTop: "15px", fontSize: "1.2em", color: "#555" }}>
-  Don't have an account? <Link to="/signup" style={{ color: "#848014", textDecoration: "none", fontWeight: "bold", color: '#848014' }}>Sign Up</Link>
+  Don't have an account? <Link to="/signup" style={{ color: "#003300", textDecoration: "none", fontWeight: "bold", color: '#003300' }}>Sign Up</Link>
 </p>
           </Card>
         </Col>

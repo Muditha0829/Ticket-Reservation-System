@@ -124,7 +124,7 @@ const AddTrainTicketBooking = () => {
   };
 
   return (
-    <Container className="text-center mt-5" style={{width: "700px"}}>
+    <Container className="text-center mt-5" style={{width: "800px", paddingLeft: "250px"}}>
       <div className="container">
       <Card>
             <Card.Body>

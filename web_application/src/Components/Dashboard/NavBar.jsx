@@ -19,7 +19,7 @@ const NavBar = () => {
   };
 
   return (
-    <Navbar style={{ backgroundColor: '#848014', marginBottom: "25px", height: "75px", fontFamily: "MyCustomFont, sans-serif", fontSize: "17px" }} variant="dark" className="justify-content-between">
+    <Navbar style={{ backgroundColor: '#003300', marginBottom: "25px", height: "75px", fontFamily: "MyCustomFont, sans-serif", fontSize: "17px" }} variant="dark" className="justify-content-between">
       <Navbar.Brand as={Link} to="#" style={{marginLeft: "25px"}}>
         <img
           src="https://melbournesptgallery.weebly.com/uploads/1/9/9/4/19942089/mptg-avatar-2020-yellow-15_orig.jpg"

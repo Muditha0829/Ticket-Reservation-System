@@ -29,20 +29,24 @@ import GetAllTravelers from './Traveler_Management/TravelAgent/GetAllTravelers';
 
 import BackOfficeUserDashboard from './Dashboard/BackOfficeUserDashboard';
 import TravelAgentDashboard from './Dashboard/TravelAgentDashboard';
+import SideBar from './Dashboard/SideBar';
 
 const ARouter = () => {
   const location = useLocation();
 
   const hideNavbarRoutes = ['/', '/signup'];
+  const hideSideBarRoutes = ['/', '/signup'];
   const hideFooterRoutes = ['/', '/signup'];
 
   const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
+  const shouldHideSideBar = hideSideBarRoutes.includes(location.pathname);
   const shouldHideFooter = hideFooterRoutes.includes(location.pathname);
 
   return (
     <Router>
       <UserProvider>
         {!shouldHideNavbar && <NavBar />}
+        {!shouldHideSideBar && <SideBar />}
         <Switch>
           <Route path="/listtrain" exact component={GetAllTrainShedules} />
           <Route path="/view/:TrainID" component={GetTrainShedule} />

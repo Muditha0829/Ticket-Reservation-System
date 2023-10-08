@@ -58,7 +58,7 @@ const UpdateTraveller = () => {
   };
 
   return (
-    <Container className="my-5 text-center" style={{width: "47%"}}>
+    <Container className="my-5 text-center" style={{width: "47%", paddingLeft: "250px"}}>
       <Card>
             <Card.Body>
   <Card.Title style={{ margin: "25px", fontFamily: "MyCustomFont, sans-serif", fontSize: "34px" }}>Update Traveller</Card.Title>

@@ -3,7 +3,7 @@ import { Container, Row, Col, Card } from 'react-bootstrap';
 
 const TravelAgentDashboard = () => {
   return (
-    <Container className="text-center mt-5">
+    <Container className="text-center mt-5" style={{paddingLeft: "250px"}}>
       <Card style={{ padding: "20px" }}>
         <Card.Body>
           <Card.Title style={{ textAlign: "center", fontSize: "43px", padding: "25px" }}>Welcome To Travel Agent Dashboard</Card.Title>

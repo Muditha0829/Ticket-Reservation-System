@@ -74,7 +74,7 @@ const UpdateTrainShedule = () => {
   }, [TrainID]);  
 
   return (
-    <Container className="text-center mt-5" style={{width: "700px"}}>
+    <Container className="text-center mt-5" style={{width: "700px", paddingLeft: "250px"}}>
       <Card>
         <Card.Body>
           <Card.Title style={{ margin: "25px", fontFamily: "MyCustomFont, sans-serif", fontSize: "34px" }}>Update Train Shedule</Card.Title>

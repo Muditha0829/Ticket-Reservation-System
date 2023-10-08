@@ -53,7 +53,7 @@ const AddTrainShedule = () => {
   };
 
   return (
-    <Container className="text-center mt-5">
+    <Container className="text-center mt-5" style={{paddingLeft: "250px"}}>
       <Row className="justify-content-center">
         <Col xs={6}>
           <Card>
@@ -173,7 +173,7 @@ const AddTrainShedule = () => {
                 <Row className="justify-content-center">
                   <Col xs="auto" style={{ margin: "34px" }}>
                     <Button variant="secondary" onClick={() => window.history.back()} style={{ width: '150px' }}>Back</Button>{' '}
-                    <Button type="submit" variant="primary" style={{ width: '150px', backgroundColor: "#848014" }}>Submit</Button>
+                    <Button type="submit" variant="primary" style={{ width: '150px', backgroundColor: "#003300" }}>Submit</Button>
                   </Col>
                 </Row>
               </Form>

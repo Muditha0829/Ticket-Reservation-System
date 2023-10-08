@@ -75,7 +75,7 @@ const AddTraveller = () => {
   };
 
   return (
-    <Container className="text-center mt-5" style={{width: "1200px"}}>
+    <Container className="text-center mt-5" style={{width: "1200px", paddingLeft: "250px"}}>
   <Row className="justify-content-center">
     <Col md={6}>
     <Card>

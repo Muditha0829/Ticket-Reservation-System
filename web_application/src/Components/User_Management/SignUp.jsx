@@ -196,12 +196,12 @@ const Signup = () => {
             </Form.Group>
             <Row className="justify-content-center">
               <Col xs="auto">
-            <Button type="submit" variant="primary" style={{ width: '150px', backgroundColor: '#848014' }}>Sign Up</Button>
+            <Button type="submit" variant="primary" style={{ width: '150px', backgroundColor: '#003300' }}>Sign Up</Button>
               </Col>
             </Row>
             <div className="text-center mt-2">
             <p style={{ marginTop: "15px", fontSize: "1.2em", color: "#555" }}>
-  Don't have an account? <Link to="/" style={{ color: "#848014", textDecoration: "none", fontWeight: "bold" }}>Sign In</Link>
+  Don't have an account? <Link to="/" style={{ color: "#003300", textDecoration: "none", fontWeight: "bold" }}>Sign In</Link>
 </p>
           </div>
           </Form>

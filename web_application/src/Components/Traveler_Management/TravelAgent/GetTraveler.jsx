@@ -31,7 +31,7 @@ const GetTraveler = () => {
   }
 
   return (
-    <Container className="my-5 text-center">
+    <Container className="my-5 text-center" style={{paddingLeft: "250px"}}>
       <Card>
             <Card.Body>
   <Card.Title style={{ margin: "25px", fontFamily: "MyCustomFont, sans-serif", fontSize: "34px" }}>View Travel User</Card.Title>

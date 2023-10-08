@@ -114,7 +114,7 @@ const UpdateTrainTicketBooking = () => {
   }, []);
 
   return (
-    <Container className="my-5 text-center" style={{width: "43%"}}>
+    <Container className="my-5 text-center" style={{width: "43%", paddingLeft: "250px"}}>
   <Card>
             <Card.Body>
               <Card.Title style={{ margin: "25px", fontFamily: "MyCustomFont, sans-serif", fontSize: "34px" }}>Create New Reservation</Card.Title>

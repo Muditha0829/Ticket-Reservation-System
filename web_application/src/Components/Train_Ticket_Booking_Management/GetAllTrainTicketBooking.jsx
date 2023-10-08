@@ -65,7 +65,7 @@ const GetAllTrainTicketBooking = () => {
   }, [userId, setUser]);
 
   return (
-    <Container className="text-center mt-5" style={{height: "700px"}}>
+    <Container className="text-center mt-5" style={{height: "700px", paddingLeft: "250px"}}>
       <Card>
             <Card.Body>
               <Card.Title style={{ margin: "25px", fontFamily: "MyCustomFont, sans-serif", fontSize: "34px" }}>You Reservations</Card.Title>
@@ -85,30 +85,32 @@ const GetAllTrainTicketBooking = () => {
     <td>{reservation.NIC}</td>
     <td>{reservation.TravelerName}</td>
     <td>
-      <Button
-        variant="warning"
-        as={Link}
-        to={`/reservationview/${reservation.BookingID}`}
-        style={{ color: 'white', marginRight: '5px', textDecoration: 'none' }}
-      >
-        View Reservation
-      </Button>
-      <Button
-        variant="link"
-        as={Link}
-        to={`/reservationupdate/${reservation.BookingID}`}
-        style={{ background: 'green', color: 'white', textDecoration: 'none' }}
-      >
-        Update Reservation
-      </Button>
-      <Button
-        variant="danger"
-        onClick={() => handleCancel(reservation.BookingID, reservation.ReservationDate, reservation.BookingDate)}
-        disabled={cancellationLoading}
-        style={{ marginLeft: '5px' }}
-      >
-        Cancel Reservation
-      </Button>
+    <Button
+  variant="warning"
+  as={Link}
+  to={`/reservationview/${reservation.BookingID}`}
+  style={{ color: 'white', marginRight: '5px', textDecoration: 'none' }}
+>
+  <i className="fas fa-eye"></i>
+</Button>
+
+<Button
+  variant="link"
+  as={Link}
+  to={`/reservationupdate/${reservation.BookingID}`}
+  style={{ background: 'green', color: 'white', textDecoration: 'none' }}
+>
+  <i className="fas fa-edit"></i>
+</Button>
+
+<Button
+  variant="danger"
+  onClick={() => handleCancel(reservation.BookingID, reservation.ReservationDate, reservation.BookingDate)}
+  disabled={cancellationLoading}
+  style={{ marginLeft: '5px' }}
+>
+  <i className="fas fa-trash-alt"></i>
+</Button>
     </td>
   </tr>
 ))}

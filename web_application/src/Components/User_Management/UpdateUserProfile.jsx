@@ -117,7 +117,7 @@ const UpdateUserProfile = () => {
             required
           />
         </Form.Group>
-        <Row className="justify-content-center" style={{marginTop: "25px"}}>
+        <Row className="justify-content-center" style={{marginTop: "25px", paddingLeft: "250px"}}>
               <Col xs="auto">
               <Button variant="secondary" onClick={() => window.history.back()} style={{ width: '150px' }}>Back</Button>{' '}
             <Button type="submit" variant="primary" style={{ width: '150px' }}>Update Profile</Button>

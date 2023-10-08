@@ -26,7 +26,7 @@ const GetTrainTicketBooking = () => {
 
   return (
     <div className="text-center p-4">
-  <Card className="mx-auto" style={{ maxWidth: '800px', borderRadius: '10px' }}>
+  <Card className="mx-auto" style={{ maxWidth: '800px', borderRadius: '10px', paddingLeft: "250px" }}>
   <Card.Title style={{ margin: "25px", fontFamily: "MyCustomFont, sans-serif", fontSize: "34px" }}>View Reservation</Card.Title>
     <Card.Body>
       <Table striped bordered hover>

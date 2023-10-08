@@ -29,7 +29,7 @@ const GetAllTrainShedules = () => {
   };  
 
   return (
-    <Container className="my-5 text-center" style={{height: "700px"}}>
+    <Container className="my-5 text-center" style={{height: "700px", paddingLeft: "250px"}}>
       <Card>
         <Card.Body>
           <Card.Title style={{ margin: "25px", fontFamily: "MyCustomFont, sans-serif", fontSize: "34px" }}>Train Shedules</Card.Title>
@@ -48,13 +48,13 @@ const GetAllTrainShedules = () => {
                   <td>{train.TrainStatus}</td>
                   <td>
                     <Link to={`/view/${train.TrainID}`}>
-                      <Button variant="warning" style={{ marginRight: '17px', color: 'white' }}>View Train Shedule</Button>
+                      <Button variant="warning" style={{ marginRight: '17px', color: 'white' }}><i className="fas fa-eye"></i></Button>
                     </Link>
                     <Link to={`/update/${train.TrainID}`}>
-                      <Button variant="success" style={{ marginRight: '17px' }}>Update Train Shedule</Button>
+                      <Button variant="success" style={{ marginRight: '17px' }}><i className="fas fa-edit"></i></Button>
                     </Link>
                     <Button variant="danger" onClick={() => handleDelete(train.TrainID)} style={{ marginRight: '17px' }}>
-                      Delete Train Shedule
+                    <i className="fas fa-trash-alt"></i>
                     </Button>
                   </td>
                 </tr>
