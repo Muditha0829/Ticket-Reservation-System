@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_horizontal"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -36,7 +36,7 @@
                     android:text="Main Passenger Name:"
                     android:textSize="18sp"
                     android:textColor="@color/black"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginRight="16dp"
                 />
 
@@ -46,7 +46,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:textColor="@color/black"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     />
 
             </LinearLayout>
@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_horizontal"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -64,8 +64,8 @@
                     android:text="NIC:"
                     android:textSize="18sp"
                     android:textColor="@color/black"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="8dp"/>
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"/>
 
                 <TextView
                     android:id="@+id/nicTextText"
@@ -73,7 +73,34 @@
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:textColor="@color/black"
-                    android:layout_marginTop="8dp"/>
+                    android:layout_marginTop="16dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginRight="16dp"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Reservation Date:"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"/>
+
+                <TextView
+                    android:id="@+id/reservationDateTextText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="16dp"/>
 
             </LinearLayout>
 
@@ -82,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_horizontal"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -90,7 +117,7 @@
                     android:text="Train Name:"
                     android:textSize="18sp"
                     android:textColor="@color/black"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginRight="16dp"/>
 
                 <TextView
@@ -99,7 +126,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:textColor="@color/black"
-                    android:layout_marginTop="8dp"/>
+                    android:layout_marginTop="16dp"/>
 
             </LinearLayout>
 
@@ -108,7 +135,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_horizontal"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginRight="16dp">
 
                 <TextView
@@ -118,7 +145,7 @@
                     android:layout_marginRight="16dp"
                     android:textSize="18sp"
                     android:textColor="@color/black"
-                    android:layout_marginTop="8dp"/>
+                    android:layout_marginTop="16dp"/>
 
                 <TextView
                     android:id="@+id/departureStationTextText"
@@ -126,7 +153,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:textColor="@color/black"
-                    android:layout_marginTop="8dp"/>
+                    android:layout_marginTop="16dp"/>
 
             </LinearLayout>
 
@@ -135,7 +162,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_horizontal"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -143,8 +170,8 @@
                     android:text="Destination Station:"
                     android:textSize="18sp"
                     android:textColor="@color/black"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="8dp"/>
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"/>
 
                 <TextView
                     android:id="@+id/destinationStationTextText"
@@ -152,7 +179,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:textColor="@color/black"
-                    android:layout_marginTop="8dp"/>
+                    android:layout_marginTop="16dp"/>
 
             </LinearLayout>
 
@@ -161,7 +188,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_horizontal"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -169,8 +196,8 @@
                     android:text="Total Passengers:"
                     android:textSize="18sp"
                     android:textColor="@color/black"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="8dp"/>
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"/>
 
                 <TextView
                     android:id="@+id/totalPassengersTextText"
@@ -178,7 +205,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:textColor="@color/black"
-                    android:layout_marginTop="8dp"/>
+                    android:layout_marginTop="16dp"/>
 
             </LinearLayout>
 
@@ -187,7 +214,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_horizontal"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -195,8 +222,8 @@
                     android:text="Email:"
                     android:textSize="18sp"
                     android:textColor="@color/black"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="8dp"/>
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"/>
 
                 <TextView
                     android:id="@+id/emailTextText"
@@ -204,7 +231,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:textColor="@color/black"
-                    android:layout_marginTop="8dp"/>
+                    android:layout_marginTop="16dp"/>
 
             </LinearLayout>
 
@@ -213,17 +240,17 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_horizontal"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="8dp">
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Contact Number:"
-                    android:layout_marginRight="8dp"
+                    android:layout_marginRight="16dp"
                     android:textSize="18sp"
                     android:textColor="@color/black"
-                    android:layout_marginTop="8dp"/>
+                    android:layout_marginTop="16dp"/>
 
                 <TextView
                     android:id="@+id/contactNumberTextText"
@@ -231,7 +258,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:textColor="@color/black"
-                    android:layout_marginTop="8dp"/>
+                    android:layout_marginTop="16dp"/>
 
             </LinearLayout>
 
@@ -240,7 +267,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_horizontal"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -248,8 +275,8 @@
                     android:text="Ticket Class:"
                     android:textSize="18sp"
                     android:textColor="@color/black"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="8dp"/>
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"/>
 
                 <TextView
                     android:id="@+id/ticketClassTextText"
@@ -257,34 +284,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:textColor="@color/black"
-                    android:layout_marginTop="8dp"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginRight="8dp"
-                android:gravity="center_horizontal"
-                android:layout_marginTop="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Reservation Date:"
-                    android:textSize="18sp"
-                    android:textColor="@color/black"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="8dp"/>
-
-                <TextView
-                    android:id="@+id/reservationDateTextText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:textColor="@color/black"
-                    android:layout_marginTop="8dp"/>
+                    android:layout_marginTop="16dp"/>
 
             </LinearLayout>
 
@@ -302,7 +302,7 @@
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
         android:background="#00284d"
-        android:elevation="8dp">
+        android:elevation="16dp">
 
         <ImageButton
             android:id="@+id/button1"
