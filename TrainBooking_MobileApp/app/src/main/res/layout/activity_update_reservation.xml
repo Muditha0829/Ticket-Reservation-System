@@ -44,11 +44,12 @@
 
                     <Spinner
                         android:id="@+id/trainNameSpinner"
-                        android:layout_width="match_parent"
+                        android:layout_width="128dp"
                         android:layout_height="match_parent"
+                        android:layout_marginLeft="87dp"
                         android:textColor="@color/white"
                         android:textColorHint="@color/white"
-                        android:background="#B2FFFFFF" />
+                        android:background="@color/white" />
 
                 </LinearLayout>
 
@@ -73,6 +74,34 @@
                     android:padding="8dp"
                     android:textColor="@color/white"
                     android:textColorHint="@color/white" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:padding="8dp"
+                    android:background="@drawable/rounded_border">
+
+                    <TextView
+                        android:id="@+id/editTextReservationDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18dp"
+                        android:hint="Reservation Date"
+                        android:inputType="date"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"/>
+
+                    <ImageButton
+                        android:id="@+id/calendarButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_baseline_calendar_month_24"
+                        android:contentDescription="Calendar Icon"
+                        android:layout_alignParentRight="true"
+                        android:background="@android:color/transparent"/>
+
+                </RelativeLayout>
 
 <!--                <EditText-->
 <!--                    android:id="@+id/trainNumberEditText"-->
@@ -149,8 +178,9 @@
 
                     <Spinner
                         android:id="@+id/totalPassengersSpinner"
-                        android:layout_width="match_parent"
+                        android:layout_width="78px"
                         android:layout_height="match_parent"
+                        android:layout_marginLeft="170dp"
                         android:textColor="@color/white"
                         android:textColorHint="@color/white"
                         android:background="#B2FFFFFF" />
@@ -176,8 +206,9 @@
 
                     <Spinner
                         android:id="@+id/ticketClassSpinner"
-                        android:layout_width="47dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="470px"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="78dp"
                         android:textColor="@color/white"
                         android:textColorHint="@color/white"
                         android:background="#B2FFFFFF"
@@ -195,33 +226,6 @@
                     android:padding="8dp"
                     android:textColor="@color/white"
                     android:textColorHint="@color/white" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:padding="8dp"
-                    android:background="@drawable/rounded_border">
-
-                    <TextView
-                        android:id="@+id/editTextReservationDate"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Reservation Date"
-                        android:inputType="date"
-                        android:textColor="@color/white"
-                        android:textColorHint="@color/white"/>
-
-                    <ImageButton
-                        android:id="@+id/calendarButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_calendar_month_24"
-                        android:contentDescription="Calendar Icon"
-                        android:layout_alignParentRight="true"
-                        android:background="@android:color/transparent"/>
-
-                </RelativeLayout>
 
                 <Button
                     android:id="@+id/updateButton"

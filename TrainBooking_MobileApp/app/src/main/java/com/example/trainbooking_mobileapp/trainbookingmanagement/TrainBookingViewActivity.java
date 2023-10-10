@@ -113,40 +113,4 @@ public class TrainBookingViewActivity extends AppCompatActivity {
         contactNumberTextText.setText(reservation.getContactNumber());
         reservationDateTextText.setText(reservation.getReservationDate());
     }
-
-//    private void updateReservation() {
-//        // Retrieve updated data from TextText fields
-//        String mainPassengerName = mainPassengerNameTextText.getText().toString();
-//        String nic = nicTextText.getText().toString();
-////        String trainNumber = trainNumberTextText.getText().toString();
-//        String trainName = trainNameTextText.getText().toString();
-//        String departureStation = departureStationTextText.getText().toString();
-//        String destinationStation = destinationStationTextText.getText().toString();
-//        int totalPassengers = Integer.parseInt(totalPassengersTextText.getText().toString());
-//        String ticketClass = ticketClassTextText.getText().toString();
-////        String totalPrice = totalPriceTextText.getText().toString();
-//        String email = emailTextText.getText().toString();
-//        String phone = contactNumberTextText.getText().toString();
-//        String reservationDate = reservationDateTextText.getText().toString();
-//
-////        TrainBooking updatedReservation = new TrainBooking(reservation.getID(), travelerName, nic, reservation.getUserId(), TrainID, reservation.getBookingStatus(),
-////                departureLocation, destinationLocation, numPassengers, age, ticketClass, seatSelection, email, phone, reservationDate, reservation.getBookingDate(), reservation.getFormattedReservationDate(), reservation.getFormattedBookingDate());
-//
-//        TrainBooking updatedReservation = new TrainBooking(reservation.getBookingID(), reservation.getTrainNumber(), trainName, userID, reservation.getBookingDate(),
-//                reservationDate, totalPassengers, mainPassengerName, phone, departureStation, destinationStation, email, nic, ticketClass, totalPrice);
-//
-//
-//        TrainBookingApiClient.updateReservationInAPI(updatedReservation, new TrainBookingApiClient.OnReservationUpdatedListener() {
-//            @Override
-//            public void onReservationUpdated() {
-//                setResult(RESULT_OK);
-//                finish();
-//            }
-//
-//            @Override
-//            public void onError(String errorMessage) {
-//                Toast.makeText(TrainBookingViewActivity.this, "Error updating reservation", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
 }

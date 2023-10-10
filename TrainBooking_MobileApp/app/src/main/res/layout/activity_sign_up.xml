@@ -108,7 +108,7 @@
                 <Spinner
                     android:id="@+id/spinnerGender"
                     android:layout_width="match_parent"
-                    android:layout_height="41dp"
+                    android:layout_height="47dp"
                     android:layout_margin="16dp"
                     android:background="@drawable/rounded_border"
                     android:hint="Gender"
@@ -158,6 +158,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
+                    android:textSize="17sp"
                     android:text="Traveler"
                     android:textColor="@color/white"
                     android:background="@drawable/rounded_border"

@@ -91,20 +91,22 @@ public class SignUpActivity extends AppCompatActivity {
         String reenteredPassword = etRePassword.getText().toString().trim();
         String contactNumber = etContactNumber.getText().toString().trim();
 
-//        String password = etPassword.getText().toString().trim();
-//        String reenteredPassword = etRePassword.getText().toString().trim();
+        // Hash the passwords
+//        String hashedPassword = hashPassword(password);
+//        String hashedReenteredPassword = hashPassword(reenteredPassword);
 
-        String hashPw = hashPassword(password);
-        String hashedRePassword = hashPassword(reenteredPassword); // Hash the re-entered password
+//        if (!hashedPassword.equals(hashedReenteredPassword)) {
+//            // Passwords don't match
+//            Toast.makeText(SignUpActivity.this, "Passwords do not match.", Toast.LENGTH_SHORT).show();
+//            return; // Return without attempting to sign up
+//        }
 
-        if (!hashPw.equals(hashedRePassword)) {
-            // Passwords don't match
-            Toast.makeText(SignUpActivity.this, "Passwords do not match.", Toast.LENGTH_SHORT).show();
-            return; // Return without attempting to sign up
-        }
+        User user = new User("", firstName, lastName, username, email, nic, gender, contactNumber, "", password, reenteredPassword, "");
 
-        User user = new User("", firstName, lastName, username, email, nic, gender, contactNumber, "", hashPw, hashedRePassword, "");
-
+        Log.d("SignUpActivity","firstName" + firstName);
+        Log.d("SignUpActivity","nic" + nic);
+        Log.d("SignUpActivity","password" + password);
+        Log.d("SignUpActivity","reenteredPassword" + reenteredPassword);
 
         OkHttpClient client = new OkHttpClient();
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
