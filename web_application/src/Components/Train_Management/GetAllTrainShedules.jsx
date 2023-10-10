@@ -31,7 +31,9 @@ const GetAllTrainShedules = () => {
     axios.delete(`http://localhost:57549/api/trains/deletetrain/${TrainID}`)
       .then(response => {
         toast.success('Train successfully deleted!');
+        setTimeout(() => {
         window.location.reload();
+        }, 2000)
       })
       .catch(error => {
         console.error('Error:', error);
@@ -40,18 +42,18 @@ const GetAllTrainShedules = () => {
   };  
 
   return (
-    <Container className="my-5 text-center" style={{paddingLeft: "250px"}}>
-      <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
-      <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>
-        <Card.Body>
-          <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Train Shedules</Card.Title>
-          <Table striped bordered hover style={{ marginTop: '20px', width: '75%' }} className="mx-auto">
-            <thead>
-              <tr style={{fontSize: "17px", fontFamily: "Montserrat"}}>
-                <th>Train ID</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
+    <Container className="my-5 text-center" style={{ paddingLeft: "250px", maxWidth: "900px" }}>
+  <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
+  <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none', borderRadius: '15px', boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.1)' }}>
+    <Card.Body>
+      <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Train Schedules</Card.Title>
+      <Table striped bordered hover style={{ marginTop: '20px', width: '75%' }} className="mx-auto" responsive>
+        <thead>
+          <tr style={{ fontSize: "17px", fontFamily: "Montserrat" }}>
+            <th>Train ID</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
             </thead>
             <tbody>
               {currentItems.map(train => (
@@ -74,7 +76,7 @@ const GetAllTrainShedules = () => {
             </tbody>
           </Table>
 
-          <div className="pagination" style={{ textAlign: 'Right', margin: "20px", marginLeft: "40%"}}>
+          <div className="pagination" style={{ textAlign: 'Right', margin: "20px", marginLeft: "40%" }}>
   <span
     onClick={() => currentPage > 1 && handlePagination(currentPage - 1)}
     className={currentPage === 1 ? 'disabled' : ''}

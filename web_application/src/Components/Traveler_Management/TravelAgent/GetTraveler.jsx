@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Container, Table, Row, Col, Button, Card } from 'react-bootstrap';
+import imageprofileavatar from '../../Assests/profileavatar.png'
 
 const GetTraveler = () => {
   const { UserID } = useParams();
@@ -33,15 +34,15 @@ const GetTraveler = () => {
   }
 
   return (
-    <Container className="my-5 text-center" style={{paddingLeft: "250px"}}>
-      <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
-      <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>
-            <Card.Body>
-  <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>View Traveler</Card.Title>
-  <div className="text-center mb-4">
-            <img src="https://th.bing.com/th/id/OIP.x7X2oAehk5M9IvGwO_K0PgHaHa?pid=ImgDet&rs=1" alt="Profile" style={{ width: '150px', height: '150px', borderRadius: '50%' }} />
-          </div>
-  <Table striped bordered responsive>
+    <Container className="my-5 text-center" style={{ paddingLeft: "250px" }}>
+  <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
+  <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none', borderRadius: '15px', boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.1)' }}>
+    <Card.Body>
+      <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px", color: "#00284d" }}>View Traveler</Card.Title>
+      <div className="text-center mb-4">
+      <img src={imageprofileavatar} alt="Profile" style={{ width: '250px', height: '170px', borderRadius: '50%' }} />
+      </div>
+      <Table striped bordered responsive style={{ fontFamily: "Onest" }}>
     <tbody>
       <tr>
         <td style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>User NIC</strong></td>
@@ -80,14 +81,14 @@ const GetTraveler = () => {
         <td style={{fontFamily: "Onest"}}>{user.UserStatus}</td>
       </tr>
     </tbody>
-  </Table>
-  <Row className="justify-content-center" style={{margin: "25px"}}>
-              <Col xs="auto">
-              <Button variant="secondary" onClick={() => window.history.back()} style={{ width: '150px' }}>Back</Button>{' '}
-              </Col>
-            </Row>
-            </Card.Body>
-            </Card>
+    </Table>
+      <Row className="justify-content-center" style={{ margin: "25px" }}>
+        <Col xs="auto">
+          <Button variant="secondary" onClick={() => window.history.back()} style={{ width: '150px', backgroundColor: '#00284d', fontFamily: "Montserrat" }}>Back</Button>{' '}
+        </Col>
+      </Row>
+    </Card.Body>
+  </Card>
 </Container>
   );
 };

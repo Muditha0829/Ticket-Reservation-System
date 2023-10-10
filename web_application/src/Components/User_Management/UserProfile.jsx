@@ -1,64 +1,48 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { AuthContext } from '../AuthContext';
-import Cookies from 'js-cookie';
-import { Container, Row, Col, Button, Table, Card } from 'react-bootstrap';
+import { Container, Table, Row, Col, Button, Card } from 'react-bootstrap';
+import imageprofileavatar from '../Assests/profileavatar.png'
 
 const UserProfile = () => {
   const history = useHistory();
-  const { userID, setUser, UserType } = useContext(AuthContext);
-  const [user, setUserState] = useState(null);
+  const { userId } = useParams(); // Get the user ID from URL parameters
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const saveduserID = Cookies.get('userID');
-    if (!userID && saveduserID) {
-        setUser(saveduserID);
-      }
     const fetchData = async () => {
       try {
-        const response = await axios.get(`/api/users/get/${userID}`);
-        setUserState(response.data);
+        const response = await axios.get(`http://localhost:57549/api/users/getuser/${userId}`);
+        setUser(response.data);
       } catch (error) {
         console.error('Error fetching user:', error);
       }
     };
 
-    if (userID) {
+    if (userId) {
       fetchData();
     }
-  }, [userID]);
-
-  useEffect(() => {
-    const saveduserID = Cookies.get('userID');
-
-    if (saveduserID) {
-      setUser(saveduserID);
-    }
-  }, [setUser]);
+  }, [userId]);
 
   const handleUpdate = () => {
-    history.push(`/updateprofile/${userID}`);
+    history.push(`/updateprofile/${userId}`);
   };
 
-  const handleDelete = () => {
-    axios.delete(`/api/users/delete/${userID}`)
-      .then(response => {
-        console.log('User deleted:', response.data);
-        toast.success('Profile deleted successfully!');
-        Cookies.remove('userID');
-        Cookies.remove('UserType');
-        setUser(null);
-        history.push('/home');
-      })
-      .catch(error => {
-        toast.error('Error deleting user:', error);
-      });
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`http://localhost:57549/api/users/deletuser/${userId}`);
+      toast.success('User deleted successfully!');
+      window.location.href="/"
+    } catch (error) {
+      console.error('Error deleting user:', error);
+      toast.error('Error deleting user. Please try again later.');
+    }
   };
 
-  if (!userID) {
+  if (!userId) {
     return <div>No user ID found</div>;
   }
 
@@ -66,60 +50,64 @@ const UserProfile = () => {
     return <div>Loading...</div>;
   }
 
-  const setCookies = () => {
-    Cookies.set('userID', userID, { expires: 7 });
-    Cookies.set('UserType', UserType, { expires: 7 });
-  };
-
-  setCookies();
-
   return (
-    <Container className="my-5 text-center" style={{paddingLeft: "250px"}}>
+    <Container className="my-5 text-center" style={{ paddingLeft: "250px" }}>
       <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
-      <Row>
-        <Col md={0}>
-        <Card.Title style={{ margin: "25px", fontFamily: "MyCustomFont, sans-serif", fontSize: "34px" }}>Profile</Card.Title>
+      <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none', borderRadius: '15px', boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.1)' }}>
+        <Card.Body>
+          <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px", color: "#00284d" }}>My Profile</Card.Title>
           <div className="text-center mb-4">
-            <img src="https://cdn4.vectorstock.com/i/1000x1000/06/18/male-avatar-profile-picture-vector-10210618.jpg" alt="Profile" style={{ width: '150px', height: '150px', borderRadius: '50%' }} />
+            <img src={imageprofileavatar} alt="Profile" style={{ width: '250px', height: '170px', borderRadius: '50%' }} />
           </div>
-          <Table striped bordered responsive>
+          <Table striped bordered responsive style={{ fontFamily: "Onest" }}>
             <tbody>
-              <tr>
-                <td><strong>First Name</strong></td>
-                <td>{user.FirstName}</td>
-              </tr>
-              <tr>
-                <td><strong>Last Name</strong></td>
-                <td>{user.LastName}</td>
-              </tr>
-              <tr>
-                <td><strong>User Name</strong></td>
-                <td>{user.UserName}</td>
-              </tr>
-              <tr>
-                <td><strong>NIC</strong></td>
-                <td>{user.NIC}</td>
-              </tr>
-              <tr>
-                <td><strong>Email</strong></td>
-                <td>{user.Email}</td>
-              </tr>
-              <tr>
-                <td><strong>Contact Number</strong></td>
-                <td>{user.ContactNumber}</td>
-              </tr>
-              <tr>
-                <td><strong>User Type</strong></td>
-                <td>{user.UserType}</td>
-              </tr>
+            <tr>
+        <td style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>NIC</strong></td>
+        <td style={{fontFamily: "Onest"}}>{user.NIC}</td>
+      </tr>
+      <tr>
+        <td style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Username</strong></td>
+        <td style={{fontFamily: "Onest"}}>{user.UserName}</td>
+      </tr>
+      <tr>
+        <td style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>First Name</strong></td>
+        <td style={{fontFamily: "Onest"}}>{user.FirstName}</td>
+      </tr>
+      <tr>
+        <td style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Last Name</strong></td>
+        <td style={{fontFamily: "Onest"}}>{user.LastName}</td>
+      </tr>
+      <tr>
+        <td style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Email</strong></td>
+        <td style={{fontFamily: "Onest"}}>{user.Email}</td>
+      </tr>
+      <tr>
+        <td style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Gender</strong></td>
+        <td style={{fontFamily: "Onest"}}>{user.Gender}</td>
+      </tr>
+      <tr>
+        <td style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Phone Number</strong></td>
+        <td style={{fontFamily: "Onest"}}>{user.ContactNumber}</td>
+      </tr>
+      <tr>
+        <td style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>User Type</strong></td>
+        <td style={{fontFamily: "Onest"}}>{user.UserType}</td>
+      </tr>
+      <tr>
+        <td style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Status</strong></td>
+        <td style={{fontFamily: "Onest"}}>{user.UserStatus}</td>
+      </tr>
             </tbody>
           </Table>
-          <div className="text-center">
-            <Button variant="primary" className="mr-2" onClick={handleUpdate} style={{margin: "25px"}}>Update Profile</Button>
-            <Button variant="danger" className="mr-2" onClick={handleDelete} style={{margin: "25px"}}>Delete Profile</Button>
-          </div>
+          <Row className="justify-content-center" style={{ margin: "25px" }}>
+        <Col xs="auto">
+        <Button variant="secondary" onClick={() => window.history.back()} style={{ width: '150px', backgroundColor: '#00284d', fontFamily: "Montserrat" }}>Back</Button>{' '}
+          <Button variant="secondary" onClick={handleUpdate} style={{ width: '150px', backgroundColor: '#006600', fontFamily: "Montserrat", marginRight: '10px' }}>Update</Button>{' '}
+          <Button variant="danger" onClick={handleDelete} style={{ width: '150px', fontFamily: "Montserrat", marginRight: '10px' }}>Delete</Button>{' '}
         </Col>
       </Row>
+        </Card.Body>
+      </Card>
     </Container>
   );
 };

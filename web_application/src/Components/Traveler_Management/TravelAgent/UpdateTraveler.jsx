@@ -4,6 +4,8 @@ import { useParams, useHistory } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Container, Form, Button, Row, Col, Card } from 'react-bootstrap';
+import { IsValidEmail, IsValidPassword, IsValidNIC, IsValidContactNumber } from '../../Validations';
+import imageprofileavatar from '../../Assests/profileavatar.png'
 
 const UpdateTraveller = () => {
   const { UserID } = useParams();
@@ -40,19 +42,29 @@ const UpdateTraveller = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const EmailRegex = /^[0-9]{10}$/;
+    if (!IsValidEmail(userData.Email)) {
+      toast.error('Invalid email format.');
+      return;
+    }
 
-  if (!EmailRegex.test(userData.ContactNumber)) {
-    alert('Invalid Email number. Please enter a 10-digit Email number.');
-    return;
-  }
+    if (!IsValidNIC(userData.NIC)) {
+      toast.error('Invalid NIC format.');
+      return;
+    }
+
+    if (!IsValidContactNumber(userData.ContactNumber)) {
+      toast.error('Invalid contact number format.');
+      return;
+    }
 
     axios.put(`http://localhost:57549/api/users/updateuser/${UserID}`, userData)
       .then(response => {
         console.log('User updated:', response.data);
-        alert('Travel user updated successfully!');
+        toast.success('Travel user updated successfully!');
+        setTimeout(() => {
         history.push(`/viewtraveller/${UserID}`);
         window.location.href = `/listtraveluser`;
+        }, 2000)
       })
       .catch(error => {
         console.error('Error updating user:', error);
@@ -64,9 +76,9 @@ const UpdateTraveller = () => {
       <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
       <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>
             <Card.Body>
-  <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Update Traveller</Card.Title>
+  <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Update Traveler</Card.Title>
   <div className="text-center mb-4">
-            <img src="https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Photos.png" alt="Profile" style={{ width: '150px', height: '150px', borderRadius: '50%' }} />
+  <img src={imageprofileavatar} alt="Profile" style={{ width: '250px', height: '170px', borderRadius: '50%' }} />
           </div>
   <Form onSubmit={handleSubmit}>
   <div className="row">
@@ -77,6 +89,7 @@ const UpdateTraveller = () => {
         type="text"
         id="NIC"
         name="NIC"
+        placeholder='NIC'
         value={userData.NIC}
         style={{fontFamily: "Onest"}}
         onChange={handleChange}
@@ -91,6 +104,7 @@ const UpdateTraveller = () => {
         type="text"
         id="UserName"
         name="UserName"
+        placeholder='User Name'
         value={userData.UserName}
         style={{fontFamily: "Onest"}}
         onChange={handleChange}
@@ -104,6 +118,7 @@ const UpdateTraveller = () => {
         type="text"
         id="FirstName"
         name="FirstName"
+        placeholder='First Name'
         value={userData.FirstName}
         style={{fontFamily: "Onest"}}
         onChange={handleChange}
@@ -117,6 +132,7 @@ const UpdateTraveller = () => {
         type="text"
         id="LastName"
         name="LastName"
+        placeholder='Last Name'
         value={userData.LastName}
         style={{fontFamily: "Onest"}}
         onChange={handleChange}
@@ -132,6 +148,7 @@ const UpdateTraveller = () => {
         type="Email"
         id="Email"
         name="Email"
+        placeholder='Email'
         value={userData.Email}
         style={{fontFamily: "Onest"}}
         onChange={handleChange}
@@ -139,18 +156,21 @@ const UpdateTraveller = () => {
       />
     </Form.Group>
     <br/>
-    <Form.Group>
-      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Gender</Form.Label>
-      <Form.Control
-        type="text"
-        id="Gender"
-        name="Gender"
-        style={{fontFamily: "Onest"}}
-        value={userData.Gender}
-        onChange={handleChange}
-        required
-      />
-    </Form.Group>
+    <Form.Group controlId="Gender" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
+  <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Gender</Form.Label>
+  <Form.Select
+    name="Gender"
+    value={userData.Gender}
+    style={{fontFamily: "Onest"}}
+    onChange={handleChange}
+    required
+  >
+    <option value="">Select Gender</option>
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+    <option value="Other">Other</option>
+  </Form.Select>
+</Form.Group>
     <br/>
     <Form.Group>
       <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Phone Number</Form.Label>
@@ -158,6 +178,7 @@ const UpdateTraveller = () => {
         type="text"
         id="ContactNumber"
         name="ContactNumber"
+        placeholder='Contact Number'
         value={userData.ContactNumber}
         style={{fontFamily: "Onest"}}
         onChange={handleChange}
@@ -171,6 +192,7 @@ const UpdateTraveller = () => {
         type="text"
         id="UserStatus"
         name="UserStatus"
+        placeholder='User Status'
         value={userData.UserStatus}
         style={{fontFamily: "Onest"}}
         onChange={handleChange}

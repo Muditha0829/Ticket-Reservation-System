@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { Table, Button, Card, Container } from 'react-bootstrap';
 
-const GetAllTrainTicketBooking = () => {
+const GetMyTrainTicketBooking = () => {
   const { userId, setUser } = useContext(AuthContext);
   const [reservations, setReservations] = useState([]);
   const [cancellationLoading, setCancellationLoading] = useState(false);
@@ -30,7 +30,7 @@ const GetAllTrainTicketBooking = () => {
     const differenceInDays = differenceInMilliseconds / (1000 * 60 * 60 * 24);
   
     if (differenceInDays < 5) {
-      alert("Cancellation is allowed only if reservation date is within 5 days of booking date.");
+      toast.error("Cancellation is allowed only if reservation date is within 5 days of booking date.");
       return;
     }
   
@@ -39,11 +39,11 @@ const GetAllTrainTicketBooking = () => {
       .then(response => {
         console.log(`Booking with ID ${id} has been cancelled.`);
         setReservations(prevReservations => prevReservations.filter(res => res.ID !== id));
-        alert("Reservation has been cancelled.");
+        toast.success("Reservation has been cancelled.");
         window.location.href="#"
       })
       .catch(error => {
-        alert("Cancellation is allowed only if reservation date is within 5 days of booking date.");
+        toast.error("Cancellation is allowed only if reservation date is within 5 days of booking date.");
       })
       .finally(() => {
         setCancellationLoading(false);
@@ -75,19 +75,19 @@ const GetAllTrainTicketBooking = () => {
   }, [userId, setUser]);
 
   return (
-    <Container className="text-center mt-5" style={{height: "700px", paddingLeft: "250px"}}>
-      <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
-      <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>
-            <Card.Body>
-              <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Your All Train Bookings</Card.Title>
-  <Table striped bordered hover style={{ marginTop: '20px', width:"75%" }} className="mx-auto">
-    <thead>
-      <tr style={{fontSize: "17px", fontFamily: "Montserrat"}}>
-        <th>Train Name</th>
-        <th>Main Passenger Name</th>
-        <th>Traveler NIC</th>
-        <th>Actions</th>
-      </tr>
+    <Container className="text-center mt-5" style={{ height: "700px", paddingLeft: "250px", maxWidth: "1200px" }}>
+  <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
+  <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none', borderRadius: '15px', boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.1)' }}>
+    <Card.Body>
+      <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Your All Train Bookings</Card.Title>
+      <Table striped bordered hover style={{ marginTop: '20px', width:"75%" }} className="mx-auto">
+        <thead>
+          <tr style={{ fontSize: "17px", fontFamily: "Montserrat" }}>
+            <th>Train Name</th>
+            <th>Main Passenger Name</th>
+            <th>Traveler NIC</th>
+            <th>Actions</th>
+          </tr>
     </thead>
     <tbody>
     {reservations.map(reservation => (
@@ -127,7 +127,7 @@ const GetAllTrainTicketBooking = () => {
 ))}
     </tbody>
   </Table>
-  <div className="pagination" style={{ textAlign: 'Right', margin: "20px", marginLeft: "40%"}}>
+  <div className="pagination" style={{ textAlign: 'Right', margin: "20px", marginLeft: "40%" }}>
   <span
     onClick={() => currentPage > 1 && handlePagination(currentPage - 1)}
     className={currentPage === 1 ? 'disabled' : ''}
@@ -161,4 +161,4 @@ const GetAllTrainTicketBooking = () => {
   );
 };
 
-export default GetAllTrainTicketBooking;
+export default GetMyTrainTicketBooking;

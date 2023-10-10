@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Card, Table, Row, Col, Button } from 'react-bootstrap';
+import { Card, Table, Row, Col, Button, Container } from 'react-bootstrap';
 
 const GetTrainTicketBooking = () => {
   const [reservation, setReservation] = useState(null);
@@ -27,10 +27,11 @@ const GetTrainTicketBooking = () => {
   }
 
   return (
-    <div className="text-center p-4">
-  <Card className="mx-auto" style={{ maxWidth: '800px', borderRadius: '10px', paddingLeft: "250px" }}>
+    <Container className="my-5 text-center" style={{ paddingLeft: "250px" }}>
   <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
-  <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>View Reservation</Card.Title>
+  <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none', borderRadius: '15px', boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.1)' }}>
+    <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
+    <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>View Reservation</Card.Title>
     <Card.Body>
       <Table striped bordered hover>
         <tbody>
@@ -81,13 +82,13 @@ const GetTrainTicketBooking = () => {
         </tbody>
       </Table>
     </Card.Body>
-    <Row className="justify-content-center" style={{margin: "25px"}}>
+    <Row className="justify-content-center" style={{ margin: "25px" }}>
               <Col xs="auto">
-              <Button variant="secondary" onClick={() => window.history.back()} style={{ width: '150px' }}>Back</Button>{' '}
+              <Button variant="secondary" onClick={() => window.history.back()} style={{ width: '150px', backgroundColor: "#00284d" }}>Back</Button>{' '}
               </Col>
             </Row>
   </Card>
-</div>
+  </Container>
   );
 };
 

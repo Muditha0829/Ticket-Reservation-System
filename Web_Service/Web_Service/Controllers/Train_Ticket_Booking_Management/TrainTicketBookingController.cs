@@ -97,9 +97,17 @@ namespace WebSevice.Controllers
 
         [HttpGet]
         [Route("getallticketbookings/{userId}")]
-        public IHttpActionResult GetAllBookings(string userId)
+        public IHttpActionResult GetAllMyBookings(string userId)
         {
             var reservations = _bookingsCollection.Find(b => b.UserID == userId).ToList();
+            return Ok(reservations);
+        }
+
+        [HttpGet]
+        [Route("getallticketbookings")]
+        public IHttpActionResult GetAllBookings()
+        {
+            var reservations = _bookingsCollection.Find(_ => true).ToList();
             return Ok(reservations);
         }
 

@@ -27,19 +27,22 @@ const GetAllTravelers = () => {
 
       const updatedUsers = users.filter(user => user.UserID !== userID);
       setUsers(updatedUsers);
-      alert('Travel user deleted successfully!');
+      toast.success('Travel user deleted successfully!');
+      setTimeout(() => {
+      window.location.href="#";
+      }, 2000)
     } catch (error) {
       console.error('Error deleting user:', error);
     }
   };
 
   return (
-    <Container className="my-5 text-center" style={{height: "700px", paddingLeft: "250px"}}>
-      <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
-  <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>
-            <Card.Body>
-              <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Travelers</Card.Title>
-  <Table striped bordered hover responsive>
+    <Container className="my-5 text-center" style={{ height: "600px", paddingLeft: "250px", maxWidth: "900px" }}>
+  <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
+  <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none', borderRadius: '15px', boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.1)' }}>
+    <Card.Body>
+      <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Travelers</Card.Title>
+      <Table striped bordered hover responsive>
     <thead>
       <tr style={{fontSize: "17px", fontFamily: "Montserrat"}}>
       <th>NIC</th>

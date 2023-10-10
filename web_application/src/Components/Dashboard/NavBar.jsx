@@ -13,7 +13,7 @@ const NavBar = () => {
   const history = useHistory();
 
   return (
-    <Navbar style={{ backgroundColor: '#d9ffb3', marginBottom: "25px", height: "75px", fontFamily: "Dela Gothic One", fontSize: "23px", border: "1px solid #003300", color: "#003300" }} className="justify-content-between">
+    <Navbar style={{ backgroundColor: '#b3daff', marginBottom: "25px", height: "75px", fontFamily: "Dela Gothic One", fontSize: "23px", border: "1px solid #00284d", color: "#00284d" }} className="justify-content-between">
       <Navbar.Brand as={Link} to="#" style={{marginLeft: "1px"}}>
         <img
           src="https://melbournesptgallery.weebly.com/uploads/1/9/9/4/19942089/mptg-avatar-2020-yellow-15_orig.jpg"
@@ -26,37 +26,22 @@ const NavBar = () => {
       <Nav className="m3-auto">
         {UserType === 'travelagent' && (
           <>
-            {/* <Nav.Link as={Link} to="/travelagentdashboard" style={{padding: "34px"}}>Home</Nav.Link> */}
-       
-                <Nav.Link as={Link} to="/makereservation" style={{padding: "34px", color: "black"}}>Add Train Booking</Nav.Link>
-                {/* <NavDropdown.Item as={Link} to="/listreservation" style={{padding: "25px"}}>Reservation List</NavDropdown.Item> */}
-     
-       
-              <Nav.Link as={Link} to="/addtraveluser" style={{padding: "34px", color: "black"}}>Add Traveller</Nav.Link>
-            {/* <NavDropdown.Item as={Link} to="/listtraveluser" style={{padding: "25px"}}>Travel user List</NavDropdown.Item> */}
-
-            {/* <Nav.Link as={Link} to={`/profile/${userId}`} style={{padding: "34px"}}>Profile</Nav.Link> */}
+                <Nav.Link as={Link} to="/makereservation" style={{padding: "34px", color: "#00284d"}}>Add Train Booking</Nav.Link>
+              <Nav.Link as={Link} to="/addtraveluser" style={{padding: "34px", color: "#00284d"}}>Add Traveler</Nav.Link>
           </>
         )}
       </Nav>
       <Nav className="m3-auto">
         {UserType === 'backofficeuser' && (
           <>
-            {/* <Nav.Link as={Link} to="/backofficeuserdashboard" style={{padding: "34px"}}>Home</Nav.Link> */}
-    
-              <Nav.Link as={Link} to="/addtrain" style={{padding: "34px", color: "black", marginRight: "740px"}}>Add Train</Nav.Link>
-            {/* <NavDropdown.Item as={Link} to="/listtrain" style={{padding: "25px"}}>Train List</NavDropdown.Item> */}
-
-            {/* <Nav.Link as={Link} to="/traveluserstatus" style={{padding: "34px"}}>Travel Users</Nav.Link> */}
-            {/* <Nav.Link as={Link} to={`/profile/${userId}`} style={{padding: "34px"}}>Profile</Nav.Link> */}
+              <Nav.Link as={Link} to="/addtrain" style={{padding: "34px", color: "#00284d", marginRight: "740px"}}>Add Train</Nav.Link>
           </>
         )}
       </Nav>
       <Nav>
-      <Nav.Link as={Link} to={`/profile/${userId}`} style={{padding: "34px", color: "black"}}>
+      <Nav.Link as={Link} to={`/profile/${userId}`} style={{padding: "34px", color: "#00284d"}}>
   <FaUser style={{ marginRight: '8px' }} />
 </Nav.Link>
-        {/* <Nav.Link onClick={handleLogout} style={{ color: "white", marginRight: "25px", padding: "25px"}}>Signout</Nav.Link> */}
       </Nav>
     </Navbar>
   );

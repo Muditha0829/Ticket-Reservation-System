@@ -4,6 +4,7 @@ import { Form, Button, Container, Row, Col, Card } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useHistory } from 'react-router-dom';
+import { IsValidEmail, IsValidPassword, IsValidNIC, IsValidContactNumber } from '../../Validations';
 
 const AddTraveller = () => {
   const [formData, setFormData] = useState({
@@ -16,7 +17,7 @@ const AddTraveller = () => {
     Password: '',
     RePassword: '',
     ContactNumber: '',
-    UserType: "Traveller"
+    UserType: "Traveler"
   });
 
   const history = useHistory();
@@ -32,33 +33,30 @@ const AddTraveller = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-  //   const nicRegex = /^[0-9]{10,12}$/;
-  //   const EmailRegex = /^[0-9]{10}$/;
+    if (formData.Password !== formData.RePassword) {
+      toast.error('Passwords do not match.');
+      return;
+    }
 
-  //   const isValidPassword = (password) => {
-  //     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
-  //     return passwordPattern.test(password);
-  //   };
+    if (!IsValidEmail(formData.Email)) {
+      toast.error('Invalid email format.');
+      return;
+    }
 
-  // if (!nicRegex.test(formData.NIC.toUpperCase())) {
-  //   alert('Invalid NIC number. Please enter a valid NIC number.');
-  //   return;
-  // }
+    if (!IsValidNIC(formData.NIC)) {
+      toast.error('Invalid NIC format.');
+      return;
+    }
 
-  // if (!EmailRegex.test(formData.ContactNumber)) {
-  //   alert('Invalid Email number. Please enter a 10-digit Email number.');
-  //   return;
-  // }
+    if (!IsValidPassword(formData.Password)) {
+      toast.error('Invalid Password format.');
+      return;
+    }
 
-  //   if (formData.Password !== formData.RePassword) {
-  //     alert("Passwords do not match. Please try again.");
-  //     return;
-  //   }
-
-  //   if (!isValidPassword(formData.Password)) {
-  //     alert('Password must contain at least one uppercase letter, one lowercase letter, one digit, and be at least 8 characters long.');
-  //     return;
-  //   }
+    if (!IsValidContactNumber(formData.ContactNumber)) {
+      toast.error('Invalid contact number format.');
+      return;
+    }
   
     axios.post('http://localhost:57549/api/users/signup', formData, {
       headers: {
@@ -68,7 +66,9 @@ const AddTraveller = () => {
     .then(response => {
       console.log('Success:', response.data);
       toast.success('User Created successfully!');
+      setTimeout(() => {
       history.push('/travelagentdashboard');
+      }, 2000)
     })
     .catch(error => {
       toast.error('Error:', error);
@@ -83,11 +83,12 @@ const AddTraveller = () => {
     <Col>
     <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>
             <Card.Body>
-              <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Create New Traveller</Card.Title>
+              <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Create New Traveler</Card.Title>
       <Form onSubmit={handleSubmit}>
       <div className="row">
       <div className="col-md-6" style={{textAlign: "left"}}>
         <Form.Group controlId="NIC" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
+        <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>NIC</Form.Label>
           <Form.Control
             type="text"
             name="NIC"
@@ -100,18 +101,20 @@ const AddTraveller = () => {
           <br/>
         </Form.Group>
         <Form.Group controlId="UserName" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
+        <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>User Name</Form.Label>
           <Form.Control
             type="text"
             name="UserName"
             value={formData.UserName}
             style={{fontFamily: "Onest"}}
             onChange={handleChange}
-            placeholder="Username"
+            placeholder="User Name"
             required
           />
         </Form.Group>
         <br/>
         <Form.Group controlId="FirstName" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
+        <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>First Name</Form.Label>
           <Form.Control
             type="text"
             name="FirstName"
@@ -124,6 +127,7 @@ const AddTraveller = () => {
         </Form.Group>
         <br/>
         <Form.Group controlId="LastName" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
+        <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Last Name</Form.Label>
           <Form.Control
             type="text"
             name="LastName"
@@ -136,10 +140,11 @@ const AddTraveller = () => {
         </Form.Group>
         <br/>
         <Form.Group controlId="userType" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
+        <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>User Type</Form.Label>
           <Form.Control
             type="text"
             name="userType"
-            value={formData.LastName}
+            value={formData.UserType}
             style={{fontFamily: "Onest"}}
             onChange={handleChange}
             placeholder="Traveler"
@@ -151,6 +156,7 @@ const AddTraveller = () => {
         </div>
         <div className="col-md-6" style={{textAlign: "left"}}>
         <Form.Group controlId="Email" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
+        <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Email</Form.Label>
           <Form.Control
             type="Email"
             name="Email"
@@ -163,30 +169,35 @@ const AddTraveller = () => {
         </Form.Group>
         <br/>
         <Form.Group controlId="Gender" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
-          <Form.Control
-            type="text"
-            name="Gender"
-            value={formData.Gender}
-            style={{fontFamily: "Onest"}}
-            onChange={handleChange}
-            placeholder="Gender"
-            required
-          />
-        </Form.Group>
+  <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Gender</Form.Label>
+  <Form.Select
+    name="Gender"
+    value={formData.Gender}
+    style={{fontFamily: "Onest"}}
+    onChange={handleChange}
+    required
+  >
+    <option value="">Select Gender</option>
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+  </Form.Select>
+</Form.Group>
         <br/>
         <Form.Group controlId="ContactNumber" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
+        <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Contact Number</Form.Label>
           <Form.Control
             type="text"
             name="ContactNumber"
             value={formData.ContactNumber}
             style={{fontFamily: "Onest"}}
             onChange={handleChange}
-            placeholder="Phone Number"
+            placeholder="Contact Number"
             required
           />
         </Form.Group>
         <br/>
         <Form.Group controlId="Password" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
+        <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Password</Form.Label>
           <Form.Control
             type="password"
             name="Password"
@@ -199,6 +210,7 @@ const AddTraveller = () => {
         </Form.Group>
         <br/>
         <Form.Group controlId="RePassword" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
+        <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Re enter Password</Form.Label>
           <Form.Control
             type="password"
             name="RePassword"
@@ -214,8 +226,8 @@ const AddTraveller = () => {
         </div>
         <Row className="justify-content-center" style={{margin: "25px"}}>
               <Col xs="auto">
-              <Button variant="secondary" onClick={() => window.history.back()} style={{ width: '150px' }}>Back</Button>{' '}
-            <Button type="submit" variant="primary" style={{ width: '150px' }}>Submit</Button>
+              <Button variant="secondary" onClick={() => window.history.back('/listtraveluser')} style={{ width: '150px' }}>Back</Button>{' '}
+            <Button type="submit" variant="primary" style={{ width: '150px' }}>Create Traveler</Button>
               </Col>
             </Row>
       </Form>

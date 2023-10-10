@@ -18,7 +18,8 @@ import GetAllTrainShedules from './Train_Management/GetAllTrainShedules';
 import AddTrainTicketBooking from './Train_Ticket_Booking_Management/AddTrainTicketBooking';
 import UpdateTrainTicketBooking from './Train_Ticket_Booking_Management/UpdateTrainTicketBooking';
 import GetTrainTicketBooking from './Train_Ticket_Booking_Management/GetTrainTicketBooking';
-import GetAllTrainTicketBooking from './Train_Ticket_Booking_Management/GetAllTrainTicketBooking';
+import GetMyTrainTicketBooking from './Train_Ticket_Booking_Management/GetMyTrainTicketBooking';
+import GetAllTrainTicketBookings from './Train_Ticket_Booking_Management/GetAllTrainTicketBookings';
 
 import Traveler from './Traveler_Management/BackOfficeUser/Traveler';
 
@@ -52,14 +53,15 @@ const ARouter = () => {
           <Route path="/view/:TrainID" component={GetTrainShedule} />
           <Route path="/update/:TrainID" component={UpdateTrainShedule} />
           <Route path="/addtrain" component={AddTrainShedule}/>
-          <Route path="/listreservation" component={GetAllTrainTicketBooking}/>
+          <Route path="/myreservations" component={GetMyTrainTicketBooking}/>
+          <Route path="/listreservation" component={GetAllTrainTicketBookings}/>
           <Route path="/makereservation" component={AddTrainTicketBooking}/>
           <Route path="/reservationview/:BookingID" component={GetTrainTicketBooking} />
           <Route path="/reservationupdate/:BookingID" component={UpdateTrainTicketBooking} />
           <Route path="/profile/:userId" component={UserProfile} />
           <Route path="/signup" exact component={Signup} />
           <Route path="/" exact component={SignIn} />
-          <Route path="/updateprofile/:userId" component={UpdateUserProfile} />
+          <Route path="/updateprofile/:UserID" component={UpdateUserProfile} />
           <Route path="/traveluserstatus" component={Traveler} />
           <Route path="/listtraveluser" component={GetAllTravelers} />
           <Route path="/updatetraveller/:UserID" component={UpdateTraveler} />

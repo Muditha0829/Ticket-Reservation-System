@@ -5,22 +5,24 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Form, Button, Container, Row, Col, Card } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import { IsValidTimeRange, IsValidTrainNumber } from '../Validations';
 
 const AddTrainShedule = () => {
   const { userID } = useContext(AuthContext);
+  const [submissionSuccessful, setSubmissionSuccessful] = useState(false);
   const [trainData, setTrainData] = useState({
     TrainNumber: '',
     userID: userID,
     TrainName: '',
     TrainDriver: '',
-    DepartureStation: '', // Added
-    ArrivalStation: '', // Added
-    DepartureTime: '', // Changed to string for input type compatibility
-    ArrivalTime: '', // Changed to string for input type compatibility
-    TrainType: '', // Added
-    FirstClassTicketPrice: '', // Added
-    SecondClassTicketPrice: '', // Added
-    ThirdClassTicketPrice: '', // Added
+    DepartureStation: '', 
+    ArrivalStation: '', 
+    DepartureTime: '', 
+    ArrivalTime: '', 
+    TrainType: '', 
+    FirstClassTicketPrice: '', 
+    SecondClassTicketPrice: '', 
+    ThirdClassTicketPrice: '', 
     TrainStatus: 'Active',
   });
 
@@ -37,6 +39,15 @@ const AddTrainShedule = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+  //   if (!IsValidTimeRange(trainData.DepartureTime, trainData.ArrivalTime)) {
+  //     return toast.warning("Departure Time must be before Arrival Time.");
+  // }
+
+  if (!IsValidTrainNumber(trainData.TrainNumber)) {
+    toast.error('Invalid Train Number. Please enter a valid Train Number format (TXXXX).');
+    return;
+}
+
     const TrainIDPattern = /^[A-Z]\d{4}$/;
 
     if (!TrainIDPattern.test(trainData.TrainNumber)) {
@@ -45,12 +56,18 @@ const AddTrainShedule = () => {
     }
     axios.post('http://localhost:57549/api/trains/createtrain', trainData)
       .then(response => {
-        console.log('Train added:', response.data);
         toast.success("Train Added");
+        console.log('Train added:', response.data);
+        // Set a state variable to indicate that the submission was successful
+      setSubmissionSuccessful(true);
+
+      // Wait for 5 seconds before redirecting
+      setTimeout(() => {
         history.push('/backofficeuserdashboard');
+      }, 2000);
       })
       .catch(error => {
-        toast.error('Error:', error);
+        toast.error('Departure Time must be before Arrival Time.');
       });
   };
 
@@ -70,6 +87,7 @@ const AddTrainShedule = () => {
                   <Form.Control
                     type="text"
                     name="TrainNumber"
+                    placeholder='Train Number'
                     style={{fontFamily: "Onest"}}
                     value={trainData.TrainNumber}
                     onChange={handleChange}
@@ -82,6 +100,7 @@ const AddTrainShedule = () => {
                   <Form.Control
                     type="text"
                     name="TrainName"
+                    placeholder='Train Name'
                     style={{fontFamily: "Onest"}}
                     value={trainData.TrainName}
                     onChange={handleChange}
@@ -94,6 +113,7 @@ const AddTrainShedule = () => {
                   <Form.Control
                     type="text"
                     name="TrainDriver"
+                    placeholder='Train Driver'
                     style={{fontFamily: "Onest"}}
                     value={trainData.TrainDriver}
                     onChange={handleChange}
@@ -106,6 +126,7 @@ const AddTrainShedule = () => {
                   <Form.Control
                     type="text"
                     name="DepartureStation"
+                    placeholder='Departure Station'
                     style={{fontFamily: "Onest"}}
                     value={trainData.DepartureStation}
                     onChange={handleChange}
@@ -118,6 +139,7 @@ const AddTrainShedule = () => {
                   <Form.Control
                     type="text"
                     name="ArrivalStation"
+                    placeholder='Arrival Station'
                     style={{fontFamily: "Onest"}}
                     value={trainData.ArrivalStation}
                     onChange={handleChange}
@@ -130,6 +152,7 @@ const AddTrainShedule = () => {
                   <Form.Control
                     type="text"
                     name="trainStatus"
+                    placeholder='Train Status'
                     style={{fontFamily: "Onest"}}
                     value="Active"
                     onChange={handleChange}
@@ -145,6 +168,7 @@ const AddTrainShedule = () => {
                   <Form.Control
                     type="datetime-local"
                     name="DepartureTime"
+                    placeholder='Departure Time'
                     style={{fontFamily: "Onest"}}
                     value={trainData.DepartureTime}
                     onChange={handleChange}
@@ -157,6 +181,7 @@ const AddTrainShedule = () => {
                   <Form.Control
                     type="datetime-local"
                     name="ArrivalTime"
+                    placeholder='Arrival Time'
                     style={{fontFamily: "Onest"}}
                     value={trainData.ArrivalTime}
                     onChange={handleChange}
@@ -166,22 +191,30 @@ const AddTrainShedule = () => {
                 <br/>
 
                 <Form.Group controlId="trainType" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
-                  <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Train Type</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="TrainType"
-                    style={{fontFamily: "Onest"}}
-                    value={trainData.TrainType}
-                    onChange={handleChange}
-                    required
-                  />
-                </Form.Group>
+  <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Train Type</Form.Label>
+  <Form.Control
+    as="select"  // Render as a select input
+    name="TrainType"
+    placeholder='Train Type'
+    style={{fontFamily: "Onest"}}
+    value={trainData.TrainType}
+    onChange={handleChange}
+    required
+  >
+    <option value="">Select Train Type</option>
+    <option value="Express">Express</option>
+    <option value="Intercity">Intercity</option>
+    <option value="Local">Local</option>
+    {/* Add other train types as needed */}
+  </Form.Control>
+</Form.Group>
                 <br/>
                 <Form.Group controlId="firstClassTicketPrice" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
                   <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>First Class Ticket Price</Form.Label>
                   <Form.Control
                     type="text"
                     name="FirstClassTicketPrice"
+                    placeholder='First Class Ticket price'
                     style={{fontFamily: "Onest"}}
                     value={trainData.FirstClassTicketPrice}
                     onChange={handleChange}
@@ -194,6 +227,7 @@ const AddTrainShedule = () => {
                   <Form.Control
                     type="text"
                     name="SecondClassTicketPrice"
+                    placeholder='Second Class Ticket price'
                     value={trainData.SecondClassTicketPrice}
                     onChange={handleChange}
                     required
@@ -205,6 +239,7 @@ const AddTrainShedule = () => {
                   <Form.Control
                     type="text"
                     name="ThirdClassTicketPrice"
+                    placeholder='Third Class Ticket price'
                     value={trainData.ThirdClassTicketPrice}
                     onChange={handleChange}
                     required
@@ -216,7 +251,7 @@ const AddTrainShedule = () => {
                 <Row className="justify-content-center">
                   <Col xs="auto" style={{ margin: "34px" }}>
                     <Button variant="secondary" onClick={() => window.history.back()} style={{ width: '150px' }}>Back</Button>{' '}
-                    <Button type="submit" variant="primary" style={{ width: '150px', backgroundColor: "#003300" }}>Submit</Button>
+                    <Button type="submit" variant="primary" style={{ width: '150px', backgroundColor: "#00284d" }}>Submit</Button>
                   </Col>
                 </Row>
               </Form>

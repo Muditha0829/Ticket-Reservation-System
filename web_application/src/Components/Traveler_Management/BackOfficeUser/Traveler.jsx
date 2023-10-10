@@ -30,7 +30,7 @@ const TravellerUser = () => {
   }, []);
 
   const handleStatusChange = (UserID, currentStatus) => {
-    const newStatus = currentStatus === 'Active' ? 'Inactive' : 'Active';
+    const newStatus = currentStatus === 'Active' ? 'active' : 'Active';
 
     axios.put(`http://localhost:57549/api/users/updateuserstatus/${UserID}`, { UserStatus: newStatus })
       .then(response => {
@@ -38,33 +38,33 @@ const TravellerUser = () => {
           setTravellers(traveler.map(traveler =>
             traveler.UserID === UserID ? { ...traveler, UserStatus: newStatus } : traveler
           ));
-          alert('Status updated successfully');
+          toast.success('Status updated successfully');
         } else {
           console.error('Error updating status:', response.data);
-          alert('Failed to update status');
+          toast.error('Failed to update status');
         }
       })
       .catch(error => {
         console.error('Error updating status:', error);
-        alert('Failed to update status');
+        toast.error('Failed to update status');
       });
   };
 
   return (
-    <Container className="my-5 text-center" style={{height: "700px", paddingLeft: "250px"}}>
-      <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
-  <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>
-        <Card.Body>
-          <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Traveler Status</Card.Title>
-  <Table striped bordered hover responsive>
-    <thead>
-      <tr style={{fontSize: "17px", fontFamily: "Montserrat"}}>
-        <th>Username</th>
-        <th>NIC</th>
-        <th>User Type</th>
-        <th>User Status</th>
-        <th>Actions</th>
-      </tr>
+    <Container className="my-5 text-center" style={{ height: "700px", paddingLeft: "250px", maxWidth: "900px" }}>
+  <ToastContainer position="top-center" autoClose={1000} hideProgressBar />
+  <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none', borderRadius: '15px', boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.1)' }}>
+    <Card.Body>
+      <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Traveler Status</Card.Title>
+      <Table striped bordered hover responsive>
+        <thead>
+          <tr style={{ fontSize: "17px", fontFamily: "Montserrat" }}>
+            <th>Username</th>
+            <th>NIC</th>
+            <th>User Type</th>
+            <th>User Status</th>
+            <th>Actions</th>
+          </tr>
     </thead>
     <tbody>
       {traveler.map(traveler => (
@@ -88,7 +88,7 @@ const TravellerUser = () => {
       ))}
     </tbody>
   </Table>
-  <div className="pagination" style={{ textAlign: 'Right', margin: "20px", marginLeft: "47%"}}>
+  <div className="pagination" style={{ textAlign: 'Right', margin: "20px", marginLeft: "47%" }}>
   <span
     onClick={() => currentPage > 1 && handlePagination(currentPage - 1)}
     className={currentPage === 1 ? 'disabled' : ''}

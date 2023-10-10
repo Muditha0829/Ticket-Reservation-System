@@ -47,7 +47,7 @@ const BackOfficeUserDashboard = () => {
 
   return (
     <Container className="text-center" style={{ paddingLeft: "250px", marginBottom: "25px", marginTop: "25px" }}>
-      <Card style={{ padding: "1px", height: "537px", background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>
+      <Card style={{ padding: "1px", background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>
         <Card.Body>
           <Row className="mb-4">
             <Col>

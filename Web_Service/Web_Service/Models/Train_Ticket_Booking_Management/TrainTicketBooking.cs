@@ -10,6 +10,8 @@ namespace Web_Service.Models.Train_Ticket_Booking_Management
         [BsonRepresentation(BsonType.ObjectId)]
         public string BookingID { get; set; }
 
+        public string TrainNumber { get; set; }
+
         public string TrainName { get; set; }
 
         public string UserID { get; set; }

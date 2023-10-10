@@ -199,3 +199,6 @@ D:\SLIIT\Y4\Semester 02\EAD\Assignement\Ticket-Reservation-System\Web_Service\We
 D:\SLIIT\Y4\Semester 02\EAD\Assignement\Ticket-Reservation-System\Web_Service\Web_Service\obj\Release\Web_Service.csproj.CopyComplete
 D:\SLIIT\Y4\Semester 02\EAD\Assignement\Ticket-Reservation-System\Web_Service\Web_Service\obj\Release\Web_Service.dll
 D:\SLIIT\Y4\Semester 02\EAD\Assignement\Ticket-Reservation-System\Web_Service\Web_Service\obj\Release\Web_Service.pdb
+D:\SLIIT\Y4\Semester 02\EAD\Assignement\Ticket-Reservation-System\Web_Service\Web_Service\bin\System.Web.Cors.dll
+D:\SLIIT\Y4\Semester 02\EAD\Assignement\Ticket-Reservation-System\Web_Service\Web_Service\bin\System.Web.Http.Cors.dll
+D:\SLIIT\Y4\Semester 02\EAD\Assignement\Ticket-Reservation-System\Web_Service\Web_Service\bin\System.Web.Http.Cors.xml

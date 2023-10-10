@@ -6,12 +6,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from '../AuthContext';
 import { useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import { IsValidNIC, IsValidContactNumber, IsValidTicketClass } from '../Validations';
 
 const UpdateTrainTicketBooking = () => {
   const { BookingID } = useParams();
   const { userId } = useContext(AuthContext);
   const [trainData, setTrainData] = useState([]);
-  const [TrainID, setTrainID] = useState('');
+  const [inputsDisabled, setInputsDisabled] = useState(true);
   const [updatedReservationData, setUpdatedReservationData] = useState({
     MainPassengerName: '',
     UserID: userId,
@@ -24,76 +25,120 @@ const UpdateTrainTicketBooking = () => {
     TicketClass: '',
     Email: '',
     ContactNumber: '',
-    TotalPrice: ''
+    TotalPrice: '',
+    ticketPrice1: 0, // Initialize ticket prices
+    ticketPrice2: 0,
+    ticketPrice3: 0,
   });
 
   const history = useHistory();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const calculateTotalPrice = () => {
+    const ticketClass = updatedReservationData.TicketClass;
+    const totalPassengers = parseInt(updatedReservationData.TotalPassengers);
+  
+    let TotalPrice = 0;
+    if (ticketClass === 'First Class') {
+      TotalPrice = totalPassengers * updatedReservationData.uticketPrice1;
+    } else if (ticketClass === 'Second Class') {
+      TotalPrice = totalPassengers * updatedReservationData.uticketPrice2;
+    } else if (ticketClass === 'Third Class') {
+      TotalPrice = totalPassengers * updatedReservationData.uticketPrice3;
+    }
+  
+    console.log(`Ticket Class: ${ticketClass}`);
+    console.log(`Total Passengers: ${totalPassengers}`);
+    console.log(`Total Price: ${TotalPrice}`);
+  
     setUpdatedReservationData({
       ...updatedReservationData,
-      [name]: value,
+      TotalPrice: TotalPrice.toString()
     });
-  };
+  };  
 
-// const isValidEmail = (Email) => {
-//   const EmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-//   return EmailPattern.test(Email);
-// };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+  
+    if (name === 'TrainName') {
+      console.log('Selected Train Name:', value); // Add this line
+      setUpdatedReservationData({
+        ...updatedReservationData,
+        [name]: value,
+      });
+  
+      fetchTicketPrice(value);
+      setInputsDisabled(false);
+    } else {
+      console.log('Other Field Name:', name); // Add this line
+      console.log('Other Field Value:', value); // Add this line
+      setUpdatedReservationData({
+        ...updatedReservationData,
+        [name]: value,
+      });
+  
+      if (value === 'TicketClass' || value === 'TotalPassengers') {
+        calculateTotalPrice();
+      }
+    }
+  };  
 
-// const isValidContactNumber = (EmailNumber) => {
-//   const EmailNumberPattern = /^\d{10}$/;
-//   return EmailNumberPattern.test(EmailNumber);
-// };
-
-// const isValidNIC = (nic) => {
-//   const nicPattern = /^[0-9]{10,12}$/;
-//   return nicPattern.test(nic);
-// };
+  const fetchTicketPrice = (id) => {
+    axios.get(`http://localhost:57549/api/trains/gettrain/${id}`)
+      .then(response => {
+        const uticketPrice1 = response.data.FirstClassTicketPrice;
+        const uticketPrice2 = response.data.SecondClassTicketPrice; 
+        const uticketPrice3 = response.data.ThirdClassTicketPrice; 
+  
+        setUpdatedReservationData(prevState => ({
+          ...prevState,
+          uticketPrice1,
+          uticketPrice2,
+          uticketPrice3
+        }));
+      })
+      .catch(error => {
+        console.error('Error fetching ticket price:', error);
+      });
+  };     
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!IsValidNIC(updatedReservationData.NIC)) {
+      toast.error('Invalid NIC format.');
+      return;
+    }
+
+    if (!IsValidContactNumber(updatedReservationData.ContactNumber)) {
+      toast.error('Invalid Contact Number format.');
+      return;
+    }
+
+    if (!IsValidTicketClass(updatedReservationData.TicketClass)) {
+      toast.error('Invalid ticket Class format.');
+      return;
+    }
 
     const ReservationDateObj = new Date(updatedReservationData.ReservationDate);
     const BookingDateObj = new Date(updatedReservationData.BookingDate);
     const differenceInMilliseconds = ReservationDateObj - BookingDateObj;
     const differenceInDays = differenceInMilliseconds / (1000 * 60 * 60 * 24);
 
-    // if (differenceInDays <= 5) {
-    //   alert("Reservation can only be updated if reservation date is more than 5 days after booking date.");
-    //   return;
-    // }
-
-    // if (!isValidEmail(updatedReservationData.Email)) {
-    //   alert('Invalid Email. Please enter a valid Email address.');
-    //   return;
-    // }
-    
-    // if (!isValidContactNumber(updatedReservationData.Phone)) {
-    //   alert('Invalid contact number. Please enter a 10-digit Email number.');
-    //   return;
-    // }    
-
-    // if (!isValidNIC(updatedReservationData.NIC)) {
-    //   alert('Invalid NIC. Please enter a valid NIC number (e.g., 123456789V).');
-    //   return;
-    // }
-
     axios.put(`http://localhost:57549/api/trainbooking/updateticketbooking/${BookingID}`, updatedReservationData)
       .then(response => {
         console.log('Reservation updated:', response.data);
-        alert('Reservation updated successfully!');
-        history.push('/travelagentdashboard');
+        toast.success('Reservation updated successfully!');
+        setTimeout(() => {
+        history.push('/listreservation');
+        }, 2000)
       })
       .catch(error => {
         console.error('Error:', error);
-        alert('Reservation can only be updated if reservation date is more than 5 days after booking date.');
+        toast.error('Reservation can only be updated if reservation date is more than 5 days after booking date.');
       });
   };
 
   useEffect(() => {
-    // Fetch data based on reservationID
     if (BookingID) {
       axios.get(`http://localhost:57549/api/trainbooking/getticketbooking/${BookingID}`)
         .then(response => {
@@ -103,24 +148,33 @@ const UpdateTrainTicketBooking = () => {
           console.error('Error fetching reservation data:', error);
         });
     }
-  }, [BookingID]);  
-
+  }, [BookingID]);
+  
   useEffect(() => {
+    let isMounted = true;
+
     axios.get('http://localhost:57549/api/trains/getallactivetrains')
       .then(response => {
-        setTrainData(response.data);
+        if (isMounted) {
+          setTrainData(response.data);
+          calculateTotalPrice();
+        }
       })
       .catch(error => {
         console.error('Error fetching train data:', error);
       });
-  }, []);
+  
+    return () => {
+      isMounted = false;
+    };
+  }, [updatedReservationData.TotalPassengers, updatedReservationData.TicketClass]);
 
   return (
     <Container className="my-5 text-center" style={{width: "75%", paddingLeft: "250px"}}>
       <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
   <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>
             <Card.Body>
-              <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Update Your Trian Booking</Card.Title>
+              <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Update Trian Booking</Card.Title>
               
                 
   <Form onSubmit={handleSubmit}>
@@ -133,7 +187,7 @@ const UpdateTrainTicketBooking = () => {
         name="TravelerName"
         value={updatedReservationData.MainPassengerName}
         onChange={handleChange}
-        placeholder="Traveler Name"
+        placeholder="Main Passenger Name"
         style={{fontFamily: "Onest"}}
         required
       />
@@ -158,17 +212,17 @@ const UpdateTrainTicketBooking = () => {
         value={updatedReservationData.ContactNumber}
         style={{fontFamily: "Onest"}}
         onChange={handleChange}
-        placeholder="Phone"
+        placeholder="Contact Number"
         required
       />
     </Form.Group>
     
-    <Form.Group controlId="TrainID" style={{textAlign:"left", margin: "25px"}}>
+    <Form.Group controlId="TrainName" style={{textAlign:"left", margin: "25px"}}>
       <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Train Name</Form.Label>
       <Form.Select
-        name="TrainID"
+        name="TrainName"
         style={{fontFamily: "Onest"}}
-        value={updatedReservationData.TrainID}
+        value={updatedReservationData.TrainName}
         onChange={handleChange}
         required
       >
@@ -185,6 +239,7 @@ const UpdateTrainTicketBooking = () => {
       <Form.Control
   type="date"
   name="ReservationDate"
+  placeholder='Reservation Date'
   style={{fontFamily: "Onest"}}
   value={updatedReservationData.ReservationDate}
   onChange={handleChange}
@@ -194,15 +249,30 @@ const UpdateTrainTicketBooking = () => {
     
     </div>
     <div className="col-md-6" style={{textAlign: "left"}}>
+
+    <Form.Group style={{textAlign:"left", margin: "25px"}}>
+      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>NIC</Form.Label>
+      <Form.Control
+        type="text"
+        name="NIC"
+        style={{fontFamily: "Onest"}}
+        value={updatedReservationData.NIC}
+        onChange={handleChange}
+        placeholder="NIC"
+        required
+      />
+    </Form.Group>
+
     <Form.Group controlId="TotalPassengers" style={{textAlign:"left", margin: "25px"}}>
       <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Total Passengers</Form.Label>
       <Form.Select
-        name="NumPassengers"
+        name="TotalPassengers"
         style={{fontFamily: "Onest"}}
-        value={updatedReservationData.TotalPassengers}
+       
+        disabled={inputsDisabled}
         onChange={handleChange}
         required
-      >
+      >value={updatedReservationData.TotalPassengers}
         <option value="">Select total passengers</option>
         <option value="1">1</option>
         <option value="2">2</option>
@@ -217,6 +287,7 @@ const UpdateTrainTicketBooking = () => {
         name="TicketClass"
         style={{fontFamily: "Onest"}}
         value={updatedReservationData.TicketClass}
+        disabled={inputsDisabled}
         onChange={handleChange}
         required
       >
@@ -235,7 +306,7 @@ const UpdateTrainTicketBooking = () => {
         style={{fontFamily: "Onest"}}
         value={updatedReservationData.DepartureStation}
         onChange={handleChange}
-        placeholder="DepartureStation"
+        placeholder="Departure Station"
         required
       />
     </Form.Group>
@@ -248,29 +319,36 @@ const UpdateTrainTicketBooking = () => {
         name="DestinationStation"
         value={updatedReservationData.DestinationStation}
         onChange={handleChange}
-        placeholder="DestinationStation"
-        required
-      />
-    </Form.Group>
-    <Form.Group style={{textAlign:"left", margin: "25px"}}>
-      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Total Price</Form.Label>
-      <Form.Control
-        type="tel"
-        style={{fontFamily: "Onest"}}
-        name="Phone"
-        value={updatedReservationData.TotalPrice}
-        onChange={handleChange}
-        placeholder="Phone"
+        placeholder="Destination Station"
         required
       />
     </Form.Group>
     
         </div>
         </div>
+        <Form.Group style={{textAlign:"left", margin: "25px"}}>
+        <Row>
+            <Col>
+      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat", marginLeft: "200px"}}>Total Price</Form.Label>
+      </Col>
+      <Col>
+      <Form.Control
+        type="text"
+        style={{fontFamily: "Onest", marginRight: "100px", width: "100px"}}
+        name="TotalPrice"
+        value={"Rs: "+updatedReservationData.TotalPrice+ ".00"}
+        onChange={handleChange}
+        placeholder="Total Price"
+        required
+        disabled
+      />
+      </Col>
+      </Row>
+    </Form.Group>
         <Row className="mb-3" style={{margin: "25px"}}>
           <Col md={0} className="mx-auto">
             <Button variant="secondary" onClick={() => window.history.back()} style={{ width: '150px' }}>Back</Button>{' '}
-            <Button variant="primary" type="submit" style={{ width: '150px' }}>Update</Button>
+            <Button variant="primary" type="submit" style={{ width: '150px' }}>Update Booking</Button>
           </Col>
         </Row>
   </Form>

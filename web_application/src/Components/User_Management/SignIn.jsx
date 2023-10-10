@@ -5,6 +5,7 @@ import { AuthContext } from '../AuthContext';
 import { Form, Button, Container, Row, Col, Card } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {IsValidNIC, IsValidPassword} from '../Validations'
 
 const SignIn = () => {
   const { setUser, UserType } = useContext(AuthContext);
@@ -25,6 +26,16 @@ const SignIn = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!IsValidNIC(formData.NIC)) {
+      toast.error('Invalid NIC format.');
+      return;
+    }
+
+    if (!IsValidPassword(formData.Password)) {
+      toast.error('Invalid Password format.');
+      return;
+    }
 
     axios.post('http://localhost:57549/api/users/signin', formData)
       .then(response => {
@@ -62,10 +73,11 @@ const SignIn = () => {
         <img src='https://lp-cms-production.imgix.net/2022-02/shutterstockRF_376030297.jpg?auto=format&q=75&w=1920' style={{width: "87%"}}/>
         </Col>
           <Col>
-        <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
+        <ToastContainer position="top-center" autoClose={1000} hideProgressBar />
         <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Sign In</Card.Title>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} style={{textAlign: "left"}}>
           <Form.Group controlId="NIC" style={{ marginBottom: "25px", fontFamily: "Montserrat" }}>
+          <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>NIC</Form.Label>
             <Form.Control
               type="text"
               name="NIC"
@@ -76,6 +88,7 @@ const SignIn = () => {
             />
           </Form.Group>
           <Form.Group controlId="Password" style={{ marginBottom: "25px", fontFamily: "Montserrat" }}>
+          <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Password</Form.Label>
             <Form.Control
               type="password"
               name="Password"
@@ -85,12 +98,12 @@ const SignIn = () => {
               required
             />
           </Form.Group>
-          <Button variant="primary" type="submit" style={{ padding: '10px 20px', backgroundColor: '#003300', fontFamily: "Montserrat" }}>
+          <Button variant="primary" type="submit" style={{ padding: '10px 20px', backgroundColor: '#00284d', fontFamily: "Montserrat" }}>
             Sign In
           </Button>
         </Form>
         <p style={{ marginTop: "15px", fontSize: "1.2em", color: "#555", fontFamily: "Montserrat" }}>
-          Don't have an account? <Link to="/signup" style={{ color: "#003300", textDecoration: "none", fontWeight: "bold", fontFamily: "Montserrat" }}>Sign Up</Link>
+          Don't have an account? <Link to="/signup" style={{ color: "#00284d", textDecoration: "none", fontWeight: "bold", fontFamily: "Montserrat" }}>Sign Up</Link>
         </p>
         </Col>
         </Row>

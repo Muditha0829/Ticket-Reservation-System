@@ -3,12 +3,14 @@ import axios from 'axios';
 import { AuthContext } from '../AuthContext';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Form, Button, Card, Container } from 'react-bootstrap';
+import { Form, Button, Card, Container, Row, Col } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import { IsValidEmail, IsValidPassword, IsValidNIC, IsValidContactNumber, IsValidTicketClass } from '../Validations';
 
 const AddTrainTicketBooking = () => {
   const { userId } = useContext(AuthContext);
   const [trainData, setTrainData] = useState([]);
+  const [inputsDisabled, setInputsDisabled] = useState(true);
   const [formData, setFormData] = useState({
     MainPassengerName: '',
     UserID: userId,
@@ -27,6 +29,27 @@ const AddTrainTicketBooking = () => {
 
   const history = useHistory();
 
+  const calculateTotalPrice = () => {
+    const ticketClass = formData.TicketClass;
+    const totalPassengers = parseInt(formData.TotalPassengers);
+
+    // Add logic to calculate total price based on ticket class and total passengers
+    let TotalPrice = 0;
+    if (ticketClass === 'First Class') {
+      TotalPrice = totalPassengers * formData.ticketPrice1;
+      console.log("Total price"+ TotalPrice);
+    } else if (ticketClass === 'Second Class') {
+      TotalPrice = totalPassengers * formData.ticketPrice2;
+    } else if (ticketClass === 'Third Class') {
+      TotalPrice = totalPassengers * formData.ticketPrice3;
+    }
+
+    setFormData({
+      ...formData,
+      TotalPrice: TotalPrice.toString()
+    });
+  };
+
   const getCurrentDate = () => {
     const today = new Date();
     const year = today.getFullYear();
@@ -44,71 +67,79 @@ const AddTrainTicketBooking = () => {
     return `${year}-${month}-${day}`;
   };
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  
+    if (name === 'TrainName') {
+      fetchTicketPrice(value);
+      setInputsDisabled(false);
+    }
+  };
+  
+  const fetchTicketPrice = (id) => {
+    console.log(`Fetching ticket price for train ID: ${id}`);
+    axios.get(`http://localhost:57549/api/trains/gettrain/${id}`)
+      .then(response => {
+        const ticketPrice1 = response.data.FirstClassTicketPrice;
+        const ticketPrice2 = response.data.SecondClassTicketPrice; 
+        const ticketPrice3 = response.data.ThirdClassTicketPrice; 
+  
+        setFormData(prevState => ({
+          ...prevState,
+          ticketPrice1, // Add ticket prices to the state
+          ticketPrice2,
+          ticketPrice3
+        }));
+      })
+      .catch(error => {
+        console.error('Error fetching ticket price:', error);
+      });
+  };    
+  
+
   useEffect(() => {
     axios.get('http://localhost:57549/api/trains/getalltrains')
       .then(response => {
         setTrainData(response.data);
+        calculateTotalPrice();
       })
       .catch(error => {
         console.error('Error fetching train data:', error);
       });
-  }, []);
+  }, [formData.TotalPassengers, formData.TicketClass]);
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  console.log('Form Data:', formData); // Add this line
-  console.log('UserID:', formData.UserID); // Add this line
-  console.log('TrainName:', formData.TrainName); // Add this line
-
-  // const isValidEmail = (Email) => {
-  //   const EmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  //   return EmailPattern.test(Email);
+  // const handleChange = (e) => {
+  //   setFormData({
+  //     ...formData,
+  //     [e.target.name]: e.target.value
+  //   });
   // };
 
-  // const isValidContactNumber = (EmailNumber) => {
-  //   const EmailNumberPattern = /^\d{10}$/;
-  //   return EmailNumberPattern.test(EmailNumber);
-  // };
-
-  // const isValidNIC = (nic) => {
-  //   const nicPattern = /^[0-9]{10,12}$/;
-  //   return nicPattern.test(nic);
-  // };
+  console.log('Form Data:', formData);
+  console.log('UserID:', formData.UserID);
+  console.log('TrainName:', formData.TrainName);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // if (!isValidEmail(formData.Email)) {
-    //   alert('Invalid Email. Please enter a valid Email address.');
-    //   return;
-    // }
+    if (!IsValidNIC(formData.NIC)) {
+      toast.error('Invalid NIC format.');
+      return;
+    }
 
-    // if (!isValidContactNumber(formData.Email)) {
-    //   alert('Invalid contact number. Please enter a 10-digit Email number.');
-    //   return;
-    // }
+    if (!IsValidContactNumber(formData.ContactNumber)) {
+      toast.error('Invalid Contact Number format.');
+      return;
+    }
 
-    // if (!isValidNIC(formData.nic)) {
-    //   alert('Invalid NIC. Please enter a valid NIC number.');
-    //   return;
-    // }
-
-  // const ReservationDate = new Date(formData.ReservationDate);
-  // const BookingDate = new Date(getCurrentDate());
-
-  // const differenceInMilliseconds = ReservationDate - BookingDate;
-
-  // const differenceInDays = differenceInMilliseconds / (1000 * 60 * 60 * 24);
-
-  // if (differenceInDays >= 30) {
-  //   alert("Reservation date must be within 30 days of booking date.");
-  //   return;
-  // }
+    if (!IsValidTicketClass(formData.TicketClass)) {
+      toast.error('Invalid ticket Class format.');
+      return;
+    }
 
     setFormData({
       ...formData,
@@ -118,17 +149,19 @@ const AddTrainTicketBooking = () => {
     axios.post('http://localhost:57549/api/trainbooking/createticketbooking', formData)
       .then(response => {
         console.log('Reservation created:', response.data);
-        alert("Reservation Added");
+        toast.success("Reservation Added");
+        setTimeout(() => {
         history.push('/travelagentdashboard');
+        }, 2000)
       })
       .catch(error => {
-        console.error('Error creating reservation:', error);
+        toast.error('Reservation date must be within 30 days from the current date.', error);
       });
   };
 
   return (
     <Container className="text-center mt-5" style={{width: "1200px", paddingLeft: "250px", marginBottom: "25px"}}>
-      <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
+      <ToastContainer position="top-center" autoClose={1000} hideProgressBar />
       <div className="container">
       <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>
             <Card.Body>
@@ -141,6 +174,8 @@ const AddTrainTicketBooking = () => {
               <Form.Control
                 type="text"
                 name="MainPassengerName"
+                placeholder='main Passenger Name'
+                style={{fontFamily: "Onest"}}
                 value={formData.MainPassengerName}
                 onChange={handleChange}
                 required
@@ -151,6 +186,7 @@ const AddTrainTicketBooking = () => {
                 type="Email"
                 name="Email"
                 value={formData.Email}
+                style={{fontFamily: "Onest"}}
                 onChange={handleChange}
                 placeholder="Email"
                 required
@@ -160,6 +196,7 @@ const AddTrainTicketBooking = () => {
               <Form.Control
                 type="text"
                 name="ContactNumber"
+                style={{fontFamily: "Onest"}}
                 value={formData.ContactNumber}
                 onChange={handleChange}
                 placeholder="Contact Number"
@@ -170,6 +207,8 @@ const AddTrainTicketBooking = () => {
               <Form.Control
                 type="date"
                 name="ReservationDate"
+                placeholder='Reservation Date'
+                style={{fontFamily: "Onest"}}
                 value={formData.ReservationDate}
                 onChange={handleChange}
                 required
@@ -180,6 +219,7 @@ const AddTrainTicketBooking = () => {
             name="TrainName"
             value={formData.TrainName}
             onChange={handleChange}
+            style={{fontFamily: "Onest"}}
             required
           >
             <option value="">Select Train Name</option>
@@ -204,6 +244,8 @@ const AddTrainTicketBooking = () => {
     as="select"
     name="TotalPassengers"
     value={formData.TotalPassengers}
+    style={{fontFamily: "Onest"}}
+    disabled={inputsDisabled}
     onChange={handleChange}
     required
   >
@@ -222,6 +264,8 @@ const AddTrainTicketBooking = () => {
     as="select"
     name="TicketClass"
     value={formData.TicketClass}
+    style={{fontFamily: "Onest"}}
+    disabled={inputsDisabled}
     onChange={handleChange}
     required
   >
@@ -238,8 +282,9 @@ const AddTrainTicketBooking = () => {
                 type="text"
                 name="DestinationStation"
                 value={formData.DestinationStation}
+                style={{fontFamily: "Onest"}}
                 onChange={handleChange}
-                placeholder='DestinationStation'
+                placeholder='Destination Station'
                 required
               /><br />
 
@@ -248,6 +293,7 @@ const AddTrainTicketBooking = () => {
                 type="text"
                 name="DepartureStation"
                 value={formData.DepartureStation}
+                style={{fontFamily: "Onest"}}
                 onChange={handleChange}
                 placeholder='Departure Station'
                 required
@@ -258,21 +304,32 @@ const AddTrainTicketBooking = () => {
                 type="text"
                 name="NIC"
                 value={formData.NIC}
+                style={{fontFamily: "Onest"}}
                 onChange={handleChange}
                 placeholder='NIC'
                 required
               /><br />
             </div>
           </div>
-          <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat", textAlign: "left"}}>Total Price</Form.Label>
+          <br/>
+          <Row>
+            <Col>
+          <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat", marginLeft: "200px"}}>Total Price</Form.Label>
+          </Col>
+          <Col>
               <Form.Control
                 type="text"
                 name="TotalPrice"
-                value={formData.TotalPrice}
+                style={{marginRight: "100px", width: "100px", fontFamily: "Onest"}}
+                value={"Rs." + formData.TotalPrice + ".00"}
                 onChange={handleChange}
                 placeholder='Total Price'
                 required
-              /><br />
+                disabled
+              />
+              </Col>
+              </Row>
+
 
           <div className="text-center" style={{margin: "34px"}}>
             <Button variant="secondary" onClick={() => window.history.back()} style={{ width: '150px' }}>Back</Button>{' '}

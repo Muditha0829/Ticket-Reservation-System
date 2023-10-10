@@ -4,6 +4,7 @@ import { Form, Button, Container, Card, Row, Col } from 'react-bootstrap';
 import { useHistory, Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { IsValidEmail, IsValidPassword, IsValidNIC, IsValidContactNumber } from '../Validations';
 
 const Signup = () => {
 
@@ -33,6 +34,31 @@ const Signup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (formData.Password !== formData.RePassword) {
+      toast.error('Passwords do not match.');
+      return;
+    }
+
+    if (!IsValidEmail(formData.Email)) {
+      toast.error('Invalid email format.');
+      return;
+    }
+
+    if (!IsValidNIC(formData.NIC)) {
+      toast.error('Invalid NIC format.');
+      return;
+    }
+
+    if (!IsValidPassword(formData.Password)) {
+      toast.error('Invalid Password format.');
+      return;
+    }
+
+    if (!IsValidContactNumber(formData.ContactNumber)) {
+      toast.error('Invalid contact number format.');
+      return;
+    }
+
     axios.post('http://localhost:57549/api/users/signup', formData, {
       headers: {
         'Content-Type': 'application/json',
@@ -51,7 +77,7 @@ const Signup = () => {
 
   return (
     <div>
-    <Container style={{width:"75%", marginTop: "87px"}}>
+    <Container style={{width:"75%", marginTop: "47px", marginBottom: "48px"}}>
       <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>
         <Row>
           <Col>
@@ -59,12 +85,13 @@ const Signup = () => {
           </Col>
           <Col>
         <Card.Body>
-        <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
+        <ToastContainer position="top-center" autoClose={1000} hideProgressBar />
         <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px", textAlign: "center" }}>Sign Up</Card.Title>
           <Form onSubmit={handleSubmit}>
             <Row>
               <Col>
-            <Form.Group controlId="NIC" style={{marginBottom:"25px"}}>
+            <Form.Group controlId="NIC" style={{marginBottom:"7px"}}>
+            <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>NIC</Form.Label>
               <Form.Control
                 type="text"
                 name="NIC"
@@ -75,7 +102,8 @@ const Signup = () => {
                 required
               />
             </Form.Group>
-            <Form.Group controlId="UserName" style={{marginBottom:"25px"}}>
+            <Form.Group controlId="UserName" style={{marginBottom:"7px"}}>
+            <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>User Name</Form.Label>
               <Form.Control
                 type="text"
                 name="UserName"
@@ -86,7 +114,8 @@ const Signup = () => {
                 required
               />
             </Form.Group>
-            <Form.Group controlId="FirstName" style={{marginBottom:"25px"}}>
+            <Form.Group controlId="FirstName" style={{marginBottom:"7px"}}>
+            <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>First Name</Form.Label>
               <Form.Control
                 type="text"
                 name="FirstName"
@@ -97,7 +126,8 @@ const Signup = () => {
                 required
               />
             </Form.Group>
-            <Form.Group controlId="LastName" style={{marginBottom:"25px"}}>
+            <Form.Group controlId="LastName" style={{marginBottom:"7px"}}>
+            <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Last Name</Form.Label>
               <Form.Control
                 type="text"
                 name="LastName"
@@ -109,7 +139,8 @@ const Signup = () => {
               />
             </Form.Group>
             
-            <Form.Group controlId="Email" style={{marginBottom:"25px"}}>
+            <Form.Group controlId="Email" style={{marginBottom:"7px"}}>
+            <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Email</Form.Label>
               <Form.Control
                 type="Email"
                 name="Email"
@@ -123,29 +154,35 @@ const Signup = () => {
               </Form.Group>
               </Col>
             <Col>
-              <Form.Group controlId="Gender" style={{marginBottom:"25px"}}>
-              <Form.Control
-                type="text"
-                name="Gender"
-                style={{fontFamily: "Montserrat"}}
-                value={formData.Gender}
-                onChange={handleChange}
-                placeholder="Gender"
-                required
-              />
-            </Form.Group>
-            <Form.Group controlId="ContactNumber" style={{marginBottom:"25px"}}>
+            <Form.Group controlId="Gender" style={{marginBottom:"7px"}}>
+            <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Gender</Form.Label>
+    <Form.Control
+        as="select"
+        name="Gender"
+        style={{fontFamily: "Montserrat"}}
+        value={formData.Gender}
+        onChange={handleChange}
+        required
+    >
+        <option value="">Select Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+    </Form.Control>
+</Form.Group>
+            <Form.Group controlId="ContactNumber" style={{marginBottom:"7px"}}>
+            <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Contact Number</Form.Label>
               <Form.Control
                 type="text"
                 name="ContactNumber"
                 style={{fontFamily: "Montserrat"}}
                 value={formData.ContactNumber}
                 onChange={handleChange}
-                placeholder="Phone Number"
+                placeholder="Contact Number"
                 required
               />
             </Form.Group>
-            <Form.Group controlId="Password" style={{marginBottom:"25px"}}>
+            <Form.Group controlId="Password" style={{marginBottom:"7px"}}>
+            <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Password</Form.Label>
               <Form.Control
                 type="password"
                 name="Password"
@@ -156,7 +193,8 @@ const Signup = () => {
                 required
               />
             </Form.Group>
-            <Form.Group controlId="RePassword" style={{marginBottom:"25px"}}>
+            <Form.Group controlId="RePassword" style={{marginBottom:"7px"}}>
+            <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Re enter Password</Form.Label>
               <Form.Control
                 type="password"
                 name="RePassword"
@@ -167,7 +205,8 @@ const Signup = () => {
                 required
               />
             </Form.Group>
-            <Form.Group controlId="UserType" style={{marginBottom:"25px"}}>
+            <Form.Group controlId="UserType" style={{marginBottom:"7px"}}>
+            <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>User Type</Form.Label>
               <Form.Control
                 as="select"
                 name="UserType"
@@ -185,12 +224,12 @@ const Signup = () => {
           </Row>
           <Row className="justify-content-center">
               <Col xs="auto">
-            <Button type="submit" variant="primary" style={{ width: '150px', backgroundColor: '#003300', fontFamily: "Montserrat" }}>Sign Up</Button>
+            <Button type="submit" variant="primary" style={{ width: '150px', backgroundColor: '#00284d', fontFamily: "Montserrat" }}>Sign Up</Button>
               </Col>
             </Row>
           <div className="text-center mt-2">
             <p style={{ marginTop: "15px", fontSize: "1.2em", color: "#555", fontFamily: "Montserrat" }}>
-  Don't have an account? <Link to="/" style={{ color: "#003300", textDecoration: "none", fontWeight: "bold", fontFamily: "Montserrat" }}>Sign In</Link>
+  Don't have an account? <Link to="/" style={{ color: "#00284d", textDecoration: "none", fontWeight: "bold", fontFamily: "Montserrat" }}>Sign In</Link>
 </p>
           </div>
           </Form>

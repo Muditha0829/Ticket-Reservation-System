@@ -5,13 +5,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
+import { IsValidTimeRange, IsValidTrainNumber } from '../Validations';
 
 const UpdateTrainShedule = () => {
   const { TrainID } = useParams();
   const [TraingId, setTrainID] = useState('');
   const [updatedTrainData, setUpdatedTrainData] = useState({
-    // TrainID: '',
-    // userID: '',
     TrainNumber: '',
     TrainName: '',
     TrainDriver: '',
@@ -43,29 +42,29 @@ const UpdateTrainShedule = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-  //   const TrainIDPattern = /^[A-Z]\d{4}$/;
-
-  // if (!TrainIDPattern.test(updatedTrainData.TrainNumber)) {
-  //   alert('Invalid Train Number. Please enter a valid Train Number format. (TXXXX).');
-  //   return;
-  // }
+    if (!IsValidTrainNumber(updatedTrainData.TrainNumber)) {
+      toast.error('Invalid Train Number. Please enter a valid Train Number format (TXXXX).');
+      return;
+  }
 
     axios.put(`http://localhost:57549/api/trains/updatetrain/${TrainID}`, updatedTrainData)
       .then(response => {
         console.log('Train updated:', response.data);
         toast.success('Train updated successfully!');
-        history.push('/backofficeuserdashboard');
+        setTimeout(() => {
+        history.push('/listtrain');
+        }, 2000)
       })
       .catch(error => {
         console.error('Error:', error);
-        toast.error('Error updating train. Please try again later.');
+        toast.error('Departure Time must be before Arrival Time.');
       });
   };
 
   useEffect(() => {
     // Fetch data based on TrainID
     if (TrainID) {
-      axios.get(`http://localhost:57549/api/trains/gettrain/${TrainID}`)
+      axios.get(`http://localhost:57549/api/trains/gettrainbyId/${TrainID}`)
         .then(response => {
           setUpdatedTrainData(response.data);
         })
@@ -150,15 +149,24 @@ const UpdateTrainShedule = () => {
         </Row>
         <Row className="mb-3">
           <Col className="mx-auto">
-            <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Train Type</Form.Label>
-            <Form.Control
-              type="text"
-              name="TrainType"
-              placeholder="Train Type"
-              style={{fontFamily: "Onest"}}
-              value={updatedTrainData.TrainType}
-              onChange={handleChange}
-            />
+          <Form.Group controlId="trainType" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
+  <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Train Type</Form.Label>
+  <Form.Control
+    as="select"  // Render as a select input
+    name="TrainType"
+    placeholder='Train Type'
+    style={{fontFamily: "Onest"}}
+    value={updatedTrainData.TrainType}
+    onChange={handleChange}
+    required
+  >
+    <option value="">Select Train Type</option>
+    <option value="Express">Express</option>
+    <option value="Intercity">Intercity</option>
+    <option value="Local">Local</option>
+    {/* Add other train types as needed */}
+  </Form.Control>
+</Form.Group>
           </Col>
         </Row>
         
@@ -170,9 +178,9 @@ const UpdateTrainShedule = () => {
             <Form.Control
               type="datetime-local"
               style={{fontFamily: "Onest"}}
-              name="DeDateTime"
+              name="DepartureTime"
               placeholder="Departure Time"
-              value={updatedTrainData.DeDateTime}
+              // value={updatedTrainData.DepartureTime}
               onChange={handleChange}
             />
           </Col>
@@ -182,10 +190,10 @@ const UpdateTrainShedule = () => {
             <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Arrival Time</Form.Label>
             <Form.Control
               type="datetime-local"
-              name="ArDateTime"
+              name="ArrivalTime"
               placeholder="Arrival Time"
               style={{fontFamily: "Onest"}}
-              value={updatedTrainData.ArDateTime}
+              // value={updatedTrainData.ArrivalTime}
               onChange={handleChange}
             />
             </Col>
@@ -237,12 +245,13 @@ const UpdateTrainShedule = () => {
     <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Train Status</Form.Label>
     <Form.Select
       name="TrainStatus"
+      placeholder='Train Status'
       style={{fontFamily: "Onest"}}
       value={updatedTrainData.TrainStatus}
       onChange={handleChange}
     >
       <option value="Active">Active</option>
-      <option value="Inactive">Inactive</option>
+      <option value="Deactive">Deactive</option>
     </Form.Select>
   </Col>
 </Row>

@@ -83,6 +83,18 @@ namespace Web_Service.Controllers
 
         [HttpGet]
         [Route("gettrain/{id}")]
+        public IHttpActionResult GetTrain(string id)
+        {
+            var train = _trainsCollection.Find(t => t.TrainName == id).FirstOrDefault();
+            if (train == null)
+            {
+                return NotFound();
+            }
+            return Ok(train);
+        }
+
+        [HttpGet]
+        [Route("gettrainbyId/{id}")]
         public IHttpActionResult GetTrainById(string id)
         {
             var train = _trainsCollection.Find(t => t.TrainID == id).FirstOrDefault();

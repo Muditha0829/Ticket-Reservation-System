@@ -10,7 +10,7 @@ const GetTrainShedule = () => {
   const { TrainID } = useParams();
 
   useEffect(() => {
-    axios.get(`http://localhost:57549/api/trains/gettrain/${TrainID}`)
+    axios.get(`http://localhost:57549/api/trains/gettrainbyId/${TrainID}`)
       .then(response => {
         setTrain(response.data);
       })
@@ -20,13 +20,13 @@ const GetTrainShedule = () => {
   }, [TrainID]);
 
   return (
-    <Container className="my-5 text-center" style={{width: "1200px", paddingLeft: "250px"}}>
-      <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
-      <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>
-        <Card.Body>
-          <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>View Train Shedule</Card.Title>
-          <div className="mx-auto" style={{ maxWidth: '600px' }}>
-            <Table striped bordered hover>
+    <Container className="my-5 text-center" style={{ width: "1200px", paddingLeft: "250px" }}>
+  <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
+  <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none', borderRadius: '15px', boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.1)' }}>
+    <Card.Body>
+      <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>View Train Schedule</Card.Title>
+      <div className="mx-auto" style={{ maxWidth: '600px' }}>
+        <Table striped bordered hover style={{ fontFamily: "Onest" }}>
             <tbody>
   <tr>
     <td style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Train Number</strong></td>
@@ -77,16 +77,16 @@ const GetTrainShedule = () => {
     <td style={{fontFamily: "Onest"}}>{train.TrainStatus}</td>
   </tr>
 </tbody>
-            </Table>
-            <Row className="justify-content-center" style={{ margin: '25px' }}>
-              <Col xs="auto">
-                <Button variant="secondary" onClick={() => window.history.back()} style={{ width: '150px' }}>Back</Button>{' '}
-              </Col>
-            </Row>
-          </div>
-        </Card.Body>
-      </Card>
-    </Container>
+</Table>
+        <Row className="justify-content-center" style={{ margin: '25px' }}>
+          <Col xs="auto">
+            <Button variant="secondary" onClick={() => window.history.back()} style={{ width: '150px', backgroundColor: '#00284d', fontFamily: "Montserrat" }}>Back</Button>{' '}
+          </Col>
+        </Row>
+      </div>
+    </Card.Body>
+  </Card>
+</Container>
   );
 };
 
