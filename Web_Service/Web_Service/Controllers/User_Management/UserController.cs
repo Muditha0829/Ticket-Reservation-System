@@ -240,10 +240,10 @@ namespace WebSevice.Controllers
             }
 
             // Validate NIC format (Assuming NIC is a 9-digit number)
-            if (!IsValidNIC(updatedUserData.NIC))
+            /*if (!IsValidNIC(updatedUserData.NIC))
             {
                 return BadRequest("Invalid NIC format.");
-            }
+            }*/
 
             // Validate contact number format (Assuming 10-digit number)
             if (!IsValidContactNumber(updatedUserData.ContactNumber))

@@ -144,7 +144,7 @@ namespace WebSevice.Controllers
                 }
                 var update = Builders<TrainTicketBooking>.Update
                     .Set(t => t.TrainName, updatedBooking.TrainName)
-                    .Set(t => t.UserID, updatedBooking.UserID)
+                    //.Set(t => t.UserID, updatedBooking.UserID)
                     .Set(t => t.ReservationDate, updatedBooking.ReservationDate)
                     .Set(t => t.TotalPassengers, updatedBooking.TotalPassengers)
                     .Set(t => t.MainPassengerName, updatedBooking.MainPassengerName)
