@@ -270,8 +270,8 @@ public class ReservationApiClient {
                 String totalPrice = jsonObject.optString("TotalPrice");
                 String email = jsonObject.optString("Email");
                 String phone = jsonObject.optString("ContactNumber");
-                String reservationDate = jsonObject.optString("ReservationDate");
-                String bookingDate = jsonObject.optString("BookingDate");
+                String reservationDate = jsonObject.optString("FormattedReservationDate");
+                String bookingDate = jsonObject.optString("FormattedBookingDate");
                 Log.d("ReservationApiClient", "Parsed reservations: " + reservationList.size());
 
                 Reservation reservation = new Reservation(ID, trainNumber, trainName, userID, bookingDate,

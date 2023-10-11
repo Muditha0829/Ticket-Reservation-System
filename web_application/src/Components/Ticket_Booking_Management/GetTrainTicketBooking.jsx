@@ -41,7 +41,7 @@ const GetTrainTicketBooking = () => {
           </tr>
           <tr>
             <td className="text" style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Booking Date</strong></td>
-            <td style={{fontFamily: "Onest"}}>{reservation.BookingDate}</td>
+            <td style={{fontFamily: "Onest"}}>{reservation.FormattedBookingDate}</td>
           </tr>
           <tr>
             <td className="text" style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Train Name</strong></td>
@@ -49,7 +49,7 @@ const GetTrainTicketBooking = () => {
           </tr>
           <tr>
             <td className="text" style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Reservation Date</strong></td>
-            <td style={{fontFamily: "Onest"}}>{reservation.ReservationDate}</td>
+            <td style={{fontFamily: "Onest"}}>{reservation.FormattedReservationDate}</td>
           </tr>
           <tr>
             <td className="text" style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Departure Station</strong></td>

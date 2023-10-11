@@ -50,11 +50,11 @@ const GetTrainShedule = () => {
   </tr>
   <tr>
     <td style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Departure Time</strong></td>
-    <td style={{fontFamily: "Onest"}}>{train.DepartureTime}</td>
+    <td style={{fontFamily: "Onest"}}>{train.FormattedDepartureTime}</td>
   </tr>
   <tr>
     <td style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Arrival Time</strong></td>
-    <td style={{fontFamily: "Onest"}}>{train.ArrivalTime}</td>
+    <td style={{fontFamily: "Onest"}}>{train.FormattedArrivalTime}</td>
   </tr>
   <tr>
     <td style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Train Type</strong></td>

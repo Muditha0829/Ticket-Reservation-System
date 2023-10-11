@@ -151,10 +151,10 @@ namespace WebSevice.Controllers
             }
 
             // Add user type validation here
-            if (existingUser.UserType != "BackOfficeUser" && existingUser.UserType != "TravelAgent")
+            /*if (existingUser.UserType != "BackOfficeUser" && existingUser.UserType != "TravelAgent")
             {
                 return BadRequest("Invalid user type for signing in.");
-            }
+            }*/
 
             return Ok(existingUser);
         }

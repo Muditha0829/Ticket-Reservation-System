@@ -78,10 +78,10 @@ public class TrainApiClient {
             String trainName = jsonObject.getString("TrainName");
             Log.d("TrainDetails", "TrainName: " + trainName);
 
-            String departureTime = jsonObject.getString("DepartureTime");
+            String departureTime = jsonObject.getString("FormattedDepartureTime");
             Log.d("TrainDetails", "DepartureTime: " + departureTime);
 
-            String arrivalTime = jsonObject.getString("ArrivalTime");
+            String arrivalTime = jsonObject.getString("FormattedArrivalTime");
             Log.d("TrainDetails", "ArrivalTime: " + arrivalTime);
 
             String departureStation = jsonObject.getString("DepartureStation");

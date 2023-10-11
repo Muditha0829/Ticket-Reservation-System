@@ -20,6 +20,25 @@ namespace Web_Service.Models.Train_Management
         public string ArrivalStation { get; set; }
         public DateTime DepartureTime { get; set; }
         public DateTime ArrivalTime { get; set; }
+
+        public string FormattedDepartureTime
+        {
+            get
+            {
+                return DepartureTime.ToString("yyyy-MM-dd HH:mm:ss");
+                // Adjust the format string as needed (e.g., "dd/MM/yyyy HH:mm" for a different format)
+            }
+        }
+
+        public string FormattedArrivalTime
+        {
+            get
+            {
+                return ArrivalTime.ToString("yyyy-MM-dd HH:mm:ss");
+                // Adjust the format string as needed (e.g., "dd/MM/yyyy HH:mm" for a different format)
+            }
+        }
+
         public string TrainType { get; set; }
         public string FirstClassTicketPrice { get; set; }
         public string SecondClassTicketPrice { get; set; }

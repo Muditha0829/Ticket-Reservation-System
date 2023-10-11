@@ -20,6 +20,22 @@ namespace Web_Service.Models.Ticket_Booking_Management
 
         public DateTime ReservationDate { get; set; }
 
+        public string FormattedBookingDate
+        {
+            get
+            {
+                return BookingDate.ToString("dd/MM/yyyy");
+            }
+        }
+
+        public string FormattedReservationDate
+        {
+            get
+            {
+                return ReservationDate.ToString("dd/MM/yyyy");
+            }
+        }
+
         public int TotalPassengers { get; set; }
 
         public string MainPassengerName { get; set; }
