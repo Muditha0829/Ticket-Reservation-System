@@ -36,6 +36,10 @@
                 android:id="@+id/aboutUsDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/white"
+                android:background="#8B00284D"
                 android:text="We are a team of four undergraduate students in our fourth year, specializing in software engineering. Our project, the Train Ticket Booking System, aims to provide a seamless and user-friendly experience for booking train tickets. We have leveraged modern technologies and best practices to develop this system, ensuring reliability and efficiency in ticket booking and management."
                 android:layout_gravity="center"
                 android:textSize="21sp"/>

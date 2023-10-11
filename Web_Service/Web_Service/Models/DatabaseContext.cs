@@ -1,6 +1,6 @@
 ﻿using MongoDB.Driver;
 using Web_Service.Models.Train_Management;
-using Web_Service.Models.Train_Ticket_Booking_Management;
+using Web_Service.Models.Ticket_Booking_Management;
 
 namespace Web_Service.Models
 {
@@ -9,7 +9,7 @@ namespace Web_Service.Models
         private IMongoDatabase _database;
 
         public IMongoCollection<User> Users { get; private set; }
-        public IMongoCollection<TrainTicketBooking> TrainBookings { get; private set; }
+        public IMongoCollection<TicketBooking> TrainBookings { get; private set; }
         public IMongoCollection<Train> Trains { get; private set; }
 
         public DatabaseContext(string connectionString, string databaseName)
@@ -18,7 +18,7 @@ namespace Web_Service.Models
             _database = client.GetDatabase("EAD_Group_Assignment");
 
             Users = _database.GetCollection<User>("Users");
-            TrainBookings = _database.GetCollection<TrainTicketBooking>("TrainBookings");
+            TrainBookings = _database.GetCollection<TicketBooking>("TrainBookings");
             Trains = _database.GetCollection<Train>("Trains");
         }
     }

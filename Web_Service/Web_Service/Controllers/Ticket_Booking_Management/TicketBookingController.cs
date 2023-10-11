@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Web.Http;
 using MongoDB.Driver;
-using Web_Service.Models.Train_Ticket_Booking_Management;
+using Web_Service.Models.Ticket_Booking_Management;
 using System.Text.RegularExpressions;
 
 namespace WebSevice.Controllers
@@ -11,7 +11,7 @@ namespace WebSevice.Controllers
     [RoutePrefix("api/trainbooking")]
     public class TrainTicketBookingController : ApiController
     {
-        private readonly IMongoCollection<TrainTicketBooking> _bookingsCollection;
+        private readonly IMongoCollection<TicketBooking> _bookingsCollection;
 
         public TrainTicketBookingController()
         {
@@ -19,12 +19,12 @@ namespace WebSevice.Controllers
             var collectionName = "TrainBookings";
             var client = new MongoClient(connectionString);
             var database = client.GetDatabase("EAD_Group_Assignment");
-            _bookingsCollection = database.GetCollection<TrainTicketBooking>(collectionName);
+            _bookingsCollection = database.GetCollection<TicketBooking>(collectionName);
         }
 
         [HttpPost]
         [Route("createticketbooking")]
-        public IHttpActionResult CreateBooking(TrainTicketBooking booking)
+        public IHttpActionResult CreateBooking(TicketBooking booking)
         {
             booking.BookingID = ObjectId.GenerateNewId().ToString();
 
@@ -113,9 +113,9 @@ namespace WebSevice.Controllers
 
         [HttpPut]
         [Route("updateticketbooking/{id}")]
-        public IHttpActionResult UpdateTicketBooking(string id, TrainTicketBooking updatedBooking)
+        public IHttpActionResult UpdateTicketBooking(string id, TicketBooking updatedBooking)
         {
-            var filter = Builders<TrainTicketBooking>.Filter.Eq(t => t.BookingID, id);
+            var filter = Builders<TicketBooking>.Filter.Eq(t => t.BookingID, id);
             var today = DateTime.Now;
 
             // Calculate the difference in days between ReservationDate and BookingDate
@@ -142,7 +142,7 @@ namespace WebSevice.Controllers
                 {
                     return BadRequest("Invalid ticket class.");
                 }
-                var update = Builders<TrainTicketBooking>.Update
+                var update = Builders<TicketBooking>.Update
                     .Set(t => t.TrainName, updatedBooking.TrainName)
                     //.Set(t => t.UserID, updatedBooking.UserID)
                     .Set(t => t.ReservationDate, updatedBooking.ReservationDate)
@@ -173,7 +173,7 @@ namespace WebSevice.Controllers
         [Route("cancelticketbooking/{id}")]
         public IHttpActionResult CancelBooking(string id)
         {
-            var filter = Builders<TrainTicketBooking>.Filter.Eq(b => b.BookingID, id);
+            var filter = Builders<TicketBooking>.Filter.Eq(b => b.BookingID, id);
             var existingBooking = _bookingsCollection.Find(filter).FirstOrDefault();
 
             if (existingBooking == null)

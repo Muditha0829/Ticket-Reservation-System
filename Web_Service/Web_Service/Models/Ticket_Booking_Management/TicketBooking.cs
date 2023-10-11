@@ -2,9 +2,9 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Web_Service.Models.Train_Ticket_Booking_Management
+namespace Web_Service.Models.Ticket_Booking_Management
 {
-    public class TrainTicketBooking
+    public class TicketBooking
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]

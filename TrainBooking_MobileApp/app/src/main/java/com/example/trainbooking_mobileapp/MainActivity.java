@@ -95,30 +95,26 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // ...
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.top_app_bar_menu, menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_sign_out) {
-            signOut();
-            return true;
-        } else if (id == android.R.id.home) {
-            onBackPressed();
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_sign_out:
+                // Perform sign out logic here
+                // For example, you can start the sign-in activity
+                Intent intent = new Intent(MainActivity.this, SignInActivity.class);
+                startActivity(intent);
+                finish(); // Finish the current activity after signing out
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void signOut() {
-        Intent intent = new Intent(this, SignInActivity.class);
-        startActivity(intent);
-        finish();
     }
 }

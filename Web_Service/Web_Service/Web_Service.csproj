@@ -165,14 +165,14 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Train_Management\TrainController.cs" />
-    <Compile Include="Controllers\Train_Ticket_Booking_Management\TrainTicketBookingController.cs" />
+    <Compile Include="Controllers\Ticket_Booking_Management\TicketBookingController.cs" />
     <Compile Include="Controllers\User_Management\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Models\Train_Management\Train.cs" />
-    <Compile Include="Models\Train_Ticket_Booking_Management\TrainTicketBooking.cs" />
+    <Compile Include="Models\Ticket_Booking_Management\TicketBooking.cs" />
     <Compile Include="Models\User_Management\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
