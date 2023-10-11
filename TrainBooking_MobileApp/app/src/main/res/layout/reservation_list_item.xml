@@ -171,7 +171,7 @@
                 android:textColor="#FFFFFF"
                 android:text="Update"
                 android:layout_margin="4dp"
-                android:background="@color/green"/>
+                android:background="@drawable/rounded_border_update"/>
 
             <Button
                 android:id="@+id/viewButton"
@@ -180,7 +180,7 @@
                 android:textColor="#FFFFFF"
                 android:text="View"
                 android:layout_margin="4dp"
-                android:background="#FFC107"/>
+                android:background="@drawable/rounded_border_details"/>
 
             <Button
                 android:id="@+id/cancelButton"
@@ -189,7 +189,7 @@
                 android:textColor="#FFFFFF"
                 android:text="Cancel"
                 android:layout_margin="4dp"
-                android:background="@color/red"/>
+                android:background="@drawable/rounded_border_delete"/>
 
         </LinearLayout>
     </LinearLayout>

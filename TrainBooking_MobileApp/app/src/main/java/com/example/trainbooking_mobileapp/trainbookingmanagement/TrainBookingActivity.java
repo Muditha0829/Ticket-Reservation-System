@@ -19,10 +19,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.trainbooking_mobileapp.AboutUsActivity;
 import com.example.trainbooking_mobileapp.MainActivity;
 import com.example.trainbooking_mobileapp.R;
 import com.example.trainbooking_mobileapp.usermanagement.ProfileActivity;
 import com.example.trainbooking_mobileapp.usermanagement.SignInActivity;
+import com.example.trainbooking_mobileapp.usermanagement.SignUpActivity;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -50,6 +52,21 @@ public class TrainBookingActivity extends AppCompatActivity {
     private Double firstClassTicketPrice;
     private Double secondClassTicketPrice;
     private Double thirdClassTicketPrice;
+
+    private boolean isValidEmail(String email) {
+        String emailPattern = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$";
+        return email.matches(emailPattern);
+    }
+
+    private boolean isValidNIC(String nic) {
+        String nicPattern = "^\\d{12}$";
+        return nic.matches(nicPattern);
+    }
+
+    private boolean isValidContactNumber(String contactNumber) {
+        String contactNumberPattern = "^\\d{10}$";
+        return contactNumber.matches(contactNumberPattern);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +103,7 @@ public class TrainBookingActivity extends AppCompatActivity {
         Log.d("ReservationActivity", "Received userID: " + userID);
 
         ImageButton Button1 = findViewById(R.id.button1);
-
+        ImageButton Button6 = findViewById(R.id.button6);
         ImageButton Button5 = findViewById(R.id.button5);
         Button1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,6 +122,14 @@ public class TrainBookingActivity extends AppCompatActivity {
                 intent.putExtra("userID", userID);
                 startActivity(intent);
 
+            }
+        });
+        Button6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TrainBookingActivity.this, AboutUsActivity.class);
+                intent.putExtra("userID", userID);
+                startActivity(intent);
             }
         });
 
@@ -279,6 +304,21 @@ public class TrainBookingActivity extends AppCompatActivity {
         LocalDateTime currentDateTime = LocalDateTime.now();
         String bookingDate = currentDateTime.toString();
 
+        if (!isValidEmail(email)) {
+            Toast.makeText(TrainBookingActivity.this, "Invalid email format.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!isValidNIC(nic)) {
+            Toast.makeText(TrainBookingActivity.this, "Invalid NIC format.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!isValidContactNumber(phone)) {
+            Toast.makeText(TrainBookingActivity.this, "Invalid contact number format.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         Log.d("ReservationActivity", "booking Date: " + bookingDate);
 
         String ticketClass = ticketClassSpinner.getSelectedItem().toString();
@@ -345,7 +385,7 @@ public class TrainBookingActivity extends AppCompatActivity {
                 startActivity(intent);
             } else {
                 Log.e("ReservationActivity", "Error creating reservation.");
-                Toast.makeText(TrainBookingActivity.this, "Reservation date must be within 30 days from the booking date.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(TrainBookingActivity.this, "Reservation date must be within 30 days from the your booking date.", Toast.LENGTH_SHORT).show();
             }
         }
     }

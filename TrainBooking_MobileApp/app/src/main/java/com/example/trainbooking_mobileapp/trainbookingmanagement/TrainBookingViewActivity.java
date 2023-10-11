@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.trainbooking_mobileapp.AboutUsActivity;
 import com.example.trainbooking_mobileapp.MainActivity;
 import com.example.trainbooking_mobileapp.R;
 import com.example.trainbooking_mobileapp.usermanagement.ProfileActivity;
@@ -52,7 +53,7 @@ public class TrainBookingViewActivity extends AppCompatActivity {
 
         ImageButton Button1 = findViewById(R.id.button1);
         ImageButton Button5 = findViewById(R.id.button5);
-
+        ImageButton Button6 = findViewById(R.id.button6);
         userID = getIntent().getStringExtra("userID");
 
         Button1.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +69,14 @@ public class TrainBookingViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TrainBookingViewActivity.this, ProfileActivity.class);
+                intent.putExtra("userID", userID);
+                startActivity(intent);
+            }
+        });
+        Button6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TrainBookingViewActivity.this, AboutUsActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
             }

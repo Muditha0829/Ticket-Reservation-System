@@ -14,6 +14,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.trainbooking_mobileapp.AboutUsActivity;
 import com.example.trainbooking_mobileapp.MainActivity;
 import com.example.trainbooking_mobileapp.R;
 import com.example.trainbooking_mobileapp.usermanagement.ProfileActivity;
@@ -54,7 +55,7 @@ public class TrainBookingDetailActivity extends AppCompatActivity implements Tra
         reservationApiClient.getReservationsForUserFromAPI(userID, this);
 
         ImageButton Button1 = findViewById(R.id.button1);
-
+        ImageButton Button6 = findViewById(R.id.button6);
         ImageButton Button5 = findViewById(R.id.button5);
         Button1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +74,14 @@ public class TrainBookingDetailActivity extends AppCompatActivity implements Tra
                 intent.putExtra("userID", userID);
                 startActivity(intent);
 
+            }
+        });
+        Button6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TrainBookingDetailActivity.this, AboutUsActivity.class);
+                intent.putExtra("userID", userID);
+                startActivity(intent);
             }
         });
     }

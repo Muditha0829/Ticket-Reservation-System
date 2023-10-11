@@ -20,6 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.trainbooking_mobileapp.AboutUsActivity;
 import com.example.trainbooking_mobileapp.MainActivity;
 import com.example.trainbooking_mobileapp.R;
 import com.example.trainbooking_mobileapp.usermanagement.ProfileActivity;
@@ -82,6 +83,7 @@ public class UpdateTrainBookingActivity extends AppCompatActivity {
 
         ImageButton Button1 = findViewById(R.id.button1);
         ImageButton Button5 = findViewById(R.id.button5);
+        ImageButton Button6 = findViewById(R.id.button6);
         Button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,6 +97,14 @@ public class UpdateTrainBookingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UpdateTrainBookingActivity.this, ProfileActivity.class);
+                intent.putExtra("userID", userID);
+                startActivity(intent);
+            }
+        });
+        Button6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UpdateTrainBookingActivity.this, AboutUsActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
             }
@@ -199,6 +209,21 @@ public class UpdateTrainBookingActivity extends AppCompatActivity {
         String contactNumber = contactNumberEditText.getText().toString();
         String reservationDate = reservationDateTextView.getText().toString();
 
+        if (!isValidEmail(email)) {
+            Toast.makeText(UpdateTrainBookingActivity.this, "Invalid email format.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!isValidNIC(nic)) {
+            Toast.makeText(UpdateTrainBookingActivity.this, "Invalid NIC format.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!isValidContactNumber(contactNumber)) {
+            Toast.makeText(UpdateTrainBookingActivity.this, "Invalid contact number format.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         Log.d("Updateuser","userid3: " + reservation.getUserID());
 
         TrainBooking updatedReservation = new TrainBooking(reservation.getBookingID(), reservation.getTrainNumber(), reservation.getTrainName(), userID, reservation.getBookingDate(),
@@ -218,8 +243,23 @@ public class UpdateTrainBookingActivity extends AppCompatActivity {
 
             @Override
             public void onError(String errorMessage) {
-                Toast.makeText(UpdateTrainBookingActivity.this, "You can only update reservations at least 5 days before the reservation date", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpdateTrainBookingActivity.this, "You can only update reservations at least 5 days before the your ticket booking date", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private boolean isValidEmail(String email) {
+        String emailPattern = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$";
+        return email.matches(emailPattern);
+    }
+
+    private boolean isValidNIC(String nic) {
+        String nicPattern = "^\\d{12}$";
+        return nic.matches(nicPattern);
+    }
+
+    private boolean isValidContactNumber(String contactNumber) {
+        String contactNumberPattern = "^\\d{10}$";
+        return contactNumber.matches(contactNumberPattern);
     }
 }

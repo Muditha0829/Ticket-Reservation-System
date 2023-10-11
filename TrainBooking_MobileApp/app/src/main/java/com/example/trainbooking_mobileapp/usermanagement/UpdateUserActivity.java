@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.trainbooking_mobileapp.AboutUsActivity;
 import com.example.trainbooking_mobileapp.MainActivity;
 import com.example.trainbooking_mobileapp.R;
 
@@ -26,6 +27,16 @@ public class UpdateUserActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private String userID;
     private  Spinner genderSpinner;
+
+    private boolean isValidEmail(String email) {
+        String emailPattern = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$";
+        return email.matches(emailPattern);
+    }
+
+    private boolean isValidContactNumber(String contactNumber) {
+        String contactNumberPattern = "^\\d{10}$";
+        return contactNumber.matches(contactNumberPattern);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,6 +75,7 @@ public class UpdateUserActivity extends AppCompatActivity {
 
         ImageButton Button1 = findViewById(R.id.button1);
         ImageButton Button5 = findViewById(R.id.button5);
+        ImageButton Button6 = findViewById(R.id.button6);
         Button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,6 +89,14 @@ public class UpdateUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UpdateUserActivity.this, ProfileActivity.class);
+                intent.putExtra("userID", userID);
+                startActivity(intent);
+            }
+        });
+        Button6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UpdateUserActivity.this, AboutUsActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
             }
@@ -156,6 +176,16 @@ public class UpdateUserActivity extends AppCompatActivity {
         String email = updatedEmailEditText.getText().toString();
 //        String gender = updatedGenderEditText.getText().toString();
         String contactNumber = updatedPhoneNumberEditText.getText().toString();
+
+        if (!isValidEmail(email)) {
+            Toast.makeText(UpdateUserActivity.this, "Invalid email format.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!isValidContactNumber(contactNumber)) {
+            Toast.makeText(UpdateUserActivity.this, "Invalid contact number format.", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
 
         Log.d("UpdateUserActivity", "FirstName: " + firstName);

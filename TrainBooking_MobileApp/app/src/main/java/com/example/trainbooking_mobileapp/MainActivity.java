@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         ImageButton Button3 = findViewById(R.id.button3);
         ImageButton Button4 = findViewById(R.id.button4);
         ImageButton Button5 = findViewById(R.id.button5);
+        ImageButton Button6 = findViewById(R.id.button6);
         Button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,6 +83,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                intent.putExtra("userID", userID);
+                startActivity(intent);
+            }
+        });
+        Button6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AboutUsActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
             }

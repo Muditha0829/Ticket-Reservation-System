@@ -109,7 +109,7 @@ public class TrainBookingListAdapter extends RecyclerView.Adapter<TrainBookingLi
 
             @Override
             public void onError(String errorMessage) {
-                Toast.makeText(context, "You can only cancel reservations at least 5 days before the reservation date.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "You can only cancel reservations at least 5 days before the your ticket booking date.", Toast.LENGTH_SHORT).show();
             }
         });
     }

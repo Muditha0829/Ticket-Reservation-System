@@ -91,6 +91,31 @@ public class SignUpActivity extends AppCompatActivity {
         String reenteredPassword = etRePassword.getText().toString().trim();
         String contactNumber = etContactNumber.getText().toString().trim();
 
+        if (!isValidEmail(email)) {
+            Toast.makeText(SignUpActivity.this, "Invalid email format.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!isValidPassword(password)) {
+            Toast.makeText(SignUpActivity.this, "Invalid password format.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!password.equals(reenteredPassword)) {
+            Toast.makeText(SignUpActivity.this, "Passwords do not match.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!isValidNIC(nic)) {
+            Toast.makeText(SignUpActivity.this, "Invalid NIC format.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!isValidContactNumber(contactNumber)) {
+            Toast.makeText(SignUpActivity.this, "Invalid contact number format.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         // Hash the passwords
 //        String hashedPassword = hashPassword(password);
 //        String hashedReenteredPassword = hashPassword(reenteredPassword);
@@ -177,5 +202,25 @@ public class SignUpActivity extends AppCompatActivity {
         }
 
         return null;
+    }
+
+    private boolean isValidEmail(String email) {
+        String emailPattern = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$";
+        return email.matches(emailPattern);
+    }
+
+    private boolean isValidPassword(String password) {
+        String passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
+        return password.matches(passwordPattern);
+    }
+
+    private boolean isValidNIC(String nic) {
+        String nicPattern = "^\\d{12}$";
+        return nic.matches(nicPattern);
+    }
+
+    private boolean isValidContactNumber(String contactNumber) {
+        String contactNumberPattern = "^\\d{10}$";
+        return contactNumber.matches(contactNumberPattern);
     }
 }

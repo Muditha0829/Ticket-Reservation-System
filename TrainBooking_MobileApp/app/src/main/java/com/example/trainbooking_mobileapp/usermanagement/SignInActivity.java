@@ -47,6 +47,16 @@ public class SignInActivity extends AppCompatActivity {
                     return;
                 }
 
+                if (!isValidNIC(nic)) {
+                    Toast.makeText(SignInActivity.this, "Invalid NIC format.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (!isValidPassword(password)) {
+                    Toast.makeText(SignInActivity.this, "Invalid password format.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 JSONObject json = new JSONObject();
                 try {
                     json.put("NIC", nic);
@@ -68,6 +78,16 @@ public class SignInActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private boolean isValidNIC(String nic) {
+        String nicPattern = "^\\d{12}$";
+        return nic.matches(nicPattern);
+    }
+
+    private boolean isValidPassword(String password) {
+        String passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
+        return password.matches(passwordPattern);
     }
 
     private class SignInTask extends AsyncTask<String, Void, String> {

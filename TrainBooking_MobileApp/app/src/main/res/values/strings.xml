@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TTB App</string>
+    <string name="app_name">Train Journey</string>
     <string-array name="gender_array">
         <item>Gender</item>
         <item>Male</item>
