@@ -150,6 +150,12 @@ namespace WebSevice.Controllers
                 return BadRequest("Incorrect password.");
             }
 
+            // Add user type validation here
+            if (existingUser.UserType != "BackOfficeUser" && existingUser.UserType != "TravelAgent")
+            {
+                return BadRequest("Invalid user type for signing in.");
+            }
+
             return Ok(existingUser);
         }
 
@@ -337,7 +343,7 @@ namespace WebSevice.Controllers
         [Route("getbackofficeusercount")]
         public IHttpActionResult GetTravelAgentCount()
         {
-            var filter = Builders<User>.Filter.Eq(u => u.UserType, "backofficeuser");
+            var filter = Builders<User>.Filter.Eq(u => u.UserType, "backOfficeUser");
             long backofficeUserCount = _usersCollection.CountDocuments(filter);
 
             return Ok(backofficeUserCount);
@@ -348,7 +354,7 @@ namespace WebSevice.Controllers
         [Route("gettravelagentcount")]
         public IHttpActionResult GetBackofficeUserCount()
         {
-            var filter = Builders<User>.Filter.Eq(u => u.UserType, "travelagent");
+            var filter = Builders<User>.Filter.Eq(u => u.UserType, "TravelAgent");
             long backofficeUserCount = _usersCollection.CountDocuments(filter);
 
             return Ok(backofficeUserCount);

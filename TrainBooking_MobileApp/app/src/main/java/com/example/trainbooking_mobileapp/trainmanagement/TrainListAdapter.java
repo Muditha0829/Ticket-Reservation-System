@@ -34,8 +34,6 @@ public class TrainListAdapter extends RecyclerView.Adapter<TrainListAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Train train = trainList.get(position);
-        holder.TrainIDTextView.setText(train.getTrainID());
-        Log.d("TrainListAdapter", "Train ID set: " + train.getTrainID());
 
         holder.trainNameTextView.setText(train.getTrainName());
         Log.d("TrainListAdapter", "Train Name set: " + train.getTrainName());
@@ -80,7 +78,6 @@ public class TrainListAdapter extends RecyclerView.Adapter<TrainListAdapter.View
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            TrainIDTextView = itemView.findViewById(R.id.TrainIDTextView);
             trainNameTextView = itemView.findViewById(R.id.trainNameTextView);
             departureTimeTextView = itemView.findViewById(R.id.departureTimeTextView);
             arrivalTimeTextView = itemView.findViewById(R.id.arrivalTimeTextView);
@@ -90,9 +87,6 @@ public class TrainListAdapter extends RecyclerView.Adapter<TrainListAdapter.View
             secondClassTicketPriceTextView = itemView.findViewById(R.id.secondClassTicketPriceTextView);
             thirdClassTicketPriceTextView = itemView.findViewById(R.id.thirdClassTicketPriceTextView);
             statusTextView = itemView.findViewById(R.id.statusTextView);
-
-            TrainIDTextView = itemView.findViewById(R.id.TrainIDTextView);
-            Log.d("TrainListAdapter", "TrainIDTextView initialized: " + (TrainIDTextView != null));
 
             trainNameTextView = itemView.findViewById(R.id.trainNameTextView);
             Log.d("TrainListAdapter", "trainNameTextView initialized: " + (trainNameTextView != null));

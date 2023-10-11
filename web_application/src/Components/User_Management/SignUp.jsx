@@ -216,8 +216,8 @@ const Signup = () => {
                 required
               >
                 <option value="">Select User Type</option>
-                <option value="backofficeuser">Backoffice User</option>
-                <option value="travelagent">Travel Agent</option>
+                <option value="BackOfficeUser">Backoffice User</option>
+                <option value="travelAgent">Travel Agent</option>
               </Form.Control>
             </Form.Group>
             </Col>

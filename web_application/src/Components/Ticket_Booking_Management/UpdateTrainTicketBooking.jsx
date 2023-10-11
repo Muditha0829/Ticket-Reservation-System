@@ -153,7 +153,7 @@ const UpdateTrainTicketBooking = () => {
   useEffect(() => {
     let isMounted = true;
 
-    axios.get('http://localhost:57549/api/trains/getallactivetrains')
+    axios.get('http://localhost:57549/api/trains/getallsheduledtrains')
       .then(response => {
         if (isMounted) {
           setTrainData(response.data);

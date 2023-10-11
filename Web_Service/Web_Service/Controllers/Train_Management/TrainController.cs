@@ -57,7 +57,7 @@ namespace Web_Service.Controllers
 
             // Set Train ID and Status
             train.TrainID = ObjectId.GenerateNewId().ToString();
-            train.TrainStatus = "Active";
+            train.TrainStatus = "Sheduled";
 
             // Insert the train into the database
             _trainsCollection.InsertOne(train);
@@ -74,10 +74,10 @@ namespace Web_Service.Controllers
         }
 
         [HttpGet]
-        [Route("getallActivetrains")]
+        [Route("getallSheduledtrains")]
         public IHttpActionResult GetActiveTrains()
         {
-            var activeTrains = _trainsCollection.Find(t => t.TrainStatus == "Active").ToList();
+            var activeTrains = _trainsCollection.Find(t => t.TrainStatus == "Sheduled").ToList();
             return Ok(activeTrains);
         }
 

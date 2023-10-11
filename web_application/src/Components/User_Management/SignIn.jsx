@@ -43,14 +43,14 @@ const SignIn = () => {
         setUser(response.data.UserID, response.data.UserType);
         sessionStorage.setItem('userID', response.data.userID);
 
-        if (response.data.UserType === 'backofficeuser') {
+        if (response.data.UserType === 'BackOfficeUser') {
           history.push('/backofficeuserdashboard');
           window.location.href="/backofficeuserdashboard";
-        } else if (response.data.UserType === 'travelagent') {
+        } else if (response.data.UserType === 'TravelAgent') {
           history.push('/travelagentdashboard');
           window.location.href="/travelagentdashboard";
         } else {
-          history.push('/home');
+          history.push('/');
         }
       })
       .catch(error => {

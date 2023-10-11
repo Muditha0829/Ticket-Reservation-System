@@ -23,7 +23,7 @@ const AddTrainShedule = () => {
     FirstClassTicketPrice: '', 
     SecondClassTicketPrice: '', 
     ThirdClassTicketPrice: '', 
-    TrainStatus: 'Active',
+    TrainStatus: 'Sheduled',
   });
 
   const history = useHistory();

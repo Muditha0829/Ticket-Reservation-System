@@ -24,7 +24,7 @@ const NavBar = () => {
         />
       </Navbar.Brand>
       <Nav className="m3-auto">
-        {UserType === 'travelagent' && (
+        {UserType === 'TravelAgent' && (
           <>
                 <Nav.Link as={Link} to="/makereservation" style={{padding: "34px", color: "#00284d"}}>Add Train Booking</Nav.Link>
               <Nav.Link as={Link} to="/addtraveluser" style={{padding: "34px", color: "#00284d"}}>Add Traveler</Nav.Link>
@@ -32,7 +32,7 @@ const NavBar = () => {
         )}
       </Nav>
       <Nav className="m3-auto">
-        {UserType === 'backofficeuser' && (
+        {UserType === 'BackOfficeUser' && (
           <>
               <Nav.Link as={Link} to="/addtrain" style={{padding: "34px", color: "#00284d", marginRight: "740px"}}>Add Train</Nav.Link>
           </>

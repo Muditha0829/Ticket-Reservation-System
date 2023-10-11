@@ -31,7 +31,7 @@ const SideBar = () => {
       </div>
 
       <Nav className="flex-column">
-        {UserType === 'travelagent' && (
+        {UserType === 'TravelAgent' && (
           <>
             <Nav.Link as={Link} to="/travelagentdashboard" style={{ color: "white", padding: "15px", textAlign: "center" }}>Home</Nav.Link>
             <Nav.Link as={Link} to="/myreservations" style={{ color: "white", padding: "15px", textAlign: "center" }}>My Bookings</Nav.Link>
@@ -39,7 +39,7 @@ const SideBar = () => {
             <Nav.Link as={Link} to="/listtraveluser" style={{ color: "white", padding: "15px", textAlign: "center" }}>Traveler Management</Nav.Link>
           </>
         )}
-        {UserType === 'backofficeuser' && (
+        {UserType === 'BackOfficeUser' && (
           <>
             <Nav.Link as={Link} to="/backofficeuserdashboard" style={{ color: "white", padding: "15px", textAlign: "center" }}>Home</Nav.Link>
             <Nav.Link as={Link} to="/listtrain" style={{ color: "white", padding: "15px", textAlign: "center" }}>Train Management</Nav.Link>
