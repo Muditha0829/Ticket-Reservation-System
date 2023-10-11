@@ -5,20 +5,24 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
-import { Table, Button, Card, Container } from 'react-bootstrap';
+import { Table, Button, Card, Container, Form } from 'react-bootstrap';
 
 const GetAllTrainTicketBookings = () => {
   const { userId, setUser } = useContext(AuthContext);
   const [reservations, setReservations] = useState([]);
   const [cancellationLoading, setCancellationLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState('');
   const itemsPerPage = 5;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = reservations.slice(indexOfFirstItem, indexOfLastItem);
 
   const handlePagination = (pageNumber) => {
     setCurrentPage(pageNumber);
+  };
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
   };
 
   const handleCancel = (id, ReservationDate, BookingDate) => {
@@ -74,20 +78,36 @@ const GetAllTrainTicketBookings = () => {
     }
   }, [userId, setUser]);
 
+  const filteredReservations = reservations.filter(reservation =>
+    reservation.MainPassengerName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    reservation.TrainName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    reservation.NIC.toLowerCase().includes(searchQuery.toLowerCase())
+    // Adjust this condition based on your specific search criteria
+  );
+
+  const currentItems = filteredReservations.slice(indexOfFirstItem, indexOfLastItem);
+
   return (
     <Container className="text-center mt-5" style={{ height: "600px", paddingLeft: "250px", maxWidth: "1200px" }}>
-  <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
-  <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none', borderRadius: '15px', boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.1)' }}>
-    <Card.Body>
-      <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>All Train Bookings</Card.Title>
-      <Table striped bordered hover style={{ marginTop: '20px', width: "75%" }} className="mx-auto">
-        <thead>
-          <tr style={{ fontSize: "17px", fontFamily: "Montserrat" }}>
-            <th>Train Name</th>
-            <th>Main Passenger Name</th>
-            <th>Traveler NIC</th>
-            <th>Actions</th>
-          </tr>
+      <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
+      <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none', borderRadius: '15px', boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.1)' }}>
+        <Card.Body>
+          <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>All Train Bookings</Card.Title>
+          <Form.Control
+            type="text"
+            placeholder="Search by Train Name, Main Passenger Name, or NIC"
+            value={searchQuery}
+            onChange={handleSearchChange}
+            style={{ marginBottom: '10px' }}
+          />
+          <Table striped bordered hover style={{ marginTop: '20px', width: "75%" }} className="mx-auto">
+            <thead>
+              <tr style={{ fontSize: "17px", fontFamily: "Montserrat" }}>
+                <th>Train Name</th>
+                <th>Main Passenger Name</th>
+                <th>Traveler NIC</th>
+                <th>Actions</th>
+              </tr>
             </thead>
             <tbody>
               {currentItems.map(reservation => (
@@ -134,7 +154,7 @@ const GetAllTrainTicketBookings = () => {
               &#8249;  {/* Left arrow */}
             </span>
 
-            {Array.from({ length: Math.ceil(reservations.length / itemsPerPage) }).map((_, index) => (
+            {Array.from({ length: Math.ceil(filteredReservations.length / itemsPerPage) }).map((_, index) => (
               <span
                 key={index}
                 onClick={() => handlePagination(index + 1)}
@@ -146,8 +166,8 @@ const GetAllTrainTicketBookings = () => {
             ))}
 
             <span
-              onClick={() => currentPage < Math.ceil(reservations.length / itemsPerPage) && handlePagination(currentPage + 1)}
-              className={currentPage === Math.ceil(reservations.length / itemsPerPage) ? 'disabled' : ''}
+              onClick={() => currentPage < Math.ceil(filteredReservations.length / itemsPerPage) && handlePagination(currentPage + 1)}
+              className={currentPage === Math.ceil(filteredReservations.length / itemsPerPage) ? 'disabled' : ''}
               style={{ margin: "0 5px", cursor: "pointer" }}
             >
               &#8250;  {/* Right arrow */}
