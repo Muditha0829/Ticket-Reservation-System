@@ -1,4 +1,4 @@
-package com.example.trainbooking_mobileapp.trainmanagement;
+package com.example.trainbooking_mobileapp.TrainManagement;
 
 public class Train {
     private String TrainID;

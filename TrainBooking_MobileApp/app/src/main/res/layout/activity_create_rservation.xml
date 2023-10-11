@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/background"
-    tools:context=".trainbookingmanagement.TrainBookingActivity">
+    tools:context=".ReservationManagement.CreateReservationActivity">
 
     <include layout="@layout/top_bar" />
 

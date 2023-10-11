@@ -1,4 +1,4 @@
-package com.example.trainbooking_mobileapp.trainmanagement;
+package com.example.trainbooking_mobileapp.TrainManagement;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,12 +15,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.trainbooking_mobileapp.AboutUsActivity;
 import com.example.trainbooking_mobileapp.MainActivity;
 import com.example.trainbooking_mobileapp.R;
-import com.example.trainbooking_mobileapp.usermanagement.ProfileActivity;
-import com.example.trainbooking_mobileapp.usermanagement.SignInActivity;
+import com.example.trainbooking_mobileapp.UserManagement.UserProfileActivity;
+import com.example.trainbooking_mobileapp.UserManagement.SignInActivity;
 
 import java.util.List;
 
-public class TrainDetailActivity extends AppCompatActivity implements TrainApiClient.OnTrainDataReceivedListener {
+public class TrainDetailsActivity extends AppCompatActivity implements TrainApiClient.OnTrainDataReceivedListener {
 
     private RecyclerView recyclerView;
     private TrainListAdapter trainListAdapter;
@@ -54,7 +54,7 @@ public class TrainDetailActivity extends AppCompatActivity implements TrainApiCl
         Button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TrainDetailActivity.this, MainActivity.class);
+                Intent intent = new Intent(TrainDetailsActivity.this, MainActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
             }
@@ -63,7 +63,7 @@ public class TrainDetailActivity extends AppCompatActivity implements TrainApiCl
         Button5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TrainDetailActivity.this, ProfileActivity.class);
+                Intent intent = new Intent(TrainDetailsActivity.this, UserProfileActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
             }
@@ -71,7 +71,7 @@ public class TrainDetailActivity extends AppCompatActivity implements TrainApiCl
         Button6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TrainDetailActivity.this, AboutUsActivity.class);
+                Intent intent = new Intent(TrainDetailsActivity.this, AboutUsActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
             }

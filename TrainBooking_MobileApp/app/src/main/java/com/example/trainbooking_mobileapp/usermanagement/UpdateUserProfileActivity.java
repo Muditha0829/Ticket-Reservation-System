@@ -1,4 +1,4 @@
-package com.example.trainbooking_mobileapp.usermanagement;
+package com.example.trainbooking_mobileapp.UserManagement;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,7 +19,7 @@ import com.example.trainbooking_mobileapp.AboutUsActivity;
 import com.example.trainbooking_mobileapp.MainActivity;
 import com.example.trainbooking_mobileapp.R;
 
-public class UpdateUserActivity extends AppCompatActivity {
+public class UpdateUserProfileActivity extends AppCompatActivity {
 
     private EditText updatedUserNameEditText, updatedFirstNameEditText, updatedLastNameEditText, updatedPhoneNumberEditText, updatedEmailEditText, updatedGenderEditText;
     private Button updateButton;
@@ -41,7 +41,7 @@ public class UpdateUserActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update_user);
+        setContentView(R.layout.activity_update_user_profile);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -79,7 +79,7 @@ public class UpdateUserActivity extends AppCompatActivity {
         Button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(UpdateUserActivity.this, MainActivity.class);
+                Intent intent = new Intent(UpdateUserProfileActivity.this, MainActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
             }
@@ -88,7 +88,7 @@ public class UpdateUserActivity extends AppCompatActivity {
         Button5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(UpdateUserActivity.this, ProfileActivity.class);
+                Intent intent = new Intent(UpdateUserProfileActivity.this, UserProfileActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
             }
@@ -96,7 +96,7 @@ public class UpdateUserActivity extends AppCompatActivity {
         Button6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(UpdateUserActivity.this, AboutUsActivity.class);
+                Intent intent = new Intent(UpdateUserProfileActivity.this, AboutUsActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
             }
@@ -178,12 +178,12 @@ public class UpdateUserActivity extends AppCompatActivity {
         String contactNumber = updatedPhoneNumberEditText.getText().toString();
 
         if (!isValidEmail(email)) {
-            Toast.makeText(UpdateUserActivity.this, "Invalid email format.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(UpdateUserProfileActivity.this, "Invalid email format.", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (!isValidContactNumber(contactNumber)) {
-            Toast.makeText(UpdateUserActivity.this, "Invalid contact number format.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(UpdateUserProfileActivity.this, "Invalid contact number format.", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -204,12 +204,12 @@ public class UpdateUserActivity extends AppCompatActivity {
             public void onUserUpdated() {
                 setResult(RESULT_OK);
                 finish();
-                Toast.makeText(UpdateUserActivity.this, "User updated successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpdateUserProfileActivity.this, "User updated successfully", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onError(String errorMessage) {
-                Toast.makeText(UpdateUserActivity.this, "Error updating user", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpdateUserProfileActivity.this, "Error updating user", Toast.LENGTH_SHORT).show();
             }
         });
     }

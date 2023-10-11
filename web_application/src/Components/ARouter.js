@@ -15,11 +15,11 @@ import UpdateTrainShedule from './Train_Management/UpdateTrainShedule';
 import GetTrainShedule from './Train_Management/GetTrainShedule';
 import GetAllTrainShedules from './Train_Management/GetAllTrainShedules';
 
-import AddTrainTicketBooking from './Train_Ticket_Booking_Management/AddTrainTicketBooking';
-import UpdateTrainTicketBooking from './Train_Ticket_Booking_Management/UpdateTrainTicketBooking';
-import GetTrainTicketBooking from './Train_Ticket_Booking_Management/GetTrainTicketBooking';
-import GetMyTrainTicketBooking from './Train_Ticket_Booking_Management/GetMyTrainTicketBooking';
-import GetAllTrainTicketBookings from './Train_Ticket_Booking_Management/GetAllTrainTicketBookings';
+import AddTrainTicketBooking from './Ticket_Booking_Management/AddTrainTicketBooking';
+import UpdateTrainTicketBooking from './Ticket_Booking_Management/UpdateTrainTicketBooking';
+import GetTrainTicketBooking from './Ticket_Booking_Management/GetTrainTicketBooking';
+import GetMyTrainTicketBooking from './Ticket_Booking_Management/GetMyTrainTicketBooking';
+import GetAllTrainTicketBookings from './Ticket_Booking_Management/GetAllTrainTicketBookings';
 
 import Traveler from './Traveler_Management/BackOfficeUser/Traveler';
 

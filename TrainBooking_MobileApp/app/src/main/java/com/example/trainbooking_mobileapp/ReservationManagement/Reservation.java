@@ -1,8 +1,8 @@
-package com.example.trainbooking_mobileapp.trainbookingmanagement;
+package com.example.trainbooking_mobileapp.ReservationManagement;
 
 import java.io.Serializable;
 
-public class TrainBooking implements Serializable {
+public class Reservation implements Serializable {
     private String BookingID;
     private String TrainNumber;
     private String TrainName;
@@ -19,10 +19,10 @@ public class TrainBooking implements Serializable {
     private String TicketClass;
     private String TotalPrice;
 
-    public TrainBooking(String bookingID, String trainNumber, String trainName, String userID, String bookingDate,
-                        String reservationDate, int totalPassengers, String mainPassengerName, String contactNumber,
-                        String departureStation, String destinationStation, String email, String nic,
-                        String ticketClass, String totalPrice) {
+    public Reservation(String bookingID, String trainNumber, String trainName, String userID, String bookingDate,
+                       String reservationDate, int totalPassengers, String mainPassengerName, String contactNumber,
+                       String departureStation, String destinationStation, String email, String nic,
+                       String ticketClass, String totalPrice) {
         BookingID = bookingID;
         TrainNumber = trainNumber;
         TrainName = trainName;

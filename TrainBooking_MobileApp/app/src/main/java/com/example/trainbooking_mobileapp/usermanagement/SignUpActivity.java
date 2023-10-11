@@ -1,4 +1,4 @@
-package com.example.trainbooking_mobileapp.usermanagement;
+package com.example.trainbooking_mobileapp.UserManagement;
 
 import android.content.Intent;
 import android.os.Bundle;

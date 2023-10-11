@@ -1,4 +1,4 @@
-package com.example.trainbooking_mobileapp.trainbookingmanagement;
+package com.example.trainbooking_mobileapp.ReservationManagement;
 
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
@@ -16,7 +16,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrainBookingApiClient {
+public class ReservationApiClient {
 
     public interface OnTicketPricesReceivedListener {
         void onTicketPricesReceived(Double firstClassPrice, Double secondClassPrice, Double thirdClassPrice);
@@ -140,7 +140,7 @@ public class TrainBookingApiClient {
 
 
     public interface OnReservationDataReceivedListener {
-        void onReservationDataReceived(List<TrainBooking> reservationList);
+        void onReservationDataReceived(List<Reservation> reservationList);
         void onError(String errorMessage);
     }
 
@@ -171,7 +171,7 @@ public class TrainBookingApiClient {
             protected void onPostExecute(String response) {
                 if (response != null) {
                     try {
-                        List<TrainBooking> reservationList = parseJson(response);
+                        List<Reservation> reservationList = parseJson(response);
                         Log.d("ReservationClient", "API Response: " + response);  // Log the API response
                         listener.onReservationDataReceived(reservationList);
                     } catch (JSONException e) {
@@ -187,7 +187,7 @@ public class TrainBookingApiClient {
         task.execute(userId);
     }
 
-    public static void cancelReservationFromAPI(final TrainBooking reservation, final OnReservationCanceledListener listener) {
+    public static void cancelReservationFromAPI(final Reservation reservation, final OnReservationCanceledListener listener) {
         AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>() {
             @Override
             protected String doInBackground(Void... voids) {
@@ -248,8 +248,8 @@ public class TrainBookingApiClient {
         void onError(String errorMessage);
     }
 
-    private List<TrainBooking> parseJson(String json) throws JSONException {
-        List<TrainBooking> reservationList = new ArrayList<>();
+    private List<Reservation> parseJson(String json) throws JSONException {
+        List<Reservation> reservationList = new ArrayList<>();
 
         try {
             JSONArray jsonArray = new JSONArray(json);
@@ -274,7 +274,7 @@ public class TrainBookingApiClient {
                 String bookingDate = jsonObject.optString("BookingDate");
                 Log.d("ReservationApiClient", "Parsed reservations: " + reservationList.size());
 
-                TrainBooking reservation = new TrainBooking(ID, trainNumber, trainName, userID, bookingDate,
+                Reservation reservation = new Reservation(ID, trainNumber, trainName, userID, bookingDate,
                         reservationDate, totalPassengers, mainPassengerName, phone, departureStation, destinationStation, email, nic, ticketClass, totalPrice);
 
                 reservationList.add(reservation);
@@ -287,7 +287,7 @@ public class TrainBookingApiClient {
         return reservationList;
     }
 
-    public static void updateReservationInAPI(final TrainBooking reservation, final OnReservationUpdatedListener listener) {
+    public static void updateReservationInAPI(final Reservation reservation, final OnReservationUpdatedListener listener) {
         AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>() {
             @Override
             protected String doInBackground(Void... voids) {

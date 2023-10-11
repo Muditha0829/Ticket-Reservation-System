@@ -1,4 +1,4 @@
-package com.example.trainbooking_mobileapp.trainmanagement;
+package com.example.trainbooking_mobileapp.TrainManagement;
 
 import android.content.Context;
 import android.util.Log;

@@ -8,7 +8,7 @@
     android:gravity="center"
 
     android:background="@drawable/background"
-    tools:context=".usermanagement.ProfileActivity">
+    tools:context=".UserManagement.UserProfileActivity">
 
     <include layout="@layout/top_bar" />
 

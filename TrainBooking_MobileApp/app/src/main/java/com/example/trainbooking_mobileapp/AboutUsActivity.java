@@ -6,15 +6,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.TextView;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.example.trainbooking_mobileapp.MainActivity;
-import com.example.trainbooking_mobileapp.R;
-import com.example.trainbooking_mobileapp.usermanagement.ProfileActivity;
-import com.example.trainbooking_mobileapp.usermanagement.SignInActivity;
+import com.example.trainbooking_mobileapp.UserManagement.UserProfileActivity;
+import com.example.trainbooking_mobileapp.UserManagement.SignInActivity;
 
 public class AboutUsActivity extends AppCompatActivity {
 
@@ -51,7 +49,7 @@ public class AboutUsActivity extends AppCompatActivity {
         Button5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AboutUsActivity.this, ProfileActivity.class);
+                Intent intent = new Intent(AboutUsActivity.this, UserProfileActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
             }

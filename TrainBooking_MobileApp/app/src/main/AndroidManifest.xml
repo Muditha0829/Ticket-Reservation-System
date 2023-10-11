@@ -26,7 +26,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".trainbookingmanagement.TrainBookingViewActivity"
+            android:name=".ReservationManagement.ReservationViewActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <meta-data
@@ -34,7 +34,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".usermanagement.ProfileActivity"
+            android:name=".UserManagement.UserProfileActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <meta-data
@@ -42,7 +42,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".trainbookingmanagement.UpdateTrainBookingActivity"
+            android:name=".ReservationManagement.UpdateReservationActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <meta-data
@@ -50,7 +50,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".usermanagement.UpdateUserActivity"
+            android:name=".UserManagement.UpdateUserProfileActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <meta-data
@@ -58,7 +58,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".trainbookingmanagement.TrainBookingActivity"
+            android:name=".ReservationManagement.CreateReservationActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <meta-data
@@ -66,7 +66,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".trainbookingmanagement.TrainBookingDetailActivity"
+            android:name=".ReservationManagement.reservationDetailsActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <meta-data
@@ -74,7 +74,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".SplashActivity"
+            android:name=".SplashScreenActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
@@ -84,7 +84,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".usermanagement.SignInActivity"
+            android:name=".UserManagement.SignInActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <meta-data
@@ -92,7 +92,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".usermanagement.SignUpActivity"
+            android:name=".UserManagement.SignUpActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <meta-data
@@ -100,7 +100,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".trainmanagement.TrainDetailActivity"
+            android:name=".TrainManagement.TrainDetailsActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <meta-data

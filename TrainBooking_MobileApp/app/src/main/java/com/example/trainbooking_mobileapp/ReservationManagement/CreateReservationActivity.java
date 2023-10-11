@@ -1,4 +1,4 @@
-package com.example.trainbooking_mobileapp.trainbookingmanagement;
+package com.example.trainbooking_mobileapp.ReservationManagement;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -22,9 +22,8 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.trainbooking_mobileapp.AboutUsActivity;
 import com.example.trainbooking_mobileapp.MainActivity;
 import com.example.trainbooking_mobileapp.R;
-import com.example.trainbooking_mobileapp.usermanagement.ProfileActivity;
-import com.example.trainbooking_mobileapp.usermanagement.SignInActivity;
-import com.example.trainbooking_mobileapp.usermanagement.SignUpActivity;
+import com.example.trainbooking_mobileapp.UserManagement.UserProfileActivity;
+import com.example.trainbooking_mobileapp.UserManagement.SignInActivity;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -35,7 +34,7 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class TrainBookingActivity extends AppCompatActivity {
+public class CreateReservationActivity extends AppCompatActivity {
 
     private EditText editTextMainPassengerName;
     private EditText editTextNIC;
@@ -48,7 +47,7 @@ public class TrainBookingActivity extends AppCompatActivity {
     private Spinner ticketClassSpinner;
     private Spinner totalPassengersSpinner, trainNameSpinner;
     private String userID;
-    private TrainBookingApiClient trainBookingApiClient;
+    private ReservationApiClient trainBookingApiClient;
     private Double firstClassTicketPrice;
     private Double secondClassTicketPrice;
     private Double thirdClassTicketPrice;
@@ -71,7 +70,7 @@ public class TrainBookingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.reservation_layout);
+        setContentView(R.layout.activity_create_rservation);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -108,7 +107,7 @@ public class TrainBookingActivity extends AppCompatActivity {
         Button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TrainBookingActivity.this, MainActivity.class);
+                Intent intent = new Intent(CreateReservationActivity.this, MainActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
 
@@ -118,7 +117,7 @@ public class TrainBookingActivity extends AppCompatActivity {
         Button5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TrainBookingActivity.this, ProfileActivity.class);
+                Intent intent = new Intent(CreateReservationActivity.this, UserProfileActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
 
@@ -127,7 +126,7 @@ public class TrainBookingActivity extends AppCompatActivity {
         Button6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TrainBookingActivity.this, AboutUsActivity.class);
+                Intent intent = new Intent(CreateReservationActivity.this, AboutUsActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
             }
@@ -154,15 +153,15 @@ public class TrainBookingActivity extends AppCompatActivity {
         spinnerTicketClass.setAdapter(adaptertwo);
 
 
-        trainBookingApiClient = new TrainBookingApiClient();
+        trainBookingApiClient = new ReservationApiClient();
 
         Spinner trainNameSpinner = findViewById(R.id.trainNameSpinner);
 
-        trainBookingApiClient.getTrains(new TrainBookingApiClient.OnTrainNamesReceivedListener() {
+        trainBookingApiClient.getTrains(new ReservationApiClient.OnTrainNamesReceivedListener() {
             @Override
             public void onTrainNamesReceived(List<String> trainNames) {
                 // Create an ArrayAdapter and set it to the spinner
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(TrainBookingActivity.this, android.R.layout.simple_spinner_item, trainNames);
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(CreateReservationActivity.this, android.R.layout.simple_spinner_item, trainNames);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 trainNameSpinner.setAdapter(adapter);
             }
@@ -305,17 +304,17 @@ public class TrainBookingActivity extends AppCompatActivity {
         String bookingDate = currentDateTime.toString();
 
         if (!isValidEmail(email)) {
-            Toast.makeText(TrainBookingActivity.this, "Invalid email format.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(CreateReservationActivity.this, "Invalid email format.", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (!isValidNIC(nic)) {
-            Toast.makeText(TrainBookingActivity.this, "Invalid NIC format.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(CreateReservationActivity.this, "Invalid NIC format.", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (!isValidContactNumber(phone)) {
-            Toast.makeText(TrainBookingActivity.this, "Invalid contact number format.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(CreateReservationActivity.this, "Invalid contact number format.", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -326,7 +325,7 @@ public class TrainBookingActivity extends AppCompatActivity {
         int totalPassengers = Integer.parseInt(totalPassengersString);
         String trainName = trainNameSpinner.getSelectedItem().toString();
 
-        TrainBooking reservation = new TrainBooking(null, "", trainName, userID, bookingDate,
+        Reservation reservation = new Reservation(null, "", trainName, userID, bookingDate,
                 reservationDate, totalPassengers, mainPassengerName, phone, departureStation, destinationStation, email, nic, ticketClass, "");
 
         CreateReservationTask task = new CreateReservationTask(userID);
@@ -335,7 +334,7 @@ public class TrainBookingActivity extends AppCompatActivity {
         Log.d("ReservationActivity", "Reservation: " + reservation);
     }
 
-    private class CreateReservationTask extends AsyncTask<TrainBooking, Void, String> {
+    private class CreateReservationTask extends AsyncTask<Reservation, Void, String> {
         private String userID;
 
         public CreateReservationTask(String userID) {
@@ -343,8 +342,8 @@ public class TrainBookingActivity extends AppCompatActivity {
         }
 
         @Override
-        protected String doInBackground(TrainBooking... reservations) {
-            TrainBooking reservation = reservations[0];
+        protected String doInBackground(Reservation... reservations) {
+            Reservation reservation = reservations[0];
             try {
                 URL url = new URL("http://pasinduperera-001-site1.atempurl.com/api/trainbooking/createticketbooking");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -379,13 +378,13 @@ public class TrainBookingActivity extends AppCompatActivity {
         protected void onPostExecute(String response) {
             if (response != null) {
                 Log.d("ReservationActivity", "Reservation created successfully. Response: " + response);
-                Toast.makeText(TrainBookingActivity.this, "Reservation created successfully!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(TrainBookingActivity.this, TrainBookingDetailActivity.class);
+                Toast.makeText(CreateReservationActivity.this, "Reservation created successfully!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(CreateReservationActivity.this, reservationDetailsActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
             } else {
                 Log.e("ReservationActivity", "Error creating reservation.");
-                Toast.makeText(TrainBookingActivity.this, "Reservation date must be within 30 days from the your booking date.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateReservationActivity.this, "Reservation date must be within 30 days from the your booking date.", Toast.LENGTH_SHORT).show();
             }
         }
     }

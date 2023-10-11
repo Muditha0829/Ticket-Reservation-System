@@ -1,4 +1,4 @@
-package com.example.trainbooking_mobileapp.usermanagement;
+package com.example.trainbooking_mobileapp.UserManagement;
 
 import java.io.Serializable;
 

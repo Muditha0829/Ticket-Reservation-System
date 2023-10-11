@@ -1,4 +1,4 @@
-package com.example.trainbooking_mobileapp.trainbookingmanagement;
+package com.example.trainbooking_mobileapp.ReservationManagement;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
@@ -23,26 +23,26 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.trainbooking_mobileapp.AboutUsActivity;
 import com.example.trainbooking_mobileapp.MainActivity;
 import com.example.trainbooking_mobileapp.R;
-import com.example.trainbooking_mobileapp.usermanagement.ProfileActivity;
-import com.example.trainbooking_mobileapp.usermanagement.SignInActivity;
+import com.example.trainbooking_mobileapp.UserManagement.UserProfileActivity;
+import com.example.trainbooking_mobileapp.UserManagement.SignInActivity;
 
 import java.util.List;
 
-public class UpdateTrainBookingActivity extends AppCompatActivity {
+public class UpdateReservationActivity extends AppCompatActivity {
 
     private EditText mainPassengerNameEditText, nicEditText, departureStationEditText,
             destinationStationEditText,
             emailEditText, contactNumberEditText;
     private TextView reservationDateTextView;
     private Button updateButton;
-    private TrainBooking reservation;
+    private Reservation reservation;
 
     private Toolbar toolbar;
     private String userID;
 
     private Spinner ticketClassSpinner, totalPassengersSpinner, trainNameSpinner;
 
-    private TrainBookingApiClient trainBookingApiClient;
+    private ReservationApiClient trainBookingApiClient;
 
     @SuppressLint("LongLogTag")
     @Override
@@ -55,7 +55,7 @@ public class UpdateTrainBookingActivity extends AppCompatActivity {
 
         setTitle("Update Reservation");
         userID = getIntent().getStringExtra("userID");
-        reservation = (TrainBooking) getIntent().getSerializableExtra("reservation");
+        reservation = (Reservation) getIntent().getSerializableExtra("reservation");
 
         userID = getIntent().getStringExtra("userID");
         Log.d("ReservationDetailActivity", "Received userID: " + userID);
@@ -87,7 +87,7 @@ public class UpdateTrainBookingActivity extends AppCompatActivity {
         Button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(UpdateTrainBookingActivity.this, MainActivity.class);
+                Intent intent = new Intent(UpdateReservationActivity.this, MainActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
             }
@@ -96,7 +96,7 @@ public class UpdateTrainBookingActivity extends AppCompatActivity {
         Button5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(UpdateTrainBookingActivity.this, ProfileActivity.class);
+                Intent intent = new Intent(UpdateReservationActivity.this, UserProfileActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
             }
@@ -104,7 +104,7 @@ public class UpdateTrainBookingActivity extends AppCompatActivity {
         Button6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(UpdateTrainBookingActivity.this, AboutUsActivity.class);
+                Intent intent = new Intent(UpdateReservationActivity.this, AboutUsActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
             }
@@ -128,14 +128,14 @@ public class UpdateTrainBookingActivity extends AppCompatActivity {
         adaptertwo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerTicketClass.setAdapter(adaptertwo);
 
-        trainBookingApiClient = new TrainBookingApiClient();
+        trainBookingApiClient = new ReservationApiClient();
 
         Spinner trainNameSpinner = findViewById(R.id.trainNameSpinner);
 
-        trainBookingApiClient.getTrains(new TrainBookingApiClient.OnTrainNamesReceivedListener() {
+        trainBookingApiClient.getTrains(new ReservationApiClient.OnTrainNamesReceivedListener() {
             @Override
             public void onTrainNamesReceived(List<String> trainNames) {
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(UpdateTrainBookingActivity.this, android.R.layout.simple_spinner_item, trainNames);
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(UpdateReservationActivity.this, android.R.layout.simple_spinner_item, trainNames);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 trainNameSpinner.setAdapter(adapter);
             }
@@ -210,40 +210,40 @@ public class UpdateTrainBookingActivity extends AppCompatActivity {
         String reservationDate = reservationDateTextView.getText().toString();
 
         if (!isValidEmail(email)) {
-            Toast.makeText(UpdateTrainBookingActivity.this, "Invalid email format.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(UpdateReservationActivity.this, "Invalid email format.", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (!isValidNIC(nic)) {
-            Toast.makeText(UpdateTrainBookingActivity.this, "Invalid NIC format.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(UpdateReservationActivity.this, "Invalid NIC format.", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (!isValidContactNumber(contactNumber)) {
-            Toast.makeText(UpdateTrainBookingActivity.this, "Invalid contact number format.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(UpdateReservationActivity.this, "Invalid contact number format.", Toast.LENGTH_SHORT).show();
             return;
         }
 
         Log.d("Updateuser","userid3: " + reservation.getUserID());
 
-        TrainBooking updatedReservation = new TrainBooking(reservation.getBookingID(), reservation.getTrainNumber(), reservation.getTrainName(), userID, reservation.getBookingDate(),
+        Reservation updatedReservation = new Reservation(reservation.getBookingID(), reservation.getTrainNumber(), reservation.getTrainName(), userID, reservation.getBookingDate(),
                 reservationDate, reservation.getTotalPassengers(), mainPassengerName, contactNumber, departureStation, destinationStation, email, nic, reservation.getTicketClass(), reservation.getTotalPrice());
 
-        TrainBookingApiClient.updateReservationInAPI(updatedReservation, new TrainBookingApiClient.OnReservationUpdatedListener() {
+        ReservationApiClient.updateReservationInAPI(updatedReservation, new ReservationApiClient.OnReservationUpdatedListener() {
             @Override
             public void onReservationUpdated() {
-                Intent intent = new Intent(UpdateTrainBookingActivity.this, TrainBookingDetailActivity.class);
+                Intent intent = new Intent(UpdateReservationActivity.this, reservationDetailsActivity.class);
                 intent.putExtra("userID", userID);
                 Log.d("Updateuser","userid4: " + userID);
                 startActivity(intent);
 
-                Toast.makeText(UpdateTrainBookingActivity.this, "Reservation updated successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpdateReservationActivity.this, "Reservation updated successfully", Toast.LENGTH_SHORT).show();
                 finish();
             }
 
             @Override
             public void onError(String errorMessage) {
-                Toast.makeText(UpdateTrainBookingActivity.this, "You can only update reservations at least 5 days before the your ticket booking date", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpdateReservationActivity.this, "You can only update reservations at least 5 days before the your ticket booking date", Toast.LENGTH_SHORT).show();
             }
         });
     }

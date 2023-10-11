@@ -8,15 +8,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 
-import com.example.trainbooking_mobileapp.R;
-import com.example.trainbooking_mobileapp.trainbookingmanagement.TrainBookingActivity;
-import com.example.trainbooking_mobileapp.trainbookingmanagement.TrainBookingDetailActivity;
-import com.example.trainbooking_mobileapp.trainmanagement.TrainDetailActivity;
-import com.example.trainbooking_mobileapp.usermanagement.ProfileActivity;
-import com.example.trainbooking_mobileapp.usermanagement.SignInActivity;
+import com.example.trainbooking_mobileapp.ReservationManagement.CreateReservationActivity;
+import com.example.trainbooking_mobileapp.ReservationManagement.reservationDetailsActivity;
+import com.example.trainbooking_mobileapp.TrainManagement.TrainDetailsActivity;
+import com.example.trainbooking_mobileapp.UserManagement.UserProfileActivity;
+import com.example.trainbooking_mobileapp.UserManagement.SignInActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -55,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         Button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, TrainBookingActivity.class);
+                Intent intent = new Intent(MainActivity.this, CreateReservationActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
                 Log.d("mainActivity", "Received userID: " + userID);
@@ -64,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         Button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, TrainBookingDetailActivity.class);
+                Intent intent = new Intent(MainActivity.this, reservationDetailsActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
                 Log.d("mainActivity", "Received userID: " + userID);
@@ -73,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         Button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, TrainDetailActivity.class);
+                Intent intent = new Intent(MainActivity.this, TrainDetailsActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
                 Log.d("mainActivity", "Received userID: " + userID);
@@ -82,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         Button5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                Intent intent = new Intent(MainActivity.this, UserProfileActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
             }

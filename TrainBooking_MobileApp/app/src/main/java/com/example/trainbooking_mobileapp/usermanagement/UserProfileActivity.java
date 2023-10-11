@@ -1,4 +1,4 @@
-package com.example.trainbooking_mobileapp.usermanagement;
+package com.example.trainbooking_mobileapp.UserManagement;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -31,7 +31,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class ProfileActivity extends AppCompatActivity {
+public class UserProfileActivity extends AppCompatActivity {
 
     private TextView nicTextView;
     private TextView firstNameTextView;
@@ -48,7 +48,7 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.profile_activity);
+        setContentView(R.layout.activity_user_profile);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -80,11 +80,11 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (user != null) {
                     Log.d("ProfileActivity", "User ID: " + userID);
-                    Intent intent = new Intent(ProfileActivity.this, UpdateUserActivity.class);
+                    Intent intent = new Intent(UserProfileActivity.this, UpdateUserProfileActivity.class);
                     intent.putExtra("user", user);
                     startActivityForResult(intent, 1001);
                 } else {
-                    Toast.makeText(ProfileActivity.this, "User data not available", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserProfileActivity.this, "User data not available", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -96,7 +96,7 @@ public class ProfileActivity extends AppCompatActivity {
                     new DeactivateUserTask().execute(userID);
                     Log.d("DeactivateUserTask", "Getid: " + userID);
                 } else {
-                    Toast.makeText(ProfileActivity.this, "User data not available", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserProfileActivity.this, "User data not available", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -107,7 +107,7 @@ public class ProfileActivity extends AppCompatActivity {
         Button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+                Intent intent = new Intent(UserProfileActivity.this, MainActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
 
@@ -117,7 +117,7 @@ public class ProfileActivity extends AppCompatActivity {
         Button5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ProfileActivity.this, ProfileActivity.class);
+                Intent intent = new Intent(UserProfileActivity.this, UserProfileActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
             }
@@ -125,7 +125,7 @@ public class ProfileActivity extends AppCompatActivity {
         Button6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ProfileActivity.this, AboutUsActivity.class);
+                Intent intent = new Intent(UserProfileActivity.this, AboutUsActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
             }
@@ -171,11 +171,11 @@ public class ProfileActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String response) {
             if (response != null && response.equals("Success")) {
-                Toast.makeText(ProfileActivity.this, "User deactivated successfully", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(ProfileActivity.this, SignInActivity.class);
+                Toast.makeText(UserProfileActivity.this, "User deactivated successfully", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(UserProfileActivity.this, SignInActivity.class);
                 startActivity(intent);
             } else {
-                Toast.makeText(ProfileActivity.this, "Error deactivating user", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UserProfileActivity.this, "Error deactivating user", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -282,7 +282,7 @@ public class ProfileActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             } else {
-                Toast.makeText(ProfileActivity.this, "Error fetching user data", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UserProfileActivity.this, "Error fetching user data", Toast.LENGTH_SHORT).show();
             }
         }
     }

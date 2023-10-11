@@ -1,4 +1,4 @@
-package com.example.trainbooking_mobileapp.trainbookingmanagement;
+package com.example.trainbooking_mobileapp.ReservationManagement;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,14 +14,14 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.trainbooking_mobileapp.AboutUsActivity;
 import com.example.trainbooking_mobileapp.MainActivity;
 import com.example.trainbooking_mobileapp.R;
-import com.example.trainbooking_mobileapp.usermanagement.ProfileActivity;
-import com.example.trainbooking_mobileapp.usermanagement.SignInActivity;
+import com.example.trainbooking_mobileapp.UserManagement.UserProfileActivity;
+import com.example.trainbooking_mobileapp.UserManagement.SignInActivity;
 
-public class TrainBookingViewActivity extends AppCompatActivity {
+public class ReservationViewActivity extends AppCompatActivity {
 
     private TextView mainPassengerNameTextText, nicTextText, trainNameTextText, departureStationTextText,
             destinationStationTextText, totalPassengersTextText, ticketClassTextText, emailTextText, contactNumberTextText, reservationDateTextText, bookingDateTextText;
-    private TrainBooking reservation;
+    private Reservation reservation;
 
     private Toolbar toolbar;
     private String userID;
@@ -36,7 +36,7 @@ public class TrainBookingViewActivity extends AppCompatActivity {
 
         setTitle("Reservation Details");
 
-        reservation = (TrainBooking) getIntent().getSerializableExtra("reservation");
+        reservation = (Reservation) getIntent().getSerializableExtra("reservation");
 
         mainPassengerNameTextText = findViewById(R.id.mainPassengerNameTextText);
         nicTextText = findViewById(R.id.nicTextText);
@@ -59,7 +59,7 @@ public class TrainBookingViewActivity extends AppCompatActivity {
         Button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TrainBookingViewActivity.this, MainActivity.class);
+                Intent intent = new Intent(ReservationViewActivity.this, MainActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
             }
@@ -68,7 +68,7 @@ public class TrainBookingViewActivity extends AppCompatActivity {
         Button5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TrainBookingViewActivity.this, ProfileActivity.class);
+                Intent intent = new Intent(ReservationViewActivity.this, UserProfileActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
             }
@@ -76,7 +76,7 @@ public class TrainBookingViewActivity extends AppCompatActivity {
         Button6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TrainBookingViewActivity.this, AboutUsActivity.class);
+                Intent intent = new Intent(ReservationViewActivity.this, AboutUsActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
             }

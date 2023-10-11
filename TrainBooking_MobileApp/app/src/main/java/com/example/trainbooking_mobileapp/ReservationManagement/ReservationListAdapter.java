@@ -1,4 +1,4 @@
-package com.example.trainbooking_mobileapp.trainbookingmanagement;
+package com.example.trainbooking_mobileapp.ReservationManagement;
 
 import android.app.Activity;
 import android.content.Context;
@@ -18,14 +18,14 @@ import com.example.trainbooking_mobileapp.R;
 
 import java.util.List;
 
-public class TrainBookingListAdapter extends RecyclerView.Adapter<TrainBookingListAdapter.ViewHolder> {
+public class ReservationListAdapter extends RecyclerView.Adapter<ReservationListAdapter.ViewHolder> {
 
-    private List<TrainBooking> reservationList;
+    private List<Reservation> reservationList;
     private LayoutInflater inflater;
     private Context context;
     private String userID;
 
-    public TrainBookingListAdapter(Context context, List<TrainBooking> reservationList) {
+    public ReservationListAdapter(Context context, List<Reservation> reservationList) {
         this.inflater = LayoutInflater.from(context);
         this.reservationList = reservationList;
         this.context = context;
@@ -45,7 +45,7 @@ public class TrainBookingListAdapter extends RecyclerView.Adapter<TrainBookingLi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        TrainBooking reservation = reservationList.get(position);
+        Reservation reservation = reservationList.get(position);
 
         Log.d("ReservationListAdapter", "Reservation ID: " + reservation.getBookingID());
 
@@ -98,8 +98,8 @@ public class TrainBookingListAdapter extends RecyclerView.Adapter<TrainBookingLi
         }
     }
 
-    private void cancelReservation(TrainBooking reservation) {
-        TrainBookingApiClient.cancelReservationFromAPI(reservation, new TrainBookingApiClient.OnReservationCanceledListener() {
+    private void cancelReservation(Reservation reservation) {
+        ReservationApiClient.cancelReservationFromAPI(reservation, new ReservationApiClient.OnReservationCanceledListener() {
             @Override
             public void onReservationCanceled() {
                 reservationList.remove(reservation);
@@ -114,15 +114,15 @@ public class TrainBookingListAdapter extends RecyclerView.Adapter<TrainBookingLi
         });
     }
 
-    private void openUpdateReservationActivity(TrainBooking reservation) {
-        Intent intent = new Intent(context, UpdateTrainBookingActivity.class);
+    private void openUpdateReservationActivity(Reservation reservation) {
+        Intent intent = new Intent(context, UpdateReservationActivity.class);
         intent.putExtra("reservation", reservation);
         intent.putExtra("userID", userID);
         ((Activity) context).startActivityForResult(intent, 1001);
     }
 
-    private void openViewReservationActivity(TrainBooking reservation) {
-        Intent intent = new Intent(context, TrainBookingViewActivity.class);
+    private void openViewReservationActivity(Reservation reservation) {
+        Intent intent = new Intent(context, ReservationViewActivity.class);
         intent.putExtra("reservation", reservation);
         intent.putExtra("userID", userID);
         ((Activity) context).startActivityForResult(intent, 1001);
