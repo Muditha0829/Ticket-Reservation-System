@@ -45,6 +45,7 @@ const GetMyTrainTicketBooking = () => {
     }
   
     setCancellationLoading(true);
+    // Function to cancel booking data.
     axios.put(`http://localhost:57549/api/trainbooking/cancelticketbooking/${id}`)
       .then(response => {
         console.log(`Booking with ID ${id} has been cancelled.`);
@@ -68,6 +69,7 @@ const GetMyTrainTicketBooking = () => {
       setUser(saveduserID);
     }
     if (userId) {
+      // Function to fetch booking data.
       axios.get(`http://localhost:57549/api/trainbooking/getallticketbookings/${userId}`)
         .then(response => {
           setReservations(response.data);

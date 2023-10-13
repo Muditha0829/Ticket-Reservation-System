@@ -35,9 +35,6 @@ const UpdateTrainTicketBooking = () => {
     Email: '',
     ContactNumber: '',
     TotalPrice: ''
-    // ticketPrice1: 0,
-    // ticketPrice2: 0,
-    // ticketPrice3: 0,
   });
 
   // Getting history object for navigation
@@ -119,21 +116,25 @@ const UpdateTrainTicketBooking = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Handle NIC Validation
     if (!IsValidNIC(updatedReservationData.NIC)) {
       toast.error('Invalid NIC format.');
       return;
     }
 
+    // Handle Contact Number Validation
     if (!IsValidContactNumber(updatedReservationData.ContactNumber)) {
       toast.error('Invalid Contact Number format.');
       return;
     }
 
+    // Handle Ticket Class Validation
     if (!IsValidTicketClass(updatedReservationData.TicketClass)) {
       toast.error('Invalid ticket Class format.');
       return;
     }
 
+    // Handle update booking data
     axios.put(`http://localhost:57549/api/trainbooking/updateticketbooking/${BookingID}`, updatedReservationData)
       .then(response => {
         console.log('Reservation updated:', response.data);
@@ -161,6 +162,7 @@ const UpdateTrainTicketBooking = () => {
     }
   }, [BookingID]);
   
+  // Effect to fetch all shedule trains
   useEffect(() => {
     let isMounted = true;
 

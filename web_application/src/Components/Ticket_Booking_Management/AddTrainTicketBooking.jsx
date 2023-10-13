@@ -126,16 +126,19 @@ const AddTrainTicketBooking = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Handle NIC Validation
     if (!IsValidNIC(formData.NIC)) {
       toast.error('Invalid NIC format.');
       return;
     }
 
+    // Handle Contact Number Validation
     if (!IsValidContactNumber(formData.ContactNumber)) {
       toast.error('Invalid Contact Number format.');
       return;
     }
 
+    // Handle Ticket Class Validation
     if (!IsValidTicketClass(formData.TicketClass)) {
       toast.error('Invalid ticket Class format.');
       return;
