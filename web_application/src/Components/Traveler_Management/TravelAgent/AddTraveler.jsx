@@ -69,7 +69,7 @@ const AddTraveller = () => {
     }
   
     // Send POST request to create a new traveler
-    axios.post('http://localhost:57549/api/users/signup', formData, {
+    axios.post('http://pasinduperera-001-site1.atempurl.com/api/users/signup', formData, {
       headers: {
         'Content-Type': 'application/json',
       },

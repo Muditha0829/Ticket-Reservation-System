@@ -88,7 +88,7 @@ const AddTrainTicketBooking = () => {
   // Function to fetch ticket price for a selected train
   const fetchTicketPrice = (id) => {
     console.log(`Fetching ticket price for train ID: ${id}`);
-    axios.get(`http://localhost:57549/api/trains/gettrain/${id}`)
+    axios.get(`http://pasinduperera-001-site1.atempurl.com/api/trains/gettrain/${id}`)
       .then(response => {
         const ticketPrice1 = response.data.FirstClassTicketPrice;
         const ticketPrice2 = response.data.SecondClassTicketPrice; 
@@ -108,7 +108,7 @@ const AddTrainTicketBooking = () => {
   
 // Fetches the list of trains and sets ticket prices based on total passengers and ticket class
   useEffect(() => {
-    axios.get('http://localhost:57549/api/trains/getalltrains')
+    axios.get('http://pasinduperera-001-site1.atempurl.com/api/trains/getalltrains')
       .then(response => {
         setTrainData(response.data);
         calculateTotalPrice();
@@ -149,7 +149,7 @@ const AddTrainTicketBooking = () => {
       BookingDate: getCurrentDate()
     });
   
-    axios.post('http://localhost:57549/api/trainbooking/createticketbooking', formData)
+    axios.post('http://pasinduperera-001-site1.atempurl.com/api/trainbooking/createticketbooking', formData)
       .then(response => {
         console.log('Reservation created:', response.data);
         toast.success("Reservation Added");

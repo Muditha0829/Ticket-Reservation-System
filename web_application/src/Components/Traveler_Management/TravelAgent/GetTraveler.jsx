@@ -18,7 +18,7 @@ const GetTraveler = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:57549/api/users/getuser/${UserID}`);
+        const response = await axios.get(`http://pasinduperera-001-site1.atempurl.com/api/users/getuser/${UserID}`);
         setUser(response.data);
       } catch (error) {
         console.error('Error fetching user:', error);

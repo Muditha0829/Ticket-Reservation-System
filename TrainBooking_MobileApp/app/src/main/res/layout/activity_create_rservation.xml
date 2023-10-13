@@ -46,7 +46,7 @@
                     android:layout_marginLeft="87dp"
                     android:textColor="@color/white"
                     android:textColorHint="@color/white"
-                    android:background="@color/white" />
+                    android:background="#8BC1C8" />
 
             </LinearLayout>
 
@@ -184,7 +184,7 @@
                     android:layout_marginLeft="78dp"
                     android:textColor="@color/white"
                     android:textColorHint="@color/white"
-                    android:background="#B2FFFFFF"
+                    android:background="#8BC1C8"
                     style="@style/SpinnerDropDownItem" />
 
             </LinearLayout>

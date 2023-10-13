@@ -17,7 +17,7 @@ const GetAllTravelers = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('http://localhost:57549/api/users/getallusers');
+        const response = await axios.get('http://pasinduperera-001-site1.atempurl.com/api/users/getallusers');
         setUsers(response.data);
       } catch (error) {
         console.error('Error fetching users:', error);
@@ -30,7 +30,7 @@ const GetAllTravelers = () => {
   // Function to handle user deletion
   const handleDeleteUser = async (userID) => {
     try {
-      await axios.delete(`http://localhost:57549/api/users/deleteuser/${userID}`);
+      await axios.delete(`http://pasinduperera-001-site1.atempurl.com/api/users/deleteuser/${userID}`);
 
       const updatedUsers = users.filter(user => user.UserID !== userID);
       setUsers(updatedUsers);

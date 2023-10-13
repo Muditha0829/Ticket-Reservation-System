@@ -47,9 +47,9 @@
                         android:layout_width="128dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="87dp"
+                        android:background="#8BC1C8"
                         android:textColor="@color/white"
-                        android:textColorHint="@color/white"
-                        android:background="@color/white" />
+                        android:textColorHint="@color/white" />
 
                 </LinearLayout>
 
@@ -102,28 +102,6 @@
                         android:background="@android:color/transparent"/>
 
                 </RelativeLayout>
-
-<!--                <EditText-->
-<!--                    android:id="@+id/trainNumberEditText"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginBottom="16dp"-->
-<!--                    android:background="@drawable/rounded_border"-->
-<!--                    android:hint="Train Number"-->
-<!--                    android:padding="8dp"-->
-<!--                    android:textColor="@color/white"-->
-<!--                    android:textColorHint="@color/white" />-->
-
-<!--                <EditText-->
-<!--                    android:id="@+id/trainNameEditText"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginBottom="16dp"-->
-<!--                    android:background="@drawable/rounded_border"-->
-<!--                    android:hint="Train Name"-->
-<!--                    android:padding="8dp"-->
-<!--                    android:textColor="@color/white"-->
-<!--                    android:textColorHint="@color/white" />-->
 
                 <EditText
                     android:id="@+id/departureStationEditText"
@@ -195,7 +173,7 @@
                         android:layout_marginLeft="78dp"
                         android:textColor="@color/white"
                         android:textColorHint="@color/white"
-                        android:background="#B2FFFFFF"
+                        android:background="#8BC1C8"
                         style="@style/SpinnerDropDownItem" />
 
                 </LinearLayout>

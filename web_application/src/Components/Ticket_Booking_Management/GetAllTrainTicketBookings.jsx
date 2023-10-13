@@ -46,7 +46,7 @@ const GetAllTrainTicketBookings = () => {
   
     setCancellationLoading(true);
     // Function to cancel booking data
-    axios.put(`http://localhost:57549/api/trainbooking/cancelticketbooking/${id}`)
+    axios.put(`http://pasinduperera-001-site1.atempurl.com/api/trainbooking/cancelticketbooking/${id}`)
       .then(response => {
         console.log(`Booking with ID ${id} has been cancelled.`);
         setReservations(prevReservations => prevReservations.filter(res => res.ID !== id));
@@ -70,7 +70,7 @@ const GetAllTrainTicketBookings = () => {
     }
     if (userId) {
       // Function to fetch booking data
-      axios.get(`http://localhost:57549/api/trainbooking/getallticketbookings`)
+      axios.get(`http://pasinduperera-001-site1.atempurl.com/api/trainbooking/getallticketbookings`)
         .then(response => {
           setReservations(response.data);
           localStorage.setItem('reservations', JSON.stringify(response.data));

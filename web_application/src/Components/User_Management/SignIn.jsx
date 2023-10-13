@@ -44,7 +44,7 @@ const SignIn = () => {
       return;
     }
 
-    axios.post('http://localhost:57549/api/users/signin', formData)
+    axios.post('http://pasinduperera-001-site1.atempurl.com/api/users/signin', formData)
       .then(response => {
         console.log('User authenticated:', response.data);
         setUser(response.data.UserID, response.data.UserType);

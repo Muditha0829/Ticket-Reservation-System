@@ -14,7 +14,7 @@ const GetTrainShedule = () => {
 
   // Fetch train data based on TrainID
   useEffect(() => {
-    axios.get(`http://localhost:57549/api/trains/gettrainbyId/${TrainID}`)
+    axios.get(`http://pasinduperera-001-site1.atempurl.com/api/trains/gettrainbyId/${TrainID}`)
       .then(response => {
         setTrain(response.data);
       })

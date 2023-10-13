@@ -94,7 +94,7 @@ const UpdateTrainTicketBooking = () => {
 
   // Function to fetch ticket price based on selected train
   const fetchTicketPrice = (id) => {
-    axios.get(`http://localhost:57549/api/trains/gettrain/${id}`)
+    axios.get(`http://pasinduperera-001-site1.atempurl.com/api/trains/gettrain/${id}`)
       .then(response => {
         const uticketPrice1 = response.data.FirstClassTicketPrice;
         const uticketPrice2 = response.data.SecondClassTicketPrice; 
@@ -135,7 +135,7 @@ const UpdateTrainTicketBooking = () => {
     }
 
     // Handle update booking data
-    axios.put(`http://localhost:57549/api/trainbooking/updateticketbooking/${BookingID}`, updatedReservationData)
+    axios.put(`http://pasinduperera-001-site1.atempurl.com/api/trainbooking/updateticketbooking/${BookingID}`, updatedReservationData)
       .then(response => {
         console.log('Reservation updated:', response.data);
         toast.success('Reservation updated successfully!');
@@ -152,7 +152,7 @@ const UpdateTrainTicketBooking = () => {
   // Effect to fetch and set train data
   useEffect(() => {
     if (BookingID) {
-      axios.get(`http://localhost:57549/api/trainbooking/getticketbooking/${BookingID}`)
+      axios.get(`http://pasinduperera-001-site1.atempurl.com/api/trainbooking/getticketbooking/${BookingID}`)
         .then(response => {
           setUpdatedReservationData(response.data);
         })
@@ -166,7 +166,7 @@ const UpdateTrainTicketBooking = () => {
   useEffect(() => {
     let isMounted = true;
 
-    axios.get('http://localhost:57549/api/trains/getallsheduledtrains')
+    axios.get('http://pasinduperera-001-site1.atempurl.com/api/trains/getallsheduledtrains')
       .then(response => {
         if (isMounted) {
           setTrainData(response.data);

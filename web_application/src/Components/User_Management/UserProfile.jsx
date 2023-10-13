@@ -21,7 +21,7 @@ const UserProfile = () => {
     // Function to fetch user data
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:57549/api/users/getuser/${userId}`);
+        const response = await axios.get(`http://pasinduperera-001-site1.atempurl.com/api/users/getuser/${userId}`);
         setUser(response.data);
       } catch (error) {
         console.error('Error fetching user:', error);
@@ -42,7 +42,7 @@ const UserProfile = () => {
   // Function to handle delete button click
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:57549/api/users/deletuser/${userId}`);
+      await axios.delete(`http://pasinduperera-001-site1.atempurl.com/api/users/deletuser/${userId}`);
       toast.success('User deleted successfully!');
       window.location.href="/"
     } catch (error) {

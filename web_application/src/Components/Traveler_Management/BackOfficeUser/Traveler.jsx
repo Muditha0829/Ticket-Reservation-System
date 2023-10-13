@@ -27,7 +27,7 @@ const TravellerUser = () => {
 
   // Fetch traveler data on component mount
   useEffect(() => {
-    axios.get('http://localhost:57549/api/users/getallusers')
+    axios.get('http://pasinduperera-001-site1.atempurl.com/api/users/getallusers')
       .then(response => {
         setTravellers(response.data);
       })
@@ -40,7 +40,7 @@ const TravellerUser = () => {
   const handleStatusChange = (UserID, currentStatus) => {
     const newStatus = currentStatus === 'Active' ? 'active' : 'Active';
 
-    axios.put(`http://localhost:57549/api/users/updateuserstatus/${UserID}`, { UserStatus: newStatus })
+    axios.put(`http://pasinduperera-001-site1.atempurl.com/api/users/updateuserstatus/${UserID}`, { UserStatus: newStatus })
       .then(response => {
         if (response.status === 200) {
           setTravellers(traveler.map(traveler =>

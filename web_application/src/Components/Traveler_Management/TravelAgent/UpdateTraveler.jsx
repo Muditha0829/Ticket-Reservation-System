@@ -28,7 +28,7 @@ const UpdateTraveller = () => {
 
   // Fetch user data from the API
   useEffect(() => {
-    axios.get(`http://localhost:57549/api/users/getuser/${UserID}`)
+    axios.get(`http://pasinduperera-001-site1.atempurl.com/api/users/getuser/${UserID}`)
       .then(response => {
         setUserData(response.data);
       })
@@ -65,7 +65,7 @@ const UpdateTraveller = () => {
       return;
     }
 
-    axios.put(`http://localhost:57549/api/users/updateuser/${UserID}`, userData)
+    axios.put(`http://pasinduperera-001-site1.atempurl.com/api/users/updateuser/${UserID}`, userData)
       .then(response => {
         console.log('User updated:', response.data);
         toast.success('Travel user updated successfully!');

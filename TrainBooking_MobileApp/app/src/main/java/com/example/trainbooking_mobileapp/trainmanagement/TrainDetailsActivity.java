@@ -47,7 +47,7 @@ public class TrainDetailsActivity extends AppCompatActivity implements TrainApiC
         setSupportActionBar(toolbar);
 
         // Set the title of the activity
-        setTitle("Train Details");
+        setTitle("Train Schedules");
 
         // Enable the back button in the toolbar
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);

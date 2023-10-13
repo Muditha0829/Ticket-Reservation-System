@@ -59,7 +59,7 @@ const AddTrainShedule = () => {
       toast.error('Invalid Train Number. Please enter a valid Train Number format (TXXXX).');
       return;
     }
-    axios.post('http://localhost:57549/api/trains/createtrain', trainData)
+    axios.post('http://pasinduperera-001-site1.atempurl.com/api/trains/createtrain', trainData)
       .then(response => {
         toast.success("Train Added");
         console.log('Train added:', response.data);

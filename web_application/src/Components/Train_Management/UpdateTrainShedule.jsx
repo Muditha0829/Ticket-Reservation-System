@@ -54,7 +54,7 @@ const UpdateTrainShedule = () => {
   }
 
   // Send PUT request to update train data
-    axios.put(`http://localhost:57549/api/trains/updatetrain/${TrainID}`, updatedTrainData)
+    axios.put(`http://pasinduperera-001-site1.atempurl.com/api/trains/updatetrain/${TrainID}`, updatedTrainData)
       .then(response => {
         console.log('Train updated:', response.data);
         toast.success('Train updated successfully!');
@@ -71,7 +71,7 @@ const UpdateTrainShedule = () => {
   // Fetch train data based on TrainID
   useEffect(() => {
     if (TrainID) {
-      axios.get(`http://localhost:57549/api/trains/gettrainbyId/${TrainID}`)
+      axios.get(`http://pasinduperera-001-site1.atempurl.com/api/trains/gettrainbyId/${TrainID}`)
         .then(response => {
           setUpdatedTrainData(response.data);
         })

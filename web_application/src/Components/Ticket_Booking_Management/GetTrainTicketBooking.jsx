@@ -12,7 +12,7 @@ const GetTrainTicketBooking = () => {
 
   useEffect(() => {
     if (BookingID) {
-      axios.get(`http://localhost:57549/api/trainbooking/getticketbooking/${BookingID}`)
+      axios.get(`http://pasinduperera-001-site1.atempurl.com/api/trainbooking/getticketbooking/${BookingID}`)
         .then(response => {
           setReservation(response.data);
           console.log(response.data);

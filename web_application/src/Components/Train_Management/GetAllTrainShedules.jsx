@@ -34,7 +34,7 @@ const GetAllTrainShedules = () => {
 
   // Fetching train data on component mount
   useEffect(() => {
-    axios.get('http://localhost:57549/api/trains/getalltrains')
+    axios.get('http://pasinduperera-001-site1.atempurl.com/api/trains/getalltrains')
       .then(response => {
         setTrains(response.data);
       })
@@ -45,7 +45,7 @@ const GetAllTrainShedules = () => {
 
   // Function to handle train deletion
   const handleDelete = (TrainID) => {
-    axios.delete(`http://localhost:57549/api/trains/deletetrain/${TrainID}`)
+    axios.delete(`http://pasinduperera-001-site1.atempurl.com/api/trains/deletetrain/${TrainID}`)
       .then(response => {
         toast.success('Train successfully deleted!');
         setTimeout(() => {

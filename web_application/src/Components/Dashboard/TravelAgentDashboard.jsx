@@ -10,7 +10,7 @@ const TravelAgentDashboard = () => {
 
   useEffect(() => {
     // Fetch user counts from the API for back office users, travel agents, and travel users
-    axios.get('http://localhost:57549/api/users/getbackofficeusercount')
+    axios.get('http://pasinduperera-001-site1.atempurl.com/api/users/getbackofficeusercount')
       .then(response => {
         setBackofficeUserCount(response.data);
       })
@@ -18,7 +18,7 @@ const TravelAgentDashboard = () => {
         console.error('Error:', error);
       });
 
-    axios.get('http://localhost:57549/api/users/gettravelagentcount')
+    axios.get('http://pasinduperera-001-site1.atempurl.com/api/users/gettravelagentcount')
       .then(response => {
         setTravelAgentCount(response.data);
       })
@@ -26,7 +26,7 @@ const TravelAgentDashboard = () => {
         console.error('Error:', error);
       });
 
-    axios.get('http://localhost:57549/api/users/gettravelusercount')
+    axios.get('http://pasinduperera-001-site1.atempurl.com/api/users/gettravelusercount')
       .then(response => {
         setTravelUserCount(response.data);
       })
