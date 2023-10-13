@@ -10,15 +10,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.trainbooking_mobileapp.MainActivity;
 import com.example.trainbooking_mobileapp.R;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
-
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -26,6 +22,8 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class SignInActivity extends AppCompatActivity {
+
+    // EditText fields for NIC and password
     private EditText nicEditText, passwordEditText;
 
     @Override
@@ -33,15 +31,20 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
+        // Initialize EditText fields
         nicEditText = findViewById(R.id.nicEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
 
+        // Sign In Button Click Listener
         Button signInButton = findViewById(R.id.signInButton);
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Get NIC and password from EditText fields
                 String nic = nicEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
+
+                // Validate NIC and password
                 if (nic.isEmpty() || password.isEmpty()) {
                     Toast.makeText(SignInActivity.this, "NIC and password cannot be empty", Toast.LENGTH_SHORT).show();
                     return;
@@ -57,6 +60,7 @@ public class SignInActivity extends AppCompatActivity {
                     return;
                 }
 
+                // Create JSON object for NIC and password
                 JSONObject json = new JSONObject();
                 try {
                     json.put("NIC", nic);
@@ -65,10 +69,12 @@ public class SignInActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
+                // Execute SignInTask
                 new SignInTask().execute(json.toString());
             }
         });
 
+        // Sign Up TextView Click Listener
         TextView txtSignUp = findViewById(R.id.txtSignUp);
         txtSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,20 +83,23 @@ public class SignInActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
+    // Validate NIC format
     private boolean isValidNIC(String nic) {
         String nicPattern = "^\\d{12}$";
         return nic.matches(nicPattern);
     }
 
+    // Validate password format
     private boolean isValidPassword(String password) {
         String passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
         return password.matches(passwordPattern);
     }
 
+    // AsyncTask to handle sign in process
     private class SignInTask extends AsyncTask<String, Void, String> {
+        // Background task to perform sign in request
         @Override
         protected String doInBackground(String... params) {
             MediaType JSON = MediaType.parse("application/json; charset=utf-8");
@@ -121,12 +130,11 @@ public class SignInActivity extends AppCompatActivity {
             }
         }
 
+        // Handle response after sign in request
         @Override
         protected void onPostExecute(String userID) {
             if (userID != null) {
                 Toast.makeText(SignInActivity.this, "Sign-in successful!", Toast.LENGTH_SHORT).show();
-                Log.d("SignInActivity", "User UserID: " + userID);
-
                 Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);

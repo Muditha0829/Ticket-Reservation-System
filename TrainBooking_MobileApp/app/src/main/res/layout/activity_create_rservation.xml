@@ -149,33 +149,16 @@
         android:padding="8dp"
         android:background="@drawable/rounded_border"/>
 
-            <LinearLayout
+            <EditText
+                android:id="@+id/editTextTotalPassengers"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@drawable/rounded_border"
+                android:hint="Total Passengers"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
                 android:layout_marginTop="16dp"
-                android:padding="8dp">
-
-                <TextView
-                    android:id="@+id/TotalPassengersLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="16dp"
-                    android:text="Total Passengers"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
-
-                <Spinner
-                    android:id="@+id/totalPassengersSpinner"
-                    android:layout_width="78px"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="170dp"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
-                    android:background="#B2FFFFFF" />
-
-            </LinearLayout>
+                android:padding="8dp"
+                android:background="@drawable/rounded_border"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

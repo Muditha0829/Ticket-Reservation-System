@@ -1,6 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿/*
+ * File: WebApiConfig.cs
+ * Purpose: Registers Web API configuration and services.
+ * Description: This file contains the configuration for the Web API, including CORS settings and route mapping.
+ */
+
 using System.Web.Http;
 using System.Web.Http.Cors; // Add this line for CORS
 

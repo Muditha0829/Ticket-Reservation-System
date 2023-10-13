@@ -9,8 +9,8 @@ const BackOfficeUserDashboard = () => {
   const [travelUserCount, setTravelUserCount] = useState(0);
   const [trainshedulerCount, setTrainSheduleCount] = useState(0);
 
+  // Fetch counts from the API
   useEffect(() => {
-    // Fetch user counts from the API
     axios.get('http://localhost:57549/api/users/getbackofficeusercount')
       .then(response => {
         setBackofficeUserCount(response.data);

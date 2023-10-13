@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route, useLocation } from 'react-route
 import { UserProvider } from './AuthContext';
 
 import NavBar from '../Components/Dashboard/NavBar';
+
 import Footer from './Dashboard/Footer';
 
 import SignIn from './User_Management/SignIn';
@@ -30,15 +31,19 @@ import GetAllTravelers from './Traveler_Management/TravelAgent/GetAllTravelers';
 
 import BackOfficeUserDashboard from './Dashboard/BackOfficeUserDashboard';
 import TravelAgentDashboard from './Dashboard/TravelAgentDashboard';
+
 import SideBar from './Dashboard/SideBar';
 
 const ARouter = () => {
+  // Get the current location
   const location = useLocation();
 
+  // Define routes to hide Navbar, Sidebar, and Footer components
   const hideNavbarRoutes = ['/', '/signup'];
   const hideSideBarRoutes = ['/', '/signup'];
   const hideFooterRoutes = ['/', '/signup'];
 
+  // Determine if Navbar, Sidebar, and Footer should be hidden
   const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
   const shouldHideSideBar = hideSideBarRoutes.includes(location.pathname);
   const shouldHideFooter = hideFooterRoutes.includes(location.pathname);
@@ -46,31 +51,41 @@ const ARouter = () => {
   return (
     <Router>
       <UserProvider>
+        {/* Render NavBar unless shouldHideNavbar is true */}
         {!shouldHideNavbar && <NavBar />}
+
+        {/* Render SideBar unless shouldHideSideBar is true */}
         {!shouldHideSideBar && <SideBar />}
         <Switch>
-          <Route path="/listtrain" exact component={GetAllTrainShedules} />
-          <Route path="/view/:TrainID" component={GetTrainShedule} />
-          <Route path="/update/:TrainID" component={UpdateTrainShedule} />
-          <Route path="/addtrain" component={AddTrainShedule}/>
-          <Route path="/myreservations" component={GetMyTrainTicketBooking}/>
-          <Route path="/listreservation" component={GetAllTrainTicketBookings}/>
-          <Route path="/makereservation" component={AddTrainTicketBooking}/>
-          <Route path="/reservationview/:BookingID" component={GetTrainTicketBooking} />
-          <Route path="/reservationupdate/:BookingID" component={UpdateTrainTicketBooking} />
-          <Route path="/profile/:userId" component={UserProfile} />
           <Route path="/signup" exact component={Signup} />
           <Route path="/" exact component={SignIn} />
-          <Route path="/updateprofile/:UserID" component={UpdateUserProfile} />
-          <Route path="/traveluserstatus" component={Traveler} />
-          <Route path="/listtraveluser" component={GetAllTravelers} />
+          <Route path="/updateuserprofile/:UserID" component={UpdateUserProfile} />
+          <Route path="/userprofile/:userId" component={UserProfile} />
+
+          <Route path="/addtrainshedule" component={AddTrainShedule}/>
+          <Route path="/updatetrainshedule/:TrainID" component={UpdateTrainShedule} />
+          <Route path="/viewtrainshedule/:TrainID" component={GetTrainShedule} />
+          <Route path="/trainshedulelist" exact component={GetAllTrainShedules} />
+          
+          <Route path="/addticketbooking" component={AddTrainTicketBooking}/>
+          <Route path="/updateticketbooking/:BookingID" component={UpdateTrainTicketBooking} />
+          <Route path="/getticketbooking/:BookingID" component={GetTrainTicketBooking} />
+          <Route path="/getmyticketbookings" component={GetMyTrainTicketBooking}/>
+          <Route path="/getallticketbookings" component={GetAllTrainTicketBookings}/>
+
+          <Route path="/travelerstatus" component={Traveler} />
+
+          <Route path="/addtraveler" component={AddTraveler} />
           <Route path="/updatetraveller/:UserID" component={UpdateTraveler} />
           <Route path="/viewtraveller/:UserID" component={GetTraveler} />
-          <Route path="/addtraveluser" component={AddTraveler} />
+          <Route path="/travelerlist" component={GetAllTravelers} />
+
           <Route path="/backofficeuserdashboard" component={BackOfficeUserDashboard} />
           <Route path="/travelagentdashboard" component={TravelAgentDashboard} />
+
           <Route path="/footer" component={Footer} />
         </Switch>
+        {/* Render Footer unless shouldHideFooter is true */}
         {!shouldHideFooter && <Footer />}
       </UserProvider>
     </Router>

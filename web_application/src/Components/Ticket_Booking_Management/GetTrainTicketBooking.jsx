@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Card, Table, Row, Col, Button, Container } from 'react-bootstrap';
 
 const GetTrainTicketBooking = () => {
+  // Fetching the reservation details based on BookingID from the API
   const [reservation, setReservation] = useState(null);
   const { BookingID } = useParams();
 
@@ -22,6 +23,7 @@ const GetTrainTicketBooking = () => {
     }
   }, [BookingID]);
 
+  // Rendering a loading message while waiting for reservation data
   if (!reservation) {
     return <div>Loading...</div>;
   }
@@ -31,7 +33,7 @@ const GetTrainTicketBooking = () => {
   <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
   <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none', borderRadius: '15px', boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.1)' }}>
     <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
-    <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>View Reservation</Card.Title>
+    <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>View Train Booking</Card.Title>
     <Card.Body>
       <Table striped bordered hover>
         <tbody>
@@ -76,7 +78,7 @@ const GetTrainTicketBooking = () => {
             <td style={{fontFamily: "Onest"}}>{reservation.ContactNumber}</td>
           </tr>
           <tr>
-            <td className="text" style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Total Price</strong></td>
+            <td className="text" style={{fontSize: "17px", fontFamily: "Montserrat"}}><strong>Total Price (Rs.)</strong></td>
             <td style={{fontFamily: "Onest"}}>{reservation.TotalPrice}</td>
           </tr>
         </tbody>

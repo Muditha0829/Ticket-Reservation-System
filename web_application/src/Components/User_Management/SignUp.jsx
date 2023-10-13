@@ -8,6 +8,7 @@ import { IsValidEmail, IsValidPassword, IsValidNIC, IsValidContactNumber } from 
 
 const Signup = () => {
 
+  // State for form data
   const [formData, setFormData] = useState({
     NIC: '',
     UserName: '',
@@ -21,8 +22,10 @@ const Signup = () => {
     UserType: ''
   });
 
+  // Access to the history object to navigate
   const history = useHistory();
 
+  // Handle changes in form fields
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -31,6 +34,7 @@ const Signup = () => {
     });
   };
 
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -224,7 +228,7 @@ const Signup = () => {
           </Row>
           <Row className="justify-content-center">
               <Col xs="auto">
-            <Button type="submit" variant="primary" style={{ width: '150px', backgroundColor: '#00284d', fontFamily: "Montserrat" }}>Sign Up</Button>
+            <Button type="submit" variant="primary" style={{ width: '150px', backgroundColor: '#00284d', fontFamily: "Montserrat", marginTop: "27px" }}>Sign Up</Button>
               </Col>
             </Row>
           <div className="text-center mt-2">

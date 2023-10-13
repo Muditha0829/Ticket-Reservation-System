@@ -8,14 +8,20 @@ import 'react-toastify/dist/ReactToastify.css';
 import {IsValidNIC, IsValidPassword} from '../Validations'
 
 const SignIn = () => {
+
+   // Access the setUser and UserType from the AuthContext
   const { setUser, UserType } = useContext(AuthContext);
+
+  // State for form data
   const [formData, setFormData] = useState({
     NIC: '',
     Password: ''
   });
 
+  // Access to the history object to navigate
   const history = useHistory();
 
+  // Handle changes in form fields
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -24,6 +30,7 @@ const SignIn = () => {
     });
   };
 
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -98,10 +105,12 @@ const SignIn = () => {
               required
             />
           </Form.Group>
-          <Button variant="primary" type="submit" style={{ padding: '10px 20px', backgroundColor: '#00284d', fontFamily: "Montserrat" }}>
-            Sign In
-          </Button>
-        </Form>
+          <div style={{ textAlign: 'center' }}>
+  <Button variant="primary" type="submit" style={{ padding: '10px 20px', backgroundColor: '#00284d', fontFamily: "Montserrat" }}>
+    Sign In
+  </Button>
+</div>
+          </Form>
         <p style={{ marginTop: "15px", fontSize: "1.2em", color: "#555", fontFamily: "Montserrat" }}>
           Don't have an account? <Link to="/signup" style={{ color: "#00284d", textDecoration: "none", fontWeight: "bold", fontFamily: "Montserrat" }}>Sign Up</Link>
         </p>

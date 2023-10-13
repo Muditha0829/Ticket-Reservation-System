@@ -1,4 +1,10 @@
-﻿using System.Web.Http;
+﻿/*
+    Filename: TrainsController.cs
+    Description:
+    This file contains the definition of the TrainsController class, which handles train-related API endpoints.
+*/
+
+using System.Web.Http;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using Web_Service.Models.Train_Management;
@@ -19,6 +25,7 @@ namespace Web_Service.Controllers
             _trainsCollection = database.GetCollection<Train>(collectionName);
         }
 
+        // Create Train endpoint
         [HttpPost]
         [Route("createtrain")]
         public IHttpActionResult CreateTrain(Train train)
@@ -65,6 +72,7 @@ namespace Web_Service.Controllers
             return Ok(train);
         }
 
+        // Get all trains
         [HttpGet]
         [Route("getalltrains")]
         public IHttpActionResult GetAllTrains()
@@ -73,6 +81,7 @@ namespace Web_Service.Controllers
             return Ok(trains);
         }
 
+        // Get all scheduled trains
         [HttpGet]
         [Route("getallSheduledtrains")]
         public IHttpActionResult GetActiveTrains()
@@ -81,6 +90,7 @@ namespace Web_Service.Controllers
             return Ok(activeTrains);
         }
 
+        // Get train by Train Name
         [HttpGet]
         [Route("gettrain/{id}")]
         public IHttpActionResult GetTrain(string id)
@@ -93,6 +103,7 @@ namespace Web_Service.Controllers
             return Ok(train);
         }
 
+        // Get train by Train ID
         [HttpGet]
         [Route("gettrainbyId/{id}")]
         public IHttpActionResult GetTrainById(string id)
@@ -105,6 +116,7 @@ namespace Web_Service.Controllers
             return Ok(train);
         }
 
+        // Update Train endpoint
         [HttpPut]
         [Route("updatetrain/{id}")]
         public IHttpActionResult updatetrain(string id, Train updatedTrain)
@@ -161,6 +173,7 @@ namespace Web_Service.Controllers
             return Ok("Train schedule updated");
         }
 
+        // Delete Train endpoint
         [HttpDelete]
         [Route("deletetrain/{id}")]
         public IHttpActionResult DeleteTrain(string id)
@@ -175,6 +188,7 @@ namespace Web_Service.Controllers
             return Ok("Train shedule deleted");
         }
 
+        // Get total number of trains
         [HttpGet]
         [Route("gettraincount")]
         public IHttpActionResult GetTrainCount()

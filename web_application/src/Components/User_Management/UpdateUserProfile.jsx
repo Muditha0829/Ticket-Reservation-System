@@ -8,9 +8,14 @@ import { IsValidEmail, IsValidPassword, IsValidNIC, IsValidContactNumber } from 
 import imageprofileavatar from '../Assests/profileavatar.png'
 
 const UpdateTraveller = () => {
+
+  // Extracting UserID from the URL parameters
   const { UserID } = useParams();
+
+  // Initializing history hook for navigation
   const history = useHistory();
 
+  // Initializing state to hold user data
   const [userData, setUserData] = useState({
     UserName: '',
     FirstName: '',
@@ -21,6 +26,7 @@ const UpdateTraveller = () => {
     UserType: '',
   });
 
+  // Fetching user data on component mount
   useEffect(() => {
     axios.get(`http://localhost:57549/api/users/getuser/${UserID}`)
       .then(response => {
@@ -31,6 +37,7 @@ const UpdateTraveller = () => {
       });
   }, [UserID]);
 
+  // Handler for input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserData({
@@ -39,24 +46,29 @@ const UpdateTraveller = () => {
     });
   };
 
+  // Handler for form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Validate email format
     if (!IsValidEmail(userData.Email)) {
       toast.error('Invalid email format.');
       return;
     }
 
+    // Validate NIC format
     if (!IsValidNIC(userData.NIC)) {
       toast.error('Invalid NIC format.');
       return;
     }
 
+    // Validate contact number format
     if (!IsValidContactNumber(userData.ContactNumber)) {
       toast.error('Invalid contact number format.');
       return;
     }
 
+    // Sending a PUT request to update user data
     axios.put(`http://localhost:57549/api/users/updateuser/${UserID}`, userData)
       .then(response => {
         console.log('User updated:', response.data);
@@ -204,7 +216,7 @@ const UpdateTraveller = () => {
             <Row className="justify-content-center" style={{margin: "25px"}}>
               <Col xs="auto">
               <Button variant="secondary" onClick={() => window.history.back()} style={{ width: '150px' }}>Back</Button>{' '}
-            <Button type="submit" variant="primary" style={{ width: '150px' }} onClick={() => window.history.back()} >Update Profile</Button>
+            <Button type="submit" variant="primary" style={{ width: '150px', backgroundColor: "#00284d" }} onClick={() => window.history.back()} >Update Profile</Button>
               </Col>
             </Row>
   </Form>

@@ -8,11 +8,17 @@ import { Container, Table, Row, Col, Button, Card } from 'react-bootstrap';
 import imageprofileavatar from '../Assests/profileavatar.png'
 
 const UserProfile = () => {
+
   const history = useHistory();
-  const { userId } = useParams(); // Get the user ID from URL parameters
+
+    // Get the user ID from URL parameters
+  const { userId } = useParams();
+
+  // State to store user data
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+    // Function to fetch user data
     const fetchData = async () => {
       try {
         const response = await axios.get(`http://localhost:57549/api/users/getuser/${userId}`);
@@ -22,15 +28,18 @@ const UserProfile = () => {
       }
     };
 
+    // Check if userId exists before fetching data
     if (userId) {
       fetchData();
     }
   }, [userId]);
 
+  // Function to handle update button click
   const handleUpdate = () => {
-    history.push(`/updateprofile/${userId}`);
+    history.push(`/updateuserprofile/${userId}`);
   };
 
+  // Function to handle delete button click
   const handleDelete = async () => {
     try {
       await axios.delete(`http://localhost:57549/api/users/deletuser/${userId}`);

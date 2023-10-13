@@ -5,11 +5,16 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Form, Button, Container, Row, Col, Card } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
-import { IsValidTimeRange, IsValidTrainNumber } from '../Validations';
+import { IsValidTrainNumber } from '../Validations';
 
 const AddTrainShedule = () => {
+  // Getting userID from AuthContext
   const { userID } = useContext(AuthContext);
-  const [submissionSuccessful, setSubmissionSuccessful] = useState(false);
+
+  // State for submission status
+  const [ setSubmissionSuccessful] = useState(false);
+
+  // State for storing train data
   const [trainData, setTrainData] = useState({
     TrainNumber: '',
     userID: userID,
@@ -26,8 +31,10 @@ const AddTrainShedule = () => {
     TrainStatus: 'Sheduled',
   });
 
+  // Getting history object for navigation
   const history = useHistory();
 
+  // Function to handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setTrainData({
@@ -36,13 +43,11 @@ const AddTrainShedule = () => {
     });
   };
 
+  // Function to handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
-  //   if (!IsValidTimeRange(trainData.DepartureTime, trainData.ArrivalTime)) {
-  //     return toast.warning("Departure Time must be before Arrival Time.");
-  // }
-
+    // Validating Train Number format
   if (!IsValidTrainNumber(trainData.TrainNumber)) {
     toast.error('Invalid Train Number. Please enter a valid Train Number format (TXXXX).');
     return;
@@ -58,10 +63,7 @@ const AddTrainShedule = () => {
       .then(response => {
         toast.success("Train Added");
         console.log('Train added:', response.data);
-        // Set a state variable to indicate that the submission was successful
       setSubmissionSuccessful(true);
-
-      // Wait for 5 seconds before redirecting
       setTimeout(() => {
         history.push('/backofficeuserdashboard');
       }, 2000);
@@ -193,7 +195,7 @@ const AddTrainShedule = () => {
                 <Form.Group controlId="trainType" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
   <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Train Type</Form.Label>
   <Form.Control
-    as="select"  // Render as a select input
+    as="select"
     name="TrainType"
     placeholder='Train Type'
     style={{fontFamily: "Onest"}}
@@ -205,7 +207,6 @@ const AddTrainShedule = () => {
     <option value="Express">Express</option>
     <option value="Intercity">Intercity</option>
     <option value="Local">Local</option>
-    {/* Add other train types as needed */}
   </Form.Control>
 </Form.Group>
                 <br/>

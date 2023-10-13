@@ -7,6 +7,8 @@ import { useHistory } from 'react-router-dom';
 import { IsValidEmail, IsValidPassword, IsValidNIC, IsValidContactNumber } from '../../Validations';
 
 const AddTraveller = () => {
+
+  // Initialize state with form data
   const [formData, setFormData] = useState({
     NIC: '',
     UserName: '',
@@ -20,8 +22,10 @@ const AddTraveller = () => {
     UserType: "Traveler"
   });
 
+  // Get the history object for programmatic navigation
   const history = useHistory();
 
+  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -30,34 +34,41 @@ const AddTraveller = () => {
     });
   };
 
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Check if passwords match
     if (formData.Password !== formData.RePassword) {
       toast.error('Passwords do not match.');
       return;
     }
 
+    // Validate email
     if (!IsValidEmail(formData.Email)) {
       toast.error('Invalid email format.');
       return;
     }
 
+    // Validate NIC
     if (!IsValidNIC(formData.NIC)) {
       toast.error('Invalid NIC format.');
       return;
     }
 
+    // Validate password
     if (!IsValidPassword(formData.Password)) {
       toast.error('Invalid Password format.');
       return;
     }
 
+    // Validate contact number
     if (!IsValidContactNumber(formData.ContactNumber)) {
       toast.error('Invalid contact number format.');
       return;
     }
   
+    // Send POST request to create a new traveler
     axios.post('http://localhost:57549/api/users/signup', formData, {
       headers: {
         'Content-Type': 'application/json',
@@ -226,8 +237,8 @@ const AddTraveller = () => {
         </div>
         <Row className="justify-content-center" style={{margin: "25px"}}>
               <Col xs="auto">
-              <Button variant="secondary" onClick={() => window.history.back('/listtraveluser')} style={{ width: '150px' }}>Back</Button>{' '}
-            <Button type="submit" variant="primary" style={{ width: '150px' }}>Create Traveler</Button>
+              <Button variant="secondary" onClick={() => window.history.back('/travelerlist')} style={{ width: '150px' }}>Back</Button>{' '}
+            <Button type="submit" variant="primary" style={{ width: '150px', backgroundColor: "#00284d" }}>Create Traveler</Button>
               </Col>
             </Row>
       </Form>

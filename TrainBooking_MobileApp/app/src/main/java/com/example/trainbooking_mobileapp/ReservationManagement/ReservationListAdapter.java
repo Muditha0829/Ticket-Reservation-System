@@ -3,19 +3,15 @@ package com.example.trainbooking_mobileapp.ReservationManagement;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.trainbooking_mobileapp.R;
-
 import java.util.List;
 
 public class ReservationListAdapter extends RecyclerView.Adapter<ReservationListAdapter.ViewHolder> {
@@ -25,6 +21,7 @@ public class ReservationListAdapter extends RecyclerView.Adapter<ReservationList
     private Context context;
     private String userID;
 
+    // Constructor
     public ReservationListAdapter(Context context, List<Reservation> reservationList) {
         this.inflater = LayoutInflater.from(context);
         this.reservationList = reservationList;
@@ -32,6 +29,7 @@ public class ReservationListAdapter extends RecyclerView.Adapter<ReservationList
         this.userID = userID;
     }
 
+    // Set user ID
     public void setUserID(String userID) {
         this.userID = userID;
     }
@@ -47,17 +45,18 @@ public class ReservationListAdapter extends RecyclerView.Adapter<ReservationList
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Reservation reservation = reservationList.get(position);
 
-        Log.d("ReservationListAdapter", "Reservation ID: " + reservation.getBookingID());
-
+        // Bind reservation data to views
         holder.reservationTrainNameTextView.setText(reservation.getTrainName());
         holder.reservationBookingStatusTextView.setText(reservation.getMainPassengerName());
         holder.reservationReservationDateTextView.setText(reservation.getReservationDate());
         holder.reservationBookingDateTextView.setText(reservation.getBookingDate());
 
+        // Set click listeners for buttons
         Button updateButton = holder.itemView.findViewById(R.id.updateButton);
         Button viewButton = holder.itemView.findViewById(R.id.viewButton);
         Button cancelButton = holder.itemView.findViewById(R.id.cancelButton);
 
+        // Update Button Click Listener
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,6 +64,7 @@ public class ReservationListAdapter extends RecyclerView.Adapter<ReservationList
             }
         });
 
+        // View Button Click Listener
         viewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,6 +72,7 @@ public class ReservationListAdapter extends RecyclerView.Adapter<ReservationList
             }
         });
 
+        // Cancel Button Click Listener
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,6 +89,7 @@ public class ReservationListAdapter extends RecyclerView.Adapter<ReservationList
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView reservationTrainNameTextView, reservationBookingStatusTextView, reservationReservationDateTextView, reservationBookingDateTextView;
 
+        // ViewHolder constructor
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -98,6 +100,7 @@ public class ReservationListAdapter extends RecyclerView.Adapter<ReservationList
         }
     }
 
+    // Cancel Reservation
     private void cancelReservation(Reservation reservation) {
         ReservationApiClient.cancelReservationFromAPI(reservation, new ReservationApiClient.OnReservationCanceledListener() {
             @Override
@@ -114,6 +117,7 @@ public class ReservationListAdapter extends RecyclerView.Adapter<ReservationList
         });
     }
 
+    // Open Update Reservation Activity
     private void openUpdateReservationActivity(Reservation reservation) {
         Intent intent = new Intent(context, UpdateReservationActivity.class);
         intent.putExtra("reservation", reservation);
@@ -121,6 +125,7 @@ public class ReservationListAdapter extends RecyclerView.Adapter<ReservationList
         ((Activity) context).startActivityForResult(intent, 1001);
     }
 
+    // Open View Reservation Activity
     private void openViewReservationActivity(Reservation reservation) {
         Intent intent = new Intent(context, ReservationViewActivity.class);
         intent.putExtra("reservation", reservation);

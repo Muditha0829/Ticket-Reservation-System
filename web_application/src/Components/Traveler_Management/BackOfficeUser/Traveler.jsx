@@ -7,18 +7,25 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Container, Table, Button, Card } from 'react-bootstrap';
 
 const TravellerUser = () => {
+  // Retrieve UserID from the AuthContext
   const { UserID } = useContext(AuthContext);
+
+  // State to hold the list of travelers
   const [traveler, setTravellers] = useState([]);
+
+  // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = traveler.slice(indexOfFirstItem, indexOfLastItem);
 
+  // Function to handle pagination
   const handlePagination = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
+  // Fetch traveler data on component mount
   useEffect(() => {
     axios.get('http://localhost:57549/api/users/getallusers')
       .then(response => {
@@ -29,6 +36,7 @@ const TravellerUser = () => {
       });
   }, []);
 
+  // Function to handle status change (Activate/Deactivate)
   const handleStatusChange = (UserID, currentStatus) => {
     const newStatus = currentStatus === 'Active' ? 'active' : 'Active';
 
@@ -51,7 +59,7 @@ const TravellerUser = () => {
   };
 
   return (
-    <Container className="my-5 text-center" style={{ height: "700px", paddingLeft: "250px", maxWidth: "900px" }}>
+    <Container className="my-5 text-center" style={{ height: "570px", paddingLeft: "250px", maxWidth: "900px" }}>
   <ToastContainer position="top-center" autoClose={1000} hideProgressBar />
   <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none', borderRadius: '15px', boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.1)' }}>
     <Card.Body>

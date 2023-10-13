@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -14,25 +13,22 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
 import com.example.trainbooking_mobileapp.AboutUsActivity;
 import com.example.trainbooking_mobileapp.MainActivity;
 import com.example.trainbooking_mobileapp.R;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
 public class UserProfileActivity extends AppCompatActivity {
 
+    // Declare TextViews
     private TextView nicTextView;
     private TextView firstNameTextView;
     private TextView lastNameTextView;
@@ -41,10 +37,14 @@ public class UserProfileActivity extends AppCompatActivity {
     private TextView usernameTextView;
     private TextView contactNumberTextView;
 
+    // Declare User and Toolbar
     private User user;
     private Toolbar toolbar;
+
+    // Declare userID
     private String userID;
 
+    // Method for setting up the activity
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +62,7 @@ public class UserProfileActivity extends AppCompatActivity {
         Button updateButton = findViewById(R.id.updateButton);
         Button deactivateButton = findViewById(R.id.deactivateButton);
 
-
+// Initialize and set up TextViews and Buttons
         nicTextView = findViewById(R.id.nicTextView);
         firstNameTextView = findViewById(R.id.firstNameTextView);
         lastNameTextView = findViewById(R.id.lastNameTextView);
@@ -71,15 +71,13 @@ public class UserProfileActivity extends AppCompatActivity {
         genderTextView = findViewById(R.id.genderTextView);
         contactNumberTextView = findViewById(R.id.contactNumberTextView);
 
-        Log.d("ProfileActivity", "Starting ProfileActivity with User ID: " + userID);
-
         new FetchUserDataTask().execute(userID);
 
+        // Set click listeners for buttons
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (user != null) {
-                    Log.d("ProfileActivity", "User ID: " + userID);
                     Intent intent = new Intent(UserProfileActivity.this, UpdateUserProfileActivity.class);
                     intent.putExtra("user", user);
                     startActivityForResult(intent, 1001);
@@ -94,7 +92,6 @@ public class UserProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (user != null) {
                     new DeactivateUserTask().execute(userID);
-                    Log.d("DeactivateUserTask", "Getid: " + userID);
                 } else {
                     Toast.makeText(UserProfileActivity.this, "User data not available", Toast.LENGTH_SHORT).show();
                 }
@@ -132,6 +129,7 @@ public class UserProfileActivity extends AppCompatActivity {
         });
     }
 
+    // Method for handling options menu items
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -147,6 +145,7 @@ public class UserProfileActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    // Method for signing out
     private void signOut() {
 
         Intent intent = new Intent(this, SignInActivity.class);
@@ -154,6 +153,7 @@ public class UserProfileActivity extends AppCompatActivity {
         finish();
     }
 
+    // AsyncTask for deactivating a user
     private class DeactivateUserTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
@@ -174,10 +174,10 @@ public class UserProfileActivity extends AppCompatActivity {
         }
     }
 
+    // Method for deactivating a user
     private String deactivateUser(String userID) {
         try {
             URL url = new URL("http://pasinduperera-001-site1.atempurl.com/api/users/updateuserstatus/" + userID);
-            Log.d("DeactivateUserTask", "Url: " + url);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("PUT");
             connection.setRequestProperty("Content-Type", "application/json");
@@ -190,10 +190,6 @@ public class UserProfileActivity extends AppCompatActivity {
             outputStream.close();
 
             int responseCode = connection.getResponseCode();
-            String responseMessage = connection.getResponseMessage();
-
-            Log.d("DeactivateUserTask", "Response Code: " + responseCode);
-            Log.d("DeactivateUserTask", "Response Message: " + responseMessage);
 
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 return "Success";
@@ -202,24 +198,22 @@ public class UserProfileActivity extends AppCompatActivity {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Log.e("DeactivateUserTask", "Error deactivating user: " + e.getMessage());
             return "Error. Exception: " + e.getMessage();
         }
     }
 
+    // AsyncTask for fetching user data
     private class FetchUserDataTask extends AsyncTask<String, Void, JSONObject> {
         @Override
         protected JSONObject doInBackground(String... params) {
             OkHttpClient client = new OkHttpClient();
             String userID = params[0];
             String apiUrl = "http://pasinduperera-001-site1.atempurl.com/api/users/getuser/" + userID;
-            Log.d("ProfileActivity", "Getapi: " + apiUrl);
 
             Request request = new Request.Builder()
                     .url(apiUrl)
                     .get()
                     .build();
-
             try {
                 Response response = client.newCall(request).execute();
                 if (response.isSuccessful()) {
@@ -232,6 +226,7 @@ public class UserProfileActivity extends AppCompatActivity {
             return null;
         }
 
+        // Handling the result of an activity
         @Override
         protected void onPostExecute(JSONObject userData) {
             if (userData != null) {
@@ -245,15 +240,6 @@ public class UserProfileActivity extends AppCompatActivity {
                     String gender = userData.getString("Gender");
                     String contactNumber = userData.getString("ContactNumber");
 
-                    Log.d("FetchUserDataTask", "User Data Retrieved:");
-                    Log.d("FetchUserDataTask", "User ID: " + userID);
-                    Log.d("FetchUserDataTask", "NIC: " + NIC);
-                    Log.d("FetchUserDataTask", "First Name: " + firstName);
-                    Log.d("FetchUserDataTask", "Last Name: " + lastName);
-                    Log.d("FetchUserDataTask", "UserName: " + username);
-                    Log.d("FetchUserDataTask", "Email: " + email);
-                    Log.d("FetchUserDataTask", "Contact Number: " + contactNumber);
-
                     user = new User( userID, firstName, lastName, username, email, NIC, gender, contactNumber, "", "", "", "");
 
                     firstNameTextView.setText("First Name: " + firstName);
@@ -263,15 +249,6 @@ public class UserProfileActivity extends AppCompatActivity {
                     nicTextView.setText("NIC: " + NIC);
                     genderTextView.setText("Gender: " + gender);
                     contactNumberTextView.setText("Contact Number: " + contactNumber);
-
-                    Log.d("FetchUserDataTask", "User Data Retrieved:");
-                    Log.d("FetchUserDataTask", "User ID: " + userID);
-                    Log.d("FetchUserDataTask", "NIC: " + NIC);
-                    Log.d("FetchUserDataTask", "First Name: " + firstName);
-                    Log.d("FetchUserDataTask", "Last Name: " + lastName);
-                    Log.d("FetchUserDataTask", "User Name: " + username);
-                    Log.d("FetchUserDataTask", "Email: " + email);
-                    Log.d("FetchUserDataTask", "Contact Number: " + contactNumber);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

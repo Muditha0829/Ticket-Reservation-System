@@ -4,16 +4,13 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.trainbooking_mobileapp.AboutUsActivity;
 import com.example.trainbooking_mobileapp.MainActivity;
 import com.example.trainbooking_mobileapp.R;
@@ -22,7 +19,7 @@ import com.example.trainbooking_mobileapp.UserManagement.SignInActivity;
 
 import java.util.List;
 
-public class reservationDetailsActivity extends AppCompatActivity implements ReservationApiClient.OnReservationDataReceivedListener {
+public class ReservationDetailsActivity extends AppCompatActivity implements ReservationApiClient.OnReservationDataReceivedListener {
 
     private RecyclerView recyclerView;
     private ReservationListAdapter reservationListAdapter;
@@ -37,30 +34,40 @@ public class reservationDetailsActivity extends AppCompatActivity implements Res
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation_list);
 
+        // Initialize the toolbar
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        setTitle("Reservation List");
+        // Set the title for this activity
+        setTitle("Reservation History");
 
+        // Disable the up button in the action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
+        // Find the RecyclerView for reservations
         recyclerView = findViewById(R.id.reservationRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        // Create an instance of ReservationApiClient
         reservationApiClient = new ReservationApiClient();
 
+        // Get the user ID passed from the previous activity
         userID = getIntent().getStringExtra("userID");
-        Log.d("ReservationDetailActivity", "Send userID: " + userID);
 
+        // Fetch reservations from the API
         reservationApiClient.getReservationsForUserFromAPI(userID, this);
 
+        // Set click listeners for the ImageButtons
         ImageButton Button1 = findViewById(R.id.button1);
         ImageButton Button6 = findViewById(R.id.button6);
         ImageButton Button5 = findViewById(R.id.button5);
+
+        // Handle button clicks
         Button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(reservationDetailsActivity.this, MainActivity.class);
+                // Navigate to the main activity
+                Intent intent = new Intent(ReservationDetailsActivity.this, MainActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
 
@@ -70,7 +77,7 @@ public class reservationDetailsActivity extends AppCompatActivity implements Res
         Button5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(reservationDetailsActivity.this, UserProfileActivity.class);
+                Intent intent = new Intent(ReservationDetailsActivity.this, UserProfileActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
 
@@ -79,7 +86,7 @@ public class reservationDetailsActivity extends AppCompatActivity implements Res
         Button6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(reservationDetailsActivity.this, AboutUsActivity.class);
+                Intent intent = new Intent(ReservationDetailsActivity.this, AboutUsActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
             }
@@ -94,10 +101,10 @@ public class reservationDetailsActivity extends AppCompatActivity implements Res
             signOut();
             return true;
         } else if (id == android.R.id.home) {
+            // Handle the up button in the action bar
             onBackPressed();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -109,10 +116,8 @@ public class reservationDetailsActivity extends AppCompatActivity implements Res
 
     @Override
     public void onReservationDataReceived(List<Reservation> reservationList) {
-        Log.d("ReservationDetails", "Received: " + reservationList.size());
 
         for (Reservation reservation : reservationList) {
-            Log.d("ReservationDetails", "Reservation ID: " + reservation.getBookingID());
         }
 
         reservationListAdapter = new ReservationListAdapter(this, reservationList);
@@ -132,7 +137,6 @@ public class reservationDetailsActivity extends AppCompatActivity implements Res
         if (requestCode == 1001 && resultCode == RESULT_OK) {
             Reservation updatedReservation = (Reservation) data.getSerializableExtra("updatedReservation");
             String updatedUserID = data.getStringExtra("userID");
-            Log.d("Updateuser","userid1: " + updatedUserID);
 
             int position = reservationList.indexOf(updatedReservation);
             if (position != -1) {

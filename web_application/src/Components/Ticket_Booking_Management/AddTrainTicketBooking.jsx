@@ -5,10 +5,13 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Form, Button, Card, Container, Row, Col } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
-import { IsValidEmail, IsValidPassword, IsValidNIC, IsValidContactNumber, IsValidTicketClass } from '../Validations';
+import { IsValidNIC, IsValidContactNumber, IsValidTicketClass } from '../Validations';
 
 const AddTrainTicketBooking = () => {
+  // Context for authentication
   const { userId } = useContext(AuthContext);
+
+  // State variables
   const [trainData, setTrainData] = useState([]);
   const [inputsDisabled, setInputsDisabled] = useState(true);
   const [formData, setFormData] = useState({
@@ -29,11 +32,11 @@ const AddTrainTicketBooking = () => {
 
   const history = useHistory();
 
+  // Function to calculate total price based on ticket class and number of passengers
   const calculateTotalPrice = () => {
     const ticketClass = formData.TicketClass;
     const totalPassengers = parseInt(formData.TotalPassengers);
 
-    // Add logic to calculate total price based on ticket class and total passengers
     let TotalPrice = 0;
     if (ticketClass === 'First Class') {
       TotalPrice = totalPassengers * formData.ticketPrice1;
@@ -50,6 +53,7 @@ const AddTrainTicketBooking = () => {
     });
   };
 
+  // Function to get the current date in the required format
   const getCurrentDate = () => {
     const today = new Date();
     const year = today.getFullYear();
@@ -67,6 +71,7 @@ const AddTrainTicketBooking = () => {
     return `${year}-${month}-${day}`;
   };
 
+  // Function to handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -80,6 +85,7 @@ const AddTrainTicketBooking = () => {
     }
   };
   
+  // Function to fetch ticket price for a selected train
   const fetchTicketPrice = (id) => {
     console.log(`Fetching ticket price for train ID: ${id}`);
     axios.get(`http://localhost:57549/api/trains/gettrain/${id}`)
@@ -90,7 +96,7 @@ const AddTrainTicketBooking = () => {
   
         setFormData(prevState => ({
           ...prevState,
-          ticketPrice1, // Add ticket prices to the state
+          ticketPrice1,
           ticketPrice2,
           ticketPrice3
         }));
@@ -100,7 +106,7 @@ const AddTrainTicketBooking = () => {
       });
   };    
   
-
+// Fetches the list of trains and sets ticket prices based on total passengers and ticket class
   useEffect(() => {
     axios.get('http://localhost:57549/api/trains/getalltrains')
       .then(response => {
@@ -112,17 +118,11 @@ const AddTrainTicketBooking = () => {
       });
   }, [formData.TotalPassengers, formData.TicketClass]);
 
-  // const handleChange = (e) => {
-  //   setFormData({
-  //     ...formData,
-  //     [e.target.name]: e.target.value
-  //   });
-  // };
-
   console.log('Form Data:', formData);
   console.log('UserID:', formData.UserID);
   console.log('TrainName:', formData.TrainName);
 
+  // Handles form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -155,7 +155,8 @@ const AddTrainTicketBooking = () => {
         }, 2000)
       })
       .catch(error => {
-        toast.error('Reservation date must be within 30 days from the current date.', error);
+        // toast.error('Reservation date must be within 30 days from the current date.', error);
+        toast.error(error.response.data.Message); 
       });
   };
 
@@ -232,32 +233,18 @@ const AddTrainTicketBooking = () => {
 
         </Form.Group>
               <br />
-              
-              
             </div>
-
-            {/* Right Column */}
             <div className="col-md-6" style={{textAlign: "left"}}>
             <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Total Passengers</Form.Label>
-            <Form.Group controlId="TotalPassengers">
-  <Form.Control
-    as="select"
-    name="TotalPassengers"
-    value={formData.TotalPassengers}
-    style={{fontFamily: "Onest"}}
-    disabled={inputsDisabled}
-    onChange={handleChange}
-    required
-  >
-    <option value="" disabled>Select Passengers Count</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-  </Form.Control>
-</Form.Group>
-
-              <br />
+              <Form.Control
+                type="number"
+                name="TotalPassengers"
+                value={formData.TotalPassengers}
+                style={{fontFamily: "Onest"}}
+                onChange={handleChange}
+                placeholder='Total Passengers'
+                required
+              /><br />
               <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Ticket Class</Form.Label>
               <Form.Group controlId="TicketClass">
   <Form.Control
@@ -333,7 +320,7 @@ const AddTrainTicketBooking = () => {
 
           <div className="text-center" style={{margin: "34px"}}>
             <Button variant="secondary" onClick={() => window.history.back()} style={{ width: '150px' }}>Back</Button>{' '}
-            <Button type="submit" variant="primary" style={{ width: '150px' }}>Submit</Button>
+            <Button type="submit" variant="primary" style={{ width: '150px', backgroundColor: "#00284d" }}>Submit</Button>
           </div>
         </Form>
         </Card.Body>

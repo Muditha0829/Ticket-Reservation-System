@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/background"
-    tools:context=".ReservationManagement.reservationDetailsActivity">
+    tools:context=".ReservationManagement.ReservationDetailsActivity">
 
     <include layout="@layout/top_bar"
         android:padding="16dp"/>

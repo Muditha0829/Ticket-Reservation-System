@@ -7,10 +7,9 @@ const TravelAgentDashboard = () => {
   const [travelAgentCount, setTravelAgentCount] = useState(0);
   const [backofficeUserCount, setBackofficeUserCount] = useState(0);
   const [travelUserCount, setTravelUserCount] = useState(0);
-  const [trainBookingCount, setTrainBookingCount] = useState(0);
 
   useEffect(() => {
-    // Fetch user counts from the API
+    // Fetch user counts from the API for back office users, travel agents, and travel users
     axios.get('http://localhost:57549/api/users/getbackofficeusercount')
       .then(response => {
         setBackofficeUserCount(response.data);
@@ -49,21 +48,30 @@ const TravelAgentDashboard = () => {
               {/* Dashboard image */}
               <Card.Img src='https://t4.ftcdn.net/jpg/02/90/79/53/360_F_290795351_i0kJX32HPEdjTgK1iSjaDjTb9MN3qk4O.jpg' style={{ height: "200px", marginBottom: "17px" }} />
               <CardBody>
-                <Card.Text style={{fontFamily: "Onest", textAlign: "justify"}}>With a focus on train booking management and traveler management, travel agents are essential to the travel sector. They professionally plan clients' lodging and travel arrangements, assuring hassle-free and delightful trips. They also offer thorough assistance to tourists, from preliminary questions to aid following a trip, ensuring a smooth journey. Travel agents are essential in delivering memorable and stress-free travel experiences thanks to their attention to detail and individualized service.</Card.Text>
+                <Card.Text style={{fontFamily: "Onest", textAlign: "justify"}}>
+                  With a focus on train booking management and traveler management, travel agents are essential to the travel sector. They professionally plan clients' lodging and travel arrangements, assuring hassle-free and delightful trips. They also offer thorough assistance to tourists, from preliminary questions to aid following a trip, ensuring a smooth journey. Travel agents are essential in delivering memorable and stress-free travel experiences thanks to their attention to detail and individualized service.
+                </Card.Text>
               </CardBody>
             </Col>
             <Col>
               {/* Card displaying Travel Agents count */}
-              <Card style={{width: "75%", margin: "33px", marginTop: "25%"}}>
+              <Card style={{width: "75%", margin: "24px", marginTop: "17%"}}>
                 <Card.Body style={{fontFamily: "Montserrat"}}>
                   <Card.Title>Number of Travel Agents</Card.Title>
                   <Card.Text>{travelAgentCount}</Card.Text>
                 </Card.Body>
               </Card>
-              {/* Card displaying Travellers count */}
-              <Card style={{width: "75%", margin: "34px", marginTop: "25%"}}>
+              {/* Card displaying Back Office Users count */}
+              <Card style={{width: "75%", margin: "24px", marginTop: "17%"}}>
                 <Card.Body style={{fontFamily: "Montserrat"}}>
-                  <Card.Title>Number of Travellers</Card.Title>
+                  <Card.Title>Number of Back Office Users</Card.Title>
+                  <Card.Text>{backofficeUserCount}</Card.Text>
+                </Card.Body>
+              </Card>
+              {/* Card displaying Travel Users count */}
+              <Card style={{width: "75%", margin: "24px", marginTop: "17%"}}>
+                <Card.Body style={{fontFamily: "Montserrat"}}>
+                  <Card.Title>Number of Travel Users</Card.Title>
                   <Card.Text>{travelUserCount}</Card.Text>
                 </Card.Body>
               </Card>

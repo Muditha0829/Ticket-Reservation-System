@@ -8,7 +8,10 @@ import Cookies from 'js-cookie';
 import { Table, Button, Card, Container, Form } from 'react-bootstrap';
 
 const GetMyTrainTicketBooking = () => {
+  // Context for authentication
   const { userId, setUser } = useContext(AuthContext);
+
+  // State variables
   const [reservations, setReservations] = useState([]);
   const [cancellationLoading, setCancellationLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -17,14 +20,17 @@ const GetMyTrainTicketBooking = () => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
+  // Handle pagination
   const handlePagination = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
+  // Handle search input change
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
 
+  // Handle cancellation of a booking
   const handleCancel = (id, ReservationDate, BookingDate) => {
     const ReservationDateObj = new Date(ReservationDate);
     const BookingDateObj = new Date(BookingDate);
@@ -54,6 +60,7 @@ const GetMyTrainTicketBooking = () => {
       });
   };  
 
+  // Fetch reservations and handle user authentication
   useEffect(() => {
     const saveduserID = Cookies.get('userID');
 
@@ -64,13 +71,12 @@ const GetMyTrainTicketBooking = () => {
       axios.get(`http://localhost:57549/api/trainbooking/getallticketbookings/${userId}`)
         .then(response => {
           setReservations(response.data);
-          localStorage.setItem('reservations', JSON.stringify(response.data)); // Store data in localStorage
+          localStorage.setItem('reservations', JSON.stringify(response.data));
         })
         .catch(error => {
           console.error('Error fetching reservations:', error);
         });
     } else {
-      // Retrieve data from localStorage
       const savedReservations = JSON.parse(localStorage.getItem('reservations'));
       if (savedReservations) {
         setReservations(savedReservations);
@@ -78,6 +84,7 @@ const GetMyTrainTicketBooking = () => {
     }
   }, [userId, setUser]);
 
+  // Filter reservations based on search query and calculate current items for pagination
   const filteredReservations = reservations.filter(reservation =>
     reservation.MainPassengerName.toLowerCase().includes(searchQuery.toLowerCase()) ||
     reservation.TrainName.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -87,7 +94,7 @@ const GetMyTrainTicketBooking = () => {
   const currentItems = filteredReservations.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
-    <Container className="text-center mt-5" style={{ height: "700px", paddingLeft: "250px", maxWidth: "1200px" }}>
+    <Container className="text-center mt-5" style={{ height: "570px", paddingLeft: "250px", maxWidth: "1200px" }}>
       <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
       <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none', borderRadius: '15px', boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.1)' }}>
         <Card.Body>
@@ -118,7 +125,7 @@ const GetMyTrainTicketBooking = () => {
                     <Button
                       variant="warning"
                       as={Link}
-                      to={`/reservationview/${reservation.BookingID}`}
+                      to={`/getticketbooking/${reservation.BookingID}`}
                       style={{ color: 'white', marginRight: '5px', textDecoration: 'none' }}
                     >
                       <i className="fas fa-eye"></i>
@@ -127,7 +134,7 @@ const GetMyTrainTicketBooking = () => {
                     <Button
                       variant="link"
                       as={Link}
-                      to={`/reservationupdate/${reservation.BookingID}`}
+                      to={`/updateticketbooking/${reservation.BookingID}`}
                       style={{ background: 'green', color: 'white', textDecoration: 'none' }}
                     >
                       <i className="fas fa-edit"></i>
@@ -152,7 +159,7 @@ const GetMyTrainTicketBooking = () => {
               className={currentPage === 1 ? 'disabled' : ''}
               style={{margin: "0 5px", cursor: "pointer"}}
             >
-              &#8249;  {/* Left arrow */}
+              &#8249;
             </span>
 
             {Array.from({ length: Math.ceil(filteredReservations.length / itemsPerPage) }).map((_, index) => (
@@ -171,7 +178,7 @@ const GetMyTrainTicketBooking = () => {
               className={currentPage === Math.ceil(filteredReservations.length / itemsPerPage) ? 'disabled' : ''}
               style={{margin: "0 5px", cursor: "pointer"}}
             >
-              &#8250;  {/* Right arrow */}
+              &#8250;
             </span>
           </div>
         </Card.Body>

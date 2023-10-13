@@ -1,10 +1,17 @@
-﻿using MongoDB.Bson;
+﻿/*
+    Filename: TrainTicketBookingController.cs
+    Description:
+    This file contains the definition of the TrainTicketBookingController class, which handles train ticket booking related API endpoints.
+*/
+
+using MongoDB.Bson;
 using System;
 using System.Linq;
 using System.Web.Http;
 using MongoDB.Driver;
 using Web_Service.Models.Ticket_Booking_Management;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 namespace WebSevice.Controllers
 {
@@ -22,6 +29,7 @@ namespace WebSevice.Controllers
             _bookingsCollection = database.GetCollection<TicketBooking>(collectionName);
         }
 
+        // Create Train Ticket Booking endpoint
         [HttpPost]
         [Route("createticketbooking")]
         public IHttpActionResult CreateBooking(TicketBooking booking)
@@ -33,10 +41,6 @@ namespace WebSevice.Controllers
 
             if (daysDifference < 30)
             {
-                if (booking.TotalPassengers > 4)
-                {
-                    return BadRequest("Maximum 4 passengers allowed per reservation.");
-                }
 
                 if (!IsValidEmail(booking.Email))
                 {
@@ -53,6 +57,24 @@ namespace WebSevice.Controllers
                     return BadRequest("Invalid ticket class.");
                 }
 
+                if (!IsValidNIC(booking.NIC))
+                {
+                    return BadRequest("Invalid NIC.");
+                }
+
+                var NIC = booking.NIC;
+                var maxReservationsCount = _bookingsCollection.CountDocuments(x => x.NIC == NIC);
+
+                if (maxReservationsCount >= 4)
+                {
+                    return BadRequest("Maximum 4 reservations allowed per NIC.");
+                }
+
+                if (!IsValidNIC(booking.NIC))
+                {
+                    return BadRequest("Invalid NIC format.");
+                }
+
                 booking.BookingDate = DateTime.Now;
 
                 _bookingsCollection.InsertOne(booking);
@@ -61,6 +83,14 @@ namespace WebSevice.Controllers
             }
 
             return BadRequest("Reservation date must be within 30 days from the current date.");
+        }
+
+        // Validate NIC format (Assuming NIC is a 9-digit number)
+        private bool IsValidNIC(string nic)
+        {
+            // Use a regular expression to validate NIC format
+            string nicPattern = @"^\d{12}$";
+            return Regex.IsMatch(nic, nicPattern);
         }
 
         private bool IsValidEmail(string email)
@@ -81,7 +111,7 @@ namespace WebSevice.Controllers
             return ticketClass == "First Class" || ticketClass == "Second Class" || ticketClass == "Third Class";
         }
 
-
+        // Get booking by ID
         [HttpGet]
         [Route("getticketbooking/{id}")]
         public IHttpActionResult GetBookingById(string id)
@@ -95,6 +125,7 @@ namespace WebSevice.Controllers
             return Ok(reservation);
         }
 
+        // Get all bookings of a user
         [HttpGet]
         [Route("getallticketbookings/{userId}")]
         public IHttpActionResult GetAllMyBookings(string userId)
@@ -103,6 +134,7 @@ namespace WebSevice.Controllers
             return Ok(reservations);
         }
 
+        // Get all bookings
         [HttpGet]
         [Route("getallticketbookings")]
         public IHttpActionResult GetAllBookings()
@@ -111,6 +143,7 @@ namespace WebSevice.Controllers
             return Ok(reservations);
         }
 
+        // Update Train Ticket Booking endpoint
         [HttpPut]
         [Route("updateticketbooking/{id}")]
         public IHttpActionResult UpdateTicketBooking(string id, TicketBooking updatedBooking)
@@ -123,10 +156,6 @@ namespace WebSevice.Controllers
 
             if (daysDifference > 5)
             {
-                if (updatedBooking.TotalPassengers > 4)
-                {
-                    return BadRequest("Maximum 4 passengers allowed per reservation.");
-                }
 
                 if (!IsValidEmail(updatedBooking.Email))
                 {
@@ -144,7 +173,6 @@ namespace WebSevice.Controllers
                 }
                 var update = Builders<TicketBooking>.Update
                     .Set(t => t.TrainName, updatedBooking.TrainName)
-                    //.Set(t => t.UserID, updatedBooking.UserID)
                     .Set(t => t.ReservationDate, updatedBooking.ReservationDate)
                     .Set(t => t.TotalPassengers, updatedBooking.TotalPassengers)
                     .Set(t => t.MainPassengerName, updatedBooking.MainPassengerName)
@@ -169,6 +197,7 @@ namespace WebSevice.Controllers
             return BadRequest("Reservation can only be updated if the difference between Reservation Date and Booking Date is greater than 5 days.");
         }
 
+        // Cancel Train Ticket Booking endpoint
         [HttpPut]
         [Route("cancelticketbooking/{id}")]
         public IHttpActionResult CancelBooking(string id)
@@ -199,6 +228,7 @@ namespace WebSevice.Controllers
             return BadRequest("Reservation can only be canceled at least 5 days before the reservation date.");
         }
 
+        // Get booking count for a user
         [HttpGet]
         [Route("getbookingcount/{id}")]
         public IHttpActionResult GetBookingCount(string agentId)

@@ -6,9 +6,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Table, Row, Col, Button, Card, Container } from 'react-bootstrap';
 
 const GetTrainShedule = () => {
+  // State for storing train data
   const [train, setTrain] = useState({});
+
+  // Get TrainID from route parameters
   const { TrainID } = useParams();
 
+  // Fetch train data based on TrainID
   useEffect(() => {
     axios.get(`http://localhost:57549/api/trains/gettrainbyId/${TrainID}`)
       .then(response => {

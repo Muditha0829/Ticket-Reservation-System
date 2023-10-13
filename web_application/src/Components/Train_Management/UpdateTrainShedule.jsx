@@ -5,11 +5,16 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
-import { IsValidTimeRange, IsValidTrainNumber } from '../Validations';
+import { IsValidTrainNumber } from '../Validations';
 
 const UpdateTrainShedule = () => {
+  // Get TrainID from route parameters
   const { TrainID } = useParams();
-  const [TraingId, setTrainID] = useState('');
+
+  // State for storing train ID (not sure if you intended to use it, if not, you can remove it)
+  const [ setTrainID] = useState('');
+
+  // State for storing updated train data
   const [updatedTrainData, setUpdatedTrainData] = useState({
     TrainNumber: '',
     TrainName: '',
@@ -42,17 +47,19 @@ const UpdateTrainShedule = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Validate Train Number format
     if (!IsValidTrainNumber(updatedTrainData.TrainNumber)) {
       toast.error('Invalid Train Number. Please enter a valid Train Number format (TXXXX).');
       return;
   }
 
+  // Send PUT request to update train data
     axios.put(`http://localhost:57549/api/trains/updatetrain/${TrainID}`, updatedTrainData)
       .then(response => {
         console.log('Train updated:', response.data);
         toast.success('Train updated successfully!');
         setTimeout(() => {
-        history.push('/listtrain');
+        history.push('/trainshedulelist');
         }, 2000)
       })
       .catch(error => {
@@ -61,8 +68,8 @@ const UpdateTrainShedule = () => {
       });
   };
 
+  // Fetch train data based on TrainID
   useEffect(() => {
-    // Fetch data based on TrainID
     if (TrainID) {
       axios.get(`http://localhost:57549/api/trains/gettrainbyId/${TrainID}`)
         .then(response => {
@@ -75,7 +82,7 @@ const UpdateTrainShedule = () => {
   }, [TrainID]);  
 
   return (
-    <Container className="text-center mt-5" style={{width: "1200px", paddingLeft: "250px"}}>
+    <Container className="text-center mt-5" style={{width: "1200px", paddingLeft: "250px", marginBottom: "27px"}}>
       <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
       <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>
         <Card.Body>
@@ -92,6 +99,7 @@ const UpdateTrainShedule = () => {
               style={{fontFamily: "Onest"}}
               value={updatedTrainData.TrainNumber}
               onChange={handleTrainIDChange}
+              disabled
             />
           </Col>
         </Row>
@@ -142,7 +150,7 @@ const UpdateTrainShedule = () => {
               name="ArrivalStation"
               style={{fontFamily: "Onest"}}
               placeholder="Arrival Station"
-              value={updatedTrainData.TrainDriver}
+              value={updatedTrainData.A}
               onChange={handleChange}
             />
           </Col>
@@ -152,7 +160,7 @@ const UpdateTrainShedule = () => {
           <Form.Group controlId="trainType" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
   <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Train Type</Form.Label>
   <Form.Control
-    as="select"  // Render as a select input
+    as="select"
     name="TrainType"
     placeholder='Train Type'
     style={{fontFamily: "Onest"}}
@@ -164,7 +172,6 @@ const UpdateTrainShedule = () => {
     <option value="Express">Express</option>
     <option value="Intercity">Intercity</option>
     <option value="Local">Local</option>
-    {/* Add other train types as needed */}
   </Form.Control>
 </Form.Group>
           </Col>
@@ -180,7 +187,6 @@ const UpdateTrainShedule = () => {
               style={{fontFamily: "Onest"}}
               name="DepartureTime"
               placeholder="Departure Time"
-              // value={updatedTrainData.DepartureTime}
               onChange={handleChange}
             />
           </Col>
@@ -193,7 +199,6 @@ const UpdateTrainShedule = () => {
               name="ArrivalTime"
               placeholder="Arrival Time"
               style={{fontFamily: "Onest"}}
-              // value={updatedTrainData.ArrivalTime}
               onChange={handleChange}
             />
             </Col>
@@ -201,7 +206,7 @@ const UpdateTrainShedule = () => {
 
         <Row className="mb-3">
           <Col className="mx-auto">
-            <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>First Class Ticket Price</Form.Label>
+            <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat", marginTop: "17px"}}>First Class Ticket Price (Rs.)</Form.Label>
             <Form.Control
               type="text"
               name="FirstClassTicketPrice"
@@ -214,7 +219,7 @@ const UpdateTrainShedule = () => {
         </Row>
         <Row className="mb-3">
           <Col className="mx-auto">
-            <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Second Class Ticket Price</Form.Label>
+            <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Second Class Ticket Price (Rs.)</Form.Label>
             <Form.Control
               type="text"
               name="SecondClassTicketPrice"
@@ -227,7 +232,7 @@ const UpdateTrainShedule = () => {
         </Row>
         <Row className="mb-3">
           <Col className="mx-auto">
-            <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Third Class Ticket Price</Form.Label>
+            <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Third Class Ticket Price (Rs.)</Form.Label>
             <Form.Control
               type="text"
               name="ThirdClassTicketPrice"
@@ -256,12 +261,11 @@ const UpdateTrainShedule = () => {
   </Col>
 </Row>
 </div>
-        
         </div>
         <Row className="mb-3">
           <Col className="mx-auto" style={{margin: "34px"}}>
             <Button variant="secondary" onClick={() => window.history.back()} style={{ width: '150px' }}>Back</Button>{' '}
-            <Button variant="primary" type="submit" style={{ width: '150px' }}>Update Train</Button>
+            <Button variant="primary" type="submit" style={{ width: '150px', backgroundColor: "#00284d" }}>Update Train</Button>
           </Col>
         </Row>
       </Form>

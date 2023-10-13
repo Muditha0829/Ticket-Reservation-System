@@ -7,9 +7,14 @@ import { Container, Table, Row, Col, Button, Card } from 'react-bootstrap';
 import imageprofileavatar from '../../Assests/profileavatar.png'
 
 const GetTraveler = () => {
+
+  // Retrieve UserID from URL parameters
   const { UserID } = useParams();
+
+  // State for storing the user details
   const [user, setUser] = useState(null);
 
+  // Function to fetch user details from the API
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -25,10 +30,12 @@ const GetTraveler = () => {
     }
   }, [UserID]);
 
+  // If no UserID is found, display a message
   if (!UserID) {
     return <div>No user ID found</div>;
   }
 
+  // If user details are still loading, display a loading message
   if (!user) {
     return <div>Loading...</div>;
   }

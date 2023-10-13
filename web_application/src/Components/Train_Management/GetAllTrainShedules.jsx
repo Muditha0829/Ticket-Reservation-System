@@ -6,21 +6,33 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Table, Button, Card, Container, Form } from 'react-bootstrap';
 
 const GetAllTrainShedules = () => {
+  // State for storing train data
   const [trains, setTrains] = useState([]);
+
+  // State for current page in pagination
   const [currentPage, setCurrentPage] = useState(1);
+
+  // State for search query
   const [searchQuery, setSearchQuery] = useState('');
+
+  // Number of items per page
   const itemsPerPage = 5;
+
+  // Calculate index of last and first item on current page
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
+  // Function to handle pagination
   const handlePagination = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
+  // Function to handle search input change
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
 
+  // Fetching train data on component mount
   useEffect(() => {
     axios.get('http://localhost:57549/api/trains/getalltrains')
       .then(response => {
@@ -31,6 +43,7 @@ const GetAllTrainShedules = () => {
       });
   }, []);
 
+  // Function to handle train deletion
   const handleDelete = (TrainID) => {
     axios.delete(`http://localhost:57549/api/trains/deletetrain/${TrainID}`)
       .then(response => {
@@ -45,15 +58,16 @@ const GetAllTrainShedules = () => {
       });
   };
 
+  // Filtered trains based on search query
   const filteredTrains = trains.filter(train =>
     train.TrainNumber.toLowerCase().includes(searchQuery.toLowerCase())
-    // Adjust this condition based on your specific search criteria
   );
 
+  // Get current items to display on the page
   const currentItems = filteredTrains.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
-    <Container className="my-5 text-center" style={{ paddingLeft: "250px", maxWidth: "900px" }}>
+    <Container className="my-5 text-center" style={{ paddingLeft: "250px", maxWidth: "900px", height: "530px" }}>
       <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
       <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none', borderRadius: '15px', boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.1)' }}>
         <Card.Body>
@@ -79,10 +93,10 @@ const GetAllTrainShedules = () => {
                   <td>{train.TrainNumber}</td>
                   <td>{train.TrainStatus}</td>
                   <td>
-                    <Link to={`/view/${train.TrainID}`}>
+                    <Link to={`/viewtrainshedule/${train.TrainID}`}>
                       <Button variant="warning" style={{ marginRight: '5px', color: 'white' }}><i className="fas fa-eye"></i></Button>
                     </Link>
-                    <Link to={`/update/${train.TrainID}`}>
+                    <Link to={`/updatetrainshedule/${train.TrainID}`}>
                       <Button variant="success" style={{ marginRight: '5px' }}><i className="fas fa-edit"></i></Button>
                     </Link>
                     <Button variant="danger" onClick={() => handleDelete(train.TrainID)} style={{ marginRight: '5px' }}>
@@ -100,7 +114,7 @@ const GetAllTrainShedules = () => {
               className={currentPage === 1 ? 'disabled' : ''}
               style={{ margin: "0 5px", cursor: "pointer" }}
             >
-              &#8249;  {/* Left arrow */}
+              &#8249;
             </span>
 
             {Array.from({ length: Math.ceil(filteredTrains.length / itemsPerPage) }).map((_, index) => (
@@ -119,7 +133,7 @@ const GetAllTrainShedules = () => {
               className={currentPage === Math.ceil(filteredTrains.length / itemsPerPage) ? 'disabled' : ''}
               style={{ margin: "0 5px", cursor: "pointer" }}
             >
-              &#8250;  {/* Right arrow */}
+              &#8250;
             </span>
           </div>
         </Card.Body>

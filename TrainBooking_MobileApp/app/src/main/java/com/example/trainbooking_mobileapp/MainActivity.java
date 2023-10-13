@@ -4,14 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
-
 import com.example.trainbooking_mobileapp.ReservationManagement.CreateReservationActivity;
-import com.example.trainbooking_mobileapp.ReservationManagement.reservationDetailsActivity;
+import com.example.trainbooking_mobileapp.ReservationManagement.ReservationDetailsActivity;
 import com.example.trainbooking_mobileapp.TrainManagement.TrainDetailsActivity;
 import com.example.trainbooking_mobileapp.UserManagement.UserProfileActivity;
 import com.example.trainbooking_mobileapp.UserManagement.SignInActivity;
@@ -25,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Set up the toolbar
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -32,51 +31,54 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
+        // Get the user ID from the intent
         String userID = getIntent().getStringExtra("userID");
-        Log.d("mainActivity", "Received userID: " + userID);
 
+        // Initialize buttons
         ImageButton Button1 = findViewById(R.id.button1);
         ImageButton Button2 = findViewById(R.id.button2);
         ImageButton Button3 = findViewById(R.id.button3);
         ImageButton Button4 = findViewById(R.id.button4);
         ImageButton Button5 = findViewById(R.id.button5);
         ImageButton Button6 = findViewById(R.id.button6);
+
+        // Set up click listeners for the buttons
         Button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, MainActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
-                Log.d("mainActivity", "Received userID: " + userID);
             }
         });
+
         Button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CreateReservationActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
-                Log.d("mainActivity", "Received userID: " + userID);
             }
         });
+
         Button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, reservationDetailsActivity.class);
+                Intent intent = new Intent(MainActivity.this, ReservationDetailsActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
-                Log.d("mainActivity", "Received userID: " + userID);
             }
         });
+
         Button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, TrainDetailsActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
-                Log.d("mainActivity", "Received userID: " + userID);
             }
         });
+
         Button5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         Button6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,8 +97,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-    // ...
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

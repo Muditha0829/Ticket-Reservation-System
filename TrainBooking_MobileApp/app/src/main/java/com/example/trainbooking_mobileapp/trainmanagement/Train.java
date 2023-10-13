@@ -12,6 +12,7 @@ public class Train {
     private String thirdClassTicketPrice;
     private String status;
 
+    // Constructor to initialize Train object
     public Train(String TrainID, String trainName, String departureTime, String arrivalTime, String departureStation, String arrivalStation, String firstClassTicketPrice, String secondClassTicketPrice, String thirdClassTicketPrice, String status) {
         this.TrainID = TrainID;
         this.trainName = trainName;
@@ -25,42 +26,52 @@ public class Train {
         this.status = status;
     }
 
+    // Getter for TrainID
     public String getTrainID() {
         return TrainID;
     }
 
+    // Getter for trainName
     public String getTrainName() {
         return trainName;
     }
 
+    // Getter for departureTime
     public String getDepartureTime() {
         return departureTime;
     }
 
+    // Getter for arrivalTime
     public String getArrivalTime() {
         return arrivalTime;
     }
 
+    // Getter for departureStation
     public String getDepartureStation() {
         return departureStation;
     }
 
+    // Getter for arrivalStation
     public String getArrivalStation() {
         return arrivalStation;
     }
 
+    // Getter for firstClassTicketPrice
     public String getFirstClassTicketPrice() {
         return firstClassTicketPrice;
     }
 
+    // Getter for secondClassTicketPrice
     public String getSecondClassTicketPrice() {
         return secondClassTicketPrice;
     }
 
+    // Getter for thirdClassTicketPrice
     public String getThirdClassTicketPrice() {
         return thirdClassTicketPrice;
     }
 
+    // Getter for status
     public String getStatus() {
         return status;
     }

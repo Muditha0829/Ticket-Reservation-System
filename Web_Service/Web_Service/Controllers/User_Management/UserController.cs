@@ -1,4 +1,10 @@
-﻿using System.Linq;
+﻿/*
+    Filename: UsersController.cs
+    Description:
+    This file contains the definition of the UsersController class, which handles user-related API endpoints.
+*/
+
+using System.Linq;
 using System.Web.Http;
 using Web_Service.Models;
 using MongoDB.Bson;
@@ -24,6 +30,7 @@ namespace WebSevice.Controllers
             _usersCollection = database.GetCollection<User>(collectionName);
         }
 
+        // Sign Up endpoint
         [HttpPost]
         [Route("signup")]
         public IHttpActionResult signup(User user)
@@ -84,8 +91,8 @@ namespace WebSevice.Controllers
                 NIC = user.NIC,
                 Gender = user.Gender,
                 UserType = user.UserType,
-                Password = hashedPassword,  // Set the hashed password
-                RePassword = hashedPassword,  // Set the hashed re-password
+                Password = hashedPassword,
+                RePassword = hashedPassword,
                 UserStatus = "Active"
             };
             _usersCollection.InsertOne(newUser);
@@ -128,6 +135,7 @@ namespace WebSevice.Controllers
             return Regex.IsMatch(contactNumber, contactNumberPattern);
         }
 
+        // Sign In endpoint
         [HttpPost]
         [Route("signin")]
         public IHttpActionResult signin(User user)
@@ -150,12 +158,6 @@ namespace WebSevice.Controllers
                 return BadRequest("Incorrect password.");
             }
 
-            // Add user type validation here
-            /*if (existingUser.UserType != "BackOfficeUser" && existingUser.UserType != "TravelAgent")
-            {
-                return BadRequest("Invalid user type for signing in.");
-            }*/
-
             return Ok(existingUser);
         }
 
@@ -169,59 +171,7 @@ namespace WebSevice.Controllers
             }
         }
 
-        [HttpPost]
-        [Route("createtraveluser")]
-        public IHttpActionResult CreateTraveluser(User user)
-        {
-            // Validate email format
-            if (!IsValidEmail(user.Email))
-            {
-                return BadRequest("Invalid email format.");
-            }
-
-            // Validate NIC format (Assuming NIC is a 9-digit number)
-            if (!IsValidNIC(user.NIC))
-            {
-                return BadRequest("Invalid NIC format.");
-            }
-
-            // Validate contact number format (Assuming 10-digit number)
-            if (!IsValidContactNumber(user.ContactNumber))
-            {
-                return BadRequest("Invalid contact number format.");
-            }
-
-            // Validate password format (Assuming at least 8 characters, one uppercase, one lowercase, one digit, and one special character)
-            string passwordPattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$";
-            if (!Regex.IsMatch(user.Password, passwordPattern))
-            {
-                return BadRequest("Invalid password format.");
-            }
-
-            if (!Regex.IsMatch(user.RePassword, passwordPattern))
-            {
-                return BadRequest("Invalid password format.");
-            }
-
-            var newUser = new User
-            {
-                UserID = ObjectId.GenerateNewId().ToString(),
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                UserName = user.UserName,
-                Email = user.Email,
-                ContactNumber = user.ContactNumber,
-                NIC = user.NIC,
-                Gender = user.Gender,
-                UserType = user.UserType,
-                Password = user.Password,
-                RePassword = user.RePassword,
-                UserStatus = "Active"
-            };
-            _usersCollection.InsertOne(newUser);
-            return Ok(newUser);
-        }
-
+        // Get User by ID endpoint
         [HttpGet]
         [Route("getuser/{id}")]
         public IHttpActionResult GetUser(string id)
@@ -235,6 +185,7 @@ namespace WebSevice.Controllers
             return Ok(user);
         }
 
+        // Update User endpoint
         [HttpPut]
         [Route("updateuser/{id}")]
         public IHttpActionResult updateuser(string id, User updatedUserData)
@@ -244,12 +195,6 @@ namespace WebSevice.Controllers
             {
                 return BadRequest("Invalid email format.");
             }
-
-            // Validate NIC format (Assuming NIC is a 9-digit number)
-            /*if (!IsValidNIC(updatedUserData.NIC))
-            {
-                return BadRequest("Invalid NIC format.");
-            }*/
 
             // Validate contact number format (Assuming 10-digit number)
             if (!IsValidContactNumber(updatedUserData.ContactNumber))
@@ -284,6 +229,7 @@ namespace WebSevice.Controllers
             return Ok(updatedUser);
         }
 
+        // Get all users with UserType 'Traveler'
         [HttpGet]
         [Route("getallusers")]
         public IHttpActionResult GetAllUsers()
@@ -293,6 +239,7 @@ namespace WebSevice.Controllers
             return Ok(travelusers);
         }
 
+        // Update User Status endpoint
         [HttpPut]
         [Route("updateuserstatus/{id}")]
         public IHttpActionResult updateuser(string id, [FromBody] UserStatusModel updateModel)
@@ -316,7 +263,7 @@ namespace WebSevice.Controllers
             public string UserStatus { get; set; }
         }
 
-
+        // Delete User endpoint
         [HttpDelete]
         [Route("deleteuser/{id}")]
         public IHttpActionResult DeleteUser(string id)
@@ -330,6 +277,7 @@ namespace WebSevice.Controllers
             return Ok("user deleted");
         }
 
+        // Get total number of users
         [HttpGet]
         [Route("getusercount")]
         public IHttpActionResult GetUserCount()
@@ -339,17 +287,18 @@ namespace WebSevice.Controllers
             return Ok(userCount);
         }
 
+        // Get total number of 'BackOfficeUser'
         [HttpGet]
         [Route("getbackofficeusercount")]
         public IHttpActionResult GetTravelAgentCount()
         {
-            var filter = Builders<User>.Filter.Eq(u => u.UserType, "backOfficeUser");
+            var filter = Builders<User>.Filter.Eq(u => u.UserType, "BackOfficeUser");
             long backofficeUserCount = _usersCollection.CountDocuments(filter);
 
             return Ok(backofficeUserCount);
         }
 
-
+        // Get total number of 'TravelAgent'
         [HttpGet]
         [Route("gettravelagentcount")]
         public IHttpActionResult GetBackofficeUserCount()
@@ -360,7 +309,7 @@ namespace WebSevice.Controllers
             return Ok(backofficeUserCount);
         }
 
-
+        // Get total number of 'Traveler'
         [HttpGet]
         [Route("gettravelusercount")]
         public IHttpActionResult GetTravelUserCount()

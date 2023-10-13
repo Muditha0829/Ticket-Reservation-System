@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -18,14 +17,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
 import com.example.trainbooking_mobileapp.AboutUsActivity;
 import com.example.trainbooking_mobileapp.MainActivity;
 import com.example.trainbooking_mobileapp.R;
 import com.example.trainbooking_mobileapp.UserManagement.UserProfileActivity;
 import com.example.trainbooking_mobileapp.UserManagement.SignInActivity;
 import com.google.gson.Gson;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -42,26 +39,27 @@ public class CreateReservationActivity extends AppCompatActivity {
     private EditText editTextDestinationStation;
     private EditText editTextEmail;
     private EditText editTextPhone;
+    private EditText editTextTotalPassengers;
     private TextView textviewReservationDate;
     private Toolbar toolbar;
     private Spinner ticketClassSpinner;
-    private Spinner totalPassengersSpinner, trainNameSpinner;
+    private Spinner trainNameSpinner;
     private String userID;
     private ReservationApiClient trainBookingApiClient;
-    private Double firstClassTicketPrice;
-    private Double secondClassTicketPrice;
-    private Double thirdClassTicketPrice;
 
+    // Method for checking if the provided email is valid
     private boolean isValidEmail(String email) {
         String emailPattern = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$";
         return email.matches(emailPattern);
     }
 
+    // Method for checking if the provided NIC is valid
     private boolean isValidNIC(String nic) {
         String nicPattern = "^\\d{12}$";
         return nic.matches(nicPattern);
     }
 
+    // Method for checking if the provided contact number is valid
     private boolean isValidContactNumber(String contactNumber) {
         String contactNumberPattern = "^\\d{10}$";
         return contactNumber.matches(contactNumberPattern);
@@ -84,7 +82,7 @@ public class CreateReservationActivity extends AppCompatActivity {
         trainNameSpinner = findViewById(R.id.trainNameSpinner);
         editTextDepartureStation = findViewById(R.id.editTextDepartureStation);
         editTextDestinationStation = findViewById(R.id.editTextDestinationStation);
-        totalPassengersSpinner = findViewById(R.id.totalPassengersSpinner);
+        editTextTotalPassengers = findViewById(R.id.editTextTotalPassengers);
         ticketClassSpinner = findViewById(R.id.ticketClassSpinner);
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPhone = findViewById(R.id.editTextPhone);
@@ -147,11 +145,6 @@ public class CreateReservationActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         ticketClassSpinner.setAdapter(adapter);
 
-        Spinner spinnerTicketClass = findViewById(R.id.totalPassengersSpinner);
-        ArrayAdapter<CharSequence> adaptertwo = ArrayAdapter.createFromResource(this, R.array.total_passengers, android.R.layout.simple_spinner_item);
-        adaptertwo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerTicketClass.setAdapter(adaptertwo);
-
 
         trainBookingApiClient = new ReservationApiClient();
 
@@ -172,53 +165,6 @@ public class CreateReservationActivity extends AppCompatActivity {
 
     }
 
-//    private void fetchTicketPrices() {
-//        trainBookingApiClient.getTicketPrices(new TrainBookingApiClient.OnTicketPricesReceivedListener() {
-//            @Override
-//            public void onTicketPricesReceived(Double firstClassPrice, Double secondClassPrice, Double thirdClassPrice) {
-//                firstClassTicketPrice = firstClassPrice;
-//                secondClassTicketPrice = secondClassPrice;
-//                thirdClassTicketPrice = thirdClassPrice;
-//            }
-//
-//            @Override
-//            public void onError(String errorMessage) {
-//            }
-//        });
-//    }
-
-//    private Double getTicketClassPrice(String ticketClass) {
-//        switch (ticketClass) {
-//            case "First Class":
-//                return firstClassTicketPrice;
-//            case "Second Class":
-//                return secondClassTicketPrice;
-//            case "Third Class":
-//                return thirdClassTicketPrice;
-//            default:
-//                return null; // Handle if ticket class is not recognized
-//        }
-//    }
-
-//    private String calculateTotalPrice() {
-//        String ticketClass = ticketClassSpinner.getSelectedItem().toString();
-//        int totalPassengers = Integer.parseInt(totalPassengersSpinner.getSelectedItem().toString());
-//
-//        Double ticketClassPrice = getTicketClassPrice(ticketClass);
-//
-//        if (ticketClassPrice != null) {
-//            Double totalPrice = totalPassengers * ticketClassPrice;
-//            return String.valueOf(totalPrice);
-//        }
-//
-//        return "N/A"; // Handle if ticket class price is not available
-//    }
-
-//    private void updateTotalPriceField() {
-//        String totalPrice = calculateTotalPrice();
-//        editTextTotalPrice.setText(totalPrice);
-//    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -234,6 +180,7 @@ public class CreateReservationActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    // Method for showing the date picker dialog
     private void showDatePickerDialog() {
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 this,
@@ -245,49 +192,24 @@ public class CreateReservationActivity extends AppCompatActivity {
                         textviewReservationDate.setText(formattedDate);
                     }
                 },
-                // Set the initial date (optional)
-                2023, 9, 17 // Year, month (0-based), day
+                2023, 9, 17
         );
         datePickerDialog.show();
     }
 
-
-
+    // Method for signing out
     private void signOut() {
         Intent intent = new Intent(this, SignInActivity.class);
         startActivity(intent);
-        finish(); // Optional: Close the current activity if needed
+        finish();
     }
 
-    // Inside your TrainBookingActivity class
-
-//    private void loadTrainNames() {
-//        TrainBookingApiClient apiClient = new TrainBookingApiClient();
-//        apiClient.getTrainNamesFromAPI(new TrainBookingApiClient.OnTrainNamesReceivedListener() {
-//            @Override
-//            public void onTrainNamesReceived(List<String> trainNames) {
-//                // Populate train names in your EditText or any other UI component
-//                // For example, assuming you have an EditText named editTextTrainName:
-//                ArrayAdapter<String> adapter = new ArrayAdapter<>(TrainBookingActivity.this, android.R.layout.simple_spinner_item, trainNames);
-//                editTextTrainName.setAdapter(adapter);
-//            }
-//
-//            @Override
-//            public void onError(String errorMessage) {
-//                // Handle errors, e.g., show an error message to the user
-//                Toast.makeText(TrainBookingActivity.this, "Error fetching train names: " + errorMessage, Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
-//
-//    // Call this method when you want to load train names, e.g., in your onCreate method
-//    loadTrainNames();
-
-
+    // Method for creating a reservation
     private void createReservation() {
         String mainPassengerName = editTextMainPassengerName.getText().toString();
         String nic = editTextNIC.getText().toString();
         String userID = getIntent().getStringExtra("userID");
+        String totalPassengersString = editTextTotalPassengers.getText().toString();
         String departureStation = editTextDepartureStation.getText().toString();
         String destinationStation = editTextDestinationStation.getText().toString();
         String bookingStatus = "Active";
@@ -315,12 +237,12 @@ public class CreateReservationActivity extends AppCompatActivity {
         Log.d("ReservationActivity", "booking Date: " + bookingDate);
 
         String ticketClass = ticketClassSpinner.getSelectedItem().toString();
-        String totalPassengersString = totalPassengersSpinner.getSelectedItem().toString();
+
         int totalPassengers = Integer.parseInt(totalPassengersString);
         String trainName = trainNameSpinner.getSelectedItem().toString();
 
         Reservation reservation = new Reservation(null, "", trainName, userID, bookingDate,
-                reservationDate, totalPassengers, mainPassengerName, phone, departureStation, destinationStation, email, nic, ticketClass, "");
+                reservationDate, totalPassengers, mainPassengerName, phone, departureStation, destinationStation, email, nic, ticketClass);
 
         CreateReservationTask task = new CreateReservationTask(userID);
         task.execute(reservation);
@@ -328,6 +250,7 @@ public class CreateReservationActivity extends AppCompatActivity {
         Log.d("ReservationActivity", "Reservation: " + reservation);
     }
 
+    // AsyncTask class for creating a reservation in the background
     private class CreateReservationTask extends AsyncTask<Reservation, Void, String> {
         private String userID;
 
@@ -373,7 +296,7 @@ public class CreateReservationActivity extends AppCompatActivity {
             if (response != null) {
                 Log.d("ReservationActivity", "Reservation created successfully. Response: " + response);
                 Toast.makeText(CreateReservationActivity.this, "Reservation created successfully!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(CreateReservationActivity.this, reservationDetailsActivity.class);
+                Intent intent = new Intent(CreateReservationActivity.this, ReservationDetailsActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
             } else {

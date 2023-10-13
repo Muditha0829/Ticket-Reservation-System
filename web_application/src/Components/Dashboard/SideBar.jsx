@@ -1,5 +1,3 @@
-// Sidebar.jsx
-
 import React, { useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
@@ -9,14 +7,15 @@ import Cookies from 'js-cookie';
 import imglogo from '../Assests/logo.png'
 
 const SideBar = () => {
-  const { userId, setUser, UserType } = useContext(AuthContext);
+  const { setUser, UserType } = useContext(AuthContext);
   const history = useHistory();
 
   const handleLogout = () => {
+    // Remove userId cookie and set user to null
     Cookies.remove('userId');
     setUser(null);
     history.push('/');
-    window.location.href = "/";
+    window.location.href = "/"; // Redirect to home
   };
 
   return (
@@ -34,16 +33,16 @@ const SideBar = () => {
         {UserType === 'TravelAgent' && (
           <>
             <Nav.Link as={Link} to="/travelagentdashboard" style={{ color: "white", padding: "15px", textAlign: "center" }}>Home</Nav.Link>
-            <Nav.Link as={Link} to="/myreservations" style={{ color: "white", padding: "15px", textAlign: "center" }}>My Bookings</Nav.Link>
-            <Nav.Link as={Link} to="/listreservation" style={{ color: "white", padding: "15px", textAlign: "center" }}>Booking Management</Nav.Link>
-            <Nav.Link as={Link} to="/listtraveluser" style={{ color: "white", padding: "15px", textAlign: "center" }}>Traveler Management</Nav.Link>
+            <Nav.Link as={Link} to="/getmyticketbookings" style={{ color: "white", padding: "15px", textAlign: "center" }}>My Bookings</Nav.Link>
+            <Nav.Link as={Link} to="/getallticketbookings" style={{ color: "white", padding: "15px", textAlign: "center" }}>Booking Management</Nav.Link>
+            <Nav.Link as={Link} to="/travelerlist" style={{ color: "white", padding: "15px", textAlign: "center" }}>Traveler Management</Nav.Link>
           </>
         )}
         {UserType === 'BackOfficeUser' && (
           <>
             <Nav.Link as={Link} to="/backofficeuserdashboard" style={{ color: "white", padding: "15px", textAlign: "center" }}>Home</Nav.Link>
-            <Nav.Link as={Link} to="/listtrain" style={{ color: "white", padding: "15px", textAlign: "center" }}>Train Management</Nav.Link>
-            <Nav.Link as={Link} to="/traveluserstatus" style={{ color: "white", padding: "15px", textAlign: "center" }}>Traveler Status</Nav.Link>
+            <Nav.Link as={Link} to="/trainshedulelist" style={{ color: "white", padding: "15px", textAlign: "center" }}>Train Management</Nav.Link>
+            <Nav.Link as={Link} to="/travelerstatus" style={{ color: "white", padding: "15px", textAlign: "center" }}>Traveler Status</Nav.Link>
           </>
         )}
         <Nav.Link onClick={handleLogout} style={{ color: "white", padding: "15px", textAlign: "center", marginTop: "27px" }}>SignOut</Nav.Link>

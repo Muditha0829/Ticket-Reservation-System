@@ -10,16 +10,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.trainbooking_mobileapp.R;
 import com.google.gson.Gson;
-
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -30,8 +26,11 @@ import okhttp3.Response;
 
 public class SignUpActivity extends AppCompatActivity {
 
+    // EditText fields
     private EditText etFirstName, etLastName, etEmail, etNIC, etUserName, etPassword, etRePassword, etContactNumber;
+    // Button for sign up
     private Button btnSignUp;
+    // Spinner for gender selection
     Spinner spinnerGender;
 
     @Override
@@ -39,6 +38,7 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+        // Initialize EditText fields and Button
         etFirstName = findViewById(R.id.etFirstName);
         etLastName = findViewById(R.id.etLastName);
         etEmail = findViewById(R.id.etEmail);
@@ -50,6 +50,7 @@ public class SignUpActivity extends AppCompatActivity {
         etContactNumber = findViewById(R.id.etContactNumber);
         btnSignUp = findViewById(R.id.btnSignUp);
 
+        // Set click listener for sign up button
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,6 +58,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
+        // Set click listener for "Sign In" TextView
         TextView txtSignIn = findViewById(R.id.txtSignIn);
         txtSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,17 +72,15 @@ public class SignUpActivity extends AppCompatActivity {
         // Get the Spinner
         Spinner spinnerGender = findViewById(R.id.spinnerGender);
 
-// Create an ArrayAdapter using the string array and a default spinner layout
+        // Create an ArrayAdapter for the spinner
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.gender_array, R.layout.custom_spinner_dropdown_item);
-
-// Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-// Apply the adapter to the spinner
         spinnerGender.setAdapter(adapter);
     }
 
+    // Method to handle sign up process
     private void signUp() {
+        // Get values from EditText fields
         String firstName = etFirstName.getText().toString().trim();
         String lastName = etLastName.getText().toString().trim();
         String email = etEmail.getText().toString().trim();
@@ -91,6 +91,7 @@ public class SignUpActivity extends AppCompatActivity {
         String reenteredPassword = etRePassword.getText().toString().trim();
         String contactNumber = etContactNumber.getText().toString().trim();
 
+        // Validate email, password, NIC, and contact number
         if (!isValidEmail(email)) {
             Toast.makeText(SignUpActivity.this, "Invalid email format.", Toast.LENGTH_SHORT).show();
             return;
@@ -116,23 +117,10 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         }
 
-        // Hash the passwords
-//        String hashedPassword = hashPassword(password);
-//        String hashedReenteredPassword = hashPassword(reenteredPassword);
-
-//        if (!hashedPassword.equals(hashedReenteredPassword)) {
-//            // Passwords don't match
-//            Toast.makeText(SignUpActivity.this, "Passwords do not match.", Toast.LENGTH_SHORT).show();
-//            return; // Return without attempting to sign up
-//        }
-
+        // Create a User object
         User user = new User("", firstName, lastName, username, email, nic, gender, contactNumber, "", password, reenteredPassword, "");
 
-        Log.d("SignUpActivity","firstName" + firstName);
-        Log.d("SignUpActivity","nic" + nic);
-        Log.d("SignUpActivity","password" + password);
-        Log.d("SignUpActivity","reenteredPassword" + reenteredPassword);
-
+        // Use OkHttp to send a POST request to the server
         OkHttpClient client = new OkHttpClient();
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         RequestBody requestBody = RequestBody.create(JSON, new Gson().toJson(user));
@@ -180,10 +168,9 @@ public class SignUpActivity extends AppCompatActivity {
                 }
             }
         });
-
-        Log.d("SignUpActivity", "Attempting to sign up...");
     }
 
+    // Method to hash the password
     private String hashPassword(String password) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -204,21 +191,25 @@ public class SignUpActivity extends AppCompatActivity {
         return null;
     }
 
+    // Method to validate email format
     private boolean isValidEmail(String email) {
         String emailPattern = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$";
         return email.matches(emailPattern);
     }
 
+    // Method to validate password format
     private boolean isValidPassword(String password) {
         String passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
         return password.matches(passwordPattern);
     }
 
+    // Method to validate NIC format
     private boolean isValidNIC(String nic) {
         String nicPattern = "^\\d{12}$";
         return nic.matches(nicPattern);
     }
 
+    // Method to validate contact number format
     private boolean isValidContactNumber(String contactNumber) {
         String contactNumberPattern = "^\\d{10}$";
         return contactNumber.matches(contactNumberPattern);

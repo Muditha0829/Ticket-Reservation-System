@@ -8,9 +8,14 @@ import { IsValidEmail, IsValidPassword, IsValidNIC, IsValidContactNumber } from 
 import imageprofileavatar from '../../Assests/profileavatar.png'
 
 const UpdateTraveller = () => {
+
+  // Retrieve UserID from URL parameters
   const { UserID } = useParams();
+
+  // Access to the history object to navigate
   const history = useHistory();
 
+  // State for storing the user data
   const [userData, setUserData] = useState({
     UserName: '',
     FirstName: '',
@@ -21,6 +26,7 @@ const UpdateTraveller = () => {
     UserType: '',
   });
 
+  // Fetch user data from the API
   useEffect(() => {
     axios.get(`http://localhost:57549/api/users/getuser/${UserID}`)
       .then(response => {
@@ -31,6 +37,7 @@ const UpdateTraveller = () => {
       });
   }, [UserID]);
 
+  // Handle changes in form fields
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserData({
@@ -39,6 +46,7 @@ const UpdateTraveller = () => {
     });
   };
 
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -63,7 +71,7 @@ const UpdateTraveller = () => {
         toast.success('Travel user updated successfully!');
         setTimeout(() => {
         history.push(`/viewtraveller/${UserID}`);
-        window.location.href = `/listtraveluser`;
+        window.location.href = `/travelerlist`;
         }, 2000)
       })
       .catch(error => {
@@ -206,7 +214,7 @@ const UpdateTraveller = () => {
             <Row className="justify-content-center" style={{margin: "25px"}}>
               <Col xs="auto">
               <Button variant="secondary" onClick={() => window.history.back()} style={{ width: '150px' }}>Back</Button>{' '}
-            <Button type="submit" variant="primary" style={{ width: '150px' }}>Update</Button>
+            <Button type="submit" variant="primary" style={{ width: '150px', backgroundColor: "#00284d" }}>Update</Button>
               </Col>
             </Row>
   </Form>

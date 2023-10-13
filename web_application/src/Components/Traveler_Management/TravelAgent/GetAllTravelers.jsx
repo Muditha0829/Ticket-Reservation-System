@@ -6,9 +6,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Table, Button, Container, Card, Form } from 'react-bootstrap';
 
 const GetAllTravelers = () => {
+
+  // State for storing the list of users
   const [users, setUsers] = useState([]);
+
+  // State for storing the search query
   const [searchQuery, setSearchQuery] = useState('');
 
+  // Function to fetch users from the API
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -22,6 +27,7 @@ const GetAllTravelers = () => {
     fetchUsers();
   }, []);
 
+  // Function to handle user deletion
   const handleDeleteUser = async (userID) => {
     try {
       await axios.delete(`http://localhost:57549/api/users/deleteuser/${userID}`);
@@ -37,6 +43,7 @@ const GetAllTravelers = () => {
     }
   };
 
+  // Function to filter users based on search query
   const filteredUsers = users.filter(user => {
     const { NIC, UserName, Email } = user;
     const query = searchQuery.toLowerCase();

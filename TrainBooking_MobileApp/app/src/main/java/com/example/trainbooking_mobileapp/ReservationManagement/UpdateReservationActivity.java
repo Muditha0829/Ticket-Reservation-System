@@ -4,8 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -19,7 +17,6 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
 import com.example.trainbooking_mobileapp.AboutUsActivity;
 import com.example.trainbooking_mobileapp.MainActivity;
 import com.example.trainbooking_mobileapp.R;
@@ -31,8 +28,7 @@ import java.util.List;
 public class UpdateReservationActivity extends AppCompatActivity {
 
     private EditText mainPassengerNameEditText, nicEditText, departureStationEditText,
-            destinationStationEditText,
-            emailEditText, contactNumberEditText;
+            destinationStationEditText, emailEditText, contactNumberEditText, totalPassengersEditText;
     private TextView reservationDateTextView;
     private Button updateButton;
     private Reservation reservation;
@@ -40,32 +36,27 @@ public class UpdateReservationActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private String userID;
 
-    private Spinner ticketClassSpinner, totalPassengersSpinner, trainNameSpinner;
+    private Spinner ticketClassSpinner;
 
     private ReservationApiClient trainBookingApiClient;
 
     @SuppressLint("LongLogTag")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        // Initialize the activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_reservation);
-
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         setTitle("Update Reservation");
         userID = getIntent().getStringExtra("userID");
         reservation = (Reservation) getIntent().getSerializableExtra("reservation");
-
         userID = getIntent().getStringExtra("userID");
-        Log.d("ReservationDetailActivity", "Received userID: " + userID);
-
         mainPassengerNameEditText = findViewById(R.id.mainPassengerNameEditText);
         nicEditText = findViewById(R.id.nicEditText);
-        trainNameSpinner = findViewById(R.id.trainNameSpinner);
+        totalPassengersEditText = findViewById(R.id.totalPassengersEditText);
         departureStationEditText = findViewById(R.id.departureStationEditText);
         destinationStationEditText = findViewById(R.id.destinationStationEditText);
-        totalPassengersSpinner = findViewById(R.id.totalPassengersSpinner);
         ticketClassSpinner = findViewById(R.id.ticketClassSpinner);
         emailEditText = findViewById(R.id.emailEditText);
         contactNumberEditText = findViewById(R.id.contactNumberEditText);
@@ -123,11 +114,6 @@ public class UpdateReservationActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         ticketClassSpinner.setAdapter(adapter);
 
-        Spinner spinnerTicketClass = findViewById(R.id.totalPassengersSpinner);
-        ArrayAdapter<CharSequence> adaptertwo = ArrayAdapter.createFromResource(this, R.array.total_passengers, android.R.layout.simple_spinner_item);
-        adaptertwo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerTicketClass.setAdapter(adaptertwo);
-
         trainBookingApiClient = new ReservationApiClient();
 
         Spinner trainNameSpinner = findViewById(R.id.trainNameSpinner);
@@ -148,6 +134,7 @@ public class UpdateReservationActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle menu item selection
         int id = item.getItemId();
 
         if (id == R.id.action_sign_out) {
@@ -157,7 +144,6 @@ public class UpdateReservationActivity extends AppCompatActivity {
             onBackPressed();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -170,6 +156,7 @@ public class UpdateReservationActivity extends AppCompatActivity {
     };
 
     private void showDatePickerDialog() {
+        // Show date picker dialog
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 this,
                 dateSetListener,
@@ -188,6 +175,7 @@ public class UpdateReservationActivity extends AppCompatActivity {
         mainPassengerNameEditText.setText(reservation.getMainPassengerName());
         nicEditText.setText(reservation.getNIC());
         departureStationEditText.setText(reservation.getDepartureStation());
+        totalPassengersEditText.setText(String.valueOf(reservation.getTotalPassengers()));
         destinationStationEditText.setText(reservation.getDestinationStation());
         emailEditText.setText(reservation.getEmail());
         contactNumberEditText.setText(reservation.getContactNumber());
@@ -195,46 +183,48 @@ public class UpdateReservationActivity extends AppCompatActivity {
     }
 
     private void updateReservation() {
+        // Handle updating reservation
         String mainPassengerName = mainPassengerNameEditText.getText().toString();
         String nic = nicEditText.getText().toString();
         String departureStation = departureStationEditText.getText().toString();
+        String totalPassengersConvert = totalPassengersEditText.getText().toString();
         String destinationStation = destinationStationEditText.getText().toString();
         String email = emailEditText.getText().toString();
         String contactNumber = contactNumberEditText.getText().toString();
         String reservationDate = reservationDateTextView.getText().toString();
 
+        int totalPassengers = Integer.parseInt(totalPassengersConvert);
+
         if (!isValidEmail(email)) {
+            // Check if email is valid
             Toast.makeText(UpdateReservationActivity.this, "Invalid email format.", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (!isValidNIC(nic)) {
+            // Check if NIC is valid
             Toast.makeText(UpdateReservationActivity.this, "Invalid NIC format.", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (!isValidContactNumber(contactNumber)) {
+            // Check if contact number is valid
             Toast.makeText(UpdateReservationActivity.this, "Invalid contact number format.", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        Log.d("Updateuser","userid3: " + reservation.getUserID());
-
         Reservation updatedReservation = new Reservation(reservation.getBookingID(), reservation.getTrainNumber(), reservation.getTrainName(), userID, reservation.getBookingDate(),
-                reservationDate, reservation.getTotalPassengers(), mainPassengerName, contactNumber, departureStation, destinationStation, email, nic, reservation.getTicketClass(), reservation.getTotalPrice());
+                reservationDate, totalPassengers, mainPassengerName, contactNumber, departureStation, destinationStation, email, nic, reservation.getTicketClass());
 
         ReservationApiClient.updateReservationInAPI(updatedReservation, new ReservationApiClient.OnReservationUpdatedListener() {
             @Override
             public void onReservationUpdated() {
-                Intent intent = new Intent(UpdateReservationActivity.this, reservationDetailsActivity.class);
+                Intent intent = new Intent(UpdateReservationActivity.this, ReservationDetailsActivity.class);
                 intent.putExtra("userID", userID);
-                Log.d("Updateuser","userid4: " + userID);
                 startActivity(intent);
-
                 Toast.makeText(UpdateReservationActivity.this, "Reservation updated successfully", Toast.LENGTH_SHORT).show();
                 finish();
             }
-
             @Override
             public void onError(String errorMessage) {
                 Toast.makeText(UpdateReservationActivity.this, "You can only update reservations at least 5 days before the your ticket booking date", Toast.LENGTH_SHORT).show();
