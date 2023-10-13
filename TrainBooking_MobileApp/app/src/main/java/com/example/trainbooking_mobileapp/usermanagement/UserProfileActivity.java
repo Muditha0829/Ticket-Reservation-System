@@ -183,7 +183,7 @@ public class UserProfileActivity extends AppCompatActivity {
             connection.setRequestProperty("Content-Type", "application/json");
 
             JSONObject jsonStatusData = new JSONObject();
-            jsonStatusData.put("UserStatus", "Inactive");
+            jsonStatusData.put("UserStatus", "Deactive");
 
             OutputStream outputStream = connection.getOutputStream();
             outputStream.write(jsonStatusData.toString().getBytes("UTF-8"));

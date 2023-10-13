@@ -82,8 +82,7 @@ const AddTraveller = () => {
       }, 2000)
     })
     .catch(error => {
-      toast.error('Error:', error);
-      alert('error');
+      toast.error('user already exist');
     });
   };
 
