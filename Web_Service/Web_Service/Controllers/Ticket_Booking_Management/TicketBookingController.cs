@@ -162,6 +162,14 @@ namespace WebSevice.Controllers
                     return BadRequest("Invalid email address.");
                 }
 
+                var NIC = updatedBooking.NIC;
+        var maxReservationsCount = _bookingsCollection.CountDocuments(x => x.NIC == NIC);
+
+        if (maxReservationsCount >= 4)
+        {
+            return BadRequest("Maximum 4 reservations allowed per NIC.");
+        }
+
                 if (!IsValidContactNumber(updatedBooking.ContactNumber))
                 {
                     return BadRequest("Invalid contact number.");
