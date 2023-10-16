@@ -148,7 +148,7 @@ const UpdateTrainTicketBooking = () => {
     })
     .catch(error => {
       console.error('Error:', error);
-      toast.error('Reservation can only be updated if reservation date is more than 5 days after booking date.');
+      toast.error(error.response.data.Message);
     });
 };
 
