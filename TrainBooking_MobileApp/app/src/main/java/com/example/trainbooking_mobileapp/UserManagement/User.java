@@ -30,7 +30,7 @@ public class User implements Serializable {
         this.Password = Password;
         this.RePassword = RePassword;
         this.ContactNumber = ContactNumber;
-        this.UserType = "Traveller";
+        this.UserType = "Traveler";
         this.UserStatus = "Active";
     }
 
