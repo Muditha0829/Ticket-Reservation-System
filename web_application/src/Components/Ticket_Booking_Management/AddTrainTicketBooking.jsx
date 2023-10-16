@@ -244,6 +244,7 @@ const AddTrainTicketBooking = () => {
                 type="number"
                 name="TotalPassengers"
                 value={formData.TotalPassengers}
+                disabled={inputsDisabled}
                 style={{fontFamily: "Onest"}}
                 onChange={handleChange}
                 placeholder='Total Passengers'
