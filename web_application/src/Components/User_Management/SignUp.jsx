@@ -170,8 +170,8 @@ const Signup = () => {
         required
     >
         <option value="">Select Gender</option>
-        <option value="male">Male</option>
-        <option value="female">Female</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
     </Form.Control>
 </Form.Group>
             <Form.Group controlId="ContactNumber" style={{marginBottom:"7px"}}>
