@@ -222,7 +222,7 @@ const Signup = () => {
               >
                 <option value="">Select User Type</option>
                 <option value="BackOfficeUser">Backoffice User</option>
-                <option value="travelAgent">Travel Agent</option>
+                <option value="TravelAgent">Travel Agent</option>
               </Form.Control>
             </Form.Group>
             </Col>
