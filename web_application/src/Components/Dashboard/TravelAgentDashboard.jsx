@@ -1,14 +1,12 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Row, Col, Card, CardBody } from 'react-bootstrap';
-import { AuthContext } from '../AuthContext';
 
 const TravelAgentDashboard = () => {
   // State variables to store user counts
   const [travelAgentCount, setTravelAgentCount] = useState(0);
   const [backofficeUserCount, setBackofficeUserCount] = useState(0);
   const [travelUserCount, setTravelUserCount] = useState(0);
-  const { userId } = useContext(AuthContext);
   const [bookingCount, setBookingCount] = useState(0);
 
 

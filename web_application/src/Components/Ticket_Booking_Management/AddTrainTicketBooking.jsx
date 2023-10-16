@@ -116,6 +116,7 @@ const AddTrainTicketBooking = () => {
       .catch(error => {
         console.error('Error fetching train data:', error);
       });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData.TotalPassengers, formData.TicketClass]);
 
   console.log('Form Data:', formData);
