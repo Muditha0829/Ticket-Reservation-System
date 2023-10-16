@@ -179,7 +179,7 @@
             android:background="@drawable/rounded_button_bg"
             android:padding="12dp"
             android:layout_gravity="center"
-            android:layout_margin="16dp" />
+            android:layout_margin="8dp" />
 
         <TextView
             android:id="@+id/txtSignIn"
@@ -188,7 +188,7 @@
             android:text="Already have an Account? Sign In"
             android:textColor="#00284d"
             android:layout_gravity="center"
-            android:layout_margin="16dp" />
+            android:layout_margin="8dp" />
 
     </LinearLayout>
 

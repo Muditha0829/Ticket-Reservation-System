@@ -214,7 +214,7 @@ public class ReservationApiClient {
                 Log.d("ReservationApiClient", "Parsed reservations: " + reservationList.size());
 
                 Reservation reservation = new Reservation(ID, trainNumber, trainName, userID, bookingDate,
-                        reservationDate, totalPassengers, mainPassengerName, phone, departureStation, destinationStation, email, nic, ticketClass);
+                        reservationDate, totalPassengers, mainPassengerName, phone, departureStation, destinationStation, email, nic, ticketClass, "");
 
                 reservationList.add(reservation);
             }

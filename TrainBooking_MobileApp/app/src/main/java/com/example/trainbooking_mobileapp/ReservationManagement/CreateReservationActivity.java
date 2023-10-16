@@ -242,7 +242,7 @@ public class CreateReservationActivity extends AppCompatActivity {
         String trainName = trainNameSpinner.getSelectedItem().toString();
 
         Reservation reservation = new Reservation(null, "", trainName, userID, bookingDate,
-                reservationDate, totalPassengers, mainPassengerName, phone, departureStation, destinationStation, email, nic, ticketClass);
+                reservationDate, totalPassengers, mainPassengerName, phone, departureStation, destinationStation, email, nic, ticketClass, "");
 
         CreateReservationTask task = new CreateReservationTask(userID);
         task.execute(reservation);
@@ -301,7 +301,7 @@ public class CreateReservationActivity extends AppCompatActivity {
                 startActivity(intent);
             } else {
                 Log.e("ReservationActivity", "Error creating reservation.");
-                Toast.makeText(CreateReservationActivity.this, "Reservation date must be within 30 days from the your booking date.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateReservationActivity.this, "Reservation date must be within 30 days from the your booking date and only add 4 reservations in one nic.", Toast.LENGTH_SHORT).show();
             }
         }
     }

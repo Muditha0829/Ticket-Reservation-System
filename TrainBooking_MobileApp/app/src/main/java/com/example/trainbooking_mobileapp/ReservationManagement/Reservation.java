@@ -17,11 +17,12 @@ public class Reservation implements Serializable {
     private String Email;
     private String NIC;
     private String TicketClass;
+    private String TotalPrice;
 
     public Reservation(String bookingID, String trainNumber, String trainName, String userID, String bookingDate,
                        String reservationDate, int totalPassengers, String mainPassengerName, String contactNumber,
                        String departureStation, String destinationStation, String email, String nic,
-                       String ticketClass) {
+                       String ticketClass, String totalPrice) {
         BookingID = bookingID;
         TrainNumber = trainNumber;
         TrainName = trainName;
@@ -36,6 +37,7 @@ public class Reservation implements Serializable {
         Email = email;
         NIC = nic;
         TicketClass = ticketClass;
+        TotalPrice = "Manual";
     }
 
     /*
@@ -218,6 +220,20 @@ public class Reservation implements Serializable {
      */
     public void setNIC(String NIC) {
         this.NIC = NIC;
+    }
+
+    /*
+     * Get the total price.
+     */
+    public String getTotalPrice() {
+        return TotalPrice;
+    }
+
+    /*
+     * Set the total price.
+     */
+    public void setTotalPrice(String totalPrice) {
+        this.TotalPrice = totalPrice;
     }
 
     /*

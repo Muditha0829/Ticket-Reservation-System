@@ -223,7 +223,7 @@ public class UpdateReservationActivity extends AppCompatActivity {
         }
 
         Reservation updatedReservation = new Reservation(reservation.getBookingID(), reservation.getTrainNumber(), reservation.getTrainName(), userID, reservation.getBookingDate(),
-                reservationDate, totalPassengers, mainPassengerName, contactNumber, departureStation, destinationStation, email, nic, reservation.getTicketClass());
+                reservationDate, totalPassengers, mainPassengerName, contactNumber, departureStation, destinationStation, email, nic, reservation.getTicketClass(), reservation.getTotalPrice());
 
         ReservationApiClient.updateReservationInAPI(updatedReservation, new ReservationApiClient.OnReservationUpdatedListener() {
             @Override
