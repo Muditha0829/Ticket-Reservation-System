@@ -12,6 +12,7 @@ const AddTrainShedule = () => {
   const { userID } = useContext(AuthContext);
 
   // State for submission status
+  // eslint-disable-next-line no-unused-vars
   const [submissionSuccessful, setSubmissionSuccessful] = useState(false);
 
   // State for storing train data
