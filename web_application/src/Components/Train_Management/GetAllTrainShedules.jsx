@@ -67,7 +67,7 @@ const GetAllTrainShedules = () => {
   const currentItems = filteredTrains.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
-    <Container className="my-5 text-center" style={{ paddingLeft: "250px", maxWidth: "900px", height: "530px" }}>
+    <Container className="my-5 text-center" style={{ paddingLeft: "250px", maxWidth: "900px", height: "570px" }}>
       <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
       <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none', borderRadius: '15px', boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.1)' }}>
         <Card.Body>

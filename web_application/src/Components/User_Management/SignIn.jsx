@@ -58,7 +58,7 @@ const SignIn = () => {
           history.push('/travelagentdashboard');
           window.location.href="/travelagentdashboard";
         } else {
-          history.push('/');
+          toast.error('Travelers are not allowed for this platform');
         }
       })
       .catch(error => {

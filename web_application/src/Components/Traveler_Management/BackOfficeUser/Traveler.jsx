@@ -38,7 +38,7 @@ const TravellerUser = () => {
 
   // Function to handle status change (Activate/Deactivate)
   const handleStatusChange = (UserID, currentStatus) => {
-    const newStatus = currentStatus === 'Active' ? 'active' : 'Active';
+    const newStatus = currentStatus === 'Active' ? 'Deactive' : 'Active';
 
     axios.put(`http://pasinduperera-001-site1.atempurl.com/api/users/updateuserstatus/${UserID}`, { UserStatus: newStatus })
       .then(response => {

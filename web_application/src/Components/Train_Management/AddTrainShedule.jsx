@@ -69,13 +69,13 @@ const AddTrainShedule = () => {
       }, 2000);
       })
       .catch(error => {
-        toast.error('Departure Time must be before Arrival Time.');
+        // toast.error('Departure Time must be before Arrival Time.');
       });
   };
 
   return (
     <Container className="text-center mt-5" style={{width: "1200px", paddingLeft: "250px", marginBottom: "25px"}}>
-      <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
+      <ToastContainer position="top-center" autoClose={2000} hideProgressBar />
       <Row className="justify-content-center">
         <Col>
           <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>
@@ -213,7 +213,7 @@ const AddTrainShedule = () => {
                 <Form.Group controlId="firstClassTicketPrice" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
                   <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>First Class Ticket Price</Form.Label>
                   <Form.Control
-                    type="text"
+                    type="number"
                     name="FirstClassTicketPrice"
                     placeholder='First Class Ticket price'
                     style={{fontFamily: "Onest"}}
@@ -226,7 +226,7 @@ const AddTrainShedule = () => {
                 <Form.Group controlId="secondClassTicketPrice" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
                   <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Second Class Ticket Price</Form.Label>
                   <Form.Control
-                    type="text"
+                    type="number"
                     name="SecondClassTicketPrice"
                     placeholder='Second Class Ticket price'
                     value={trainData.SecondClassTicketPrice}
@@ -238,7 +238,7 @@ const AddTrainShedule = () => {
                 <Form.Group controlId="thirdClassTicketPrice" style={{fontSize: "17px", fontFamily: "Montserrat"}}>
                   <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Third Class Ticket Price</Form.Label>
                   <Form.Control
-                    type="text"
+                    type="number"
                     name="ThirdClassTicketPrice"
                     placeholder='Third Class Ticket price'
                     value={trainData.ThirdClassTicketPrice}

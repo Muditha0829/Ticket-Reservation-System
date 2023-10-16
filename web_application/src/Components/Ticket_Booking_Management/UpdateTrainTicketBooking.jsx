@@ -37,7 +37,7 @@ const UpdateTrainTicketBooking = () => {
     TicketClass: '',
     Email: '',
     ContactNumber: '',
-    TotalPrice: ''
+    TotalPrice: 0
   });
 
   // Getting history object for navigation
