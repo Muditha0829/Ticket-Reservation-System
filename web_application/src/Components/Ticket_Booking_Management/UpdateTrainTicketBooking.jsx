@@ -18,6 +18,7 @@ const UpdateTrainTicketBooking = () => {
   // State for storing train data
   const [trainData, setTrainData] = useState([]);
 
+  // eslint-disable-next-line no-unused-vars
   const [setLoading] = useState(true);
 
   // State for disabling form inputs
@@ -190,6 +191,7 @@ const UpdateTrainTicketBooking = () => {
     return () => {
       isMounted = false;
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [updatedReservationData.TotalPassengers, updatedReservationData.TicketClass]);
 
   return (
