@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -187,13 +188,21 @@ public class UpdateReservationActivity extends AppCompatActivity {
         String mainPassengerName = mainPassengerNameEditText.getText().toString();
         String nic = nicEditText.getText().toString();
         String departureStation = departureStationEditText.getText().toString();
-        String totalPassengersConvert = totalPassengersEditText.getText().toString();
         String destinationStation = destinationStationEditText.getText().toString();
         String email = emailEditText.getText().toString();
         String contactNumber = contactNumberEditText.getText().toString();
         String reservationDate = reservationDateTextView.getText().toString();
 
-        int totalPassengers = Integer.parseInt(totalPassengersConvert);
+        String totalPassengersConvert = totalPassengersEditText.getText().toString();
+        int totalPassengers;
+
+        try {
+            totalPassengers = Integer.parseInt(totalPassengersConvert);
+        } catch (NumberFormatException e) {
+            // Handle the case where the input is not a valid integer
+            Toast.makeText(UpdateReservationActivity.this, "Invalid total passengers format.", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         if (!isValidEmail(email)) {
             // Check if email is valid
