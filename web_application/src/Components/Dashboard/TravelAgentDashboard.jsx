@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { Container, Row, Col, Card, CardBody } from 'react-bootstrap';
+import { AuthContext } from '../AuthContext';
 
 const TravelAgentDashboard = () => {
   // State variables to store user counts
   const [travelAgentCount, setTravelAgentCount] = useState(0);
   const [backofficeUserCount, setBackofficeUserCount] = useState(0);
   const [travelUserCount, setTravelUserCount] = useState(0);
+  const { userId } = useContext(AuthContext);
+  const [bookingCount, setBookingCount] = useState(0);
+
 
   useEffect(() => {
     // Fetch user counts from the API for back office users, travel agents, and travel users
@@ -35,8 +39,16 @@ const TravelAgentDashboard = () => {
       });
   }, []);
 
+    axios.get(`http://pasinduperera-001-site1.atempurl.com/api/trainbooking/getbookingcount`)
+      .then(response => {
+        setBookingCount(response.data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+
   return (
-    <Container className="text-center" style={{ paddingLeft: "250px", marginBottom: "25px", marginTop: "25px" }}>
+    <Container className="text-center" style={{ paddingLeft: "250px", marginBottom: "34px", marginTop: "25px" }}>
       <Card style={{ padding: "1px", height: "537px", background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>
         <Card.Body>
           <Row className="mb-4">
@@ -55,26 +67,33 @@ const TravelAgentDashboard = () => {
             </Col>
             <Col>
               {/* Card displaying Travel Agents count */}
-              <Card style={{width: "75%", margin: "24px", marginTop: "17%"}}>
+              <Card style={{width: "75%", margin: "24px", marginTop: "7%"}}>
                 <Card.Body style={{fontFamily: "Montserrat"}}>
                   <Card.Title>Number of Travel Agents</Card.Title>
                   <Card.Text>{travelAgentCount}</Card.Text>
                 </Card.Body>
               </Card>
               {/* Card displaying Back Office Users count */}
-              <Card style={{width: "75%", margin: "24px", marginTop: "17%"}}>
+              <Card style={{width: "75%", margin: "24px", marginTop: "7%"}}>
                 <Card.Body style={{fontFamily: "Montserrat"}}>
                   <Card.Title>Number of Back Office Users</Card.Title>
                   <Card.Text>{backofficeUserCount}</Card.Text>
                 </Card.Body>
               </Card>
               {/* Card displaying Travel Users count */}
-              <Card style={{width: "75%", margin: "24px", marginTop: "17%"}}>
+              <Card style={{width: "75%", margin: "24px", marginTop: "7%"}}>
                 <Card.Body style={{fontFamily: "Montserrat"}}>
                   <Card.Title>Number of Travel Users</Card.Title>
                   <Card.Text>{travelUserCount}</Card.Text>
                 </Card.Body>
               </Card>
+              <Card style={{width: "75%", margin: "24px", marginTop: "7%"}}>
+  <Card.Body style={{fontFamily: "Montserrat"}}>
+    <Card.Title>Number of Reservations</Card.Title>
+    <Card.Text>{bookingCount}</Card.Text>
+  </Card.Body>
+</Card>
+
             </Col>
           </Row>
         </Card.Body>

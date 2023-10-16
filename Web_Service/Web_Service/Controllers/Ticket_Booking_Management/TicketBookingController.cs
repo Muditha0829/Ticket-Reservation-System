@@ -163,12 +163,12 @@ namespace WebSevice.Controllers
                 }
 
                 var NIC = updatedBooking.NIC;
-        var maxReservationsCount = _bookingsCollection.CountDocuments(x => x.NIC == NIC);
+                var maxReservationsCount = _bookingsCollection.CountDocuments(x => x.NIC == NIC);
 
-        if (maxReservationsCount >= 4)
-        {
-            return BadRequest("Maximum 4 reservations allowed per NIC.");
-        }
+                if (maxReservationsCount >= 4)
+                {
+                    return BadRequest("Maximum 4 reservations allowed per NIC.");
+                }
 
                 if (!IsValidContactNumber(updatedBooking.ContactNumber))
                 {
@@ -236,12 +236,12 @@ namespace WebSevice.Controllers
             return BadRequest("Reservation can only be canceled at least 5 days before the reservation date.");
         }
 
-        // Get booking count for a user
+        // Get booking count
         [HttpGet]
-        [Route("getbookingcount/{id}")]
-        public IHttpActionResult GetBookingCount(string agentId)
+        [Route("getbookingcount")]
+        public IHttpActionResult GetBookingCount()
         {
-            var bookingCount = _bookingsCollection.CountDocuments(b => b.UserID == agentId);
+            var bookingCount = _bookingsCollection.CountDocuments(new BsonDocument());
             return Ok(bookingCount);
         }
     }
