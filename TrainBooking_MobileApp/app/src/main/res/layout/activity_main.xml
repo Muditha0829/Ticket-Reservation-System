@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".MainActivity">
+
+    <include layout="@layout/top_bar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome Traveler"
+            android:layout_gravity="center"
+            android:layout_marginTop="78dp"
+            android:gravity="center"
+            android:textSize="43sp"
+            android:textColor="@color/white"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:id="@+id/appDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="170dp"
+            android:text="Welcome to our reservation app! Easily manage your train bookings and explore a wide range of travel options. With our user-friendly interface, planning your journeys has never been more convenient. Get started today and experience seamless travel planning like never before."
+            android:textSize="17sp"
+            android:textColor="#FFFFFF"
+            android:background="#8B00284D"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp"
+            android:gravity="center" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/button3"
+                android:layout_width="160dp"
+                android:layout_height="75dp"
+                android:layout_margin="16dp"
+                android:background="@drawable/button_border"
+                android:elevation="8dp"
+                android:src="@drawable/ic_baseline_library_books_24"
+                android:tint="#FFFFFF"
+                app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="My Reservations"
+                android:textSize="16dp"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/button4"
+                android:layout_width="160dp"
+                android:layout_height="75dp"
+                android:layout_margin="16dp"
+                android:background="@drawable/button_border"
+                android:elevation="8dp"
+                android:src="@drawable/ic_baseline_train_24"
+                android:tint="#FFFFFF"
+                app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Train Shedules"
+                android:textSize="16dp"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="27dp"
+            tools:context=".AboutUsActivity">
+
+            <ImageButton
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="47dp"
+                android:background="@drawable/rounded_button_bg"
+                android:elevation="8dp"
+                android:src="@drawable/ic_baseline_add_circle_outline_24"
+                android:tint="#FFFFFF"
+                app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior" />
+
+        </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:background="#00284d"
+        android:elevation="8dp">
+
+        <ImageButton
+            android:id="@+id/button1"
+            android:layout_width="0dp"
+            android:layout_height="47dp"
+            android:layout_weight="1"
+            android:background="#00284d"
+            android:src="@drawable/ic_baseline_home_24"
+            android:tint="#ffff" />
+
+        <ImageButton
+            android:id="@+id/button5"
+            android:layout_width="47dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#00284d"
+            android:src="@drawable/ic_baseline_account_circle_24"
+            android:tint="#ffff" />
+
+        <ImageButton
+            android:id="@+id/button6"
+            android:layout_width="0dp"
+            android:layout_height="47dp"
+            android:layout_weight="1"
+            android:background="#00284d"
+            android:src="@drawable/ic_baseline_groups_24"
+            android:tint="#ffff" />
+
+    </LinearLayout>
+</RelativeLayout>
