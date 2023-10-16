@@ -42,7 +42,7 @@ const UserProfile = () => {
   // Function to handle delete button click
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://pasinduperera-001-site1.atempurl.com/api/users/deletuser/${userId}`);
+      await axios.delete(`http://pasinduperera-001-site1.atempurl.com/api/users/deleteuser/${userId}`);
       toast.success('User deleted successfully!');
       window.location.href="/"
     } catch (error) {
