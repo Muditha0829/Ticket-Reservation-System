@@ -64,7 +64,7 @@ const UpdateTrainShedule = () => {
       })
       .catch(error => {
         console.error('Error:', error);
-        toast.error('Departure Time must be before Arrival Time.');
+        toast.error(error.response.data.Message);
       });
   };
 
