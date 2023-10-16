@@ -180,6 +180,7 @@ const UpdateTrainTicketBooking = () => {
     return () => {
       isMounted = false;
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [updatedReservationData.TotalPassengers, updatedReservationData.TicketClass]);
 
   return (
@@ -342,7 +343,7 @@ const UpdateTrainTicketBooking = () => {
       <Col>
       <Form.Control
         type="text"
-        style={{fontFamily: "Onest", marginRight: "100px", width: "100px"}}
+        style={{fontFamily: "Onest", marginRight: "100px", width: "170px", textAlign: "center"}}
         name="TotalPrice"
         value={"Rs: "+updatedReservationData.TotalPrice+ ".00"}
         onChange={handleChange}

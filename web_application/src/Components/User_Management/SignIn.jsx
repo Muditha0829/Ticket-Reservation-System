@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useHistory, Link } from 'react-router-dom';
@@ -10,7 +11,7 @@ import {IsValidNIC, IsValidPassword} from '../Validations'
 const SignIn = () => {
 
    // Access the setUser and UserType from the AuthContext
-  const { setUser, UserType } = useContext(AuthContext);
+  const { setUser } = useContext(AuthContext);
 
   // State for form data
   const [formData, setFormData] = useState({

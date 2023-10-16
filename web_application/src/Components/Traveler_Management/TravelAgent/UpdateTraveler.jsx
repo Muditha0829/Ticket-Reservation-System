@@ -4,7 +4,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Container, Form, Button, Row, Col, Card } from 'react-bootstrap';
-import { IsValidEmail, IsValidPassword, IsValidNIC, IsValidContactNumber } from '../../Validations';
+import { IsValidEmail, IsValidNIC, IsValidContactNumber } from '../../Validations';
 import imageprofileavatar from '../../Assests/profileavatar.png'
 
 const UpdateTraveller = () => {

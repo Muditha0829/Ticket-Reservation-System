@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Form, Button, Container, Card, Row, Col } from 'react-bootstrap';

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Container, Form, Button, Row, Col, Card } from 'react-bootstrap';
-import { IsValidEmail, IsValidPassword, IsValidNIC, IsValidContactNumber } from '../Validations';
+import { IsValidEmail, IsValidNIC, IsValidContactNumber } from '../Validations';
 import imageprofileavatar from '../Assests/profileavatar.png'
 
 const UpdateTraveller = () => {
@@ -13,7 +13,7 @@ const UpdateTraveller = () => {
   const { UserID } = useParams();
 
   // Initializing history hook for navigation
-  const history = useHistory();
+  // const history = useHistory();
 
   // Initializing state to hold user data
   const [userData, setUserData] = useState({
