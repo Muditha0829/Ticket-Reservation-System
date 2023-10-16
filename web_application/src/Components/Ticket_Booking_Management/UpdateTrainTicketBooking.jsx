@@ -18,6 +18,9 @@ const UpdateTrainTicketBooking = () => {
   // State for storing train data
   const [trainData, setTrainData] = useState([]);
 
+  // eslint-disable-next-line no-unused-vars
+  const [setLoading] = useState(true);
+
   // State for disabling form inputs
   const [inputsDisabled, setInputsDisabled] = useState(true);
 
@@ -34,7 +37,10 @@ const UpdateTrainTicketBooking = () => {
     TicketClass: '',
     Email: '',
     ContactNumber: '',
-    TotalPrice: ''
+    uticketPrice1: 0,
+    uticketPrice2: 0,
+    uticketPrice3: 0,
+    TotalPrice: 0
   });
 
   // Getting history object for navigation
@@ -56,8 +62,11 @@ const UpdateTrainTicketBooking = () => {
     }
   
     console.log(`Ticket Class: ${ticketClass}`);
-    console.log(`Total Passengers: ${totalPassengers}`);
-    console.log(`Total Price: ${TotalPrice}`);
+  console.log(`Total Passengers: ${totalPassengers}`);
+  console.log(`Price 1: ${updatedReservationData.uticketPrice1}`);
+  console.log(`Price 2: ${updatedReservationData.uticketPrice2}`);
+  console.log(`Price 3: ${updatedReservationData.uticketPrice3}`);
+  console.log(`Total Price: ${TotalPrice}`);
   
     setUpdatedReservationData({
       ...updatedReservationData,
@@ -98,7 +107,13 @@ const UpdateTrainTicketBooking = () => {
       .then(response => {
         const uticketPrice1 = response.data.FirstClassTicketPrice;
         const uticketPrice2 = response.data.SecondClassTicketPrice; 
-        const uticketPrice3 = response.data.ThirdClassTicketPrice; 
+        const uticketPrice3 = response.data.ThirdClassTicketPrice;
+
+        console.log('Response Data:', response.data);
+
+        console.log(`Price 1: ${uticketPrice1}`);
+      console.log(`Price 2: ${uticketPrice2}`);
+      console.log(`Price 3: ${uticketPrice3}`);
   
         setUpdatedReservationData(prevState => ({
           ...prevState,
@@ -106,6 +121,8 @@ const UpdateTrainTicketBooking = () => {
           uticketPrice2,
           uticketPrice3
         }));
+
+        calculateTotalPrice();
       })
       .catch(error => {
         console.error('Error fetching ticket price:', error);
@@ -149,39 +166,51 @@ const UpdateTrainTicketBooking = () => {
       });
   };
 
-  // Effect to fetch and set train data
-  useEffect(() => {
-    if (BookingID) {
-      axios.get(`http://pasinduperera-001-site1.atempurl.com/api/trainbooking/getticketbooking/${BookingID}`)
-        .then(response => {
-          setUpdatedReservationData(response.data);
-        })
-        .catch(error => {
-          console.error('Error fetching reservation data:', error);
-        });
-    }
-  }, [BookingID]);
-  
-  // Effect to fetch all shedule trains
-  useEffect(() => {
-    let isMounted = true;
+  // Effect to fetch ticket price based on selected train
+useEffect(() => {
+  if (updatedReservationData.TrainName) {
+    fetchTicketPrice(updatedReservationData.TrainName);
+  }
+}, [updatedReservationData.TrainName]);
 
-    axios.get('http://pasinduperera-001-site1.atempurl.com/api/trains/getallsheduledtrains')
+// Effect to calculate total price when TotalPassengers or TicketClass changes
+useEffect(() => {
+  calculateTotalPrice();
+// eslint-disable-next-line react-hooks/exhaustive-deps
+}, [updatedReservationData.TotalPassengers, updatedReservationData.TicketClass]);
+
+// Effect to fetch and set train data
+// Effect to fetch and set train data
+useEffect(() => {
+  if (BookingID) {
+    axios.get(`http://pasinduperera-001-site1.atempurl.com/api/trainbooking/getticketbooking/${BookingID}`)
       .then(response => {
-        if (isMounted) {
-          setTrainData(response.data);
-          calculateTotalPrice();
-        }
+        // Convert the date format here
+        const originalDate = response.data.ReservationDate;
+        const formattedDate = new Date(originalDate).toISOString().split('T')[0];
+
+        setUpdatedReservationData({
+          ...response.data,
+          ReservationDate: formattedDate, // Set the formatted date
+          TotalPrice: response.data.TotalPrice
+        });
       })
       .catch(error => {
-        console.error('Error fetching train data:', error);
+        console.error('Error fetching reservation data:', error);
       });
-  
-    return () => {
-      isMounted = false;
-    };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [updatedReservationData.TotalPassengers, updatedReservationData.TicketClass]);
+  }
+}, [BookingID]);
+
+// Effect to fetch all scheduled trains
+useEffect(() => {
+  axios.get('http://pasinduperera-001-site1.atempurl.com/api/trains/getallsheduledtrains')
+    .then(response => {
+      setTrainData(response.data);
+    })
+    .catch(error => {
+      console.error('Error fetching train data:', error);
+    });
+}, []);
 
   return (
     <Container className="my-5 text-center" style={{width: "75%", paddingLeft: "250px"}}>
@@ -283,6 +312,7 @@ const UpdateTrainTicketBooking = () => {
         type="number"
         name="TotalPassengers"
         style={{fontFamily: "Onest"}}
+        disabled={inputsDisabled}
         value={updatedReservationData.TotalPassengers}
         onChange={handleChange}
         placeholder="Total Passengers"
@@ -345,7 +375,7 @@ const UpdateTrainTicketBooking = () => {
         type="text"
         style={{fontFamily: "Onest", marginRight: "100px", width: "170px", textAlign: "center"}}
         name="TotalPrice"
-        value={"Rs: "+updatedReservationData.TotalPrice+ ".00"}
+        value={"Rs: " + updatedReservationData.TotalPrice+ ".00"}
         onChange={handleChange}
         placeholder="Total Price"
         required
