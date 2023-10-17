@@ -27,7 +27,7 @@ public class ReservationApiClient {
             @Override
             protected String doInBackground(Void... voids) {
                 try {
-                    URL url = new URL("http://pasinduperera-001-site1.atempurl.com/api/trains/getalltrains");
+                    URL url = new URL("http://pasinduperera-001-site1.atempurl.com/api/trains/getallSheduledtrains");
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("GET");
                     connection.setRequestProperty("Content-Type", "application/json");
