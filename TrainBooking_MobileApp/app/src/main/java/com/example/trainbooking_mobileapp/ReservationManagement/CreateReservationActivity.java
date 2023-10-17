@@ -29,6 +29,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.List;
 
 public class CreateReservationActivity extends AppCompatActivity {
@@ -182,6 +183,12 @@ public class CreateReservationActivity extends AppCompatActivity {
 
     // Method for showing the date picker dialog
     private void showDatePickerDialog() {
+        // Get current date
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 this,
                 new DatePickerDialog.OnDateSetListener() {
@@ -192,8 +199,12 @@ public class CreateReservationActivity extends AppCompatActivity {
                         textviewReservationDate.setText(formattedDate);
                     }
                 },
-                2023, 9, 17
+                year, month, day
         );
+
+        // Set minimum date to today
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+
         datePickerDialog.show();
     }
 

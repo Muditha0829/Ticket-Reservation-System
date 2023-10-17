@@ -26,6 +26,7 @@ import com.example.trainbooking_mobileapp.R;
 import com.example.trainbooking_mobileapp.UserManagement.UserProfileActivity;
 import com.example.trainbooking_mobileapp.UserManagement.SignInActivity;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class UpdateReservationActivity extends AppCompatActivity {
@@ -159,12 +160,21 @@ public class UpdateReservationActivity extends AppCompatActivity {
     };
 
     private void showDatePickerDialog() {
-        // Show date picker dialog
+        // Get current date
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 this,
                 dateSetListener,
-                2023, 9, 17
+                year, month, day
         );
+
+        // Set minimum date to today
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+
         datePickerDialog.show();
     }
 
