@@ -241,7 +241,7 @@ const [existingTotalPrice, setExistingTotalPrice] = useState(0);
       <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Main Passenger Name</Form.Label>
       <Form.Control
         type="text"
-        name="TravelerName"
+        name="MainPassengerName"
         value={updatedReservationData.MainPassengerName}
         onChange={handleChange}
         placeholder="Main Passenger Name"
@@ -314,6 +314,7 @@ const [existingTotalPrice, setExistingTotalPrice] = useState(0);
         type="text"
         name="NIC"
         style={{fontFamily: "Onest"}}
+        disabled
         value={updatedReservationData.NIC}
         onChange={handleChange}
         placeholder="NIC"
