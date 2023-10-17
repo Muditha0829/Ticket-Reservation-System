@@ -30,6 +30,12 @@ namespace Web_Service.Controllers
         [Route("createtrain")]
         public IHttpActionResult CreateTrain(Train train)
         {
+            // Check if a train with the same TrainID already exists
+            var existingTrain = _trainsCollection.Find(t => t.TrainNumber == train.TrainNumber).FirstOrDefault();
+            if (existingTrain != null)
+            {
+                return BadRequest("Train with the same TrainNumber already exists.");
+            }
             // Validate Train Name
             if (string.IsNullOrWhiteSpace(train.TrainName))
             {
@@ -134,12 +140,6 @@ namespace Web_Service.Controllers
             if (updatedTrain.DepartureTime >= updatedTrain.ArrivalTime)
             {
                 return BadRequest("Departure Time must be before Arrival Time.");
-            }
-            // Check if a train with the same TrainID already exists
-            var existingTrain = _trainsCollection.Find(t => t.TrainNumber == updatedTrain.TrainNumber).FirstOrDefault();
-            if (existingTrain != null)
-            {
-                return BadRequest("Train with the same TrainNumber already exists.");
             }
 
             if (string.IsNullOrWhiteSpace(updatedTrain.TrainType))
