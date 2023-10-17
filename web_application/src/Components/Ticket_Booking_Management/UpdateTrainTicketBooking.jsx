@@ -18,6 +18,9 @@ const UpdateTrainTicketBooking = () => {
   // State for storing train data
   const [trainData, setTrainData] = useState([]);
 
+  // Add a new state for existing total price
+const [existingTotalPrice, setExistingTotalPrice] = useState(0);
+
   // eslint-disable-next-line no-unused-vars
   const [setLoading] = useState(true);
 
@@ -37,6 +40,9 @@ const UpdateTrainTicketBooking = () => {
     TicketClass: '',
     Email: '',
     ContactNumber: '',
+    uticketPrice1: 0,
+    uticketPrice2: 0,
+    uticketPrice3: 0,
     TotalPrice: 0
   });
 
@@ -101,7 +107,11 @@ const UpdateTrainTicketBooking = () => {
       .then(response => {
         const uticketPrice1 = response.data.FirstClassTicketPrice;
         const uticketPrice2 = response.data.SecondClassTicketPrice; 
-        const uticketPrice3 = response.data.ThirdClassTicketPrice; 
+        const uticketPrice3 = response.data.ThirdClassTicketPrice;
+
+        console.log(`uticketPrice1: ${uticketPrice1}`);
+      console.log(`uticketPrice2: ${uticketPrice2}`);
+      console.log(`uticketPrice3: ${uticketPrice3}`);
   
         setUpdatedReservationData(prevState => ({
           ...prevState,
@@ -169,6 +179,7 @@ const UpdateTrainTicketBooking = () => {
           TicketClass: response.data.TicketClass
         });
           setUpdatedReservationData(response.data);
+          setExistingTotalPrice(response.data.TotalPrice);
           console.log(response.data.TotalPrice);
         })
         .catch(error => {
@@ -204,7 +215,6 @@ const UpdateTrainTicketBooking = () => {
   <Card style={{ background: 'rgba(255, 255, 255, 0.7)', border: 'none' }}>
             <Card.Body>
               <Card.Title style={{ margin: "25px", fontFamily: "Dela Gothic One", fontSize: "34px" }}>Update Trian Booking</Card.Title>
-              
                 
   <Form onSubmit={handleSubmit}>
   <div className="row">
@@ -354,12 +364,12 @@ const UpdateTrainTicketBooking = () => {
         <Form.Group style={{textAlign:"left", margin: "25px"}}>
         <Row>
             <Col>
-      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat", marginLeft: "200px"}}>Total Price</Form.Label>
+      <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat", marginLeft: "70px"}}>Total Price (Existing Total price : Rs {existingTotalPrice}.00)</Form.Label>
       </Col>
       <Col>
       <Form.Control
         type="text"
-        style={{fontFamily: "Onest", marginRight: "100px", width: "100px"}}
+        style={{fontFamily: "Onest", marginRight: "100px", width: "170px"}}
         name="TotalPrice"
         value={"Rs: "+updatedReservationData.TotalPrice+ ".00"}
         onChange={handleChange}
