@@ -187,6 +187,24 @@ const [existingTotalPrice, setExistingTotalPrice] = useState(0);
         });
     }
   }, [BookingID]);
+
+  // Function to get the current date in the required format
+  const getCurrentDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    let month = today.getMonth() + 1;
+    let day = today.getDate();
+
+    if (month < 10) {
+      month = `0${month}`;
+    }
+
+    if (day < 10) {
+      day = `0${day}`;
+    }
+
+    return `${year}-${month}-${day}`;
+  };
   
   // Effect to fetch all shedule trains
   useEffect(() => {
@@ -279,6 +297,7 @@ const [existingTotalPrice, setExistingTotalPrice] = useState(0);
   type="date"
   name="ReservationDate"
   placeholder='Reservation Date'
+  min={getCurrentDate()}
   style={{fontFamily: "Onest"}}
   value={updatedReservationData.ReservationDate}
   onChange={handleChange}

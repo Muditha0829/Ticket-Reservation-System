@@ -30,6 +30,19 @@ const UpdateTrainShedule = () => {
     TrainStatus: ''
   });
 
+  const [todayDateTime, setTodayDateTime] = useState('');
+
+  useEffect(() => {
+    const now = new Date();
+    const year = now.getFullYear();
+    let month = (now.getMonth() + 1).toString().padStart(2, '0');
+    let day = now.getDate().toString().padStart(2, '0');
+    let hours = now.getHours().toString().padStart(2, '0');
+    let minutes = now.getMinutes().toString().padStart(2, '0');
+    const today = `${year}-${month}-${day}T${hours}:${minutes}`;
+    setTodayDateTime(today);
+  }, []);
+
   const history = useHistory();
 
   const handleChange = (e) => {
@@ -186,6 +199,7 @@ const UpdateTrainShedule = () => {
               type="datetime-local"
               style={{fontFamily: "Onest"}}
               name="DepartureTime"
+              min={todayDateTime}
               placeholder="Departure Time"
               onChange={handleChange}
             />
@@ -198,6 +212,7 @@ const UpdateTrainShedule = () => {
               type="datetime-local"
               name="ArrivalTime"
               placeholder="Arrival Time"
+              min={todayDateTime}
               style={{fontFamily: "Onest"}}
               onChange={handleChange}
             />

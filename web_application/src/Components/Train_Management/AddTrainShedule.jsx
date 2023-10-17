@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../AuthContext';
 import { ToastContainer, toast } from 'react-toastify';
@@ -43,6 +43,19 @@ const AddTrainShedule = () => {
       [name]: value,
     });
   };
+
+  const [todayDateTime, setTodayDateTime] = useState('');
+
+  useEffect(() => {
+    const now = new Date();
+    const year = now.getFullYear();
+    let month = (now.getMonth() + 1).toString().padStart(2, '0');
+    let day = now.getDate().toString().padStart(2, '0');
+    let hours = now.getHours().toString().padStart(2, '0');
+    let minutes = now.getMinutes().toString().padStart(2, '0');
+    const today = `${year}-${month}-${day}T${hours}:${minutes}`;
+    setTodayDateTime(today);
+  }, []);
 
   // Function to handle form submission
   const handleSubmit = (e) => {
@@ -172,6 +185,7 @@ const AddTrainShedule = () => {
                     type="datetime-local"
                     name="DepartureTime"
                     placeholder='Departure Time'
+                    min={todayDateTime}
                     style={{fontFamily: "Onest"}}
                     value={trainData.DepartureTime}
                     onChange={handleChange}
@@ -185,6 +199,7 @@ const AddTrainShedule = () => {
                     type="datetime-local"
                     name="ArrivalTime"
                     placeholder='Arrival Time'
+                    min={todayDateTime}
                     style={{fontFamily: "Onest"}}
                     value={trainData.ArrivalTime}
                     onChange={handleChange}

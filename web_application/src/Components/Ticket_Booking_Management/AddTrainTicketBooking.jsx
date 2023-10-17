@@ -213,6 +213,7 @@ const AddTrainTicketBooking = () => {
                 type="date"
                 name="ReservationDate"
                 placeholder='Reservation Date'
+                min={getCurrentDate()}
                 style={{fontFamily: "Onest"}}
                 value={formData.ReservationDate}
                 onChange={handleChange}
