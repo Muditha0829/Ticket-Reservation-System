@@ -199,6 +199,7 @@ const UpdateTrainShedule = () => {
               type="datetime-local"
               style={{fontFamily: "Onest"}}
               name="DepartureTime"
+              value={updatedTrainData.DepartureTime}
               min={todayDateTime}
               placeholder="Departure Time"
               onChange={handleChange}
@@ -212,6 +213,7 @@ const UpdateTrainShedule = () => {
               type="datetime-local"
               name="ArrivalTime"
               placeholder="Arrival Time"
+              value={updatedTrainData.ArrivalTime}
               min={todayDateTime}
               style={{fontFamily: "Onest"}}
               onChange={handleChange}

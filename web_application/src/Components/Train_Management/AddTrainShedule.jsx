@@ -67,6 +67,7 @@ const AddTrainShedule = () => {
     return;
 }
 
+
     const TrainIDPattern = /^[A-Z]\d{4}$/;
 
     if (!TrainIDPattern.test(trainData.TrainNumber)) {

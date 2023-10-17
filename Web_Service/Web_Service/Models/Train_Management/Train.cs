@@ -17,9 +17,6 @@ namespace Web_Service.Models.Train_Management
         [BsonRepresentation(BsonType.ObjectId)]
         public string TrainID { get; set; }
 
-        // ID of the user associated with this train
-        public string UserID { get; set; }
-
         // Number assigned to the train
         public string TrainNumber { get; set; }
 
@@ -46,7 +43,13 @@ namespace Web_Service.Models.Train_Management
         {
             get
             {
-                return DepartureTime.ToString("yyyy-MM-dd HH:mm:ss");
+                DateTime utcDepartureTime = DepartureTime.ToUniversalTime();
+
+                // Convert UTC time to IST (UTC+5:30)
+                DateTime istDepartureTime = utcDepartureTime.AddDays(-1).AddHours(5);
+
+                // Format the IST time
+                return istDepartureTime.ToString("yyyy-MM-dd HH:mm:ss");
             }
         }
 
@@ -55,7 +58,13 @@ namespace Web_Service.Models.Train_Management
         {
             get
             {
-                return ArrivalTime.ToString("yyyy-MM-dd HH:mm:ss");
+                DateTime utcArrivalTime = ArrivalTime.ToUniversalTime();
+
+                // Convert UTC time to IST (UTC+5:30)
+                DateTime istArrivalTime = utcArrivalTime.AddDays(-1).AddHours(5);
+
+                // Format the IST time
+                return istArrivalTime.ToString("yyyy-MM-dd HH:mm:ss");
             }
         }
 
