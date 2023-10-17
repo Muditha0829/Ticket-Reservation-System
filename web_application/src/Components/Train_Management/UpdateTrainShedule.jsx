@@ -163,7 +163,7 @@ const UpdateTrainShedule = () => {
               name="ArrivalStation"
               style={{fontFamily: "Onest"}}
               placeholder="Arrival Station"
-              value={updatedTrainData.A}
+              value={updatedTrainData.ArrivalStation}
               onChange={handleChange}
             />
           </Col>
