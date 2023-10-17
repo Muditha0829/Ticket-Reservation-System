@@ -296,6 +296,7 @@ const UpdateTrainTicketBooking = () => {
       <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Total Passengers</Form.Label>
       <Form.Control
         type="number"
+        disabled={inputsDisabled}
         name="TotalPassengers"
         style={{fontFamily: "Onest"}}
         value={updatedReservationData.TotalPassengers}

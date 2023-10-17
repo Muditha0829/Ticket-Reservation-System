@@ -242,6 +242,7 @@ const AddTrainTicketBooking = () => {
             <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Total Passengers</Form.Label>
               <Form.Control
                 type="number"
+                disabled={inputsDisabled}
                 name="TotalPassengers"
                 value={formData.TotalPassengers}
                 style={{fontFamily: "Onest"}}
