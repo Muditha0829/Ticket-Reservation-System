@@ -2,6 +2,7 @@ package com.example.trainbooking_mobileapp.ReservationManagement;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import com.example.trainbooking_mobileapp.AboutUsActivity;
@@ -228,11 +230,39 @@ public class UpdateReservationActivity extends AppCompatActivity {
         ReservationApiClient.updateReservationInAPI(updatedReservation, new ReservationApiClient.OnReservationUpdatedListener() {
             @Override
             public void onReservationUpdated() {
-                Intent intent = new Intent(UpdateReservationActivity.this, ReservationDetailsActivity.class);
-                intent.putExtra("userID", userID);
-                startActivity(intent);
-                Toast.makeText(UpdateReservationActivity.this, "Reservation updated successfully", Toast.LENGTH_SHORT).show();
-                finish();
+                // Create a summary message
+                String summary = "Reservation Details:\n" +
+                        "Name: " + mainPassengerName + "\n" +
+                        "NIC: " + nic + "\n" +
+                        "Departure Station: " + departureStation + "\n" +
+                        "Destination Station: " + destinationStation + "\n" +
+                        "Email: " + email + "\n" +
+                        "Contact Number: " + contactNumber + "\n" +
+                        "Total Passengers: " + totalPassengers + "\n" +
+                        "Reservation Date: " + reservationDate + "\n" +
+                        "Ticket Class: " + reservation.getTicketClass() + "\n" +
+                        "Train Name: " + reservation.getTrainName() + "\n" +
+                        "Booking Date: " + reservation.getBookingDate() + "\n";
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(UpdateReservationActivity.this);
+                builder.setMessage("Do you want to update Reservation Details?\n\n" + summary)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Intent intent = new Intent(UpdateReservationActivity.this, ReservationDetailsActivity.class);
+                                intent.putExtra("userID", userID);
+                                startActivity(intent);
+                                Toast.makeText(UpdateReservationActivity.this, "Reservation updated successfully", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // User clicked No, do nothing or add your logic here
+                            }
+                        });
+                // Create the AlertDialog object and show it
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
             @Override
             public void onError(String errorMessage) {
