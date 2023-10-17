@@ -163,9 +163,13 @@ const UpdateTrainTicketBooking = () => {
         setUpdatedReservationData({
           ...response.data,
           ReservationDate: formattedDate, // Set the formatted date
-          TotalPrice: response.data.TotalPrice
+          TotalPrice: response.data.TotalPrice,
+          TrainName: response.data.TrainName,
+          TotalPassengers: response.data.TotalPassengers,
+          TicketClass: response.data.TicketClass
         });
           setUpdatedReservationData(response.data);
+          console.log(response.data.TotalPrice);
         })
         .catch(error => {
           console.error('Error fetching reservation data:', error);
@@ -233,7 +237,7 @@ const UpdateTrainTicketBooking = () => {
       <Form.Label style={{fontSize: "17px", fontFamily: "Montserrat"}}>Contact Number</Form.Label>
       <Form.Control
         type="tel"
-        name="Phone"
+        name="ContactNumber"
         value={updatedReservationData.ContactNumber}
         style={{fontFamily: "Onest"}}
         onChange={handleChange}

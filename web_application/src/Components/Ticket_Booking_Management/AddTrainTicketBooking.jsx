@@ -108,7 +108,7 @@ const AddTrainTicketBooking = () => {
   
 // Fetches the list of trains and sets ticket prices based on total passengers and ticket class
   useEffect(() => {
-    axios.get('http://pasinduperera-001-site1.atempurl.com/api/trains/getalltrains')
+    axios.get('http://pasinduperera-001-site1.atempurl.com/api/trains/getallSheduledtrains')
       .then(response => {
         setTrainData(response.data);
         calculateTotalPrice();

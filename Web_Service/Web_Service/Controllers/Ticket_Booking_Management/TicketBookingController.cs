@@ -153,56 +153,63 @@ namespace WebSevice.Controllers
 
             // Calculate the difference in days between ReservationDate and BookingDate
             int daysDifference = (updatedBooking.ReservationDate - today).Days;
+            // Calculate the difference in days between ReservationDate and BookingDate
+            int daysDifferencetwo = (updatedBooking.ReservationDate - DateTime.Now).Days;
 
-            if (daysDifference > 5)
+            if (daysDifferencetwo < 30)
             {
 
-                if (!IsValidEmail(updatedBooking.Email))
+                if (daysDifference > 5)
                 {
-                    return BadRequest("Invalid email address.");
+
+                    if (!IsValidEmail(updatedBooking.Email))
+                    {
+                        return BadRequest("Invalid email address.");
+                    }
+
+                    var NIC = updatedBooking.NIC;
+                    var maxReservationsCount = _bookingsCollection.CountDocuments(x => x.NIC == NIC);
+
+                    if (maxReservationsCount >= 4)
+                    {
+                        return BadRequest("Maximum 4 reservations allowed per NIC.");
+                    }
+
+                    if (!IsValidContactNumber(updatedBooking.ContactNumber))
+                    {
+                        return BadRequest("Invalid contact number.");
+                    }
+
+                    if (!IsValidTicketClass(updatedBooking.TicketClass))
+                    {
+                        return BadRequest("Invalid ticket class.");
+                    }
+                    var update = Builders<TicketBooking>.Update
+                        .Set(t => t.TrainName, updatedBooking.TrainName)
+                        .Set(t => t.ReservationDate, updatedBooking.ReservationDate)
+                        .Set(t => t.TotalPassengers, updatedBooking.TotalPassengers)
+                        .Set(t => t.MainPassengerName, updatedBooking.MainPassengerName)
+                        .Set(t => t.ContactNumber, updatedBooking.ContactNumber)
+                        .Set(t => t.DepartureStation, updatedBooking.DepartureStation)
+                        .Set(t => t.DestinationStation, updatedBooking.DestinationStation)
+                        .Set(t => t.Email, updatedBooking.Email)
+                        .Set(t => t.NIC, updatedBooking.NIC)
+                        .Set(t => t.TicketClass, updatedBooking.TicketClass)
+                        .Set(t => t.TotalPrice, updatedBooking.TotalPrice);
+
+                    var result = _bookingsCollection.UpdateOne(filter, update);
+
+                    if (result.ModifiedCount == 0)
+                    {
+                        return NotFound();
+                    }
+
+                    return Ok("Train ticket booking updated");
                 }
 
-                var NIC = updatedBooking.NIC;
-                var maxReservationsCount = _bookingsCollection.CountDocuments(x => x.NIC == NIC);
-
-                if (maxReservationsCount >= 4)
-                {
-                    return BadRequest("Maximum 4 reservations allowed per NIC.");
-                }
-
-                if (!IsValidContactNumber(updatedBooking.ContactNumber))
-                {
-                    return BadRequest("Invalid contact number.");
-                }
-
-                if (!IsValidTicketClass(updatedBooking.TicketClass))
-                {
-                    return BadRequest("Invalid ticket class.");
-                }
-                var update = Builders<TicketBooking>.Update
-                    .Set(t => t.TrainName, updatedBooking.TrainName)
-                    .Set(t => t.ReservationDate, updatedBooking.ReservationDate)
-                    .Set(t => t.TotalPassengers, updatedBooking.TotalPassengers)
-                    .Set(t => t.MainPassengerName, updatedBooking.MainPassengerName)
-                    .Set(t => t.ContactNumber, updatedBooking.ContactNumber)
-                    .Set(t => t.DepartureStation, updatedBooking.DepartureStation)
-                    .Set(t => t.DestinationStation, updatedBooking.DestinationStation)
-                    .Set(t => t.Email, updatedBooking.Email)
-                    .Set(t => t.NIC, updatedBooking.NIC)
-                    .Set(t => t.TicketClass, updatedBooking.TicketClass)
-                    .Set(t => t.TotalPrice, updatedBooking.TotalPrice);
-
-                var result = _bookingsCollection.UpdateOne(filter, update);
-
-                if (result.ModifiedCount == 0)
-                {
-                    return NotFound();
-                }
-
-                return Ok("Train ticket booking updated");
+                return BadRequest("Reservation can only be updated if the difference between Reservation Date and Booking Date is greater than 5 days.");
             }
-
-            return BadRequest("Reservation can only be updated if the difference between Reservation Date and Booking Date is greater than 5 days.");
+            return BadRequest("Reservation date must be within 30 days from the current date.");
         }
 
         // Cancel Train Ticket Booking endpoint

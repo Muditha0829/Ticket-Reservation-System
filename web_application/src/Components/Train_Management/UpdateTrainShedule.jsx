@@ -255,7 +255,7 @@ const UpdateTrainShedule = () => {
       value={updatedTrainData.TrainStatus}
       onChange={handleChange}
     >
-      <option value="Resheduled">Resheduled</option>
+      <option value="Sheduled">Resheduled</option>
       <option value="cancelled">Cancelled</option>
     </Form.Select>
   </Col>
